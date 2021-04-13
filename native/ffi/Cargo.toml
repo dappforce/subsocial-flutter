@@ -1,0 +1,18 @@
+[package]
+name = "subsocial-ffi"
+version = "0.1.0"
+authors = ["Shady Khalifa <shekohex@gmail.com>"]
+edition = "2018"
+
+[lib]
+name = "subscoial"
+# this value will change depending on the target os
+# for iOS it would be `staticlib`
+# for android it would be `c-dylib`
+crate-type = ["rlib"]
+
+[dependencies]
+sdk = { path = "../sdk", package = "subsocial-sdk" }
+
+[build-dependencies]
+cbindgen = "0.19"
