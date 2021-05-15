@@ -1,0 +1,94 @@
+syntax = "proto3";
+package subsoical;
+
+
+message Request {
+  oneof body {
+    GetSpaceById space_by_id = 1;
+    GetSpaceByHandle space_by_handle = 2;
+    GetPostById post_by_id = 3;
+    GetPostIdsBySpaceId post_ids_by_space_id = 4;
+    GetReactionById reaction_by_id = 5;
+    GetReactionIdsByPostId reaction_ids_by_post_id = 6;
+  }
+}
+
+message Response {
+  oneof body {
+    Error error = 1;
+    SpaceById space_by_id = 2;
+    SpaceByByHandle space_by_handle = 3;
+    PostById post_by_id = 4;
+    PostIdsBySpaceId post_ids_by_space_id = 5;
+    ReactionById reaction_by_id = 6;
+    ReactionIdsByPostId reaction_ids_by_post_id = 7;
+  }
+}
+
+message Error {
+  enum Kind {
+    KIND_UNKNOWN = 0;
+    KIND_NETWORK = 1;
+  }
+  Kind kind = 1;
+  string msg = 2;
+}
+
+message GetSpaceById {
+  uint64 space_id = 1;
+}
+
+message GetSpaceByHandle {
+  string handle = 1;
+}
+
+message GetPostById {
+  uint64 post_id = 1;
+}
+
+message GetReactionById {
+  uint64 reaction_id = 1;
+}
+
+message GetPostIdsBySpaceId {
+  uint64 space_id = 1;
+}
+
+message GetReactionIdsByPostId {
+  uint64 post_id = 1;
+}
+
+message Space {
+  uint64 id = 1;
+}
+message Post {
+  uint64 id = 1;
+}
+message Reaction {
+  uint64 id = 1;
+}
+
+message SpaceById {
+  Space space = 1;
+}
+
+message SpaceByByHandle {
+  Space space = 1;
+}
+
+message PostById {
+  Post post = 1;
+}
+
+message ReactionById {
+  Reaction reaction = 1;
+}
+
+message PostIdsBySpaceId {
+  repeated uint64 post_id = 1 [packed = true];
+}
+
+message ReactionIdsByPostId {
+  repeated uint64 reaction_id = 1 [packed = true];
+}
+

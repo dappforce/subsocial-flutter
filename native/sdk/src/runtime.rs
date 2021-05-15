@@ -55,15 +55,24 @@ impl Balances for SubsocialRuntime {
 }
 
 impl pallet::spaces::Spaces for SubsocialRuntime {}
+impl pallet::posts::Posts for SubsocialRuntime {}
+impl pallet::reactions::Reactions for SubsocialRuntime {}
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+    use crate::pallet::posts::*;
+    use crate::pallet::reactions::*;
     use crate::pallet::spaces::*;
 
-    use super::*;
+    type Error = Box<dyn std::error::Error + Sync + Send + 'static>;
 
     type SpaceById = SpaceByIdStore<SubsocialRuntime>;
     type SpaceIdByHandle = SpaceIdByHandleStore<SubsocialRuntime>;
+    type PostById = PostByIdStore<SubsocialRuntime>;
+    type PostIdsBySpaceId = PostIdsBySpaceIdStore<SubsocialRuntime>;
+    type ReactionById = ReactionByIdStore<SubsocialRuntime>;
+    type ReactionIdsByPostId = ReactionIdsByPostIdStore<SubsocialRuntime>;
 
     async fn get_client() -> subxt::Client<SubsocialRuntime> {
         subxt::ClientBuilder::new()
@@ -81,15 +90,45 @@ mod tests {
     }
 
     #[async_std::test]
-    async fn space_by_id() {
+    async fn space_by_id() -> Result<(), Error> {
         let client = get_client().await;
         let space_id = client
-            .fetch(&SpaceIdByHandle::new("subsocial".into()), None)
-            .await
-            .unwrap()
-            .unwrap_or(1);
-        let space =
-            client.fetch(&SpaceById::new(space_id), None).await.unwrap();
-        dbg!(space);
+            .fetch(&SpaceIdByHandle::new("subsocial"), None)
+            .await?
+            .unwrap_or(1); // id 1 is the default for subsocial.
+        let space = client.fetch(&SpaceById::new(space_id), None).await?;
+        println!("{}", space.unwrap());
+        Ok(())
+    }
+
+    #[async_std::test]
+    async fn space_posts() -> Result<(), Error> {
+        let client = get_client().await;
+        let space_id = 1;
+        let post_ids = client
+            .fetch(&PostIdsBySpaceId::new(space_id), None)
+            .await?
+            .unwrap();
+        for post_id in post_ids {
+            let storage = PostById::new(post_id);
+            let post = client.fetch(&storage, None).await?.unwrap();
+            println!("{}", post);
+        }
+        Ok(())
+    }
+
+    #[async_std::test]
+    async fn post_reactions() -> Result<(), Error> {
+        let client = get_client().await;
+        let post_id = 1;
+        let storage = ReactionIdsByPostId::new(post_id);
+        let reaction_ids = client.fetch(&storage, None).await?.unwrap();
+        println!("Post {} Reactions:", post_id);
+        for reaction_id in reaction_ids {
+            let storage = ReactionById::new(reaction_id);
+            let reaction = client.fetch(&storage, None).await?.unwrap();
+            println!("{}", reaction);
+        }
+        Ok(())
     }
 }

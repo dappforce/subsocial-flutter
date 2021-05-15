@@ -1,6 +1,11 @@
 use std::env;
 
 fn main() {
+    prost_build::Config::new()
+        .out_dir("src/pb")
+        .compile_protos(&["def.proto"], &["."])
+        .expect("Failed to compile protobuf");
+
     let crate_dir = env::var("CARGO_MANIFEST_DIR").unwrap();
     let config = cbindgen::Config {
         language: cbindgen::Language::C,

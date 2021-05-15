@@ -1,3 +1,4 @@
+use std::fmt;
 use std::marker::PhantomData;
 
 use codec::{Decode, Encode};
@@ -23,8 +24,18 @@ pub struct Space<T: Spaces> {
     pub hidden_posts_count: u32,
     pub followers_count: u32,
     pub score: i32,
-    /// Allows to override the default permissions for this space.
     pub permissions: Option<SpacePermissions>,
+}
+
+impl<T: Spaces> fmt::Display for Space<T> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(
+            f,
+            "Space #{} with #{} Posts on IPFS: {}",
+            self.id, self.posts_count, self.content
+        )?;
+        Ok(())
+    }
 }
 
 // Storage ..
@@ -53,9 +64,9 @@ pub struct SpaceIdByHandleStore<T: Spaces> {
 }
 
 impl<T: Spaces> SpaceIdByHandleStore<T> {
-    pub fn new(handle: Vec<u8>) -> Self {
+    pub fn new(handle: impl Into<Vec<u8>>) -> Self {
         Self {
-            handle,
+            handle: handle.into(),
             __marker: Default::default(),
         }
     }

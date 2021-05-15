@@ -13,6 +13,10 @@ crate-type = ["rlib"]
 
 [dependencies]
 sdk = { path = "../sdk", package = "subsocial-sdk" }
+bytes = "1.0"
+prost = "0.7"
+prost-types = "0.7"
 
 [build-dependencies]
 cbindgen = "0.19"
+prost-build = "0.7"
