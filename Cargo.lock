@@ -60,6 +60,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "allo-isolate"
+version = "0.1.8-beta"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "57ee84211d30a654b6bd441989dc89a26e7c43e53d33213a55bb421c30a2e8c2"
+dependencies = [
+ "pin-project 0.4.28",
+]
+
+[[package]]
 name = "ansi_term"
 version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3196,8 +3205,11 @@ dependencies = [
 name = "subsocial-ffi"
 version = "0.1.0"
 dependencies = [
+ "allo-isolate",
+ "async-std",
  "bytes 1.0.1",
  "cbindgen",
+ "once_cell",
  "prost",
  "prost-build",
  "prost-types",

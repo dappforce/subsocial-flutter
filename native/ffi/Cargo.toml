@@ -16,6 +16,10 @@ sdk = { path = "../sdk", package = "subsocial-sdk" }
 bytes = "1.0"
 prost = "0.7"
 prost-types = "0.7"
+once_cell = "1.7"
+allo-isolate = { version = "0.1.8-beta", features = ["catch-unwind"] }
+# Runtime
+async-std = { version = "1.8", features = [] }
 
 [build-dependencies]
 cbindgen = "0.19"

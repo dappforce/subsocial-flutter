@@ -9,15 +9,15 @@ environment:
   flutter: ">=1.20.0"
 
 dependencies:
+  ffi: ^1.0.0
   flutter:
     sdk: flutter
-  ffi: ^1.0.0
 
 dev_dependencies:
   ffigen: ^2.4.2
-  lint: ^1.5.3
   flutter_test:
     sdk: flutter
+  lint: ^1.5.3
 
 flutter:
   plugin:
@@ -39,6 +39,6 @@ ffigen:
     length: full
   headers:
     entry-points:
-      - 'ios/binding.h'
+      - 'native/ffi/binding.h'
     include-directives:
       - '**binding.h'

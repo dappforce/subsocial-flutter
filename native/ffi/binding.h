@@ -9,11 +9,9 @@ typedef struct {
   uintptr_t len;
 } SharedBuffer;
 
-void subsoical_init_client(void);
+int32_t subsoical_init_client(int64_t port);
 
-SharedBuffer *subsocial_dispatch(SharedBuffer *ptr);
-
-void subsocial_release_shared_buffer(SharedBuffer *ptr);
+int32_t subsocial_dispatch(int64_t port, SharedBuffer *ptr);
 
 // a no-op function that forces xcode to link to our lib.
 // ## Safety
