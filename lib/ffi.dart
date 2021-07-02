@@ -34,6 +34,20 @@ class RawSubsoical {
   late final _dart_subsocial_dispatch _subsocial_dispatch =
       _subsocial_dispatch_ptr.asFunction<_dart_subsocial_dispatch>();
 
+  int subsocial_init_client(
+    int port,
+  ) {
+    return _subsocial_init_client(
+      port,
+    );
+  }
+
+  late final _subsocial_init_client_ptr =
+      _lookup<ffi.NativeFunction<_c_subsocial_init_client>>(
+          'subsocial_init_client');
+  late final _dart_subsocial_init_client _subsocial_init_client =
+      _subsocial_init_client_ptr.asFunction<_dart_subsocial_init_client>();
+
   /// a no-op function that forces xcode to link to our lib.
   /// ## Safety
   /// lol
@@ -46,20 +60,6 @@ class RawSubsoical {
           'subsocial_link_me_plz');
   late final _dart_subsocial_link_me_plz _subsocial_link_me_plz =
       _subsocial_link_me_plz_ptr.asFunction<_dart_subsocial_link_me_plz>();
-
-  int subsoical_init_client(
-    int port,
-  ) {
-    return _subsoical_init_client(
-      port,
-    );
-  }
-
-  late final _subsoical_init_client_ptr =
-      _lookup<ffi.NativeFunction<_c_subsoical_init_client>>(
-          'subsoical_init_client');
-  late final _dart_subsoical_init_client _subsoical_init_client =
-      _subsoical_init_client_ptr.asFunction<_dart_subsoical_init_client>();
 }
 
 /// Immutable View of Shared Buffer.
@@ -80,14 +80,14 @@ typedef _dart_subsocial_dispatch = int Function(
   ffi.Pointer<SharedBuffer> ptr,
 );
 
-typedef _c_subsocial_link_me_plz = ffi.Void Function();
-
-typedef _dart_subsocial_link_me_plz = void Function();
-
-typedef _c_subsoical_init_client = ffi.Int32 Function(
+typedef _c_subsocial_init_client = ffi.Int32 Function(
   ffi.Int64 port,
 );
 
-typedef _dart_subsoical_init_client = int Function(
+typedef _dart_subsocial_init_client = int Function(
   int port,
 );
+
+typedef _c_subsocial_link_me_plz = ffi.Void Function();
+
+typedef _dart_subsocial_link_me_plz = void Function();

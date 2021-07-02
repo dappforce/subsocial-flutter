@@ -3,9 +3,9 @@ use sdk::pallet::spaces::*;
 use sdk::runtime::SubsocialRuntime;
 use sdk::subxt::Client;
 
-use crate::pb::subsoical::request::Body as RequestBody;
-use crate::pb::subsoical::response::Body as ResponseBody;
-use crate::pb::subsoical::*;
+use crate::pb::subsocial::request::Body as RequestBody;
+use crate::pb::subsocial::response::Body as ResponseBody;
+use crate::pb::subsocial::*;
 
 pub async fn handle(
     client: &Client<SubsocialRuntime>,
@@ -44,7 +44,7 @@ async fn space_by_id(
     client: &Client<SubsocialRuntime>,
     space_id: u64,
 ) -> Response {
-    use crate::subsoical::Space;
+    use crate::subsocial::Space;
     let store = SpaceByIdStore::new(space_id);
     let maybe_space = client.fetch(&store, None).await.unwrap();
     match maybe_space {

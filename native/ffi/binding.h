@@ -9,7 +9,7 @@ typedef struct {
   uintptr_t len;
 } SharedBuffer;
 
-int32_t subsoical_init_client(int64_t port);
+int32_t subsocial_init_client(int64_t port);
 
 int32_t subsocial_dispatch(int64_t port, SharedBuffer *ptr);
 

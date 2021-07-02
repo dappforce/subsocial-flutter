@@ -18,7 +18,7 @@ class Subsocial {
       AlloIsolate(lib: dl).hook();
       final completer = Completer<int>();
       final port = singleCompletePort(completer);
-      final result = raw.subsoical_init_client(port.nativePort);
+      final result = raw.subsocial_init_client(port.nativePort);
       assert(result == 1);
       await completer.future;
       return _instance = Subsocial._(raw);
@@ -31,7 +31,7 @@ class Subsocial {
 /// Loads the Subsocial [DynamicLibrary] depending on the [Platform]
 DynamicLibrary _load() {
   if (Platform.isAndroid) {
-    return DynamicLibrary.open('libsubsoical.so');
+    return DynamicLibrary.open('libsubsocial.so');
   } else if (Platform.isIOS) {
     return DynamicLibrary.executable();
   } else {
