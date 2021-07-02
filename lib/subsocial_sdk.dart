@@ -27,6 +27,7 @@ class Subsocial {
       );
       assert(result == 1);
       await completer.future;
+      malloc.free(config);
       return _instance = Subsocial._(raw);
     } else {
       return _instance!;
