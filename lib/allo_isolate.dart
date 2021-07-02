@@ -1,11 +1,11 @@
 import 'dart:ffi';
 
-// ignore: avoid_private_typedef_functions
+// ignore: avoid_private_typedef_functions, camel_case_types
 typedef _store_dart_post_cobject_C = Void Function(
   Pointer<NativeFunction<Int8 Function(Int64, Pointer<Dart_CObject>)>> ptr,
 );
 
-// ignore: avoid_private_typedef_functions
+// ignore: avoid_private_typedef_functions, camel_case_types
 typedef _store_dart_post_cobject_Dart = void Function(
   Pointer<NativeFunction<Int8 Function(Int64, Pointer<Dart_CObject>)>> ptr,
 );

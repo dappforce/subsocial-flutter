@@ -95,19 +95,127 @@ pub struct GetReactionIdsByPostId {
     pub post_id: u64,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Content {
+    #[prost(oneof="content::Value", tags="1, 2, 3")]
+    pub value: ::core::option::Option<content::Value>,
+}
+/// Nested message and enum types in `Content`.
+pub mod content {
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Value {
+        #[prost(bytes, tag="1")]
+        Raw(::prost::alloc::vec::Vec<u8>),
+        #[prost(string, tag="2")]
+        Ipfs(::prost::alloc::string::String),
+        #[prost(string, tag="3")]
+        Hyper(::prost::alloc::string::String),
+    }
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PostExtension {
+    #[prost(oneof="post_extension::Value", tags="1, 2")]
+    pub value: ::core::option::Option<post_extension::Value>,
+}
+/// Nested message and enum types in `PostExtension`.
+pub mod post_extension {
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Value {
+        #[prost(message, tag="1")]
+        Comment(super::Comment),
+        #[prost(message, tag="2")]
+        SharedPost(super::SharedPost),
+    }
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Space {
     #[prost(uint64, tag="1")]
     pub id: u64,
+    #[prost(uint64, tag="2")]
+    pub created: u64,
+    #[prost(uint64, tag="3")]
+    pub updated: u64,
+    #[prost(string, tag="4")]
+    pub owner: ::prost::alloc::string::String,
+    #[prost(uint64, tag="5")]
+    pub parent_id: u64,
+    #[prost(string, tag="6")]
+    pub handle: ::prost::alloc::string::String,
+    #[prost(message, optional, tag="7")]
+    pub content: ::core::option::Option<Content>,
+    #[prost(bool, tag="8")]
+    pub hidden: bool,
+    #[prost(uint32, tag="9")]
+    pub posts_count: u32,
+    #[prost(uint32, tag="10")]
+    pub hidden_posts_count: u32,
+    #[prost(uint32, tag="11")]
+    pub followers_count: u32,
+    #[prost(int32, tag="12")]
+    pub score: i32,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Post {
     #[prost(uint64, tag="1")]
     pub id: u64,
+    #[prost(uint64, tag="2")]
+    pub created: u64,
+    #[prost(uint64, tag="3")]
+    pub updated: u64,
+    #[prost(string, tag="4")]
+    pub owner: ::prost::alloc::string::String,
+    #[prost(message, optional, tag="5")]
+    pub extension: ::core::option::Option<PostExtension>,
+    #[prost(uint64, tag="6")]
+    pub space_id: u64,
+    #[prost(message, optional, tag="7")]
+    pub content: ::core::option::Option<Content>,
+    #[prost(bool, tag="8")]
+    pub hidden: bool,
+    #[prost(uint32, tag="9")]
+    pub replies_count: u32,
+    #[prost(uint32, tag="10")]
+    pub hidden_replies_count: u32,
+    #[prost(uint32, tag="11")]
+    pub shares_count: u32,
+    #[prost(uint32, tag="12")]
+    pub upvotes_count: u32,
+    #[prost(uint32, tag="13")]
+    pub downvotes_count: u32,
+    #[prost(int32, tag="14")]
+    pub score: i32,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Comment {
+    #[prost(uint64, tag="1")]
+    pub parent_id: u64,
+    #[prost(uint64, tag="2")]
+    pub root_post_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SharedPost {
+    #[prost(uint64, tag="1")]
+    pub root_post_id: u64,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Reaction {
     #[prost(uint64, tag="1")]
     pub id: u64,
+    #[prost(uint64, tag="2")]
+    pub created: u64,
+    #[prost(uint64, tag="3")]
+    pub updated: u64,
+    #[prost(enumeration="reaction::ReactionKind", tag="4")]
+    pub kind: i32,
+}
+/// Nested message and enum types in `Reaction`.
+pub mod reaction {
+    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[repr(i32)]
+    pub enum ReactionKind {
+        Unknown = 0,
+        UpVote = 1,
+        DownVote = 2,
+    }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SpaceById {

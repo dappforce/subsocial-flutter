@@ -3,6 +3,7 @@ import 'dart:ffi';
 
 import 'dart:io';
 
+import 'package:ffi/ffi.dart';
 import 'package:subsocial_sdk/allo_isolate.dart';
 import 'package:subsocial_sdk/ffi.dart';
 import 'package:subsocial_sdk/utils.dart';
@@ -18,7 +19,12 @@ class Subsocial {
       AlloIsolate(lib: dl).hook();
       final completer = Completer<int>();
       final port = singleCompletePort(completer);
-      final result = raw.subsocial_init_client(port.nativePort);
+      final config = malloc.call<SubscoialConfig>();
+      config.ref.url = "wss://rpc.subsocial.network".toNativeUtf8().cast();
+      final result = raw.subsocial_init_client(
+        port.nativePort,
+        config,
+      );
       assert(result == 1);
       await completer.future;
       return _instance = Subsocial._(raw);

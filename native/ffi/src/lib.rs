@@ -2,6 +2,9 @@ mod handler;
 mod pb;
 mod shared_buffer;
 
+use std::ffi::CStr;
+use std::os::raw::c_char;
+
 use allo_isolate::Isolate;
 use async_std::task;
 use once_cell::sync::OnceCell;
@@ -14,20 +17,32 @@ use shared_buffer::SharedBuffer;
 
 static mut CLIENT: OnceCell<subxt::Client<SubsocialRuntime>> = OnceCell::new();
 
+#[derive(Debug, Clone)]
+#[repr(C)]
+pub struct SubscoialConfig {
+    url: *const c_char,
+}
+
 #[no_mangle]
-pub extern "C" fn subsocial_init_client(port: i64) -> i32 {
+pub extern "C" fn subsocial_init_client(
+    port: i64,
+    config: Box<SubscoialConfig>,
+) -> i32 {
     let isolate = Isolate::new(port);
+    let url = unsafe {
+        CStr::from_ptr(config.url)
+            .to_str()
+            .unwrap_or("wss://rpc.subsocial.network")
+    };
     let task = isolate.catch_unwind(async move {
-        subxt::ClientBuilder::new()
-            .set_url("wss://rpc.subsocial.network")
-            .build()
-            .await
-            .map(|client| unsafe {
+        subxt::ClientBuilder::new().set_url(url).build().await.map(
+            |client| unsafe {
                 CLIENT
                     .set(client)
                     .map_err(|_| ())
                     .expect("client already set");
-            })
+            },
+        )
     });
     task::spawn(task);
     1

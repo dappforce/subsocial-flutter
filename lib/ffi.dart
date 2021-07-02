@@ -36,9 +36,11 @@ class RawSubsoical {
 
   int subsocial_init_client(
     int port,
+    ffi.Pointer<SubscoialConfig> config,
   ) {
     return _subsocial_init_client(
       port,
+      config,
     );
   }
 
@@ -70,6 +72,10 @@ class SharedBuffer extends ffi.Struct {
   external int len;
 }
 
+class SubscoialConfig extends ffi.Struct {
+  external ffi.Pointer<ffi.Int8> url;
+}
+
 typedef _c_subsocial_dispatch = ffi.Int32 Function(
   ffi.Int64 port,
   ffi.Pointer<SharedBuffer> ptr,
@@ -82,10 +88,12 @@ typedef _dart_subsocial_dispatch = int Function(
 
 typedef _c_subsocial_init_client = ffi.Int32 Function(
   ffi.Int64 port,
+  ffi.Pointer<SubscoialConfig> config,
 );
 
 typedef _dart_subsocial_init_client = int Function(
   int port,
+  ffi.Pointer<SubscoialConfig> config,
 );
 
 typedef _c_subsocial_link_me_plz = ffi.Void Function();
