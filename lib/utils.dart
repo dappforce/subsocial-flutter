@@ -31,10 +31,10 @@ SendPort singleCallbackPort<P>(void Function(P? response) callback,
   final zone = Zone.current;
   // ignore: parameter_assignments
   callback = zone.registerUnaryCallback(callback);
-  late Timer timer;
+  Timer? timer;
   responsePort.handler = (response) {
     responsePort.close();
-    timer.cancel();
+    timer?.cancel();
     zone.runUnary(callback, response as P);
   };
   if (timeout != null) {
@@ -77,16 +77,16 @@ SendPort singleCompletePort<R, P>(Completer<R> completer,
     Duration? timeout,
     FutureOr<R> Function()? onTimeout}) {
   if (callback == null && timeout == null) {
-    return singleCallbackPort<Object>((response) {
+    return singleCallbackPort<R>((response) {
       _castComplete<R>(completer, response);
     });
   }
   final responsePort = RawReceivePort();
-  late Timer timer;
+  Timer? timer;
   if (callback == null) {
     responsePort.handler = (response) {
       responsePort.close();
-      timer.cancel();
+      timer?.cancel();
       _castComplete<R>(completer, response);
     };
   } else {
@@ -101,7 +101,7 @@ SendPort singleCompletePort<R, P>(Completer<R> completer,
     });
     responsePort.handler = (response) {
       responsePort.close();
-      timer.cancel();
+      timer?.cancel();
       zone.runUnary(action, response as P);
     };
   }

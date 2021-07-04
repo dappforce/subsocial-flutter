@@ -4,9 +4,14 @@ import 'dart:ffi';
 import 'dart:io';
 
 import 'package:ffi/ffi.dart';
+import 'package:protobuf/protobuf.dart';
 import 'package:subsocial_sdk/allo_isolate.dart';
 import 'package:subsocial_sdk/ffi.dart';
 import 'package:subsocial_sdk/utils.dart';
+import 'package:subsocial_sdk/extensions.dart';
+
+import 'generated/def.pb.dart';
+export 'generated/def.pb.dart';
 
 class Subsocial {
   static Subsocial? _instance;
@@ -17,7 +22,7 @@ class Subsocial {
       final dl = _load();
       final raw = RawSubsoical(dl);
       AlloIsolate(lib: dl).hook();
-      final completer = Completer<int>();
+      final completer = Completer<void>();
       final port = singleCompletePort(completer);
       final config = malloc.call<SubscoialConfig>();
       config.ref.url = "wss://rpc.subsocial.network".toNativeUtf8().cast();
@@ -27,11 +32,24 @@ class Subsocial {
       );
       assert(result == 1);
       await completer.future;
-      malloc.free(config);
       return _instance = Subsocial._(raw);
     } else {
       return _instance!;
     }
+  }
+
+  Future<Space> spaceById(int id) async {
+    final completer = Completer<List<int>>();
+    final port = singleCompletePort(completer);
+    final req = Request(
+      spaceById: GetSpaceById(spaceId: makeLongInt(id)),
+    );
+    final ptr = req.writeToBuffer().asSharedBufferPtr();
+    final result = _raw.subsocial_dispatch(port.nativePort, ptr);
+    assert(result == 1);
+    final resBytes = await completer.future;
+    final res = Response.fromBuffer(resBytes);
+    return res.spaceById.space;
   }
 }
 
@@ -41,6 +59,10 @@ DynamicLibrary _load() {
     return DynamicLibrary.open('libsubsocial.so');
   } else if (Platform.isIOS) {
     return DynamicLibrary.executable();
+  } else if (Platform.isLinux) {
+    return DynamicLibrary.open('target/debug/libsubscoial.so');
+  } else if (Platform.isMacOS) {
+    return DynamicLibrary.open('target/debug/libsubscoial.dylib');
   } else {
     throw UnsupportedError('The Current Platform is not supported.');
   }

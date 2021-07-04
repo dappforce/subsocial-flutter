@@ -111,7 +111,7 @@ pub trait Trait: system::Trait {
 }
 
 impl SpacePermission {
-    fn is_present_in_role(
+    pub fn is_present_in_role(
         &self,
         perms_opt: Option<SpacePermissionSet>,
     ) -> bool {

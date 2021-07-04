@@ -42,6 +42,13 @@ dependencies = ["android"]
 [tasks.build.mac]
 dependencies = ["android", "ios"]
 
+[tasks.native]
+dependencies = [
+    "native-build",
+    "native-release",
+    "post-native",
+]
+
 [tasks.ios]
 dependencies = ["ios-build", "ios-release", "post-ios"]
 
@@ -59,6 +66,22 @@ command = "cargo"
 args = ["lipo", "--release"]
 dependencies = [
     "setup-crate-type-ios",
+]
+
+[tasks.native-build]
+condition = { env_true = ["DEV"] }
+command = "cargo"
+args = ["build"]
+dependencies = [
+    "setup-crate-type-native",
+]
+
+[tasks.native-release]
+condition = { env_true = ["RELEASE"] }
+command = "cargo"
+args = ["build", "--release"]
+dependencies = [
+    "setup-crate-type-native",
 ]
 
 [tasks.post-ios]
@@ -212,8 +235,16 @@ private = true
 env = { ANDROID_TARGET = "x86_64-linux-android", JNI_LIB_DIR = "x86_64" }
 run_task = "copy-lib"
 
+[tasks.post-native]
+dependencies = ["restore-crate-type"]
+
 [tasks.post-android]
 dependencies = ["restore-crate-type"]
+
+[tasks.setup-crate-type-native]
+private = true
+env = { TARGET_OS = "native" }
+run_task = "setup-crate-type"
 
 [tasks.setup-crate-type-android]
 private = true
@@ -235,10 +266,13 @@ script = [
     os = get_env TARGET_OS
     is_android = eq ${os} "android"
     is_ios = eq ${os} "ios"
+    is_native = eq ${os} "native"
     if ${is_android}
       crate_type = set "cdylib"
     elseif ${is_ios}
       crate_type = set "staticlib"
+    elseif ${is_native}
+      crate_type = set "cdylib"
     else
       crate_type = set "rlib"
     end
@@ -258,10 +292,14 @@ script = [
     os = get_env TARGET_OS
     is_android = eq ${os} "android"
     is_ios = eq ${os} "ios"
+    is_native = eq ${os} "native"
+
     if ${is_android}
       crate_type = set "cdylib"
     elseif ${is_ios}
       crate_type = set "staticlib"
+    elseif ${is_native}
+      crate_type = set "cdylib"
     else
       crate_type = set "rlib"
     end
