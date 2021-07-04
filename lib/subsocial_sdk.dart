@@ -49,6 +49,9 @@ class Subsocial {
     assert(result == 1);
     final resBytes = await completer.future;
     final res = Response.fromBuffer(resBytes);
+    if (res.hasError()) {
+      throw res.error;
+    }
     return res.spaceById.space;
   }
 }

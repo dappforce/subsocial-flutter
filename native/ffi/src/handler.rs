@@ -90,7 +90,12 @@ async fn space_by_id(
         },
         None => {
             // handle not found.
-            Response::default()
+            Response {
+                body: Some(ResponseBody::Error(Error {
+                    kind: error::Kind::NotFound.into(),
+                    msg: String::from("Space Not Found"),
+                })),
+            }
         },
     }
 }

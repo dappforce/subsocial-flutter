@@ -72,6 +72,7 @@ pub mod error {
         Network = 1,
         InvalidProto = 2,
         InvalidRequest = 3,
+        NotFound = 4,
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]

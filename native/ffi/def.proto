@@ -31,6 +31,7 @@ message Error {
     KIND_NETWORK = 1;
     KIND_INVALID_PROTO = 2;
     KIND_INVALID_REQUEST = 3;
+    KIND_NOT_FOUND = 4;
   }
   Kind kind = 1;
   string msg = 2;
