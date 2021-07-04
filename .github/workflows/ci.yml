@@ -100,12 +100,12 @@ jobs:
           command: make
           args: native
 
-      - name: Run cargo make android (Debug)
+      - name: Run cargo make android-dev (Debug)
         uses: actions-rs/cargo@v1
         continue-on-error: false
         with:
           command: make
-          args: android
+          args: android-dev
 
       - name: Run cargo make ios (Debug)
         uses: actions-rs/cargo@v1
