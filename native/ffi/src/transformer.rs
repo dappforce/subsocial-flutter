@@ -106,7 +106,7 @@ impl From<posts::Post<SubsocialRuntime>> for Post {
             upvotes_count: post.upvotes_count.into(),
             downvotes_count: post.downvotes_count.into(),
             hidden_replies_count: post.hidden_replies_count.into(),
-            score: post.score.into(),
+            score: post.score,
         }
     }
 }
