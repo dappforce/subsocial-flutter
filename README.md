@@ -31,18 +31,31 @@ cargo install cargo-make
 2. Install LLVM - `brew install llvm`.
 
 
-i
+
 ## Build and Test
 
 In the Root of the project simply run:
 
 ```sh
-cargo make
+cargo make native
 ```
 
-Then run flutter app normally
+To Run tests:
 
+```sh
+flutter test
 ```
+
+Then run the example flutter app:
+1. Build the native libs
+
+```sh
+cargo make android-dev # or ios
+```
+
+2. then run the app
+
+```sh
 flutter run
 ```
 
