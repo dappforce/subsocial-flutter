@@ -103,7 +103,7 @@ const Response$json = const {
       '3': 3,
       '4': 1,
       '5': 11,
-      '6': '.subsocial.SpaceByByHandle',
+      '6': '.subsocial.SpaceByHandle',
       '9': 0,
       '10': 'spaceByHandle'
     },
@@ -151,7 +151,7 @@ const Response$json = const {
 
 /// Descriptor for `Response`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List responseDescriptor = $convert.base64Decode(
-    'CghSZXNwb25zZRIoCgVlcnJvchgBIAEoCzIQLnN1YnNvY2lhbC5FcnJvckgAUgVlcnJvchI2CgtzcGFjZV9ieV9pZBgCIAEoCzIULnN1YnNvY2lhbC5TcGFjZUJ5SWRIAFIJc3BhY2VCeUlkEkQKD3NwYWNlX2J5X2hhbmRsZRgDIAEoCzIaLnN1YnNvY2lhbC5TcGFjZUJ5QnlIYW5kbGVIAFINc3BhY2VCeUhhbmRsZRIzCgpwb3N0X2J5X2lkGAQgASgLMhMuc3Vic29jaWFsLlBvc3RCeUlkSABSCHBvc3RCeUlkEk0KFHBvc3RfaWRzX2J5X3NwYWNlX2lkGAUgASgLMhsuc3Vic29jaWFsLlBvc3RJZHNCeVNwYWNlSWRIAFIQcG9zdElkc0J5U3BhY2VJZBI/Cg5yZWFjdGlvbl9ieV9pZBgGIAEoCzIXLnN1YnNvY2lhbC5SZWFjdGlvbkJ5SWRIAFIMcmVhY3Rpb25CeUlkElYKF3JlYWN0aW9uX2lkc19ieV9wb3N0X2lkGAcgASgLMh4uc3Vic29jaWFsLlJlYWN0aW9uSWRzQnlQb3N0SWRIAFITcmVhY3Rpb25JZHNCeVBvc3RJZEIGCgRib2R5');
+    'CghSZXNwb25zZRIoCgVlcnJvchgBIAEoCzIQLnN1YnNvY2lhbC5FcnJvckgAUgVlcnJvchI2CgtzcGFjZV9ieV9pZBgCIAEoCzIULnN1YnNvY2lhbC5TcGFjZUJ5SWRIAFIJc3BhY2VCeUlkEkIKD3NwYWNlX2J5X2hhbmRsZRgDIAEoCzIYLnN1YnNvY2lhbC5TcGFjZUJ5SGFuZGxlSABSDXNwYWNlQnlIYW5kbGUSMwoKcG9zdF9ieV9pZBgEIAEoCzITLnN1YnNvY2lhbC5Qb3N0QnlJZEgAUghwb3N0QnlJZBJNChRwb3N0X2lkc19ieV9zcGFjZV9pZBgFIAEoCzIbLnN1YnNvY2lhbC5Qb3N0SWRzQnlTcGFjZUlkSABSEHBvc3RJZHNCeVNwYWNlSWQSPwoOcmVhY3Rpb25fYnlfaWQYBiABKAsyFy5zdWJzb2NpYWwuUmVhY3Rpb25CeUlkSABSDHJlYWN0aW9uQnlJZBJWChdyZWFjdGlvbl9pZHNfYnlfcG9zdF9pZBgHIAEoCzIeLnN1YnNvY2lhbC5SZWFjdGlvbklkc0J5UG9zdElkSABSE3JlYWN0aW9uSWRzQnlQb3N0SWRCBgoEYm9keQ==');
 @$core.Deprecated('Use errorDescriptor instead')
 const Error$json = const {
   '1': 'Error',
@@ -177,12 +177,13 @@ const Error_Kind$json = const {
     const {'1': 'KIND_NETWORK', '2': 1},
     const {'1': 'KIND_INVALID_PROTO', '2': 2},
     const {'1': 'KIND_INVALID_REQUEST', '2': 3},
+    const {'1': 'KIND_NOT_FOUND', '2': 4},
   ],
 };
 
 /// Descriptor for `Error`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List errorDescriptor = $convert.base64Decode(
-    'CgVFcnJvchIpCgRraW5kGAEgASgOMhUuc3Vic29jaWFsLkVycm9yLktpbmRSBGtpbmQSEAoDbXNnGAIgASgJUgNtc2ciXAoES2luZBIQCgxLSU5EX1VOS05PV04QABIQCgxLSU5EX05FVFdPUksQARIWChJLSU5EX0lOVkFMSURfUFJPVE8QAhIYChRLSU5EX0lOVkFMSURfUkVRVUVTVBAD');
+    'CgVFcnJvchIpCgRraW5kGAEgASgOMhUuc3Vic29jaWFsLkVycm9yLktpbmRSBGtpbmQSEAoDbXNnGAIgASgJUgNtc2cicAoES2luZBIQCgxLSU5EX1VOS05PV04QABIQCgxLSU5EX05FVFdPUksQARIWChJLSU5EX0lOVkFMSURfUFJPVE8QAhIYChRLSU5EX0lOVkFMSURfUkVRVUVTVBADEhIKDktJTkRfTk9UX0ZPVU5EEAQ=');
 @$core.Deprecated('Use getSpaceByIdDescriptor instead')
 const GetSpaceById$json = const {
   '1': 'GetSpaceById',
@@ -468,9 +469,9 @@ const SpaceById$json = const {
 /// Descriptor for `SpaceById`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List spaceByIdDescriptor = $convert.base64Decode(
     'CglTcGFjZUJ5SWQSJgoFc3BhY2UYASABKAsyEC5zdWJzb2NpYWwuU3BhY2VSBXNwYWNl');
-@$core.Deprecated('Use spaceByByHandleDescriptor instead')
-const SpaceByByHandle$json = const {
-  '1': 'SpaceByByHandle',
+@$core.Deprecated('Use spaceByHandleDescriptor instead')
+const SpaceByHandle$json = const {
+  '1': 'SpaceByHandle',
   '2': const [
     const {
       '1': 'space',
@@ -483,9 +484,9 @@ const SpaceByByHandle$json = const {
   ],
 };
 
-/// Descriptor for `SpaceByByHandle`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List spaceByByHandleDescriptor = $convert.base64Decode(
-    'Cg9TcGFjZUJ5QnlIYW5kbGUSJgoFc3BhY2UYASABKAsyEC5zdWJzb2NpYWwuU3BhY2VSBXNwYWNl');
+/// Descriptor for `SpaceByHandle`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List spaceByHandleDescriptor = $convert.base64Decode(
+    'Cg1TcGFjZUJ5SGFuZGxlEiYKBXNwYWNlGAEgASgLMhAuc3Vic29jaWFsLlNwYWNlUgVzcGFjZQ==');
 @$core.Deprecated('Use postByIdDescriptor instead')
 const PostById$json = const {
   '1': 'PostById',

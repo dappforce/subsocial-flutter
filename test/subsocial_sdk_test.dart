@@ -7,4 +7,10 @@ void main() {
     final space = await sdk.spaceById(1);
     expect(space.handle, "subsocial");
   });
+
+  test('Get Space with handle', () async {
+    final sdk = await Subsocial.instance;
+    final space = await sdk.spaceByHandle("subsocial");
+    expect(space.id.toInt(), 1);
+  });
 }

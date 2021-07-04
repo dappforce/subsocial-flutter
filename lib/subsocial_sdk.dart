@@ -52,7 +52,26 @@ class Subsocial {
     if (res.hasError()) {
       throw res.error;
     }
-    return res.spaceById.space;
+    final val = res.ensureSpaceById();
+    return val.space;
+  }
+
+  Future<Space> spaceByHandle(String handle) async {
+    final completer = Completer<List<int>>();
+    final port = singleCompletePort(completer);
+    final req = Request(
+      spaceByHandle: GetSpaceByHandle(handle: handle),
+    );
+    final ptr = req.writeToBuffer().asSharedBufferPtr();
+    final result = _raw.subsocial_dispatch(port.nativePort, ptr);
+    assert(result == 1);
+    final resBytes = await completer.future;
+    final res = Response.fromBuffer(resBytes);
+    if (res.hasError()) {
+      throw res.error;
+    }
+    final val = res.ensureSpaceByHandle();
+    return val.space;
   }
 }
 

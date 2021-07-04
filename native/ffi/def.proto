@@ -17,7 +17,7 @@ message Response {
   oneof body {
     Error error = 1;
     SpaceById space_by_id = 2;
-    SpaceByByHandle space_by_handle = 3;
+    SpaceByHandle space_by_handle = 3;
     PostById post_by_id = 4;
     PostIdsBySpaceId post_ids_by_space_id = 5;
     ReactionById reaction_by_id = 6;
@@ -133,7 +133,7 @@ message SpaceById {
   Space space = 1;
 }
 
-message SpaceByByHandle {
+message SpaceByHandle {
   Space space = 1;
 }
 

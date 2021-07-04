@@ -234,8 +234,8 @@ class Response extends $pb.GeneratedMessage {
         subBuilder: Error.create)
     ..aOM<SpaceById>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceById',
         subBuilder: SpaceById.create)
-    ..aOM<SpaceByByHandle>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceByHandle',
-        subBuilder: SpaceByByHandle.create)
+    ..aOM<SpaceByHandle>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceByHandle',
+        subBuilder: SpaceByHandle.create)
     ..aOM<PostById>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postById',
         subBuilder: PostById.create)
     ..aOM<PostIdsBySpaceId>(
@@ -249,7 +249,7 @@ class Response extends $pb.GeneratedMessage {
   factory Response({
     Error? error,
     SpaceById? spaceById,
-    SpaceByByHandle? spaceByHandle,
+    SpaceByHandle? spaceByHandle,
     PostById? postById,
     PostIdsBySpaceId? postIdsBySpaceId,
     ReactionById? reactionById,
@@ -337,9 +337,9 @@ class Response extends $pb.GeneratedMessage {
   SpaceById ensureSpaceById() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  SpaceByByHandle get spaceByHandle => $_getN(2);
+  SpaceByHandle get spaceByHandle => $_getN(2);
   @$pb.TagNumber(3)
-  set spaceByHandle(SpaceByByHandle v) {
+  set spaceByHandle(SpaceByHandle v) {
     setField(3, v);
   }
 
@@ -348,7 +348,7 @@ class Response extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearSpaceByHandle() => clearField(3);
   @$pb.TagNumber(3)
-  SpaceByByHandle ensureSpaceByHandle() => $_ensure(2);
+  SpaceByHandle ensureSpaceByHandle() => $_ensure(2);
 
   @$pb.TagNumber(4)
   PostById get postById => $_getN(3);
@@ -2021,11 +2021,11 @@ class SpaceById extends $pb.GeneratedMessage {
   Space ensureSpace() => $_ensure(0);
 }
 
-class SpaceByByHandle extends $pb.GeneratedMessage {
+class SpaceByHandle extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       const $core.bool.fromEnvironment('protobuf.omit_message_names')
           ? ''
-          : 'SpaceByByHandle',
+          : 'SpaceByHandle',
       package: const $pb.PackageName(
           const $core.bool.fromEnvironment('protobuf.omit_message_names')
               ? ''
@@ -2039,8 +2039,8 @@ class SpaceByByHandle extends $pb.GeneratedMessage {
         subBuilder: Space.create)
     ..hasRequiredFields = false;
 
-  SpaceByByHandle._() : super();
-  factory SpaceByByHandle({
+  SpaceByHandle._() : super();
+  factory SpaceByHandle({
     Space? space,
   }) {
     final _result = create();
@@ -2049,32 +2049,32 @@ class SpaceByByHandle extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory SpaceByByHandle.fromBuffer($core.List<$core.int> i,
+  factory SpaceByHandle.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(i, r);
-  factory SpaceByByHandle.fromJson($core.String i,
+  factory SpaceByHandle.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
       'Will be removed in next major version')
-  SpaceByByHandle clone() => SpaceByByHandle()..mergeFromMessage(this);
+  SpaceByHandle clone() => SpaceByHandle()..mergeFromMessage(this);
   @$core.Deprecated('Using this can add significant overhead to your binary. '
       'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
       'Will be removed in next major version')
-  SpaceByByHandle copyWith(void Function(SpaceByByHandle) updates) =>
-      super.copyWith((message) => updates(message as SpaceByByHandle))
-          as SpaceByByHandle; // ignore: deprecated_member_use
+  SpaceByHandle copyWith(void Function(SpaceByHandle) updates) =>
+      super.copyWith((message) => updates(message as SpaceByHandle))
+          as SpaceByHandle; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static SpaceByByHandle create() => SpaceByByHandle._();
-  SpaceByByHandle createEmptyInstance() => create();
-  static $pb.PbList<SpaceByByHandle> createRepeated() =>
-      $pb.PbList<SpaceByByHandle>();
+  static SpaceByHandle create() => SpaceByHandle._();
+  SpaceByHandle createEmptyInstance() => create();
+  static $pb.PbList<SpaceByHandle> createRepeated() =>
+      $pb.PbList<SpaceByHandle>();
   @$core.pragma('dart2js:noInline')
-  static SpaceByByHandle getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<SpaceByByHandle>(create);
-  static SpaceByByHandle? _defaultInstance;
+  static SpaceByHandle getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SpaceByHandle>(create);
+  static SpaceByHandle? _defaultInstance;
 
   @$pb.TagNumber(1)
   Space get space => $_getN(0);
