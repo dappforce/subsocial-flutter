@@ -1,6 +1,7 @@
 mod handler;
 mod pb;
 mod shared_buffer;
+mod transformer;
 
 use std::ffi::CStr;
 use std::os::raw::c_char;

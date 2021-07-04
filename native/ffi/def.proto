@@ -61,6 +61,12 @@ message GetReactionIdsByPostId {
   uint64 post_id = 1;
 }
 
+message WhoAndWhen {
+  string account = 1;
+  uint64 block_number = 2;
+  uint64 time = 3;
+}
+
 message Content {
   oneof value {
     bytes raw = 1;
@@ -78,8 +84,8 @@ message PostExtension {
 
 message Space {
   uint64 id = 1;
-  uint64 created = 2;
-  uint64 updated = 3;
+  WhoAndWhen created = 2;
+  WhoAndWhen updated = 3;
   string owner = 4;
   uint64 parent_id = 5;
   string handle = 6;
@@ -93,8 +99,8 @@ message Space {
 
 message Post {
   uint64 id = 1;
-  uint64 created = 2;
-  uint64 updated = 3;
+  WhoAndWhen created = 2;
+  WhoAndWhen updated = 3;
   string owner = 4;
   PostExtension extension = 5;
   uint64 space_id = 6;
@@ -124,8 +130,8 @@ message Reaction {
     DOWN_VOTE = 2;
   }
   uint64 id = 1;
-  uint64 created = 2;
-  uint64 updated = 3;
+  WhoAndWhen created = 2;
+  WhoAndWhen updated = 3;
   ReactionKind kind = 4;
 }
 
@@ -146,10 +152,10 @@ message ReactionById {
 }
 
 message PostIdsBySpaceId {
-  repeated uint64 post_id = 1 [packed = true];
+  repeated uint64 post_ids = 1 [packed = true];
 }
 
 message ReactionIdsByPostId {
-  repeated uint64 reaction_id = 1 [packed = true];
+  repeated uint64 reaction_ids = 1 [packed = true];
 }
 

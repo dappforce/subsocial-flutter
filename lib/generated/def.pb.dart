@@ -908,6 +908,112 @@ class GetReactionIdsByPostId extends $pb.GeneratedMessage {
   void clearPostId() => clearField(1);
 }
 
+class WhoAndWhen extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'WhoAndWhen',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'account')
+    ..a<$fixnum.Int64>(
+        2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'blockNumber', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(
+        3,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'time',
+        $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false;
+
+  WhoAndWhen._() : super();
+  factory WhoAndWhen({
+    $core.String? account,
+    $fixnum.Int64? blockNumber,
+    $fixnum.Int64? time,
+  }) {
+    final _result = create();
+    if (account != null) {
+      _result.account = account;
+    }
+    if (blockNumber != null) {
+      _result.blockNumber = blockNumber;
+    }
+    if (time != null) {
+      _result.time = time;
+    }
+    return _result;
+  }
+  factory WhoAndWhen.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory WhoAndWhen.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  WhoAndWhen clone() => WhoAndWhen()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  WhoAndWhen copyWith(void Function(WhoAndWhen) updates) =>
+      super.copyWith((message) => updates(message as WhoAndWhen))
+          as WhoAndWhen; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static WhoAndWhen create() => WhoAndWhen._();
+  WhoAndWhen createEmptyInstance() => create();
+  static $pb.PbList<WhoAndWhen> createRepeated() => $pb.PbList<WhoAndWhen>();
+  @$core.pragma('dart2js:noInline')
+  static WhoAndWhen getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<WhoAndWhen>(create);
+  static WhoAndWhen? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get account => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set account($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasAccount() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccount() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get blockNumber => $_getI64(1);
+  @$pb.TagNumber(2)
+  set blockNumber($fixnum.Int64 v) {
+    $_setInt64(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasBlockNumber() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearBlockNumber() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get time => $_getI64(2);
+  @$pb.TagNumber(3)
+  set time($fixnum.Int64 v) {
+    $_setInt64(2, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasTime() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTime() => clearField(3);
+}
+
 enum Content_Value { raw, ipfs, hyper, notSet }
 
 class Content extends $pb.GeneratedMessage {
@@ -1131,7 +1237,10 @@ class PostExtension extends $pb.GeneratedMessage {
 }
 
 class Space extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Space',
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'Space',
       package: const $pb.PackageName(
           const $core.bool.fromEnvironment('protobuf.omit_message_names')
               ? ''
@@ -1140,14 +1249,10 @@ class Space extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(
         1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(
-        2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'created', $pb.PbFieldType.OU6,
-        defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(
-        3,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updated',
-        $pb.PbFieldType.OU6,
-        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOM<WhoAndWhen>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'created',
+        subBuilder: WhoAndWhen.create)
+    ..aOM<WhoAndWhen>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updated',
+        subBuilder: WhoAndWhen.create)
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'owner')
     ..a<$fixnum.Int64>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'parentId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'handle')
@@ -1162,8 +1267,8 @@ class Space extends $pb.GeneratedMessage {
   Space._() : super();
   factory Space({
     $fixnum.Int64? id,
-    $fixnum.Int64? created,
-    $fixnum.Int64? updated,
+    WhoAndWhen? created,
+    WhoAndWhen? updated,
     $core.String? owner,
     $fixnum.Int64? parentId,
     $core.String? handle,
@@ -1252,28 +1357,32 @@ class Space extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $fixnum.Int64 get created => $_getI64(1);
+  WhoAndWhen get created => $_getN(1);
   @$pb.TagNumber(2)
-  set created($fixnum.Int64 v) {
-    $_setInt64(1, v);
+  set created(WhoAndWhen v) {
+    setField(2, v);
   }
 
   @$pb.TagNumber(2)
   $core.bool hasCreated() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreated() => clearField(2);
+  @$pb.TagNumber(2)
+  WhoAndWhen ensureCreated() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $fixnum.Int64 get updated => $_getI64(2);
+  WhoAndWhen get updated => $_getN(2);
   @$pb.TagNumber(3)
-  set updated($fixnum.Int64 v) {
-    $_setInt64(2, v);
+  set updated(WhoAndWhen v) {
+    setField(3, v);
   }
 
   @$pb.TagNumber(3)
   $core.bool hasUpdated() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdated() => clearField(3);
+  @$pb.TagNumber(3)
+  WhoAndWhen ensureUpdated() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.String get owner => $_getSZ(3);
@@ -1387,7 +1496,10 @@ class Space extends $pb.GeneratedMessage {
 }
 
 class Post extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Post',
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'Post',
       package: const $pb.PackageName(
           const $core.bool.fromEnvironment('protobuf.omit_message_names')
               ? ''
@@ -1396,14 +1508,10 @@ class Post extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(
         1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(
-        2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'created', $pb.PbFieldType.OU6,
-        defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(
-        3,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updated',
-        $pb.PbFieldType.OU6,
-        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOM<WhoAndWhen>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'created',
+        subBuilder: WhoAndWhen.create)
+    ..aOM<WhoAndWhen>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updated',
+        subBuilder: WhoAndWhen.create)
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'owner')
     ..aOM<PostExtension>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'extension', subBuilder: PostExtension.create)
     ..a<$fixnum.Int64>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
@@ -1420,8 +1528,8 @@ class Post extends $pb.GeneratedMessage {
   Post._() : super();
   factory Post({
     $fixnum.Int64? id,
-    $fixnum.Int64? created,
-    $fixnum.Int64? updated,
+    WhoAndWhen? created,
+    WhoAndWhen? updated,
     $core.String? owner,
     PostExtension? extension_5,
     $fixnum.Int64? spaceId,
@@ -1518,28 +1626,32 @@ class Post extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $fixnum.Int64 get created => $_getI64(1);
+  WhoAndWhen get created => $_getN(1);
   @$pb.TagNumber(2)
-  set created($fixnum.Int64 v) {
-    $_setInt64(1, v);
+  set created(WhoAndWhen v) {
+    setField(2, v);
   }
 
   @$pb.TagNumber(2)
   $core.bool hasCreated() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreated() => clearField(2);
+  @$pb.TagNumber(2)
+  WhoAndWhen ensureCreated() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $fixnum.Int64 get updated => $_getI64(2);
+  WhoAndWhen get updated => $_getN(2);
   @$pb.TagNumber(3)
-  set updated($fixnum.Int64 v) {
-    $_setInt64(2, v);
+  set updated(WhoAndWhen v) {
+    setField(3, v);
   }
 
   @$pb.TagNumber(3)
   $core.bool hasUpdated() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdated() => clearField(3);
+  @$pb.TagNumber(3)
+  WhoAndWhen ensureUpdated() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.String get owner => $_getSZ(3);
@@ -1840,14 +1952,14 @@ class Reaction extends $pb.GeneratedMessage {
               ? ''
               : 'subsocial'),
       createEmptyInstance: create)
-    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6,
-        defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(
-        2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'created', $pb.PbFieldType.OU6,
+        1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(
-        3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updated', $pb.PbFieldType.OU6,
-        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOM<WhoAndWhen>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'created',
+        subBuilder: WhoAndWhen.create)
+    ..aOM<WhoAndWhen>(
+        3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updated',
+        subBuilder: WhoAndWhen.create)
     ..e<Reaction_ReactionKind>(
         4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'kind', $pb.PbFieldType.OE,
         defaultOrMaker: Reaction_ReactionKind.UNKNOWN,
@@ -1858,8 +1970,8 @@ class Reaction extends $pb.GeneratedMessage {
   Reaction._() : super();
   factory Reaction({
     $fixnum.Int64? id,
-    $fixnum.Int64? created,
-    $fixnum.Int64? updated,
+    WhoAndWhen? created,
+    WhoAndWhen? updated,
     Reaction_ReactionKind? kind,
   }) {
     final _result = create();
@@ -1916,28 +2028,32 @@ class Reaction extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $fixnum.Int64 get created => $_getI64(1);
+  WhoAndWhen get created => $_getN(1);
   @$pb.TagNumber(2)
-  set created($fixnum.Int64 v) {
-    $_setInt64(1, v);
+  set created(WhoAndWhen v) {
+    setField(2, v);
   }
 
   @$pb.TagNumber(2)
   $core.bool hasCreated() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreated() => clearField(2);
+  @$pb.TagNumber(2)
+  WhoAndWhen ensureCreated() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $fixnum.Int64 get updated => $_getI64(2);
+  WhoAndWhen get updated => $_getN(2);
   @$pb.TagNumber(3)
-  set updated($fixnum.Int64 v) {
-    $_setInt64(2, v);
+  set updated(WhoAndWhen v) {
+    setField(3, v);
   }
 
   @$pb.TagNumber(3)
   $core.bool hasUpdated() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdated() => clearField(3);
+  @$pb.TagNumber(3)
+  WhoAndWhen ensureUpdated() => $_ensure(2);
 
   @$pb.TagNumber(4)
   Reaction_ReactionKind get kind => $_getN(3);
@@ -2244,17 +2360,17 @@ class PostIdsBySpaceId extends $pb.GeneratedMessage {
         1,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
-            : 'postId',
+            : 'postIds',
         $pb.PbFieldType.KU6)
     ..hasRequiredFields = false;
 
   PostIdsBySpaceId._() : super();
   factory PostIdsBySpaceId({
-    $core.Iterable<$fixnum.Int64>? postId,
+    $core.Iterable<$fixnum.Int64>? postIds,
   }) {
     final _result = create();
-    if (postId != null) {
-      _result.postId.addAll(postId);
+    if (postIds != null) {
+      _result.postIds.addAll(postIds);
     }
     return _result;
   }
@@ -2286,7 +2402,7 @@ class PostIdsBySpaceId extends $pb.GeneratedMessage {
   static PostIdsBySpaceId? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$fixnum.Int64> get postId => $_getList(0);
+  $core.List<$fixnum.Int64> get postIds => $_getList(0);
 }
 
 class ReactionIdsByPostId extends $pb.GeneratedMessage {
@@ -2303,17 +2419,17 @@ class ReactionIdsByPostId extends $pb.GeneratedMessage {
         1,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
-            : 'reactionId',
+            : 'reactionIds',
         $pb.PbFieldType.KU6)
     ..hasRequiredFields = false;
 
   ReactionIdsByPostId._() : super();
   factory ReactionIdsByPostId({
-    $core.Iterable<$fixnum.Int64>? reactionId,
+    $core.Iterable<$fixnum.Int64>? reactionIds,
   }) {
     final _result = create();
-    if (reactionId != null) {
-      _result.reactionId.addAll(reactionId);
+    if (reactionIds != null) {
+      _result.reactionIds.addAll(reactionIds);
     }
     return _result;
   }
@@ -2345,5 +2461,5 @@ class ReactionIdsByPostId extends $pb.GeneratedMessage {
   static ReactionIdsByPostId? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$fixnum.Int64> get reactionId => $_getList(0);
+  $core.List<$fixnum.Int64> get reactionIds => $_getList(0);
 }
