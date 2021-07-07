@@ -1,0 +1,7 @@
+include: package:lint/analysis_options_package.yaml
+exclude:
+    - lib/generated/def.pb.dart
+    - lib/generated/def.pbenum.dart
+    - lib/generated/def.pbgrpc.dart
+    - lib/generated/def.pbjson.dart
+

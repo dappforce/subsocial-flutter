@@ -1,0 +1,161 @@
+syntax = "proto3";
+package subsocial;
+
+
+message Request {
+  oneof body {
+    GetSpaceById space_by_id = 1;
+    GetSpaceByHandle space_by_handle = 2;
+    GetPostById post_by_id = 3;
+    GetPostIdsBySpaceId post_ids_by_space_id = 4;
+    GetReactionById reaction_by_id = 5;
+    GetReactionIdsByPostId reaction_ids_by_post_id = 6;
+  }
+}
+
+message Response {
+  oneof body {
+    Error error = 1;
+    SpaceById space_by_id = 2;
+    SpaceByHandle space_by_handle = 3;
+    PostById post_by_id = 4;
+    PostIdsBySpaceId post_ids_by_space_id = 5;
+    ReactionById reaction_by_id = 6;
+    ReactionIdsByPostId reaction_ids_by_post_id = 7;
+  }
+}
+
+message Error {
+  enum Kind {
+    KIND_UNKNOWN = 0;
+    KIND_NETWORK = 1;
+    KIND_INVALID_PROTO = 2;
+    KIND_INVALID_REQUEST = 3;
+    KIND_NOT_FOUND = 4;
+  }
+  Kind kind = 1;
+  string msg = 2;
+}
+
+message GetSpaceById {
+  uint64 space_id = 1;
+}
+
+message GetSpaceByHandle {
+  string handle = 1;
+}
+
+message GetPostById {
+  uint64 post_id = 1;
+}
+
+message GetReactionById {
+  uint64 reaction_id = 1;
+}
+
+message GetPostIdsBySpaceId {
+  uint64 space_id = 1;
+}
+
+message GetReactionIdsByPostId {
+  uint64 post_id = 1;
+}
+
+message WhoAndWhen {
+  string account = 1;
+  uint64 block_number = 2;
+  uint64 time = 3;
+}
+
+message Content {
+  oneof value {
+    bytes raw = 1;
+    string ipfs = 2;
+    string hyper = 3;
+  }
+}
+
+message PostExtension {
+  oneof value {
+    Comment comment = 1;
+    SharedPost shared_post = 2;
+  }
+}
+
+message Space {
+  uint64 id = 1;
+  WhoAndWhen created = 2;
+  WhoAndWhen updated = 3;
+  string owner = 4;
+  uint64 parent_id = 5;
+  string handle = 6;
+  Content content = 7;
+  bool hidden = 8;
+  uint32 posts_count = 9;
+  uint32 hidden_posts_count = 10;
+  uint32 followers_count = 11;
+  int32 score = 12;
+}
+
+message Post {
+  uint64 id = 1;
+  WhoAndWhen created = 2;
+  WhoAndWhen updated = 3;
+  string owner = 4;
+  PostExtension extension = 5;
+  uint64 space_id = 6;
+  Content content = 7;
+  bool hidden = 8;
+  uint32 replies_count = 9;
+  uint32 hidden_replies_count = 10;
+  uint32 shares_count = 11;
+  uint32 upvotes_count = 12;
+  uint32 downvotes_count = 13;
+  int32 score = 14;
+}
+
+message Comment {
+  uint64 parent_id = 1;
+  uint64 root_post_id = 2;
+}
+
+message SharedPost {
+  uint64 root_post_id = 1;
+}
+
+message Reaction {
+  enum ReactionKind {
+    UNKNOWN = 0;
+    UP_VOTE = 1;
+    DOWN_VOTE = 2;
+  }
+  uint64 id = 1;
+  WhoAndWhen created = 2;
+  WhoAndWhen updated = 3;
+  ReactionKind kind = 4;
+}
+
+message SpaceById {
+  Space space = 1;
+}
+
+message SpaceByHandle {
+  Space space = 1;
+}
+
+message PostById {
+  Post post = 1;
+}
+
+message ReactionById {
+  Reaction reaction = 1;
+}
+
+message PostIdsBySpaceId {
+  repeated uint64 post_ids = 1 [packed = true];
+}
+
+message ReactionIdsByPostId {
+  repeated uint64 reaction_ids = 1 [packed = true];
+}
+

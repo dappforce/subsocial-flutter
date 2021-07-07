@@ -1,0 +1,45 @@
+name: subsocial_sdk
+description: Flutter SDK for Subsocial.
+version: 0.1.0
+author: Shady Khalifa <shekohex@gmail.com>
+homepage: https://subsocial.network
+
+environment:
+  sdk: ">=2.13.0 <3.0.0"
+  flutter: ">=1.20.0"
+
+dependencies:
+  ffi: ^1.1.2
+  flutter:
+    sdk: flutter
+  protobuf: ^2.0.0
+
+dev_dependencies:
+  ffigen: ^3.0.0
+  flutter_test:
+    sdk: flutter
+  lint: ^1.5.3
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: network.subsocial.subsocial_sdk
+        pluginClass: SubsocialSdkPlugin
+      ios:
+        pluginClass: SubsocialSdkPlugin
+
+ffigen:
+  output: 'lib/ffi.dart'
+  name: 'RawSubsoical'
+  description: 'Subscoial FFI Binding'
+  array-workaround: false
+  sort: true
+  comments:
+    style: any
+    length: full
+  headers:
+    entry-points:
+      - 'native/ffi/binding.h'
+    include-directives:
+      - '**binding.h'
