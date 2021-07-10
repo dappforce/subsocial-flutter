@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
 import 'package:subsocial_sdk/subsocial_sdk.dart';
 
 void main() {
@@ -14,44 +11,59 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-
+  final List<Space> _spaces = [];
   @override
   void initState() {
     super.initState();
-    initPlatformState();
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      platformVersion = await Subsocial.platformVersion;
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
+    // this loads subsocial sdk for the first time.
+    final _ = Subsocial.instance;
+    loadPublicSpaces();
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('Subsocial Flutter'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        body: ListView.builder(
+          itemCount: _spaces.length,
+          shrinkWrap: true,
+          itemBuilder: (context, i) => SpaceWidget(_spaces[i]),
         ),
+      ),
+    );
+  }
+
+  Future<void> loadPublicSpaces({int from = 1, int to = 50}) async {
+    final sdk = await Subsocial.instance;
+    final List<Space> spaces = [];
+    for (int i = from; i <= to; i++) {
+      try {
+        final space = await sdk.spaceById(i);
+        spaces.add(space);
+      } catch (e) {
+        print(e);
+        continue;
+      }
+    }
+    setState(() {
+      _spaces.addAll(spaces);
+    });
+  }
+}
+
+class SpaceWidget extends StatelessWidget {
+  final Space space;
+  const SpaceWidget(this.space);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text(space.handle),
       ),
     );
   }
