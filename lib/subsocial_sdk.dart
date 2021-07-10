@@ -30,22 +30,17 @@ class Subsocial {
       final raw = RawSubsoical(dl);
       AlloIsolate(lib: dl).hook();
       final completer = Completer<void>();
-      final port = singleCompletePort(
-        completer,
-        timeout: const Duration(seconds: 1),
-        onTimeout: () {
-          // do nothing, assume already loaded.
-        },
-      );
+      final port = singleCompletePort(completer);
       final config = malloc.call<SubscoialConfig>();
       config.ref.url = "wss://rpc.subsocial.network".toNativeUtf8().cast();
       final result = raw.subsocial_init_client(
         port.nativePort,
         config,
       );
-      assert(result == 1);
+      _assertOk(result);
       await completer.future;
-      return _instance = Subsocial._(raw);
+      _instance = Subsocial._(raw);
+      return _instance!;
     } else {
       return _instance!;
     }
@@ -59,7 +54,7 @@ class Subsocial {
     );
     final ptr = req.writeToBuffer().asSharedBufferPtr();
     final result = _raw.subsocial_dispatch(port.nativePort, ptr);
-    assert(result == 1);
+    _assertOk(result);
     final resBytes = await completer.future;
     final res = Response.fromBuffer(resBytes);
     if (res.hasError()) {
@@ -77,7 +72,7 @@ class Subsocial {
     );
     final ptr = req.writeToBuffer().asSharedBufferPtr();
     final result = _raw.subsocial_dispatch(port.nativePort, ptr);
-    assert(result == 1);
+    _assertOk(result);
     final resBytes = await completer.future;
     final res = Response.fromBuffer(resBytes);
     if (res.hasError()) {
@@ -95,7 +90,7 @@ class Subsocial {
     );
     final ptr = req.writeToBuffer().asSharedBufferPtr();
     final result = _raw.subsocial_dispatch(port.nativePort, ptr);
-    assert(result == 1);
+    _assertOk(result);
     final resBytes = await completer.future;
     final res = Response.fromBuffer(resBytes);
     if (res.hasError()) {
@@ -113,7 +108,7 @@ class Subsocial {
     );
     final ptr = req.writeToBuffer().asSharedBufferPtr();
     final result = _raw.subsocial_dispatch(port.nativePort, ptr);
-    assert(result == 1);
+    _assertOk(result);
     final resBytes = await completer.future;
     final res = Response.fromBuffer(resBytes);
     if (res.hasError()) {
@@ -131,7 +126,7 @@ class Subsocial {
     );
     final ptr = req.writeToBuffer().asSharedBufferPtr();
     final result = _raw.subsocial_dispatch(port.nativePort, ptr);
-    assert(result == 1);
+    _assertOk(result);
     final resBytes = await completer.future;
     final res = Response.fromBuffer(resBytes);
     if (res.hasError()) {
@@ -149,7 +144,7 @@ class Subsocial {
     );
     final ptr = req.writeToBuffer().asSharedBufferPtr();
     final result = _raw.subsocial_dispatch(port.nativePort, ptr);
-    assert(result == 1);
+    _assertOk(result);
     final resBytes = await completer.future;
     final res = Response.fromBuffer(resBytes);
     if (res.hasError()) {
@@ -157,6 +152,20 @@ class Subsocial {
     }
     final val = res.ensureReactionIdsByPostId();
     return val.reactionIds.map((e) => e.toInt()).toList();
+  }
+}
+
+class BadProtoMessageException implements Exception {}
+
+class ClientNotInitializedException implements Exception {}
+
+void _assertOk(int result) {
+  if (result == 0xbadc0de) {
+    throw BadProtoMessageException();
+  } else if (result == 0xdead) {
+    throw ClientNotInitializedException();
+  } else {
+    // all good
   }
 }
 
