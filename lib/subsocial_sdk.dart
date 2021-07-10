@@ -30,7 +30,13 @@ class Subsocial {
       final raw = RawSubsoical(dl);
       AlloIsolate(lib: dl).hook();
       final completer = Completer<void>();
-      final port = singleCompletePort(completer);
+      final port = singleCompletePort(
+        completer,
+        timeout: const Duration(seconds: 1),
+        onTimeout: () {
+          // do nothing, assume already loaded.
+        },
+      );
       final config = malloc.call<SubscoialConfig>();
       config.ref.url = "wss://rpc.subsocial.network".toNativeUtf8().cast();
       final result = raw.subsocial_init_client(
@@ -161,9 +167,9 @@ DynamicLibrary _load() {
   } else if (Platform.isIOS) {
     return DynamicLibrary.executable();
   } else if (Platform.isLinux) {
-    return DynamicLibrary.open('target/debug/libsubscoial.so');
+    return DynamicLibrary.open('target/debug/libsubsocial.so');
   } else if (Platform.isMacOS) {
-    return DynamicLibrary.open('target/debug/libsubscoial.dylib');
+    return DynamicLibrary.open('target/debug/libsubsocial.dylib');
   } else {
     throw UnsupportedError('The Current Platform is not supported.');
   }
