@@ -9,9 +9,11 @@ import 'package:subsocial_sdk/allo_isolate.dart';
 import 'package:subsocial_sdk/ffi.dart';
 import 'package:subsocial_sdk/utils.dart';
 import 'package:subsocial_sdk/extensions.dart';
+import 'package:subsocial_sdk/generated/def.pb.dart';
 
-import 'generated/def.pb.dart';
 export 'generated/def.pb.dart';
+export 'generated/def.pbenum.dart';
+export 'ipfs.dart';
 
 typedef PostId = int;
 typedef SpaceId = int;
