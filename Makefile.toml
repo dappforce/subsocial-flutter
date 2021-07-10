@@ -89,8 +89,8 @@ script_runner = "@duckscript"
 condition = { platforms = ["mac"] }
 script = [
     """
-    cp ${CARGO_MAKE_WORKSPACE_WORKING_DIRECTORY}/target/universal/${LIB_OUT_DIR}/libsubscoial.a \
-    ${CARGO_MAKE_WORKSPACE_WORKING_DIRECTORY}/ios/libsubscoial.a
+    cp ${CARGO_MAKE_WORKSPACE_WORKING_DIRECTORY}/target/universal/${LIB_OUT_DIR}/libsubsocial.a \
+    ${CARGO_MAKE_WORKSPACE_WORKING_DIRECTORY}/ios/libsubsocial.a
     """,
     """
     cp ${CARGO_MAKE_WORKSPACE_WORKING_DIRECTORY}/native/${CARGO_MAKE_CRATE_CURRENT_WORKSPACE_MEMBER}/binding.h \
@@ -209,8 +209,8 @@ condition = { env_set = ["ANDROID_TARGET", "JNI_LIB_DIR"] }
 script_runner = "@duckscript"
 script = [
     """
-    cp ${CARGO_MAKE_WORKSPACE_WORKING_DIRECTORY}/target/${ANDROID_TARGET}/${LIB_OUT_DIR}/libsubscoial.so \
-    ${CARGO_MAKE_WORKSPACE_WORKING_DIRECTORY}/android/src/main/jniLibs/${JNI_LIB_DIR}/libsubscoial.so
+    cp ${CARGO_MAKE_WORKSPACE_WORKING_DIRECTORY}/target/${ANDROID_TARGET}/${LIB_OUT_DIR}/libsubsocial.so \
+    ${CARGO_MAKE_WORKSPACE_WORKING_DIRECTORY}/android/src/main/jniLibs/${JNI_LIB_DIR}/libsubsocial.so
     """,
 ]
 
