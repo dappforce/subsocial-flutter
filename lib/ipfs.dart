@@ -36,8 +36,8 @@ class IpfsClient {
     }
   }
 
-  Future<T?> query<T>(List<String> cids) async {
-    final result = await _client.get<T>(
+  Future<Map<String, T>> query<T>(List<String> cids) async {
+    final result = await _client.get<Map<String, T>>(
       _kIpfsBaseUrl,
       queryParameters: {
         'cids': cids.join(','),
@@ -46,6 +46,10 @@ class IpfsClient {
         contentType: ContentType.json.value,
       ),
     );
-    return result.data;
+    if (result.statusCode == 200) {
+      return result.data!;
+    } else {
+      return {};
+    }
   }
 }
