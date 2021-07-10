@@ -36,8 +36,11 @@ class IpfsClient {
     }
   }
 
-  Future<Map<String, T>> query<T>(List<String> cids) async {
-    final result = await _client.get<Map<String, T>>(
+  Future<Map<String, T>> query<T>(
+    List<String> cids,
+    T Function(Map<String, dynamic>) converter,
+  ) async {
+    final result = await _client.get<Map<String, dynamic>>(
       _kIpfsBaseUrl,
       queryParameters: {
         'cids': cids.join(','),
@@ -47,7 +50,9 @@ class IpfsClient {
       ),
     );
     if (result.statusCode == 200) {
-      return result.data!;
+      return result.data!.map(
+        (key, value) => MapEntry(key, converter(value as Map<String, dynamic>)),
+      );
     } else {
       return {};
     }

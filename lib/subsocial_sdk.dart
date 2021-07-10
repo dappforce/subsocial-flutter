@@ -14,6 +14,7 @@ import 'package:subsocial_sdk/generated/def.pb.dart';
 export 'generated/def.pb.dart';
 export 'generated/def.pbenum.dart';
 export 'ipfs.dart';
+export 'json_models.dart';
 
 typedef PostId = int;
 typedef SpaceId = int;

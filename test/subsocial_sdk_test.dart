@@ -11,6 +11,10 @@ void main() {
   test('Get Space with handle', () async {
     final sdk = await Subsocial.instance;
     final space = await sdk.spaceByHandle("subsocial");
+    final _ = await IpfsClient().query(
+      [space.content.ipfs],
+      (json) => SpaceMetadata.fromJson(json),
+    );
     expect(space.id.toInt(), 1);
   });
 
@@ -20,6 +24,10 @@ void main() {
     final postIds = await sdk.postsIdsBySpaceId(space.id.toInt());
     for (final postId in postIds) {
       final post = await sdk.postById(postId.toInt());
+      final _ = await IpfsClient().query(
+        [post.content.ipfs],
+        (json) => PostMetadata.fromJson(json),
+      );
       expect(post.spaceId, space.id);
     }
   });
