@@ -19,11 +19,13 @@ class IpfsClient {
       ),
     );
 
+  String mediaUrl(String cid) => '$_kIpfsMediaBaseUrl/$cid';
+
   Future<Uint8List?> media(String cid) async {
     final tmpDir = await getTemporaryDirectory();
     final savingPath = p.join(tmpDir.path, cid);
     final result = await _client.download(
-      '$_kIpfsMediaBaseUrl/$cid',
+      mediaUrl(cid),
       savingPath,
     );
     if (result.statusCode == 200) {

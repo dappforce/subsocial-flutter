@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="network.subsocial.subsocial_sdk_example">
+  package="network.subsocial.subsocial_sdk_example">
+   <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="subsocial_sdk_example"
         android:icon="@mipmap/ic_launcher">
