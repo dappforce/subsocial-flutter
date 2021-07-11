@@ -29,7 +29,7 @@ class Subsocial {
       final dl = _load();
       final raw = RawSubsoical(dl);
       AlloIsolate(lib: dl).hook();
-      final completer = Completer<void>();
+      final completer = Completer<dynamic>();
       final port = singleCompletePort(completer);
       final config = malloc.call<SubscoialConfig>();
       config.ref.url = "wss://rpc.subsocial.network".toNativeUtf8().cast();
@@ -38,7 +38,10 @@ class Subsocial {
         config,
       );
       _assertOk(result);
-      await completer.future;
+      final res = await completer.future;
+      if (res is String) {
+        throw SubxtException(res);
+      }
       _instance = Subsocial._(raw);
       return _instance!;
     } else {
@@ -153,11 +156,22 @@ class Subsocial {
     final val = res.ensureReactionIdsByPostId();
     return val.reactionIds.map((e) => e.toInt()).toList();
   }
+
+  void dispose() {
+    final result = _raw.subsocial_shutdown();
+    _assertOk(result);
+    _instance = null;
+  }
 }
 
 class BadProtoMessageException implements Exception {}
 
 class ClientNotInitializedException implements Exception {}
+
+class SubxtException implements Exception {
+  final String message;
+  const SubxtException(this.message);
+}
 
 void _assertOk(int result) {
   if (result == 0xbadc0de) {
