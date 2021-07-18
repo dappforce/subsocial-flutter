@@ -171,6 +171,10 @@ class ClientNotInitializedException implements Exception {}
 class SubxtException implements Exception {
   final String message;
   const SubxtException(this.message);
+  @override
+  String toString() {
+    return 'SubxtException($message)';
+  }
 }
 
 void _assertOk(int result) {
