@@ -1,6 +1,6 @@
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Request {
-    #[prost(oneof = "request::Body", tags = "1, 2, 3, 4, 5, 6")]
+    #[prost(oneof = "request::Body", tags = "1, 2, 3, 4, 5, 6, 7")]
     pub body: ::core::option::Option<request::Body>,
 }
 /// Nested message and enum types in `Request`.
@@ -19,11 +19,13 @@ pub mod request {
         ReactionById(super::GetReactionById),
         #[prost(message, tag = "6")]
         ReactionIdsByPostId(super::GetReactionIdsByPostId),
+        #[prost(message, tag = "7")]
+        ReplyIdsByPostId(super::GetReplyIdsByPostId),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Response {
-    #[prost(oneof = "response::Body", tags = "1, 2, 3, 4, 5, 6, 7")]
+    #[prost(oneof = "response::Body", tags = "1, 2, 3, 4, 5, 6, 7, 8")]
     pub body: ::core::option::Option<response::Body>,
 }
 /// Nested message and enum types in `Response`.
@@ -44,6 +46,8 @@ pub mod response {
         ReactionById(super::ReactionById),
         #[prost(message, tag = "7")]
         ReactionIdsByPostId(super::ReactionIdsByPostId),
+        #[prost(message, tag = "8")]
+        ReplyIdsByPostId(super::ReplyIdsByPostId),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -102,6 +106,11 @@ pub struct GetPostIdsBySpaceId {
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetReactionIdsByPostId {
+    #[prost(uint64, tag = "1")]
+    pub post_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetReplyIdsByPostId {
     #[prost(uint64, tag = "1")]
     pub post_id: u64,
 }
@@ -184,7 +193,7 @@ pub struct Post {
     #[prost(string, tag = "4")]
     pub owner: ::prost::alloc::string::String,
     #[prost(message, optional, tag = "5")]
-    pub extension: ::core::option::Option<PostExtension>,
+    pub extension_value: ::core::option::Option<PostExtension>,
     #[prost(uint64, tag = "6")]
     pub space_id: u64,
     #[prost(message, optional, tag = "7")]
@@ -276,4 +285,9 @@ pub struct PostIdsBySpaceId {
 pub struct ReactionIdsByPostId {
     #[prost(uint64, repeated, tag = "1")]
     pub reaction_ids: ::prost::alloc::vec::Vec<u64>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ReplyIdsByPostId {
+    #[prost(uint64, repeated, tag = "1")]
+    pub reply_ids: ::prost::alloc::vec::Vec<u64>,
 }

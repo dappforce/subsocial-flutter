@@ -56,7 +56,7 @@ pub extern "C" fn subsocial_init_client(
 #[no_mangle]
 pub extern "C" fn subsocial_dispatch(port: i64, ptr: Box<SharedBuffer>) -> i32 {
     let isolate = Isolate::new(port);
-    let req: subsocial::Request = match prost::Message::decode(ptr.as_slice()) {
+    let req = match prost::Message::decode(ptr.as_slice()) {
         Ok(v) => v,
         Err(e) => {
             let mut bytes = Vec::new();

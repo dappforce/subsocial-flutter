@@ -44,4 +44,19 @@ void main() {
       final _ = await sdk.reactionById(reactionId.toInt());
     }
   });
+
+  test('Get Post Replies', () async {
+    final sdk = await Subsocial.instance;
+    final space = await sdk.spaceByHandle("subsocial");
+    final postIds = await sdk.postsIdsBySpaceId(space.id.toInt());
+    final firstPostId = postIds.first;
+    final repliesIds = await sdk.replyIdsByPostId(firstPostId);
+    final first5Replies = repliesIds.take(5);
+    for (final replyId in first5Replies) {
+      final reply = await sdk.postById(replyId.toInt());
+      expect(reply.hasExtensionValue(), true);
+      expect(reply.extensionValue.hasComment(), true);
+      expect(reply.extensionValue.comment.rootPostId.toInt(), firstPostId);
+    }
+  });
 }

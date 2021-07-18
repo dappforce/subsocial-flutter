@@ -157,6 +157,24 @@ class Subsocial {
     return val.reactionIds.map((e) => e.toInt()).toList();
   }
 
+  Future<List<PostId>> replyIdsByPostId(PostId id) async {
+    final completer = Completer<List<int>>();
+    final port = singleCompletePort(completer);
+    final req = Request(
+      replyIdsByPostId: GetReplyIdsByPostId(postId: makeLongInt(id)),
+    );
+    final ptr = req.writeToBuffer().asSharedBufferPtr();
+    final result = _raw.subsocial_dispatch(port.nativePort, ptr);
+    _assertOk(result);
+    final resBytes = await completer.future;
+    final res = Response.fromBuffer(resBytes);
+    if (res.hasError()) {
+      throw res.error;
+    }
+    final val = res.ensureReplyIdsByPostId();
+    return val.replyIds.map((e) => e.toInt()).toList();
+  }
+
   void dispose() {
     final result = _raw.subsocial_shutdown();
     _assertOk(result);

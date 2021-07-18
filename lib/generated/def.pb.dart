@@ -21,6 +21,7 @@ enum Request_Body {
   postIdsBySpaceId,
   reactionById,
   reactionIdsByPostId,
+  replyIdsByPostId,
   notSet
 }
 
@@ -32,6 +33,7 @@ class Request extends $pb.GeneratedMessage {
     4: Request_Body.postIdsBySpaceId,
     5: Request_Body.reactionById,
     6: Request_Body.reactionIdsByPostId,
+    7: Request_Body.replyIdsByPostId,
     0: Request_Body.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Request',
@@ -40,7 +42,7 @@ class Request extends $pb.GeneratedMessage {
               ? ''
               : 'subsocial'),
       createEmptyInstance: create)
-    ..oo(0, [1, 2, 3, 4, 5, 6])
+    ..oo(0, [1, 2, 3, 4, 5, 6, 7])
     ..aOM<GetSpaceById>(
         1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceById',
         subBuilder: GetSpaceById.create)
@@ -55,6 +57,7 @@ class Request extends $pb.GeneratedMessage {
         subBuilder: GetPostIdsBySpaceId.create)
     ..aOM<GetReactionById>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reactionById', subBuilder: GetReactionById.create)
     ..aOM<GetReactionIdsByPostId>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reactionIdsByPostId', subBuilder: GetReactionIdsByPostId.create)
+    ..aOM<GetReplyIdsByPostId>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'replyIdsByPostId', subBuilder: GetReplyIdsByPostId.create)
     ..hasRequiredFields = false;
 
   Request._() : super();
@@ -65,6 +68,7 @@ class Request extends $pb.GeneratedMessage {
     GetPostIdsBySpaceId? postIdsBySpaceId,
     GetReactionById? reactionById,
     GetReactionIdsByPostId? reactionIdsByPostId,
+    GetReplyIdsByPostId? replyIdsByPostId,
   }) {
     final _result = create();
     if (spaceById != null) {
@@ -84,6 +88,9 @@ class Request extends $pb.GeneratedMessage {
     }
     if (reactionIdsByPostId != null) {
       _result.reactionIdsByPostId = reactionIdsByPostId;
+    }
+    if (replyIdsByPostId != null) {
+      _result.replyIdsByPostId = replyIdsByPostId;
     }
     return _result;
   }
@@ -199,6 +206,20 @@ class Request extends $pb.GeneratedMessage {
   void clearReactionIdsByPostId() => clearField(6);
   @$pb.TagNumber(6)
   GetReactionIdsByPostId ensureReactionIdsByPostId() => $_ensure(5);
+
+  @$pb.TagNumber(7)
+  GetReplyIdsByPostId get replyIdsByPostId => $_getN(6);
+  @$pb.TagNumber(7)
+  set replyIdsByPostId(GetReplyIdsByPostId v) {
+    setField(7, v);
+  }
+
+  @$pb.TagNumber(7)
+  $core.bool hasReplyIdsByPostId() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearReplyIdsByPostId() => clearField(7);
+  @$pb.TagNumber(7)
+  GetReplyIdsByPostId ensureReplyIdsByPostId() => $_ensure(6);
 }
 
 enum Response_Body {
@@ -209,6 +230,7 @@ enum Response_Body {
   postIdsBySpaceId,
   reactionById,
   reactionIdsByPostId,
+  replyIdsByPostId,
   notSet
 }
 
@@ -221,6 +243,7 @@ class Response extends $pb.GeneratedMessage {
     5: Response_Body.postIdsBySpaceId,
     6: Response_Body.reactionById,
     7: Response_Body.reactionIdsByPostId,
+    8: Response_Body.replyIdsByPostId,
     0: Response_Body.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Response',
@@ -229,7 +252,7 @@ class Response extends $pb.GeneratedMessage {
               ? ''
               : 'subsocial'),
       createEmptyInstance: create)
-    ..oo(0, [1, 2, 3, 4, 5, 6, 7])
+    ..oo(0, [1, 2, 3, 4, 5, 6, 7, 8])
     ..aOM<Error>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'error',
         subBuilder: Error.create)
     ..aOM<SpaceById>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceById',
@@ -243,6 +266,7 @@ class Response extends $pb.GeneratedMessage {
         subBuilder: PostIdsBySpaceId.create)
     ..aOM<ReactionById>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reactionById', subBuilder: ReactionById.create)
     ..aOM<ReactionIdsByPostId>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reactionIdsByPostId', subBuilder: ReactionIdsByPostId.create)
+    ..aOM<ReplyIdsByPostId>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'replyIdsByPostId', subBuilder: ReplyIdsByPostId.create)
     ..hasRequiredFields = false;
 
   Response._() : super();
@@ -254,6 +278,7 @@ class Response extends $pb.GeneratedMessage {
     PostIdsBySpaceId? postIdsBySpaceId,
     ReactionById? reactionById,
     ReactionIdsByPostId? reactionIdsByPostId,
+    ReplyIdsByPostId? replyIdsByPostId,
   }) {
     final _result = create();
     if (error != null) {
@@ -276,6 +301,9 @@ class Response extends $pb.GeneratedMessage {
     }
     if (reactionIdsByPostId != null) {
       _result.reactionIdsByPostId = reactionIdsByPostId;
+    }
+    if (replyIdsByPostId != null) {
+      _result.replyIdsByPostId = replyIdsByPostId;
     }
     return _result;
   }
@@ -405,6 +433,20 @@ class Response extends $pb.GeneratedMessage {
   void clearReactionIdsByPostId() => clearField(7);
   @$pb.TagNumber(7)
   ReactionIdsByPostId ensureReactionIdsByPostId() => $_ensure(6);
+
+  @$pb.TagNumber(8)
+  ReplyIdsByPostId get replyIdsByPostId => $_getN(7);
+  @$pb.TagNumber(8)
+  set replyIdsByPostId(ReplyIdsByPostId v) {
+    setField(8, v);
+  }
+
+  @$pb.TagNumber(8)
+  $core.bool hasReplyIdsByPostId() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearReplyIdsByPostId() => clearField(8);
+  @$pb.TagNumber(8)
+  ReplyIdsByPostId ensureReplyIdsByPostId() => $_ensure(7);
 }
 
 class Error extends $pb.GeneratedMessage {
@@ -894,6 +936,75 @@ class GetReactionIdsByPostId extends $pb.GeneratedMessage {
   static GetReactionIdsByPostId getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<GetReactionIdsByPostId>(create);
   static GetReactionIdsByPostId? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get postId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set postId($fixnum.Int64 v) {
+    $_setInt64(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasPostId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPostId() => clearField(1);
+}
+
+class GetReplyIdsByPostId extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'GetReplyIdsByPostId',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..a<$fixnum.Int64>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'postId',
+        $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false;
+
+  GetReplyIdsByPostId._() : super();
+  factory GetReplyIdsByPostId({
+    $fixnum.Int64? postId,
+  }) {
+    final _result = create();
+    if (postId != null) {
+      _result.postId = postId;
+    }
+    return _result;
+  }
+  factory GetReplyIdsByPostId.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory GetReplyIdsByPostId.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  GetReplyIdsByPostId clone() => GetReplyIdsByPostId()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  GetReplyIdsByPostId copyWith(void Function(GetReplyIdsByPostId) updates) =>
+      super.copyWith((message) => updates(message as GetReplyIdsByPostId))
+          as GetReplyIdsByPostId; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetReplyIdsByPostId create() => GetReplyIdsByPostId._();
+  GetReplyIdsByPostId createEmptyInstance() => create();
+  static $pb.PbList<GetReplyIdsByPostId> createRepeated() =>
+      $pb.PbList<GetReplyIdsByPostId>();
+  @$core.pragma('dart2js:noInline')
+  static GetReplyIdsByPostId getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetReplyIdsByPostId>(create);
+  static GetReplyIdsByPostId? _defaultInstance;
 
   @$pb.TagNumber(1)
   $fixnum.Int64 get postId => $_getI64(0);
@@ -1513,7 +1624,7 @@ class Post extends $pb.GeneratedMessage {
     ..aOM<WhoAndWhen>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updated',
         subBuilder: WhoAndWhen.create)
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'owner')
-    ..aOM<PostExtension>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'extension', subBuilder: PostExtension.create)
+    ..aOM<PostExtension>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'extensionValue', subBuilder: PostExtension.create)
     ..a<$fixnum.Int64>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOM<Content>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'content', subBuilder: Content.create)
     ..aOB(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hidden')
@@ -1531,7 +1642,7 @@ class Post extends $pb.GeneratedMessage {
     WhoAndWhen? created,
     WhoAndWhen? updated,
     $core.String? owner,
-    PostExtension? extension_5,
+    PostExtension? extensionValue,
     $fixnum.Int64? spaceId,
     Content? content,
     $core.bool? hidden,
@@ -1555,8 +1666,8 @@ class Post extends $pb.GeneratedMessage {
     if (owner != null) {
       _result.owner = owner;
     }
-    if (extension_5 != null) {
-      _result.extension_5 = extension_5;
+    if (extensionValue != null) {
+      _result.extensionValue = extensionValue;
     }
     if (spaceId != null) {
       _result.spaceId = spaceId;
@@ -1666,18 +1777,18 @@ class Post extends $pb.GeneratedMessage {
   void clearOwner() => clearField(4);
 
   @$pb.TagNumber(5)
-  PostExtension get extension_5 => $_getN(4);
+  PostExtension get extensionValue => $_getN(4);
   @$pb.TagNumber(5)
-  set extension_5(PostExtension v) {
+  set extensionValue(PostExtension v) {
     setField(5, v);
   }
 
   @$pb.TagNumber(5)
-  $core.bool hasExtension_5() => $_has(4);
+  $core.bool hasExtensionValue() => $_has(4);
   @$pb.TagNumber(5)
-  void clearExtension_5() => clearField(5);
+  void clearExtensionValue() => clearField(5);
   @$pb.TagNumber(5)
-  PostExtension ensureExtension_5() => $_ensure(4);
+  PostExtension ensureExtensionValue() => $_ensure(4);
 
   @$pb.TagNumber(6)
   $fixnum.Int64 get spaceId => $_getI64(5);
@@ -2462,4 +2573,63 @@ class ReactionIdsByPostId extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $core.List<$fixnum.Int64> get reactionIds => $_getList(0);
+}
+
+class ReplyIdsByPostId extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'ReplyIdsByPostId',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..p<$fixnum.Int64>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'replyIds',
+        $pb.PbFieldType.KU6)
+    ..hasRequiredFields = false;
+
+  ReplyIdsByPostId._() : super();
+  factory ReplyIdsByPostId({
+    $core.Iterable<$fixnum.Int64>? replyIds,
+  }) {
+    final _result = create();
+    if (replyIds != null) {
+      _result.replyIds.addAll(replyIds);
+    }
+    return _result;
+  }
+  factory ReplyIdsByPostId.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory ReplyIdsByPostId.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  ReplyIdsByPostId clone() => ReplyIdsByPostId()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  ReplyIdsByPostId copyWith(void Function(ReplyIdsByPostId) updates) =>
+      super.copyWith((message) => updates(message as ReplyIdsByPostId))
+          as ReplyIdsByPostId; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ReplyIdsByPostId create() => ReplyIdsByPostId._();
+  ReplyIdsByPostId createEmptyInstance() => create();
+  static $pb.PbList<ReplyIdsByPostId> createRepeated() =>
+      $pb.PbList<ReplyIdsByPostId>();
+  @$core.pragma('dart2js:noInline')
+  static ReplyIdsByPostId getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ReplyIdsByPostId>(create);
+  static ReplyIdsByPostId? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$fixnum.Int64> get replyIds => $_getList(0);
 }

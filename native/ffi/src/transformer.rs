@@ -95,7 +95,7 @@ impl From<posts::Post<SubsocialRuntime>> for Post {
             } else {
                 Some(post.content.into())
             },
-            extension: if post.extension == PostExtension::RegularPost {
+            extension_value: if post.extension == PostExtension::RegularPost {
                 None
             } else {
                 Some(post.extension.into())

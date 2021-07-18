@@ -10,6 +10,7 @@ message Request {
     GetPostIdsBySpaceId post_ids_by_space_id = 4;
     GetReactionById reaction_by_id = 5;
     GetReactionIdsByPostId reaction_ids_by_post_id = 6;
+    GetReplyIdsByPostId reply_ids_by_post_id = 7;
   }
 }
 
@@ -22,6 +23,7 @@ message Response {
     PostIdsBySpaceId post_ids_by_space_id = 5;
     ReactionById reaction_by_id = 6;
     ReactionIdsByPostId reaction_ids_by_post_id = 7;
+    ReplyIdsByPostId reply_ids_by_post_id = 8;
   }
 }
 
@@ -58,6 +60,10 @@ message GetPostIdsBySpaceId {
 }
 
 message GetReactionIdsByPostId {
+  uint64 post_id = 1;
+}
+
+message GetReplyIdsByPostId {
   uint64 post_id = 1;
 }
 
@@ -102,7 +108,7 @@ message Post {
   WhoAndWhen created = 2;
   WhoAndWhen updated = 3;
   string owner = 4;
-  PostExtension extension = 5;
+  PostExtension extension_value = 5;
   uint64 space_id = 6;
   Content content = 7;
   bool hidden = 8;
@@ -157,5 +163,9 @@ message PostIdsBySpaceId {
 
 message ReactionIdsByPostId {
   repeated uint64 reaction_ids = 1 [packed = true];
+}
+
+message ReplyIdsByPostId {
+  repeated uint64 reply_ids = 1 [packed = true];
 }
 
