@@ -44,7 +44,7 @@ class PostMetadata {
 
   PostMetadata.fromJson(Map<String, dynamic> json) {
     body = json['body'] as String;
-    tags = (json['tags'] as List<dynamic>).cast<String>();
+    tags = json['tags'] != null ? (json['tags'] as List<dynamic>).cast() : [];
     image = json['image'] as String?;
     title = json['title'] as String?;
   }

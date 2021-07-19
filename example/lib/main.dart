@@ -1,9 +1,9 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:subsocial_sdk/subsocial_sdk.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 
 void main() {
   runApp(MyApp());
@@ -61,7 +61,7 @@ class _MyAppState extends State<MyApp> {
         final space = await sdk.spaceById(i);
         if (space.hidden) continue; // skip hidden space
         final cid = space.content.ipfs;
-        if (cid.isEmpty) continue; // no metadata;
+        if (cid.isEmpty) continue; // no content;
         final metadataMap = await ipfs.query(
           [cid],
           (json) => SpaceMetadata.fromJson(json),
@@ -108,13 +108,14 @@ class SpaceWidget extends StatelessWidget {
     final tags = item.metadata.tags.map((e) => Chip(label: Text(e))).toList();
     return GestureDetector(
       onTap: () async {
+        if (item.space.postsCount == 0) return; // no posts
         final sb = SnackBar(content: Text("Loading Posts .."));
         ScaffoldMessenger.of(context).showSnackBar(sb);
         final sdk = await Subsocial.instance;
         final postIds = await sdk.postsIdsBySpaceId(item.space.id.toInt());
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => PostsPage(
+            builder: (context) => PostsList(
               spaceWithMetadata: item,
               // reverse the list, so we get the most recent posts first
               postIds: postIds.reversed.toList(growable: false),
@@ -189,18 +190,22 @@ class SpaceWidget extends StatelessWidget {
   }
 }
 
-class PostsPage extends StatefulWidget {
+class PostsList extends StatefulWidget {
   final SpaceWithMetadata spaceWithMetadata;
   final List<PostId> postIds;
-  const PostsPage({
+  final bool fullPage;
+  final bool isReplies;
+  const PostsList({
     required this.spaceWithMetadata,
     required this.postIds,
+    this.fullPage = true,
+    this.isReplies = false,
   });
   @override
-  _PostsPageState createState() => _PostsPageState();
+  _PostsListState createState() => _PostsListState();
 }
 
-class _PostsPageState extends State<PostsPage> {
+class _PostsListState extends State<PostsList> {
   static const _kPageSize = 10;
   final _pagingController = PagingController<int, PostWithMetadata>(
     firstPageKey: 0,
@@ -228,7 +233,7 @@ class _PostsPageState extends State<PostsPage> {
         final post = await sdk.postById(postId);
         if (post.hidden) continue; // skip hidden space
         final cid = post.content.ipfs;
-        if (cid.isEmpty) continue; // no metadata;
+        if (cid.isEmpty) continue; // no content;
         final metadataMap = await ipfs.query(
           [cid],
           (json) => PostMetadata.fromJson(json),
@@ -252,17 +257,55 @@ class _PostsPageState extends State<PostsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.spaceWithMetadata.metadata.name),
-      ),
-      body: PagedListView<int, PostWithMetadata>(
-        pagingController: _pagingController,
-        builderDelegate: PagedChildBuilderDelegate(
-          itemBuilder: (context, item, index) => PostWidget(item),
+    final postsList = PagedListView<int, PostWithMetadata>(
+      pagingController: _pagingController,
+      shrinkWrap: true,
+      physics: ClampingScrollPhysics(),
+      builderDelegate: PagedChildBuilderDelegate(
+        itemBuilder: (context, item, index) => GestureDetector(
+          onTap: () async {
+            if (item.post.repliesCount == 0) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => PostDetails(
+                    postWithMetadata: item,
+                    spaceWithMetadata: widget.spaceWithMetadata,
+                    isReply: widget.isReplies,
+                  ),
+                ),
+              );
+            } else {
+              final sb = SnackBar(content: Text("Loading Replies .."));
+              ScaffoldMessenger.of(context).showSnackBar(sb);
+              final sdk = await Subsocial.instance;
+              final postId = item.post.id.toInt();
+              final replyIds = await sdk.replyIdsByPostId(postId);
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => PostDetails(
+                    postWithMetadata: item,
+                    spaceWithMetadata: widget.spaceWithMetadata,
+                    replyIds: replyIds,
+                    isReply: widget.isReplies,
+                  ),
+                ),
+              );
+            }
+          },
+          child: PostWidget(item),
         ),
       ),
     );
+    if (widget.fullPage) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(widget.spaceWithMetadata.metadata.name),
+        ),
+        body: postsList,
+      );
+    } else {
+      return postsList;
+    }
   }
 
   @override
@@ -274,7 +317,13 @@ class _PostsPageState extends State<PostsPage> {
 
 class PostWidget extends StatelessWidget {
   final PostWithMetadata item;
-  const PostWidget(this.item);
+  final bool showFullBody;
+  final bool isReply;
+  const PostWidget(
+    this.item, {
+    this.showFullBody = false,
+    this.isReply = false,
+  });
   @override
   Widget build(BuildContext context) {
     bool hasImage = item.metadata.image != null;
@@ -282,10 +331,13 @@ class PostWidget extends StatelessWidget {
     final imageUrl =
         hasImage ? IpfsClient().mediaUrl(item.metadata.image!) : '';
     final tags = item.metadata.tags.map((e) => Chip(label: Text(e))).toList();
-    final body = item.metadata.body.substring(
-      0,
-      math.min(item.metadata.body.length, 800),
-    );
+    final body = showFullBody
+        ? item.metadata.body
+        : item.metadata.body.substring(
+              0,
+              math.min(item.metadata.body.length, 400),
+            ) +
+            ' ...';
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -300,24 +352,25 @@ class PostWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      item.metadata.title ?? 'Untitled',
-                      style: Theme.of(context).textTheme.headline6,
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: true,
-                      maxLines: 3,
+                if (!isReply && item.metadata.title != null)
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        item.metadata.title!,
+                        style: Theme.of(context).textTheme.headline6,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
+                        maxLines: 3,
+                      ),
                     ),
                   ),
-                ),
               ],
             ),
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: MarkdownBody(
-                data: body + '...',
+                data: body,
               ),
             ),
             Padding(
@@ -340,9 +393,59 @@ class PostWidget extends StatelessWidget {
                     '${item.post.downvotesCount} Downvotes',
                     style: Theme.of(context).textTheme.caption,
                   ),
+                  Text(
+                    '${item.post.repliesCount} Comments',
+                    style: Theme.of(context).textTheme.caption,
+                  ),
                 ],
               ),
             )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class PostDetails extends StatefulWidget {
+  final PostWithMetadata postWithMetadata;
+  final SpaceWithMetadata spaceWithMetadata;
+  final List<PostId> replyIds;
+  final bool isReply;
+  const PostDetails({
+    required this.spaceWithMetadata,
+    required this.postWithMetadata,
+    this.replyIds = const [],
+    this.isReply = false,
+  });
+  @override
+  _PostDetailsState createState() => _PostDetailsState();
+}
+
+class _PostDetailsState extends State<PostDetails> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: widget.isReply ? Text('Replies') : Text('Post Details'),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            PostWidget(
+              widget.postWithMetadata,
+              showFullBody: true,
+              isReply: widget.isReply,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: PostsList(
+                spaceWithMetadata: widget.spaceWithMetadata,
+                postIds: widget.replyIds,
+                fullPage: false,
+                isReplies: true,
+              ),
+            ),
           ],
         ),
       ),
