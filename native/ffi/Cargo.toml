@@ -5,7 +5,7 @@ authors = ["Shady Khalifa <shekohex@gmail.com>"]
 edition = "2018"
 
 [lib]
-name = "subscoial"
+name = "subsocial"
 # this value will change depending on the target os
 # for iOS it would be `staticlib`
 # for android it would be `c-dylib`

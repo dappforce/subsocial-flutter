@@ -82,3 +82,19 @@ impl<T: Posts> PostIdsBySpaceIdStore<T> {
         }
     }
 }
+
+#[derive(Clone, Debug, Eq, Encode, PartialEq, subxt::Store)]
+pub struct ReplyIdsByPostIdStore<T: Posts> {
+    #[store(returns = Vec<PostId>)]
+    post_id: PostId,
+    __marker: PhantomData<T>,
+}
+
+impl<T: Posts> ReplyIdsByPostIdStore<T> {
+    pub fn new(post_id: PostId) -> Self {
+        Self {
+            post_id,
+            __marker: Default::default(),
+        }
+    }
+}

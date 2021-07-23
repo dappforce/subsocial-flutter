@@ -42,6 +42,9 @@ pub async fn handle(
         RequestBody::ReactionById(args) => {
             reaction_by_id(client, args.reaction_id).await
         },
+        RequestBody::ReplyIdsByPostId(args) => {
+            reply_ids_by_post_id(client, args.post_id).await
+        },
     };
     let response = match result {
         Ok(body) => Response { body: Some(body) },
@@ -173,6 +176,26 @@ async fn reaction_by_id(
         None => Err(Error {
             kind: error::Kind::NotFound.into(),
             msg: String::from("Reaction Not Found"),
+        }),
+    }
+}
+
+async fn reply_ids_by_post_id(
+    client: &Client<SubsocialRuntime>,
+    post_id: u64,
+) -> Result<ResponseBody, Error> {
+    let store = posts::ReplyIdsByPostIdStore::new(post_id);
+    let maybe_ids = client.fetch(&store, None).await.unwrap();
+    match maybe_ids {
+        Some(ids) => {
+            let body = ResponseBody::ReplyIdsByPostId(ReplyIdsByPostId {
+                reply_ids: ids,
+            });
+            Ok(body)
+        },
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("Post Not Found"),
         }),
     }
 }

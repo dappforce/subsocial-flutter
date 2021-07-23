@@ -62,6 +62,15 @@ class RawSubsoical {
           'subsocial_link_me_plz');
   late final _dart_subsocial_link_me_plz _subsocial_link_me_plz =
       _subsocial_link_me_plz_ptr.asFunction<_dart_subsocial_link_me_plz>();
+
+  int subsocial_shutdown() {
+    return _subsocial_shutdown();
+  }
+
+  late final _subsocial_shutdown_ptr =
+      _lookup<ffi.NativeFunction<_c_subsocial_shutdown>>('subsocial_shutdown');
+  late final _dart_subsocial_shutdown _subsocial_shutdown =
+      _subsocial_shutdown_ptr.asFunction<_dart_subsocial_shutdown>();
 }
 
 /// Immutable View of Shared Buffer.
@@ -99,3 +108,7 @@ typedef _dart_subsocial_init_client = int Function(
 typedef _c_subsocial_link_me_plz = ffi.Void Function();
 
 typedef _dart_subsocial_link_me_plz = void Function();
+
+typedef _c_subsocial_shutdown = ffi.Int32 Function();
+
+typedef _dart_subsocial_shutdown = int Function();

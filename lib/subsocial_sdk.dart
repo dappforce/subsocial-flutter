@@ -9,9 +9,12 @@ import 'package:subsocial_sdk/allo_isolate.dart';
 import 'package:subsocial_sdk/ffi.dart';
 import 'package:subsocial_sdk/utils.dart';
 import 'package:subsocial_sdk/extensions.dart';
+import 'package:subsocial_sdk/generated/def.pb.dart';
 
-import 'generated/def.pb.dart';
 export 'generated/def.pb.dart';
+export 'generated/def.pbenum.dart';
+export 'ipfs.dart';
+export 'json_models.dart';
 
 typedef PostId = int;
 typedef SpaceId = int;
@@ -26,7 +29,7 @@ class Subsocial {
       final dl = _load();
       final raw = RawSubsoical(dl);
       AlloIsolate(lib: dl).hook();
-      final completer = Completer<void>();
+      final completer = Completer<dynamic>();
       final port = singleCompletePort(completer);
       final config = malloc.call<SubscoialConfig>();
       config.ref.url = "wss://rpc.subsocial.network".toNativeUtf8().cast();
@@ -34,9 +37,13 @@ class Subsocial {
         port.nativePort,
         config,
       );
-      assert(result == 1);
-      await completer.future;
-      return _instance = Subsocial._(raw);
+      _assertOk(result);
+      final res = await completer.future;
+      if (res is String) {
+        throw SubxtException(res);
+      }
+      _instance = Subsocial._(raw);
+      return _instance!;
     } else {
       return _instance!;
     }
@@ -50,7 +57,7 @@ class Subsocial {
     );
     final ptr = req.writeToBuffer().asSharedBufferPtr();
     final result = _raw.subsocial_dispatch(port.nativePort, ptr);
-    assert(result == 1);
+    _assertOk(result);
     final resBytes = await completer.future;
     final res = Response.fromBuffer(resBytes);
     if (res.hasError()) {
@@ -68,7 +75,7 @@ class Subsocial {
     );
     final ptr = req.writeToBuffer().asSharedBufferPtr();
     final result = _raw.subsocial_dispatch(port.nativePort, ptr);
-    assert(result == 1);
+    _assertOk(result);
     final resBytes = await completer.future;
     final res = Response.fromBuffer(resBytes);
     if (res.hasError()) {
@@ -86,7 +93,7 @@ class Subsocial {
     );
     final ptr = req.writeToBuffer().asSharedBufferPtr();
     final result = _raw.subsocial_dispatch(port.nativePort, ptr);
-    assert(result == 1);
+    _assertOk(result);
     final resBytes = await completer.future;
     final res = Response.fromBuffer(resBytes);
     if (res.hasError()) {
@@ -104,7 +111,7 @@ class Subsocial {
     );
     final ptr = req.writeToBuffer().asSharedBufferPtr();
     final result = _raw.subsocial_dispatch(port.nativePort, ptr);
-    assert(result == 1);
+    _assertOk(result);
     final resBytes = await completer.future;
     final res = Response.fromBuffer(resBytes);
     if (res.hasError()) {
@@ -122,7 +129,7 @@ class Subsocial {
     );
     final ptr = req.writeToBuffer().asSharedBufferPtr();
     final result = _raw.subsocial_dispatch(port.nativePort, ptr);
-    assert(result == 1);
+    _assertOk(result);
     final resBytes = await completer.future;
     final res = Response.fromBuffer(resBytes);
     if (res.hasError()) {
@@ -140,7 +147,7 @@ class Subsocial {
     );
     final ptr = req.writeToBuffer().asSharedBufferPtr();
     final result = _raw.subsocial_dispatch(port.nativePort, ptr);
-    assert(result == 1);
+    _assertOk(result);
     final resBytes = await completer.future;
     final res = Response.fromBuffer(resBytes);
     if (res.hasError()) {
@@ -148,6 +155,53 @@ class Subsocial {
     }
     final val = res.ensureReactionIdsByPostId();
     return val.reactionIds.map((e) => e.toInt()).toList();
+  }
+
+  Future<List<PostId>> replyIdsByPostId(PostId id) async {
+    final completer = Completer<List<int>>();
+    final port = singleCompletePort(completer);
+    final req = Request(
+      replyIdsByPostId: GetReplyIdsByPostId(postId: makeLongInt(id)),
+    );
+    final ptr = req.writeToBuffer().asSharedBufferPtr();
+    final result = _raw.subsocial_dispatch(port.nativePort, ptr);
+    _assertOk(result);
+    final resBytes = await completer.future;
+    final res = Response.fromBuffer(resBytes);
+    if (res.hasError()) {
+      throw res.error;
+    }
+    final val = res.ensureReplyIdsByPostId();
+    return val.replyIds.map((e) => e.toInt()).toList();
+  }
+
+  void dispose() {
+    final result = _raw.subsocial_shutdown();
+    _assertOk(result);
+    _instance = null;
+  }
+}
+
+class BadProtoMessageException implements Exception {}
+
+class ClientNotInitializedException implements Exception {}
+
+class SubxtException implements Exception {
+  final String message;
+  const SubxtException(this.message);
+  @override
+  String toString() {
+    return 'SubxtException($message)';
+  }
+}
+
+void _assertOk(int result) {
+  if (result == 0xbadc0de) {
+    throw BadProtoMessageException();
+  } else if (result == 0xdead) {
+    throw ClientNotInitializedException();
+  } else {
+    // all good
   }
 }
 
@@ -158,9 +212,9 @@ DynamicLibrary _load() {
   } else if (Platform.isIOS) {
     return DynamicLibrary.executable();
   } else if (Platform.isLinux) {
-    return DynamicLibrary.open('target/debug/libsubscoial.so');
+    return DynamicLibrary.open('target/debug/libsubsocial.so');
   } else if (Platform.isMacOS) {
-    return DynamicLibrary.open('target/debug/libsubscoial.dylib');
+    return DynamicLibrary.open('target/debug/libsubsocial.dylib');
   } else {
     throw UnsupportedError('The Current Platform is not supported.');
   }

@@ -30,20 +30,24 @@ pub extern "C" fn subsocial_init_client(
     config: Box<SubscoialConfig>,
 ) -> i32 {
     let isolate = Isolate::new(port);
+    // check if we already have a client
+    if unsafe { CLIENT.get().is_some() } {
+        isolate.post(());
+        return 1; // we are good!
+    }
     let url = unsafe {
         CStr::from_ptr(config.url)
             .to_str()
             .unwrap_or("wss://rpc.subsocial.network")
     };
     let task = isolate.catch_unwind(async move {
-        subxt::ClientBuilder::new().set_url(url).build().await.map(
-            |client| unsafe {
-                CLIENT
-                    .set(client)
-                    .map_err(|_| ())
-                    .expect("client already set");
-            },
-        )
+        let client = subxt::ClientBuilder::new().set_url(url).build().await?;
+        unsafe {
+            CLIENT.set(client).map_err(|_| {
+                subxt::Error::Other(String::from("Client already initialized"))
+            })
+        }?;
+        Result::<_, subxt::Error>::Ok(())
     });
     task::spawn(task);
     1
@@ -52,7 +56,7 @@ pub extern "C" fn subsocial_init_client(
 #[no_mangle]
 pub extern "C" fn subsocial_dispatch(port: i64, ptr: Box<SharedBuffer>) -> i32 {
     let isolate = Isolate::new(port);
-    let req: subsocial::Request = match prost::Message::decode(ptr.as_slice()) {
+    let req = match prost::Message::decode(ptr.as_slice()) {
         Ok(v) => v,
         Err(e) => {
             let mut bytes = Vec::new();
@@ -76,7 +80,8 @@ pub extern "C" fn subsocial_dispatch(port: i64, ptr: Box<SharedBuffer>) -> i32 {
     1
 }
 
-pub fn subsocial_shutdown() -> i32 {
+#[no_mangle]
+pub extern "C" fn subsocial_shutdown() -> i32 {
     match unsafe { CLIENT.take() } {
         Some(client) => {
             drop(client);
