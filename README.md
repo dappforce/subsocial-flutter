@@ -4,19 +4,19 @@
 
 in your flutter project run the following commands to add the SDK to your project as a package.
 
-```shell=
+```bash
 git submodule add https://github.com/dappforce/subsocial-flutter.git packages/subsocial_sdk
 ```
 
 then run the following command
 
-```shell=
+```bash
 ./packages/subsocial_sdk/init.py
 ```
 
 in your flutter project in `pubspec.yml` just add:
 
-```yaml=
+```yaml
 subsocial_sdk:
     path: packages/subsocial_sdk
 ```
@@ -26,13 +26,13 @@ then use the SDK as any other flutter package.
 **To Update the SDK**
 Simply run:
 
-```bash=
+```bash
 git submodule foreach git pull
 ```
 
 then rerun the `init.py` script to fetch the latest native libs.
 
-```shell=
+```bash
 ./packages/subsocial_sdk/init.py
 ```
 
