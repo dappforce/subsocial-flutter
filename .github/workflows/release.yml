@@ -44,7 +44,7 @@ jobs:
             ~/.cargo/git
             ~/.cargo/bin
             target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-${{ steps.rust_toolchain.outputs.rustc_hash }}
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-${{ steps.rust_toolchain.outputs.rustc_hash }}-release
 
       - name: Install Cargo Tools (cargo-make)
         uses: davidB/rust-cargo-make@v1
