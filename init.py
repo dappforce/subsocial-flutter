@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 import os
+import subprocess
+
 import requests
 
 # Script Configuration.
@@ -26,7 +28,7 @@ target_files: list = [
         f'{base_url}/lib{lib_name}-x86_64-linux-android.so',
         os.path.join(android_base, 'x86_64'),
         f'lib{lib_name}.so',
-        'x86_64 Devices (debug build) for emulator during development',
+        'x86_64 Devices (release build) for emulator during development',
     ),
     (
         f'{base_url}/lib{lib_name}-universal-apple-ios.a',
@@ -74,3 +76,8 @@ print()
 for (url, dest, filename, msg) in target_files:
     print(f'Starting to download {filename} [{msg}]')
     download(url, dest, filename)
+
+print('Finished downloading files.')
+print()
+subprocess.call(['flutter', 'pub', 'get'])
+print('Done.')
