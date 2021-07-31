@@ -40,7 +40,7 @@ impl fmt::Display for Content {
             Raw(_) => write!(f, "<RAW_BYTES>"),
             IPFS(v) => {
                 write!(f, "{}", String::from_utf8(v.clone()).unwrap())
-            },
+            }
             Hyper(_) => write!(f, "<Hyper>"),
         }
     }

@@ -56,9 +56,13 @@ pub trait IsAccountBlocked<AccountId> {
 }
 
 impl<AccountId> IsAccountBlocked<AccountId> for () {
-    fn is_blocked_account(_account: AccountId, _scope: u64) -> bool { false }
+    fn is_blocked_account(_account: AccountId, _scope: u64) -> bool {
+        false
+    }
 
-    fn is_allowed_account(_account: AccountId, _scope: u64) -> bool { true }
+    fn is_allowed_account(_account: AccountId, _scope: u64) -> bool {
+        true
+    }
 }
 
 pub trait IsSpaceBlocked {
@@ -73,9 +77,13 @@ pub trait IsPostBlocked<PostId> {
 }
 
 impl<PostId> IsPostBlocked<PostId> for () {
-    fn is_blocked_post(_post_id: PostId, _scope: SpaceId) -> bool { false }
+    fn is_blocked_post(_post_id: PostId, _scope: SpaceId) -> bool {
+        false
+    }
 
-    fn is_allowed_post(_post_id: PostId, _scope: u64) -> bool { true }
+    fn is_allowed_post(_post_id: PostId, _scope: u64) -> bool {
+        true
+    }
 }
 
 pub trait IsContentBlocked {
@@ -84,7 +92,11 @@ pub trait IsContentBlocked {
 }
 
 impl IsContentBlocked for () {
-    fn is_blocked_content(_content: Content, _scope: u64) -> bool { false }
+    fn is_blocked_content(_content: Content, _scope: u64) -> bool {
+        false
+    }
 
-    fn is_allowed_content(_content: Content, _scope: SpaceId) -> bool { true }
+    fn is_allowed_content(_content: Content, _scope: SpaceId) -> bool {
+        true
+    }
 }

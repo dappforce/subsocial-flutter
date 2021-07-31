@@ -23,28 +23,28 @@ pub async fn handle(
             .encode(&mut bytes)
             .expect("should never fails");
             return bytes;
-        },
+        }
     };
     let result = match body {
         RequestBody::SpaceById(args) => {
             space_by_id(client, args.space_id).await
-        },
+        }
         RequestBody::SpaceByHandle(args) => {
             space_by_handle(client, args.handle).await
-        },
+        }
         RequestBody::PostIdsBySpaceId(args) => {
             posts_ids_by_space_id(client, args.space_id).await
-        },
+        }
         RequestBody::PostById(args) => post_by_id(client, args.post_id).await,
         RequestBody::ReactionIdsByPostId(args) => {
             reactions_ids_by_post_id(client, args.post_id).await
-        },
+        }
         RequestBody::ReactionById(args) => {
             reaction_by_id(client, args.reaction_id).await
-        },
+        }
         RequestBody::ReplyIdsByPostId(args) => {
             reply_ids_by_post_id(client, args.post_id).await
-        },
+        }
     };
     let response = match result {
         Ok(body) => Response { body: Some(body) },
@@ -69,7 +69,7 @@ async fn space_by_id(
                 space: Some(space.into()),
             });
             Ok(body)
-        },
+        }
         None => Err(Error {
             kind: error::Kind::NotFound.into(),
             msg: String::from("Space Not Found"),
@@ -92,7 +92,7 @@ async fn space_by_handle(
             };
             let body = ResponseBody::SpaceByHandle(SpaceByHandle { space });
             Ok(body)
-        },
+        }
         None => Err(Error {
             kind: error::Kind::NotFound.into(),
             msg: String::from("Space Not Found"),
@@ -112,7 +112,7 @@ async fn posts_ids_by_space_id(
                 post_ids: ids,
             });
             Ok(body)
-        },
+        }
         None => Err(Error {
             kind: error::Kind::NotFound.into(),
             msg: String::from("Space Not Found"),
@@ -132,7 +132,7 @@ async fn post_by_id(
                 post: Some(post.into()),
             });
             Ok(body)
-        },
+        }
         None => Err(Error {
             kind: error::Kind::NotFound.into(),
             msg: String::from("Post Not Found"),
@@ -152,7 +152,7 @@ async fn reactions_ids_by_post_id(
                 reaction_ids: ids,
             });
             Ok(body)
-        },
+        }
         None => Err(Error {
             kind: error::Kind::NotFound.into(),
             msg: String::from("Post Not Found"),
@@ -172,7 +172,7 @@ async fn reaction_by_id(
                 reaction: Some(reaction.into()),
             });
             Ok(body)
-        },
+        }
         None => Err(Error {
             kind: error::Kind::NotFound.into(),
             msg: String::from("Reaction Not Found"),
@@ -192,7 +192,7 @@ async fn reply_ids_by_post_id(
                 reply_ids: ids,
             });
             Ok(body)
-        },
+        }
         None => Err(Error {
             kind: error::Kind::NotFound.into(),
             msg: String::from("Post Not Found"),

@@ -9,7 +9,9 @@ pub struct SharedBuffer {
 }
 
 impl Default for SharedBuffer {
-    fn default() -> Self { Vec::new().into() }
+    fn default() -> Self {
+        Vec::new().into()
+    }
 }
 
 impl SharedBuffer {

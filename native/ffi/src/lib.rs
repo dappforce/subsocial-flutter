@@ -69,7 +69,7 @@ pub extern "C" fn subsocial_dispatch(port: i64, ptr: Box<SharedBuffer>) -> i32 {
             .expect("should never fails");
             isolate.post(bytes);
             return 0xbadc0de;
-        },
+        }
     };
     let client = match unsafe { CLIENT.get() } {
         Some(v) => v,
@@ -86,7 +86,7 @@ pub extern "C" fn subsocial_shutdown() -> i32 {
         Some(client) => {
             drop(client);
             1
-        },
+        }
         None => 0xdead,
     }
 }
