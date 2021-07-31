@@ -46,7 +46,7 @@ impl From<posts::PostExtension> for PostExtension {
             },
             posts::PostExtension::RegularPost => {
                 unimplemented!("Should be None!")
-            },
+            }
         }
     }
 }
@@ -117,7 +117,7 @@ impl From<reactions::ReactionKind> for reaction::ReactionKind {
             reactions::ReactionKind::Upvote => reaction::ReactionKind::UpVote,
             reactions::ReactionKind::Downvote => {
                 reaction::ReactionKind::DownVote
-            },
+            }
         }
     }
 }

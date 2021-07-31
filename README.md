@@ -2,14 +2,45 @@
 
 ## Usage
 
-in pubspec.yml add:
+in your flutter project run the following commands to add the SDK to your project as a package.
 
-```yml
-subsocial_sdk:
-    git: https://github.com/dappforce/subsocial-flutter.git
+```bash
+git submodule add https://github.com/dappforce/subsocial-flutter.git packages/subsocial_sdk
 ```
 
-## Development, Setup and Tools
+then run the following command
+
+```bash
+./packages/subsocial_sdk/init.py
+```
+
+in your flutter project in `pubspec.yml` just add:
+
+```yaml
+subsocial_sdk:
+    path: packages/subsocial_sdk
+```
+
+then use the SDK as any other flutter package.
+
+**To Update the SDK**
+Simply run:
+
+```bash
+git submodule foreach git pull
+```
+
+then rerun the `init.py` script to fetch the latest native libs.
+
+```bash
+./packages/subsocial_sdk/init.py
+```
+
+## Development, Setup and, Tools
+
+> Note these instructions only for who are working on the development of the SDK
+> not the end-users that will use this SDK in the apps.
+
 * Cargo Plugins
 
 ```sh
@@ -18,19 +49,20 @@ cargo install cargo-make
 
 * Install LLVM (10+) in the following way:
 
-#### ubuntu/linux
-1. Install libclangdev - `sudo apt-get install libclang-dev`.
+* **ubuntu/linux**
 
-#### Windows
-1. Install Visual Studio with C++ development support.
-2. Install [LLVM](https://releases.llvm.org/download.html) or `winget install -e --id LLVM.LLVM`.
+    1. Install libclangdev - `sudo apt-get install libclang-dev`.
 
+* **Windows**
 
-#### MacOS
-1. Install Xcode.
-2. Install LLVM - `brew install llvm`.
+    1. Install Visual Studio with C++ development support.
+    2. Install [LLVM](https://releases.llvm.org/download.html)
+       or `winget install -e --id LLVM.LLVM`.
 
+* **MacOS**
 
+    1. Install Xcode.
+    2. Install LLVM - `brew install llvm`.
 
 ## Build and Test
 
@@ -47,13 +79,14 @@ flutter test
 ```
 
 Then run the example flutter app:
-1. Build the native libs
+
+* Build the native libs
 
 ```sh
 cargo make android-dev # or ios
 ```
 
-2. then run the app
+* then run the app (the example)
 
 ```sh
 flutter run
@@ -61,6 +94,7 @@ flutter run
 
 ## See also
 
-- [Dart Meets Rust: a match made in heaven ✨](https://dev.to/sunshine-chain/dart-meets-rust-a-match-made-in-heaven-9f5)
-- [Dart and Rust: the async story 🔃](https://dev.to/sunshine-chain/rust-and-dart-the-async-story-3adk)
-- https://github.com/shekohex/flutterust
+* [Dart Meets Rust: a match made in heaven ✨](https://dev.to/sunshine-chain/dart-meets-rust-a-match-made-in-heaven-9f5)
+* [Dart and Rust: the async story 🔃](https://dev.to/sunshine-chain/rust-and-dart-the-async-story-3adk)
+* [Flutterust](https://github.com/shekohex/flutterust)
+
