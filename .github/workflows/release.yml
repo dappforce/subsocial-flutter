@@ -84,12 +84,12 @@ jobs:
       - name: Install iOS Targets
         run: rustup target add aarch64-apple-ios x86_64-apple-ios
 
-      - name: Run cargo make android-dev (Debug)
+      - name: Run cargo make android-dev (Release)
         uses: actions-rs/cargo@v1
         continue-on-error: false
         with:
           command: make
-          args: android-dev
+          args: android-dev --profile release
 
       - name: Run cargo make android-dev (Release)
         uses: actions-rs/cargo@v1
@@ -109,7 +109,7 @@ jobs:
         run: |
           mkdir -p build
           cp target/aarch64-linux-android/release/libsubsocial.so build/libsubsocial-aarch64-linux-android.so
-          cp target/x86_64-linux-android/debug/libsubsocial.so build/libsubsocial-x86_64-linux-android.so
+          cp target/x86_64-linux-android/release/libsubsocial.so build/libsubsocial-x86_64-linux-android.so
           cp target/universal/release/libsubsocial.a build/libsubsocial-universal-apple-ios.a
           cp native/ffi/binding.h build/bindings.h
 
