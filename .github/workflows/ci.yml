@@ -43,11 +43,7 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-${{ steps.rust_toolchain.outputs.rustc_hash }}
 
       - name: Install Cargo Tools (cargo-make)
-        uses: actions-rs/cargo@v1
-        continue-on-error: true
-        with:
-          command: install
-          args: cargo-make
+        uses: davidB/rust-cargo-make@v1
 
       - name: Set up JDK 1.8
         uses: actions/setup-java@v1
@@ -57,19 +53,9 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2
 
-      - name: Cache NDK
-        id: cache-ndk
-        uses: actions/cache@v2
+      - uses: nttld/setup-ndk@v1
         with:
-          path: /Users/runner/Library/Android/ndk-bundle
-          key: ${{ runner.os }}-cached-ndk
-
-      - name: Install Android NDK
-        if: steps.cache-ndk.outputs.cache-hit != 'true'
-        run: $ANDROID_SDK_ROOT/tools/bin/sdkmanager ndk-bundle
-
-      - name: Set Android NDK Env
-        run: echo "ANDROID_NDK_HOME=/Users/runner/android/ndk-bundle" >> $GITHUB_ENV
+          ndk-version: r22b
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v1
@@ -101,7 +87,6 @@ jobs:
           args: native
 
       - name: Run cargo make android-dev (Debug)
-        if: ${{ false }} # disable android
         uses: actions-rs/cargo@v1
         continue-on-error: false
         with:
@@ -109,7 +94,6 @@ jobs:
           args: android-dev
 
       - name: Run cargo make ios (Debug)
-        if: ${{ false }} # disable ios
         uses: actions-rs/cargo@v1
         continue-on-error: false
         with:
