@@ -91,7 +91,7 @@ jobs:
           command: make
           args: android-dev --profile release
 
-      - name: Run cargo make android-dev (Release)
+      - name: Run cargo make android-arm (Release)
         uses: actions-rs/cargo@v1
         continue-on-error: false
         with:
