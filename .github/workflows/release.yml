@@ -1,10 +1,14 @@
-on: [push, pull_request]
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
 
-name: CI
+name: SDK Release
 
 jobs:
-  ci:
-    name: Compile and Test
+  release:
+    name: Compile and Release SDK
     runs-on: macos-latest
     steps:
       - name: Cache LLVM and Clang
@@ -80,13 +84,6 @@ jobs:
       - name: Install iOS Targets
         run: rustup target add aarch64-apple-ios x86_64-apple-ios
 
-      - name: Run cargo make native (Debug)
-        uses: actions-rs/cargo@v1
-        continue-on-error: false
-        with:
-          command: make
-          args: native
-
       - name: Run cargo make android-dev (Debug)
         uses: actions-rs/cargo@v1
         continue-on-error: false
@@ -94,14 +91,36 @@ jobs:
           command: make
           args: android-dev
 
-      - name: Run cargo make ios (Debug)
+      - name: Run cargo make android-dev (Release)
         uses: actions-rs/cargo@v1
         continue-on-error: false
         with:
           command: make
-          args: ios
+          args: android-arm --profile release
 
-      - name: Run flutter test
-        run: flutter test
+      - name: Run cargo make ios (Release)
+        uses: actions-rs/cargo@v1
+        continue-on-error: false
+        with:
+          command: make
+          args: ios --profile release
 
+      - name: Collect Artifacts
+        run: |
+          mkdir -p build
+          cp target/aarch64-linux-android/release/libsubsocial.so build/libsubsocial-aarch64-linux-android.so
+          cp target/x86_64-linux-android/debug/libsubsocial.so build/libsubsocial-x86_64-linux-android.so
+          cp target/universal/release/libsubsocial.a build/libsubsocial-universal-apple-ios.a
+          cp native/ffi/binding.h build/bindings.h
 
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: false
+          files: |
+            build/libsubsocial-aarch64-linux-android.so
+            build/libsubsocial-x86_64-linux-android.so
+            build/libsubsocial-universal-apple-ios.a
+            build/bindings.h
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
