@@ -50,6 +50,8 @@ pub async fn handle(
         RequestBody::SocialAccountByAccountId(args) => {
             social_account_by_account_id(client, args.account_id).await
         }
+        RequestBody::NextSpaceId(_) => next_space_id(client).await,
+        RequestBody::NextPostId(_) => next_post_id(client).await,
     };
     let response = match result {
         Ok(body) => Response { body: Some(body) },
@@ -233,5 +235,33 @@ async fn social_account_by_account_id(
             kind: error::Kind::NotFound.into(),
             msg: String::from("Social Account Not Found"),
         }),
+    }
+}
+
+async fn next_space_id(
+    client: &Client<SubsocialRuntime>,
+) -> Result<ResponseBody, Error> {
+    let store = spaces::NextSpaceIdStore::default();
+    let maybe_id = client.fetch(&store, None).await.unwrap();
+    match maybe_id {
+        Some(id) => {
+            let body = ResponseBody::NextSpaceId(NextSpaceId { id });
+            Ok(body)
+        }
+        None => unreachable!(),
+    }
+}
+
+async fn next_post_id(
+    client: &Client<SubsocialRuntime>,
+) -> Result<ResponseBody, Error> {
+    let store = posts::NextPostIdStore::default();
+    let maybe_id = client.fetch(&store, None).await.unwrap();
+    match maybe_id {
+        Some(id) => {
+            let body = ResponseBody::NextPostId(NextPostId { id });
+            Ok(body)
+        }
+        None => unreachable!(),
     }
 }

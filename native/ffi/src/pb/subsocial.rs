@@ -1,6 +1,6 @@
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Request {
-    #[prost(oneof = "request::Body", tags = "1, 2, 3, 4, 5, 6, 7, 8")]
+    #[prost(oneof = "request::Body", tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10")]
     pub body: ::core::option::Option<request::Body>,
 }
 /// Nested message and enum types in `Request`.
@@ -23,11 +23,18 @@ pub mod request {
         ReplyIdsByPostId(super::GetReplyIdsByPostId),
         #[prost(message, tag = "8")]
         SocialAccountByAccountId(super::GetSocialAccountByAccountId),
+        #[prost(message, tag = "9")]
+        NextSpaceId(super::GetNextSpaceId),
+        #[prost(message, tag = "10")]
+        NextPostId(super::GetNextPostId),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Response {
-    #[prost(oneof = "response::Body", tags = "1, 2, 3, 4, 5, 6, 7, 8, 9")]
+    #[prost(
+        oneof = "response::Body",
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11"
+    )]
     pub body: ::core::option::Option<response::Body>,
 }
 /// Nested message and enum types in `Response`.
@@ -52,6 +59,10 @@ pub mod response {
         ReplyIdsByPostId(super::ReplyIdsByPostId),
         #[prost(message, tag = "9")]
         SocialAccountByAccountId(super::SocialAccountByAccountId),
+        #[prost(message, tag = "10")]
+        NextSpaceId(super::NextSpaceId),
+        #[prost(message, tag = "11")]
+        NextPostId(super::NextPostId),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -123,6 +134,10 @@ pub struct GetSocialAccountByAccountId {
     #[prost(string, tag = "1")]
     pub account_id: ::prost::alloc::string::String,
 }
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetNextSpaceId {}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetNextPostId {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WhoAndWhen {
     #[prost(string, tag = "1")]
@@ -326,4 +341,14 @@ pub struct ReplyIdsByPostId {
 pub struct SocialAccountByAccountId {
     #[prost(message, optional, tag = "1")]
     pub social_account: ::core::option::Option<SocialAccount>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NextSpaceId {
+    #[prost(uint64, tag = "1")]
+    pub id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NextPostId {
+    #[prost(uint64, tag = "1")]
+    pub id: u64,
 }

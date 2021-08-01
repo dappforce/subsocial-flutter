@@ -23,6 +23,8 @@ enum Request_Body {
   reactionIdsByPostId,
   replyIdsByPostId,
   socialAccountByAccountId,
+  nextSpaceId,
+  nextPostId,
   notSet
 }
 
@@ -36,6 +38,8 @@ class Request extends $pb.GeneratedMessage {
     6: Request_Body.reactionIdsByPostId,
     7: Request_Body.replyIdsByPostId,
     8: Request_Body.socialAccountByAccountId,
+    9: Request_Body.nextSpaceId,
+    10: Request_Body.nextPostId,
     0: Request_Body.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Request',
@@ -44,7 +48,7 @@ class Request extends $pb.GeneratedMessage {
               ? ''
               : 'subsocial'),
       createEmptyInstance: create)
-    ..oo(0, [1, 2, 3, 4, 5, 6, 7, 8])
+    ..oo(0, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     ..aOM<GetSpaceById>(
         1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceById',
         subBuilder: GetSpaceById.create)
@@ -61,6 +65,8 @@ class Request extends $pb.GeneratedMessage {
     ..aOM<GetReactionIdsByPostId>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reactionIdsByPostId', subBuilder: GetReactionIdsByPostId.create)
     ..aOM<GetReplyIdsByPostId>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'replyIdsByPostId', subBuilder: GetReplyIdsByPostId.create)
     ..aOM<GetSocialAccountByAccountId>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'socialAccountByAccountId', subBuilder: GetSocialAccountByAccountId.create)
+    ..aOM<GetNextSpaceId>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'nextSpaceId', subBuilder: GetNextSpaceId.create)
+    ..aOM<GetNextPostId>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'nextPostId', subBuilder: GetNextPostId.create)
     ..hasRequiredFields = false;
 
   Request._() : super();
@@ -73,6 +79,8 @@ class Request extends $pb.GeneratedMessage {
     GetReactionIdsByPostId? reactionIdsByPostId,
     GetReplyIdsByPostId? replyIdsByPostId,
     GetSocialAccountByAccountId? socialAccountByAccountId,
+    GetNextSpaceId? nextSpaceId,
+    GetNextPostId? nextPostId,
   }) {
     final _result = create();
     if (spaceById != null) {
@@ -98,6 +106,12 @@ class Request extends $pb.GeneratedMessage {
     }
     if (socialAccountByAccountId != null) {
       _result.socialAccountByAccountId = socialAccountByAccountId;
+    }
+    if (nextSpaceId != null) {
+      _result.nextSpaceId = nextSpaceId;
+    }
+    if (nextPostId != null) {
+      _result.nextPostId = nextPostId;
     }
     return _result;
   }
@@ -241,6 +255,34 @@ class Request extends $pb.GeneratedMessage {
   void clearSocialAccountByAccountId() => clearField(8);
   @$pb.TagNumber(8)
   GetSocialAccountByAccountId ensureSocialAccountByAccountId() => $_ensure(7);
+
+  @$pb.TagNumber(9)
+  GetNextSpaceId get nextSpaceId => $_getN(8);
+  @$pb.TagNumber(9)
+  set nextSpaceId(GetNextSpaceId v) {
+    setField(9, v);
+  }
+
+  @$pb.TagNumber(9)
+  $core.bool hasNextSpaceId() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearNextSpaceId() => clearField(9);
+  @$pb.TagNumber(9)
+  GetNextSpaceId ensureNextSpaceId() => $_ensure(8);
+
+  @$pb.TagNumber(10)
+  GetNextPostId get nextPostId => $_getN(9);
+  @$pb.TagNumber(10)
+  set nextPostId(GetNextPostId v) {
+    setField(10, v);
+  }
+
+  @$pb.TagNumber(10)
+  $core.bool hasNextPostId() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearNextPostId() => clearField(10);
+  @$pb.TagNumber(10)
+  GetNextPostId ensureNextPostId() => $_ensure(9);
 }
 
 enum Response_Body {
@@ -253,6 +295,8 @@ enum Response_Body {
   reactionIdsByPostId,
   replyIdsByPostId,
   socialAccountByAccountId,
+  nextSpaceId,
+  nextPostId,
   notSet
 }
 
@@ -267,6 +311,8 @@ class Response extends $pb.GeneratedMessage {
     7: Response_Body.reactionIdsByPostId,
     8: Response_Body.replyIdsByPostId,
     9: Response_Body.socialAccountByAccountId,
+    10: Response_Body.nextSpaceId,
+    11: Response_Body.nextPostId,
     0: Response_Body.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Response',
@@ -275,22 +321,25 @@ class Response extends $pb.GeneratedMessage {
               ? ''
               : 'subsocial'),
       createEmptyInstance: create)
-    ..oo(0, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+    ..oo(0, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
     ..aOM<Error>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'error',
         subBuilder: Error.create)
-    ..aOM<SpaceById>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceById',
+    ..aOM<SpaceById>(
+        2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceById',
         subBuilder: SpaceById.create)
-    ..aOM<SpaceByHandle>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceByHandle',
+    ..aOM<SpaceByHandle>(
+        3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceByHandle',
         subBuilder: SpaceByHandle.create)
-    ..aOM<PostById>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postById',
+    ..aOM<PostById>(
+        4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postById',
         subBuilder: PostById.create)
-    ..aOM<PostIdsBySpaceId>(
-        5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postIdsBySpaceId',
-        subBuilder: PostIdsBySpaceId.create)
+    ..aOM<PostIdsBySpaceId>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postIdsBySpaceId', subBuilder: PostIdsBySpaceId.create)
     ..aOM<ReactionById>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reactionById', subBuilder: ReactionById.create)
     ..aOM<ReactionIdsByPostId>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reactionIdsByPostId', subBuilder: ReactionIdsByPostId.create)
     ..aOM<ReplyIdsByPostId>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'replyIdsByPostId', subBuilder: ReplyIdsByPostId.create)
     ..aOM<SocialAccountByAccountId>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'socialAccountByAccountId', subBuilder: SocialAccountByAccountId.create)
+    ..aOM<NextSpaceId>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'nextSpaceId', subBuilder: NextSpaceId.create)
+    ..aOM<NextPostId>(11, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'nextPostId', subBuilder: NextPostId.create)
     ..hasRequiredFields = false;
 
   Response._() : super();
@@ -304,6 +353,8 @@ class Response extends $pb.GeneratedMessage {
     ReactionIdsByPostId? reactionIdsByPostId,
     ReplyIdsByPostId? replyIdsByPostId,
     SocialAccountByAccountId? socialAccountByAccountId,
+    NextSpaceId? nextSpaceId,
+    NextPostId? nextPostId,
   }) {
     final _result = create();
     if (error != null) {
@@ -332,6 +383,12 @@ class Response extends $pb.GeneratedMessage {
     }
     if (socialAccountByAccountId != null) {
       _result.socialAccountByAccountId = socialAccountByAccountId;
+    }
+    if (nextSpaceId != null) {
+      _result.nextSpaceId = nextSpaceId;
+    }
+    if (nextPostId != null) {
+      _result.nextPostId = nextPostId;
     }
     return _result;
   }
@@ -489,6 +546,34 @@ class Response extends $pb.GeneratedMessage {
   void clearSocialAccountByAccountId() => clearField(9);
   @$pb.TagNumber(9)
   SocialAccountByAccountId ensureSocialAccountByAccountId() => $_ensure(8);
+
+  @$pb.TagNumber(10)
+  NextSpaceId get nextSpaceId => $_getN(9);
+  @$pb.TagNumber(10)
+  set nextSpaceId(NextSpaceId v) {
+    setField(10, v);
+  }
+
+  @$pb.TagNumber(10)
+  $core.bool hasNextSpaceId() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearNextSpaceId() => clearField(10);
+  @$pb.TagNumber(10)
+  NextSpaceId ensureNextSpaceId() => $_ensure(9);
+
+  @$pb.TagNumber(11)
+  NextPostId get nextPostId => $_getN(10);
+  @$pb.TagNumber(11)
+  set nextPostId(NextPostId v) {
+    setField(11, v);
+  }
+
+  @$pb.TagNumber(11)
+  $core.bool hasNextPostId() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearNextPostId() => clearField(11);
+  @$pb.TagNumber(11)
+  NextPostId ensureNextPostId() => $_ensure(10);
 }
 
 class Error extends $pb.GeneratedMessage {
@@ -1130,6 +1215,90 @@ class GetSocialAccountByAccountId extends $pb.GeneratedMessage {
   $core.bool hasAccountId() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccountId() => clearField(1);
+}
+
+class GetNextSpaceId extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'GetNextSpaceId',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..hasRequiredFields = false;
+
+  GetNextSpaceId._() : super();
+  factory GetNextSpaceId() => create();
+  factory GetNextSpaceId.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory GetNextSpaceId.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  GetNextSpaceId clone() => GetNextSpaceId()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  GetNextSpaceId copyWith(void Function(GetNextSpaceId) updates) =>
+      super.copyWith((message) => updates(message as GetNextSpaceId))
+          as GetNextSpaceId; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetNextSpaceId create() => GetNextSpaceId._();
+  GetNextSpaceId createEmptyInstance() => create();
+  static $pb.PbList<GetNextSpaceId> createRepeated() =>
+      $pb.PbList<GetNextSpaceId>();
+  @$core.pragma('dart2js:noInline')
+  static GetNextSpaceId getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetNextSpaceId>(create);
+  static GetNextSpaceId? _defaultInstance;
+}
+
+class GetNextPostId extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'GetNextPostId',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..hasRequiredFields = false;
+
+  GetNextPostId._() : super();
+  factory GetNextPostId() => create();
+  factory GetNextPostId.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory GetNextPostId.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  GetNextPostId clone() => GetNextPostId()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  GetNextPostId copyWith(void Function(GetNextPostId) updates) =>
+      super.copyWith((message) => updates(message as GetNextPostId))
+          as GetNextPostId; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetNextPostId create() => GetNextPostId._();
+  GetNextPostId createEmptyInstance() => create();
+  static $pb.PbList<GetNextPostId> createRepeated() =>
+      $pb.PbList<GetNextPostId>();
+  @$core.pragma('dart2js:noInline')
+  static GetNextPostId getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetNextPostId>(create);
+  static GetNextPostId? _defaultInstance;
 }
 
 class WhoAndWhen extends $pb.GeneratedMessage {
@@ -3070,4 +3239,140 @@ class SocialAccountByAccountId extends $pb.GeneratedMessage {
   void clearSocialAccount() => clearField(1);
   @$pb.TagNumber(1)
   SocialAccount ensureSocialAccount() => $_ensure(0);
+}
+
+class NextSpaceId extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'NextSpaceId',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..a<$fixnum.Int64>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'id',
+        $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false;
+
+  NextSpaceId._() : super();
+  factory NextSpaceId({
+    $fixnum.Int64? id,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    return _result;
+  }
+  factory NextSpaceId.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory NextSpaceId.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  NextSpaceId clone() => NextSpaceId()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  NextSpaceId copyWith(void Function(NextSpaceId) updates) =>
+      super.copyWith((message) => updates(message as NextSpaceId))
+          as NextSpaceId; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static NextSpaceId create() => NextSpaceId._();
+  NextSpaceId createEmptyInstance() => create();
+  static $pb.PbList<NextSpaceId> createRepeated() => $pb.PbList<NextSpaceId>();
+  @$core.pragma('dart2js:noInline')
+  static NextSpaceId getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<NextSpaceId>(create);
+  static NextSpaceId? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) {
+    $_setInt64(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+}
+
+class NextPostId extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'NextPostId',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..a<$fixnum.Int64>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'id',
+        $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false;
+
+  NextPostId._() : super();
+  factory NextPostId({
+    $fixnum.Int64? id,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    return _result;
+  }
+  factory NextPostId.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory NextPostId.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  NextPostId clone() => NextPostId()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  NextPostId copyWith(void Function(NextPostId) updates) =>
+      super.copyWith((message) => updates(message as NextPostId))
+          as NextPostId; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static NextPostId create() => NextPostId._();
+  NextPostId createEmptyInstance() => create();
+  static $pb.PbList<NextPostId> createRepeated() => $pb.PbList<NextPostId>();
+  @$core.pragma('dart2js:noInline')
+  static NextPostId getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<NextPostId>(create);
+  static NextPostId? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) {
+    $_setInt64(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
 }

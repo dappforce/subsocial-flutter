@@ -30,7 +30,7 @@ pub type Index = u32;
 pub type Hash = sp_core::H256;
 
 /// Subsocial Runtime.
-#[derive(Debug, Clone, Eq, PartialEq)]
+#[derive(Debug, Clone, Eq, PartialEq, Default)]
 pub struct SubsocialRuntime;
 
 impl subxt::Runtime for SubsocialRuntime {

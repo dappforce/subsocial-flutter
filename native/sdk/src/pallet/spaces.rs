@@ -40,6 +40,12 @@ impl<T: Spaces> fmt::Display for Space<T> {
 
 // Storage ..
 
+#[derive(Clone, Debug, Eq, Default, Encode, PartialEq, subxt::Store)]
+pub struct NextSpaceIdStore<T: Spaces> {
+    #[store(returns = SpaceId)]
+    __marker: PhantomData<T>,
+}
+
 #[derive(Clone, Debug, Eq, Encode, PartialEq, subxt::Store)]
 pub struct SpaceByIdStore<T: Spaces> {
     #[store(returns = Space<T>)]

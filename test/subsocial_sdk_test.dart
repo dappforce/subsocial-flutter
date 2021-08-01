@@ -67,4 +67,12 @@ void main() {
     expect(owner.hasProfile(), true);
     expect(owner.profile.hasContent(), true);
   });
+
+  test('Next {Space,Post}Id', () async {
+    final sdk = await Subsocial.instance;
+    final nextSpaceId = await sdk.nextSpaceId();
+    final nextPostId = await sdk.nextPostId();
+    expect(nextSpaceId > 0, true);
+    expect(nextPostId > 0, true);
+  });
 }

@@ -12,6 +12,8 @@ message Request {
     GetReactionIdsByPostId reaction_ids_by_post_id = 6;
     GetReplyIdsByPostId reply_ids_by_post_id = 7;
     GetSocialAccountByAccountId social_account_by_account_id = 8;
+    GetNextSpaceId next_space_id = 9;
+    GetNextPostId next_post_id = 10;
   }
 }
 
@@ -26,6 +28,8 @@ message Response {
     ReactionIdsByPostId reaction_ids_by_post_id = 7;
     ReplyIdsByPostId reply_ids_by_post_id = 8;
     SocialAccountByAccountId social_account_by_account_id = 9;
+    NextSpaceId next_space_id = 10;
+    NextPostId next_post_id = 11;
   }
 }
 
@@ -72,6 +76,10 @@ message GetReplyIdsByPostId {
 message GetSocialAccountByAccountId {
   string account_id = 1;
 }
+
+message GetNextSpaceId {}
+
+message GetNextPostId {}
 
 message WhoAndWhen {
   string account = 1;
@@ -191,4 +199,12 @@ message ReplyIdsByPostId {
 
 message SocialAccountByAccountId {
   SocialAccount social_account = 1;
+}
+
+message NextSpaceId {
+  uint64 id = 1;
+}
+
+message NextPostId {
+  uint64 id = 1;
 }

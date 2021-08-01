@@ -123,6 +123,20 @@ class Subsocial {
     return val.socialAccount;
   }
 
+  Future<SpaceId> nextSpaceId() async {
+    final req = Request(nextSpaceId: GetNextSpaceId());
+    final res = await _dispatch(req);
+    final val = res.ensureNextSpaceId();
+    return val.id.toInt();
+  }
+
+  Future<PostId> nextPostId() async {
+    final req = Request(nextPostId: GetNextPostId());
+    final res = await _dispatch(req);
+    final val = res.ensureNextPostId();
+    return val.id.toInt();
+  }
+
   void dispose() {
     final result = _raw.subsocial_shutdown();
     _assertOk(result);
