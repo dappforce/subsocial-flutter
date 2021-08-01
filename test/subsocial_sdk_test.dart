@@ -59,4 +59,12 @@ void main() {
       expect(reply.extensionValue.comment.rootPostId.toInt(), firstPostId);
     }
   });
+
+  test('Get Social Accounts', () async {
+    final sdk = await Subsocial.instance;
+    final space = await sdk.spaceByHandle("subsocial");
+    final owner = await sdk.socialAccountByAccountId(space.owner);
+    expect(owner.hasProfile(), true);
+    expect(owner.profile.hasContent(), true);
+  });
 }

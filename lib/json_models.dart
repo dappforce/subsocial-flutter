@@ -50,6 +50,24 @@ class PostMetadata {
   }
 }
 
+class SocialAccountMetadata {
+  late String? about;
+  late String? name;
+  late String? avatar;
+
+  SocialAccountMetadata({
+    this.name,
+    this.about,
+    this.avatar,
+  });
+
+  SocialAccountMetadata.fromJson(Map<String, dynamic> json) {
+    name = json['name'] as String?;
+    about = json['about'] as String?;
+    avatar = json['avatar'] as String?;
+  }
+}
+
 @immutable
 class SpaceWithMetadata {
   final Space space;
@@ -62,4 +80,14 @@ class PostWithMetadata {
   final Post post;
   final PostMetadata metadata;
   const PostWithMetadata({required this.post, required this.metadata});
+}
+
+@immutable
+class SocialAccountWithMetadata {
+  final SocialAccount socialAccount;
+  final SocialAccountMetadata metadata;
+  const SocialAccountWithMetadata({
+    required this.socialAccount,
+    required this.metadata,
+  });
 }

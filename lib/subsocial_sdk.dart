@@ -50,135 +50,97 @@ class Subsocial {
   }
 
   Future<Space> spaceById(SpaceId id) async {
-    final completer = Completer<List<int>>();
-    final port = singleCompletePort(completer);
     final req = Request(
       spaceById: GetSpaceById(spaceId: makeLongInt(id)),
     );
-    final ptr = req.writeToBuffer().asSharedBufferPtr();
-    final result = _raw.subsocial_dispatch(port.nativePort, ptr);
-    _assertOk(result);
-    final resBytes = await completer.future;
-    final res = Response.fromBuffer(resBytes);
-    if (res.hasError()) {
-      throw res.error;
-    }
+    final res = await _dispatch(req);
     final val = res.ensureSpaceById();
     return val.space;
   }
 
   Future<Space> spaceByHandle(String handle) async {
-    final completer = Completer<List<int>>();
-    final port = singleCompletePort(completer);
     final req = Request(
       spaceByHandle: GetSpaceByHandle(handle: handle),
     );
-    final ptr = req.writeToBuffer().asSharedBufferPtr();
-    final result = _raw.subsocial_dispatch(port.nativePort, ptr);
-    _assertOk(result);
-    final resBytes = await completer.future;
-    final res = Response.fromBuffer(resBytes);
-    if (res.hasError()) {
-      throw res.error;
-    }
+    final res = await _dispatch(req);
     final val = res.ensureSpaceByHandle();
     return val.space;
   }
 
   Future<Post> postById(PostId id) async {
-    final completer = Completer<List<int>>();
-    final port = singleCompletePort(completer);
     final req = Request(
       postById: GetPostById(postId: makeLongInt(id)),
     );
-    final ptr = req.writeToBuffer().asSharedBufferPtr();
-    final result = _raw.subsocial_dispatch(port.nativePort, ptr);
-    _assertOk(result);
-    final resBytes = await completer.future;
-    final res = Response.fromBuffer(resBytes);
-    if (res.hasError()) {
-      throw res.error;
-    }
+    final res = await _dispatch(req);
     final val = res.ensurePostById();
     return val.post;
   }
 
   Future<Reaction> reactionById(ReactionId id) async {
-    final completer = Completer<List<int>>();
-    final port = singleCompletePort(completer);
     final req = Request(
       reactionById: GetReactionById(reactionId: makeLongInt(id)),
     );
-    final ptr = req.writeToBuffer().asSharedBufferPtr();
-    final result = _raw.subsocial_dispatch(port.nativePort, ptr);
-    _assertOk(result);
-    final resBytes = await completer.future;
-    final res = Response.fromBuffer(resBytes);
-    if (res.hasError()) {
-      throw res.error;
-    }
+    final res = await _dispatch(req);
     final val = res.ensureReactionById();
     return val.reaction;
   }
 
   Future<List<PostId>> postsIdsBySpaceId(SpaceId id) async {
-    final completer = Completer<List<int>>();
-    final port = singleCompletePort(completer);
     final req = Request(
       postIdsBySpaceId: GetPostIdsBySpaceId(spaceId: makeLongInt(id)),
     );
-    final ptr = req.writeToBuffer().asSharedBufferPtr();
-    final result = _raw.subsocial_dispatch(port.nativePort, ptr);
-    _assertOk(result);
-    final resBytes = await completer.future;
-    final res = Response.fromBuffer(resBytes);
-    if (res.hasError()) {
-      throw res.error;
-    }
+    final res = await _dispatch(req);
     final val = res.ensurePostIdsBySpaceId();
     return val.postIds.map((e) => e.toInt()).toList();
   }
 
   Future<List<ReactionId>> reactionIdsByPostId(PostId id) async {
-    final completer = Completer<List<int>>();
-    final port = singleCompletePort(completer);
     final req = Request(
       reactionIdsByPostId: GetReactionIdsByPostId(postId: makeLongInt(id)),
     );
-    final ptr = req.writeToBuffer().asSharedBufferPtr();
-    final result = _raw.subsocial_dispatch(port.nativePort, ptr);
-    _assertOk(result);
-    final resBytes = await completer.future;
-    final res = Response.fromBuffer(resBytes);
-    if (res.hasError()) {
-      throw res.error;
-    }
+    final res = await _dispatch(req);
     final val = res.ensureReactionIdsByPostId();
     return val.reactionIds.map((e) => e.toInt()).toList();
   }
 
   Future<List<PostId>> replyIdsByPostId(PostId id) async {
-    final completer = Completer<List<int>>();
-    final port = singleCompletePort(completer);
     final req = Request(
       replyIdsByPostId: GetReplyIdsByPostId(postId: makeLongInt(id)),
     );
-    final ptr = req.writeToBuffer().asSharedBufferPtr();
-    final result = _raw.subsocial_dispatch(port.nativePort, ptr);
-    _assertOk(result);
-    final resBytes = await completer.future;
-    final res = Response.fromBuffer(resBytes);
-    if (res.hasError()) {
-      throw res.error;
-    }
+    final res = await _dispatch(req);
     final val = res.ensureReplyIdsByPostId();
     return val.replyIds.map((e) => e.toInt()).toList();
+  }
+
+  Future<SocialAccount> socialAccountByAccountId(String accountId) async {
+    final req = Request(
+      socialAccountByAccountId: GetSocialAccountByAccountId(
+        accountId: accountId,
+      ),
+    );
+    final res = await _dispatch(req);
+    final val = res.ensureSocialAccountByAccountId();
+    return val.socialAccount;
   }
 
   void dispose() {
     final result = _raw.subsocial_shutdown();
     _assertOk(result);
     _instance = null;
+  }
+
+  Future<Response> _dispatch(Request req) async {
+    final completer = Completer<List<int>>();
+    final port = singleCompletePort(completer);
+    final ptr = req.writeToBuffer().asSharedBufferPtr();
+    final result = _raw.subsocial_dispatch(port.nativePort, ptr);
+    _assertOk(result);
+    final resBytes = await completer.future;
+    final res = Response.fromBuffer(resBytes);
+    if (res.hasError()) {
+      throw res.error;
+    }
+    return res;
   }
 }
 

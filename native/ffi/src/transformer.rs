@@ -1,4 +1,4 @@
-use sdk::pallet::{posts, reactions, spaces, utils};
+use sdk::pallet::{posts, profiles, reactions, spaces, utils};
 use sdk::runtime::SubsocialRuntime;
 
 use crate::pb::subsocial::*;
@@ -130,6 +130,28 @@ impl From<reactions::Reaction<SubsocialRuntime>> for Reaction {
             created: Some(reaction.created.into()),
             updated: reaction.updated.map(Into::into),
             kind: ReactionKind::from(reaction.kind).into(),
+        }
+    }
+}
+
+impl From<profiles::Profile<SubsocialRuntime>> for Profile {
+    fn from(profile: profiles::Profile<SubsocialRuntime>) -> Self {
+        Self {
+            created: Some(profile.created.into()),
+            updated: profile.updated.map(Into::into),
+            content: Some(profile.content.into()),
+        }
+    }
+}
+
+impl From<profiles::SocialAccount<SubsocialRuntime>> for SocialAccount {
+    fn from(account: profiles::SocialAccount<SubsocialRuntime>) -> Self {
+        Self {
+            profile: account.profile.map(Into::into),
+            followers_count: account.followers_count,
+            reputation: account.reputation,
+            following_spaces_count: account.following_spaces_count.into(),
+            following_accounts_count: account.following_accounts_count.into(),
         }
     }
 }

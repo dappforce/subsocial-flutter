@@ -1,6 +1,8 @@
 use prost::Message;
-use sdk::pallet::{posts, reactions, spaces};
+use sdk::pallet::{posts, profiles, reactions, spaces};
 use sdk::runtime::SubsocialRuntime;
+use sdk::subxt::sp_core::crypto::Ss58Codec;
+use sdk::subxt::sp_runtime::AccountId32;
 use sdk::subxt::Client;
 
 use crate::pb::subsocial::request::Body as RequestBody;
@@ -44,6 +46,9 @@ pub async fn handle(
         }
         RequestBody::ReplyIdsByPostId(args) => {
             reply_ids_by_post_id(client, args.post_id).await
+        }
+        RequestBody::SocialAccountByAccountId(args) => {
+            social_account_by_account_id(client, args.account_id).await
         }
     };
     let response = match result {
@@ -196,6 +201,37 @@ async fn reply_ids_by_post_id(
         None => Err(Error {
             kind: error::Kind::NotFound.into(),
             msg: String::from("Post Not Found"),
+        }),
+    }
+}
+
+async fn social_account_by_account_id(
+    client: &Client<SubsocialRuntime>,
+    account_id: String,
+) -> Result<ResponseBody, Error> {
+    let account_id = match AccountId32::from_string(&account_id) {
+        Ok(val) => val,
+        Err(_) => {
+            return Err(Error {
+                kind: error::Kind::InvalidRequest.into(),
+                msg: String::from("Invalid AccountId"),
+            });
+        }
+    };
+    let store = profiles::SocialAccountByIdStore::new(account_id);
+    let maybe_account = client.fetch(&store, None).await.unwrap();
+    match maybe_account {
+        Some(account) => {
+            let body = ResponseBody::SocialAccountByAccountId(
+                SocialAccountByAccountId {
+                    social_account: Some(account.into()),
+                },
+            );
+            Ok(body)
+        }
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("Social Account Not Found"),
         }),
     }
 }

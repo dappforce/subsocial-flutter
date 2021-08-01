@@ -11,6 +11,7 @@ message Request {
     GetReactionById reaction_by_id = 5;
     GetReactionIdsByPostId reaction_ids_by_post_id = 6;
     GetReplyIdsByPostId reply_ids_by_post_id = 7;
+    GetSocialAccountByAccountId social_account_by_account_id = 8;
   }
 }
 
@@ -24,6 +25,7 @@ message Response {
     ReactionById reaction_by_id = 6;
     ReactionIdsByPostId reaction_ids_by_post_id = 7;
     ReplyIdsByPostId reply_ids_by_post_id = 8;
+    SocialAccountByAccountId social_account_by_account_id = 9;
   }
 }
 
@@ -65,6 +67,10 @@ message GetReactionIdsByPostId {
 
 message GetReplyIdsByPostId {
   uint64 post_id = 1;
+}
+
+message GetSocialAccountByAccountId {
+  string account_id = 1;
 }
 
 message WhoAndWhen {
@@ -141,6 +147,20 @@ message Reaction {
   ReactionKind kind = 4;
 }
 
+message SocialAccount {
+  uint32 followers_count = 1;
+  uint32 following_accounts_count = 2;
+  uint32 following_spaces_count = 3;
+  uint32 reputation = 4;
+  Profile profile = 5;
+}
+
+message Profile {
+  WhoAndWhen created = 1;
+  WhoAndWhen updated = 2;
+  Content content = 3;
+}
+
 message SpaceById {
   Space space = 1;
 }
@@ -169,3 +189,6 @@ message ReplyIdsByPostId {
   repeated uint64 reply_ids = 1 [packed = true];
 }
 
+message SocialAccountByAccountId {
+  SocialAccount social_account = 1;
+}

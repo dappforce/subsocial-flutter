@@ -57,6 +57,7 @@ impl Balances for SubsocialRuntime {
 impl pallet::spaces::Spaces for SubsocialRuntime {}
 impl pallet::posts::Posts for SubsocialRuntime {}
 impl pallet::reactions::Reactions for SubsocialRuntime {}
+impl pallet::profiles::Profiles for SubsocialRuntime {}
 
 #[cfg(test)]
 mod tests {
