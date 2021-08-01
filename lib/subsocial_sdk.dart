@@ -19,6 +19,7 @@ export 'json_models.dart';
 typedef PostId = int;
 typedef SpaceId = int;
 typedef ReactionId = int;
+typedef AccountId = String;
 
 class Subsocial {
   static Subsocial? _instance;
@@ -67,7 +68,7 @@ class Subsocial {
     return val.space;
   }
 
-  Future<List<SpaceId>> spaceIdsByOwner(String accountId) async {
+  Future<List<SpaceId>> spaceIdsByOwner(AccountId accountId) async {
     final req = Request(
       spaceIdsByOwner: GetSpaceIdsByOwner(
         accountId: accountId,
@@ -123,7 +124,7 @@ class Subsocial {
     return val.replyIds.map((e) => e.toInt()).toList();
   }
 
-  Future<SocialAccount> socialAccountByAccountId(String accountId) async {
+  Future<SocialAccount> socialAccountByAccountId(AccountId accountId) async {
     final req = Request(
       socialAccountByAccountId: GetSocialAccountByAccountId(
         accountId: accountId,
@@ -146,6 +147,26 @@ class Subsocial {
     final res = await _dispatch(req);
     final val = res.ensureNextPostId();
     return val.id.toInt();
+  }
+
+  Future<List<AccountId>> spaceFollowers(SpaceId spaceId) async {
+    final req = Request(
+      spaceFollowers: GetSpaceFollowers(spaceId: makeLongInt(spaceId)),
+    );
+    final res = await _dispatch(req);
+    final val = res.ensureSpaceFollowers();
+    return val.accountIds;
+  }
+
+  Future<List<SpaceId>> spacesFollowedByAccount(AccountId accountId) async {
+    final req = Request(
+      spacesFollowedByAccount: GetSpacesFollowedByAccount(
+        accountId: accountId,
+      ),
+    );
+    final res = await _dispatch(req);
+    final val = res.ensureSpacesFollowedByAccount();
+    return val.spaceIds.map((e) => e.toInt()).toList();
   }
 
   void dispose() {

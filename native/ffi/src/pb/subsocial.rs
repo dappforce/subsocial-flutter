@@ -2,7 +2,7 @@
 pub struct Request {
     #[prost(
         oneof = "request::Body",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13"
     )]
     pub body: ::core::option::Option<request::Body>,
 }
@@ -32,13 +32,17 @@ pub mod request {
         NextPostId(super::GetNextPostId),
         #[prost(message, tag = "11")]
         SpaceIdsByOwner(super::GetSpaceIdsByOwner),
+        #[prost(message, tag = "12")]
+        SpaceFollowers(super::GetSpaceFollowers),
+        #[prost(message, tag = "13")]
+        SpacesFollowedByAccount(super::GetSpacesFollowedByAccount),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Response {
     #[prost(
         oneof = "response::Body",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14"
     )]
     pub body: ::core::option::Option<response::Body>,
 }
@@ -70,6 +74,10 @@ pub mod response {
         NextPostId(super::NextPostId),
         #[prost(message, tag = "12")]
         SpaceIdsByOwner(super::SpaceIdsByOwner),
+        #[prost(message, tag = "13")]
+        SpaceFollowers(super::SpaceFollowers),
+        #[prost(message, tag = "14")]
+        SpacesFollowedByAccount(super::SpacesFollowedByAccount),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -99,8 +107,11 @@ pub mod error {
         InvalidProto = 2,
         InvalidRequest = 3,
         NotFound = 4,
+        Subxt = 5,
     }
 }
+// REQUESTS
+
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSpaceById {
     #[prost(uint64, tag = "1")]
@@ -150,6 +161,18 @@ pub struct GetSpaceIdsByOwner {
     #[prost(string, tag = "1")]
     pub account_id: ::prost::alloc::string::String,
 }
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetSpaceFollowers {
+    #[prost(uint64, tag = "1")]
+    pub space_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetSpacesFollowedByAccount {
+    #[prost(string, tag = "1")]
+    pub account_id: ::prost::alloc::string::String,
+}
+// DATA
+
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WhoAndWhen {
     #[prost(string, tag = "1")]
@@ -314,6 +337,8 @@ pub struct Profile {
     #[prost(message, optional, tag = "3")]
     pub content: ::core::option::Option<Content>,
 }
+// RESPONSES
+
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SpaceById {
     #[prost(message, optional, tag = "1")]
@@ -366,6 +391,16 @@ pub struct NextPostId {
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SpaceIdsByOwner {
+    #[prost(uint64, repeated, tag = "1")]
+    pub space_ids: ::prost::alloc::vec::Vec<u64>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SpaceFollowers {
+    #[prost(string, repeated, tag = "1")]
+    pub account_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SpacesFollowedByAccount {
     #[prost(uint64, repeated, tag = "1")]
     pub space_ids: ::prost::alloc::vec::Vec<u64>,
 }

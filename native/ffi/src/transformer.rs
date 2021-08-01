@@ -1,7 +1,32 @@
 use sdk::pallet::{posts, profiles, reactions, spaces, utils};
 use sdk::runtime::SubsocialRuntime;
+use sdk::subxt::sp_core::crypto::Ss58Codec;
+use sdk::subxt::sp_runtime::AccountId32;
 
 use crate::pb::subsocial::*;
+
+pub trait AccountIdFromString: Ss58Codec {
+    fn convert(val: String) -> Result<Self, Error> {
+        match Self::from_string(&val) {
+            Ok(val) => Ok(val),
+            Err(_) => Err(Error {
+                kind: error::Kind::InvalidRequest.into(),
+                msg: String::from("Invalid AccountId"),
+            }),
+        }
+    }
+}
+
+impl AccountIdFromString for AccountId32 {}
+
+impl From<sdk::subxt::Error> for Error {
+    fn from(e: sdk::subxt::Error) -> Self {
+        Self {
+            kind: error::Kind::Subxt.into(),
+            msg: e.to_string(),
+        }
+    }
+}
 
 impl From<utils::WhoAndWhen<SubsocialRuntime>> for WhoAndWhen {
     fn from(v: utils::WhoAndWhen<SubsocialRuntime>) -> Self {

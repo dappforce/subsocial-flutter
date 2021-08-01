@@ -1,13 +1,13 @@
 use prost::Message;
-use sdk::pallet::{posts, profiles, reactions, spaces};
+use sdk::pallet::*;
 use sdk::runtime::SubsocialRuntime;
-use sdk::subxt::sp_core::crypto::Ss58Codec;
 use sdk::subxt::sp_runtime::AccountId32;
 use sdk::subxt::Client;
 
 use crate::pb::subsocial::request::Body as RequestBody;
 use crate::pb::subsocial::response::Body as ResponseBody;
 use crate::pb::subsocial::*;
+use crate::transformer::*;
 
 pub async fn handle(
     client: &Client<SubsocialRuntime>,
@@ -55,6 +55,12 @@ pub async fn handle(
         RequestBody::SocialAccountByAccountId(args) => {
             social_account_by_account_id(client, args.account_id).await
         }
+        RequestBody::SpaceFollowers(args) => {
+            space_followers(client, args.space_id).await
+        }
+        RequestBody::SpacesFollowedByAccount(args) => {
+            spaces_followed_by_account(client, args.account_id).await
+        }
     };
     let response = match result {
         Ok(body) => Response { body: Some(body) },
@@ -72,7 +78,7 @@ async fn space_by_id(
     space_id: u64,
 ) -> Result<ResponseBody, Error> {
     let store = spaces::SpaceByIdStore::new(space_id);
-    let maybe_space = client.fetch(&store, None).await.unwrap();
+    let maybe_space = client.fetch(&store, None).await?;
     match maybe_space {
         Some(space) => {
             let body = ResponseBody::SpaceById(SpaceById {
@@ -92,7 +98,7 @@ async fn space_by_handle(
     handle: String,
 ) -> Result<ResponseBody, Error> {
     let store = spaces::SpaceIdByHandleStore::new(handle);
-    let maybe_space_id = client.fetch(&store, None).await.unwrap();
+    let maybe_space_id = client.fetch(&store, None).await?;
     match maybe_space_id {
         Some(space_id) => {
             let body = space_by_id(client, space_id).await?;
@@ -114,17 +120,9 @@ async fn space_ids_by_owner(
     client: &Client<SubsocialRuntime>,
     account_id: String,
 ) -> Result<ResponseBody, Error> {
-    let account_id = match AccountId32::from_string(&account_id) {
-        Ok(val) => val,
-        Err(_) => {
-            return Err(Error {
-                kind: error::Kind::InvalidRequest.into(),
-                msg: String::from("Invalid AccountId"),
-            });
-        }
-    };
+    let account_id = AccountId32::convert(account_id)?;
     let store = spaces::SpaceIdsByOwnerStore::new(account_id);
-    let maybe_ids = client.fetch(&store, None).await.unwrap();
+    let maybe_ids = client.fetch(&store, None).await?;
     match maybe_ids {
         Some(space_ids) => {
             let body =
@@ -143,7 +141,7 @@ async fn posts_ids_by_space_id(
     space_id: u64,
 ) -> Result<ResponseBody, Error> {
     let store = posts::PostIdsBySpaceIdStore::new(space_id);
-    let maybe_ids = client.fetch(&store, None).await.unwrap();
+    let maybe_ids = client.fetch(&store, None).await?;
     match maybe_ids {
         Some(ids) => {
             let body = ResponseBody::PostIdsBySpaceId(PostIdsBySpaceId {
@@ -163,7 +161,7 @@ async fn post_by_id(
     post_id: u64,
 ) -> Result<ResponseBody, Error> {
     let store = posts::PostByIdStore::new(post_id);
-    let maybe_post = client.fetch(&store, None).await.unwrap();
+    let maybe_post = client.fetch(&store, None).await?;
     match maybe_post {
         Some(post) => {
             let body = ResponseBody::PostById(PostById {
@@ -183,7 +181,7 @@ async fn reactions_ids_by_post_id(
     post_id: u64,
 ) -> Result<ResponseBody, Error> {
     let store = reactions::ReactionIdsByPostIdStore::new(post_id);
-    let maybe_ids = client.fetch(&store, None).await.unwrap();
+    let maybe_ids = client.fetch(&store, None).await?;
     match maybe_ids {
         Some(ids) => {
             let body = ResponseBody::ReactionIdsByPostId(ReactionIdsByPostId {
@@ -203,7 +201,7 @@ async fn reaction_by_id(
     reaction_id: u64,
 ) -> Result<ResponseBody, Error> {
     let store = reactions::ReactionByIdStore::new(reaction_id);
-    let maybe_reaction = client.fetch(&store, None).await.unwrap();
+    let maybe_reaction = client.fetch(&store, None).await?;
     match maybe_reaction {
         Some(reaction) => {
             let body = ResponseBody::ReactionById(ReactionById {
@@ -222,17 +220,9 @@ async fn social_account_by_account_id(
     client: &Client<SubsocialRuntime>,
     account_id: String,
 ) -> Result<ResponseBody, Error> {
-    let account_id = match AccountId32::from_string(&account_id) {
-        Ok(val) => val,
-        Err(_) => {
-            return Err(Error {
-                kind: error::Kind::InvalidRequest.into(),
-                msg: String::from("Invalid AccountId"),
-            });
-        }
-    };
+    let account_id = AccountId32::convert(account_id)?;
     let store = profiles::SocialAccountByIdStore::new(account_id);
-    let maybe_account = client.fetch(&store, None).await.unwrap();
+    let maybe_account = client.fetch(&store, None).await?;
     match maybe_account {
         Some(account) => {
             let body = ResponseBody::SocialAccountByAccountId(
@@ -254,7 +244,7 @@ async fn reply_ids_by_post_id(
     post_id: u64,
 ) -> Result<ResponseBody, Error> {
     let store = posts::ReplyIdsByPostIdStore::new(post_id);
-    let maybe_ids = client.fetch(&store, None).await.unwrap();
+    let maybe_ids = client.fetch(&store, None).await?;
     match maybe_ids {
         Some(ids) => {
             let body = ResponseBody::ReplyIdsByPostId(ReplyIdsByPostId {
@@ -273,7 +263,7 @@ async fn next_space_id(
     client: &Client<SubsocialRuntime>,
 ) -> Result<ResponseBody, Error> {
     let store = spaces::NextSpaceIdStore::default();
-    let maybe_id = client.fetch(&store, None).await.unwrap();
+    let maybe_id = client.fetch(&store, None).await?;
     match maybe_id {
         Some(id) => {
             let body = ResponseBody::NextSpaceId(NextSpaceId { id });
@@ -287,12 +277,56 @@ async fn next_post_id(
     client: &Client<SubsocialRuntime>,
 ) -> Result<ResponseBody, Error> {
     let store = posts::NextPostIdStore::default();
-    let maybe_id = client.fetch(&store, None).await.unwrap();
+    let maybe_id = client.fetch(&store, None).await?;
     match maybe_id {
         Some(id) => {
             let body = ResponseBody::NextPostId(NextPostId { id });
             Ok(body)
         }
         None => unreachable!(),
+    }
+}
+
+async fn space_followers(
+    client: &Client<SubsocialRuntime>,
+    space_id: u64,
+) -> Result<ResponseBody, Error> {
+    let store = space_follows::SpaceFollowersStore::new(space_id);
+    let maybe_account_ids = client.fetch(&store, None).await?;
+    match maybe_account_ids {
+        Some(account_ids) => {
+            let body = ResponseBody::SpaceFollowers(SpaceFollowers {
+                account_ids: account_ids
+                    .into_iter()
+                    .map(|v| v.to_string())
+                    .collect(),
+            });
+            Ok(body)
+        }
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("Space Not Found"),
+        }),
+    }
+}
+
+async fn spaces_followed_by_account(
+    client: &Client<SubsocialRuntime>,
+    account_id: String,
+) -> Result<ResponseBody, Error> {
+    let account_id = AccountId32::convert(account_id)?;
+    let store = space_follows::SpacesFollowedByAccountStore::new(account_id);
+    let maybe_space_ids = client.fetch(&store, None).await?;
+    match maybe_space_ids {
+        Some(space_ids) => {
+            let body = ResponseBody::SpacesFollowedByAccount(
+                SpacesFollowedByAccount { space_ids },
+            );
+            Ok(body)
+        }
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("AccountId Not Found"),
+        }),
     }
 }

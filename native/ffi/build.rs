@@ -1,6 +1,10 @@
 use std::env;
 
 fn main() {
+    // Tell Cargo that if the given file changes, to rerun this build script.
+    println!("cargo:rerun-if-changed=def.proto");
+    println!("cargo:rerun-if-changed=src/lib.rs");
+
     prost_build::Config::new()
         .out_dir("src/pb")
         .compile_protos(&["def.proto"], &["."])

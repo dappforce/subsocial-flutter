@@ -84,4 +84,18 @@ void main() {
     expect(nextSpaceId > 0, true);
     expect(nextPostId > 0, true);
   });
+
+  test('Get Space Followers', () async {
+    final sdk = await Subsocial.instance;
+    final space = await sdk.spaceByHandle("subsocial");
+    final spaceFollowers = await sdk.spaceFollowers(space.id.toInt());
+    expect(spaceFollowers.length, space.followersCount);
+  });
+
+  test('Get Spaces Followed by AccountId', () async {
+    final sdk = await Subsocial.instance;
+    final space = await sdk.spaceByHandle("subsocial");
+    final followedSpaces = await sdk.spacesFollowedByAccount(space.owner);
+    expect(followedSpaces.contains(space.id.toInt()), true);
+  });
 }

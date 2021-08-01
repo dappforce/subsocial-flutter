@@ -54,10 +54,12 @@ impl Balances for SubsocialRuntime {
     type Balance = Balance;
 }
 
+// implementations for Subsoical Pallets
 impl pallet::spaces::Spaces for SubsocialRuntime {}
 impl pallet::posts::Posts for SubsocialRuntime {}
 impl pallet::reactions::Reactions for SubsocialRuntime {}
 impl pallet::profiles::Profiles for SubsocialRuntime {}
+impl pallet::space_follows::SpaceFollows for SubsocialRuntime {}
 
 #[cfg(test)]
 mod tests {
