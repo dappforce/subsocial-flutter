@@ -103,6 +103,15 @@ const Request$json = const {
       '9': 0,
       '10': 'nextPostId'
     },
+    const {
+      '1': 'space_ids_by_owner',
+      '3': 11,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.GetSpaceIdsByOwner',
+      '9': 0,
+      '10': 'spaceIdsByOwner'
+    },
   ],
   '8': const [
     const {'1': 'body'},
@@ -111,7 +120,7 @@ const Request$json = const {
 
 /// Descriptor for `Request`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List requestDescriptor = $convert.base64Decode(
-    'CgdSZXF1ZXN0EjkKC3NwYWNlX2J5X2lkGAEgASgLMhcuc3Vic29jaWFsLkdldFNwYWNlQnlJZEgAUglzcGFjZUJ5SWQSRQoPc3BhY2VfYnlfaGFuZGxlGAIgASgLMhsuc3Vic29jaWFsLkdldFNwYWNlQnlIYW5kbGVIAFINc3BhY2VCeUhhbmRsZRI2Cgpwb3N0X2J5X2lkGAMgASgLMhYuc3Vic29jaWFsLkdldFBvc3RCeUlkSABSCHBvc3RCeUlkElAKFHBvc3RfaWRzX2J5X3NwYWNlX2lkGAQgASgLMh4uc3Vic29jaWFsLkdldFBvc3RJZHNCeVNwYWNlSWRIAFIQcG9zdElkc0J5U3BhY2VJZBJCCg5yZWFjdGlvbl9ieV9pZBgFIAEoCzIaLnN1YnNvY2lhbC5HZXRSZWFjdGlvbkJ5SWRIAFIMcmVhY3Rpb25CeUlkElkKF3JlYWN0aW9uX2lkc19ieV9wb3N0X2lkGAYgASgLMiEuc3Vic29jaWFsLkdldFJlYWN0aW9uSWRzQnlQb3N0SWRIAFITcmVhY3Rpb25JZHNCeVBvc3RJZBJQChRyZXBseV9pZHNfYnlfcG9zdF9pZBgHIAEoCzIeLnN1YnNvY2lhbC5HZXRSZXBseUlkc0J5UG9zdElkSABSEHJlcGx5SWRzQnlQb3N0SWQSaAocc29jaWFsX2FjY291bnRfYnlfYWNjb3VudF9pZBgIIAEoCzImLnN1YnNvY2lhbC5HZXRTb2NpYWxBY2NvdW50QnlBY2NvdW50SWRIAFIYc29jaWFsQWNjb3VudEJ5QWNjb3VudElkEj8KDW5leHRfc3BhY2VfaWQYCSABKAsyGS5zdWJzb2NpYWwuR2V0TmV4dFNwYWNlSWRIAFILbmV4dFNwYWNlSWQSPAoMbmV4dF9wb3N0X2lkGAogASgLMhguc3Vic29jaWFsLkdldE5leHRQb3N0SWRIAFIKbmV4dFBvc3RJZEIGCgRib2R5');
+    'CgdSZXF1ZXN0EjkKC3NwYWNlX2J5X2lkGAEgASgLMhcuc3Vic29jaWFsLkdldFNwYWNlQnlJZEgAUglzcGFjZUJ5SWQSRQoPc3BhY2VfYnlfaGFuZGxlGAIgASgLMhsuc3Vic29jaWFsLkdldFNwYWNlQnlIYW5kbGVIAFINc3BhY2VCeUhhbmRsZRI2Cgpwb3N0X2J5X2lkGAMgASgLMhYuc3Vic29jaWFsLkdldFBvc3RCeUlkSABSCHBvc3RCeUlkElAKFHBvc3RfaWRzX2J5X3NwYWNlX2lkGAQgASgLMh4uc3Vic29jaWFsLkdldFBvc3RJZHNCeVNwYWNlSWRIAFIQcG9zdElkc0J5U3BhY2VJZBJCCg5yZWFjdGlvbl9ieV9pZBgFIAEoCzIaLnN1YnNvY2lhbC5HZXRSZWFjdGlvbkJ5SWRIAFIMcmVhY3Rpb25CeUlkElkKF3JlYWN0aW9uX2lkc19ieV9wb3N0X2lkGAYgASgLMiEuc3Vic29jaWFsLkdldFJlYWN0aW9uSWRzQnlQb3N0SWRIAFITcmVhY3Rpb25JZHNCeVBvc3RJZBJQChRyZXBseV9pZHNfYnlfcG9zdF9pZBgHIAEoCzIeLnN1YnNvY2lhbC5HZXRSZXBseUlkc0J5UG9zdElkSABSEHJlcGx5SWRzQnlQb3N0SWQSaAocc29jaWFsX2FjY291bnRfYnlfYWNjb3VudF9pZBgIIAEoCzImLnN1YnNvY2lhbC5HZXRTb2NpYWxBY2NvdW50QnlBY2NvdW50SWRIAFIYc29jaWFsQWNjb3VudEJ5QWNjb3VudElkEj8KDW5leHRfc3BhY2VfaWQYCSABKAsyGS5zdWJzb2NpYWwuR2V0TmV4dFNwYWNlSWRIAFILbmV4dFNwYWNlSWQSPAoMbmV4dF9wb3N0X2lkGAogASgLMhguc3Vic29jaWFsLkdldE5leHRQb3N0SWRIAFIKbmV4dFBvc3RJZBJMChJzcGFjZV9pZHNfYnlfb3duZXIYCyABKAsyHS5zdWJzb2NpYWwuR2V0U3BhY2VJZHNCeU93bmVySABSD3NwYWNlSWRzQnlPd25lckIGCgRib2R5');
 @$core.Deprecated('Use responseDescriptor instead')
 const Response$json = const {
   '1': 'Response',
@@ -215,6 +224,15 @@ const Response$json = const {
       '9': 0,
       '10': 'nextPostId'
     },
+    const {
+      '1': 'space_ids_by_owner',
+      '3': 12,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.SpaceIdsByOwner',
+      '9': 0,
+      '10': 'spaceIdsByOwner'
+    },
   ],
   '8': const [
     const {'1': 'body'},
@@ -223,7 +241,7 @@ const Response$json = const {
 
 /// Descriptor for `Response`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List responseDescriptor = $convert.base64Decode(
-    'CghSZXNwb25zZRIoCgVlcnJvchgBIAEoCzIQLnN1YnNvY2lhbC5FcnJvckgAUgVlcnJvchI2CgtzcGFjZV9ieV9pZBgCIAEoCzIULnN1YnNvY2lhbC5TcGFjZUJ5SWRIAFIJc3BhY2VCeUlkEkIKD3NwYWNlX2J5X2hhbmRsZRgDIAEoCzIYLnN1YnNvY2lhbC5TcGFjZUJ5SGFuZGxlSABSDXNwYWNlQnlIYW5kbGUSMwoKcG9zdF9ieV9pZBgEIAEoCzITLnN1YnNvY2lhbC5Qb3N0QnlJZEgAUghwb3N0QnlJZBJNChRwb3N0X2lkc19ieV9zcGFjZV9pZBgFIAEoCzIbLnN1YnNvY2lhbC5Qb3N0SWRzQnlTcGFjZUlkSABSEHBvc3RJZHNCeVNwYWNlSWQSPwoOcmVhY3Rpb25fYnlfaWQYBiABKAsyFy5zdWJzb2NpYWwuUmVhY3Rpb25CeUlkSABSDHJlYWN0aW9uQnlJZBJWChdyZWFjdGlvbl9pZHNfYnlfcG9zdF9pZBgHIAEoCzIeLnN1YnNvY2lhbC5SZWFjdGlvbklkc0J5UG9zdElkSABSE3JlYWN0aW9uSWRzQnlQb3N0SWQSTQoUcmVwbHlfaWRzX2J5X3Bvc3RfaWQYCCABKAsyGy5zdWJzb2NpYWwuUmVwbHlJZHNCeVBvc3RJZEgAUhByZXBseUlkc0J5UG9zdElkEmUKHHNvY2lhbF9hY2NvdW50X2J5X2FjY291bnRfaWQYCSABKAsyIy5zdWJzb2NpYWwuU29jaWFsQWNjb3VudEJ5QWNjb3VudElkSABSGHNvY2lhbEFjY291bnRCeUFjY291bnRJZBI8Cg1uZXh0X3NwYWNlX2lkGAogASgLMhYuc3Vic29jaWFsLk5leHRTcGFjZUlkSABSC25leHRTcGFjZUlkEjkKDG5leHRfcG9zdF9pZBgLIAEoCzIVLnN1YnNvY2lhbC5OZXh0UG9zdElkSABSCm5leHRQb3N0SWRCBgoEYm9keQ==');
+    'CghSZXNwb25zZRIoCgVlcnJvchgBIAEoCzIQLnN1YnNvY2lhbC5FcnJvckgAUgVlcnJvchI2CgtzcGFjZV9ieV9pZBgCIAEoCzIULnN1YnNvY2lhbC5TcGFjZUJ5SWRIAFIJc3BhY2VCeUlkEkIKD3NwYWNlX2J5X2hhbmRsZRgDIAEoCzIYLnN1YnNvY2lhbC5TcGFjZUJ5SGFuZGxlSABSDXNwYWNlQnlIYW5kbGUSMwoKcG9zdF9ieV9pZBgEIAEoCzITLnN1YnNvY2lhbC5Qb3N0QnlJZEgAUghwb3N0QnlJZBJNChRwb3N0X2lkc19ieV9zcGFjZV9pZBgFIAEoCzIbLnN1YnNvY2lhbC5Qb3N0SWRzQnlTcGFjZUlkSABSEHBvc3RJZHNCeVNwYWNlSWQSPwoOcmVhY3Rpb25fYnlfaWQYBiABKAsyFy5zdWJzb2NpYWwuUmVhY3Rpb25CeUlkSABSDHJlYWN0aW9uQnlJZBJWChdyZWFjdGlvbl9pZHNfYnlfcG9zdF9pZBgHIAEoCzIeLnN1YnNvY2lhbC5SZWFjdGlvbklkc0J5UG9zdElkSABSE3JlYWN0aW9uSWRzQnlQb3N0SWQSTQoUcmVwbHlfaWRzX2J5X3Bvc3RfaWQYCCABKAsyGy5zdWJzb2NpYWwuUmVwbHlJZHNCeVBvc3RJZEgAUhByZXBseUlkc0J5UG9zdElkEmUKHHNvY2lhbF9hY2NvdW50X2J5X2FjY291bnRfaWQYCSABKAsyIy5zdWJzb2NpYWwuU29jaWFsQWNjb3VudEJ5QWNjb3VudElkSABSGHNvY2lhbEFjY291bnRCeUFjY291bnRJZBI8Cg1uZXh0X3NwYWNlX2lkGAogASgLMhYuc3Vic29jaWFsLk5leHRTcGFjZUlkSABSC25leHRTcGFjZUlkEjkKDG5leHRfcG9zdF9pZBgLIAEoCzIVLnN1YnNvY2lhbC5OZXh0UG9zdElkSABSCm5leHRQb3N0SWQSSQoSc3BhY2VfaWRzX2J5X293bmVyGAwgASgLMhouc3Vic29jaWFsLlNwYWNlSWRzQnlPd25lckgAUg9zcGFjZUlkc0J5T3duZXJCBgoEYm9keQ==');
 @$core.Deprecated('Use errorDescriptor instead')
 const Error$json = const {
   '1': 'Error',
@@ -364,6 +382,18 @@ const GetNextPostId$json = const {
 /// Descriptor for `GetNextPostId`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getNextPostIdDescriptor =
     $convert.base64Decode('Cg1HZXROZXh0UG9zdElk');
+@$core.Deprecated('Use getSpaceIdsByOwnerDescriptor instead')
+const GetSpaceIdsByOwner$json = const {
+  '1': 'GetSpaceIdsByOwner',
+  '2': const [
+    const {'1': 'account_id', '3': 1, '4': 1, '5': 9, '10': 'accountId'},
+  ],
+};
+
+/// Descriptor for `GetSpaceIdsByOwner`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getSpaceIdsByOwnerDescriptor =
+    $convert.base64Decode(
+        'ChJHZXRTcGFjZUlkc0J5T3duZXISHQoKYWNjb3VudF9pZBgBIAEoCVIJYWNjb3VudElk');
 @$core.Deprecated('Use whoAndWhenDescriptor instead')
 const WhoAndWhen$json = const {
   '1': 'WhoAndWhen',
@@ -859,3 +889,21 @@ const NextPostId$json = const {
 /// Descriptor for `NextPostId`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List nextPostIdDescriptor =
     $convert.base64Decode('CgpOZXh0UG9zdElkEg4KAmlkGAEgASgEUgJpZA==');
+@$core.Deprecated('Use spaceIdsByOwnerDescriptor instead')
+const SpaceIdsByOwner$json = const {
+  '1': 'SpaceIdsByOwner',
+  '2': const [
+    const {
+      '1': 'space_ids',
+      '3': 1,
+      '4': 3,
+      '5': 4,
+      '8': const {'2': true},
+      '10': 'spaceIds',
+    },
+  ],
+};
+
+/// Descriptor for `SpaceIdsByOwner`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List spaceIdsByOwnerDescriptor = $convert.base64Decode(
+    'Cg9TcGFjZUlkc0J5T3duZXISHwoJc3BhY2VfaWRzGAEgAygEQgIQAVIIc3BhY2VJZHM=');

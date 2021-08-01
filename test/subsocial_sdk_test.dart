@@ -18,6 +18,15 @@ void main() {
     expect(space.id.toInt(), 1);
   });
 
+  test('Get SpaceIds By Owner', () async {
+    final sdk = await Subsocial.instance;
+    final space = await sdk.spaceById(1);
+    expect(space.hasOwner(), true);
+    expect(space.handle, "subsocial");
+    final spaceIds = await sdk.spaceIdsByOwner(space.owner);
+    expect(spaceIds.contains(space.id.toInt()), true);
+  });
+
   test('Get Space Posts', () async {
     final sdk = await Subsocial.instance;
     final space = await sdk.spaceByHandle("subsocial");

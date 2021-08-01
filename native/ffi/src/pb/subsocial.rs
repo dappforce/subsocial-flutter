@@ -1,6 +1,9 @@
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Request {
-    #[prost(oneof = "request::Body", tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10")]
+    #[prost(
+        oneof = "request::Body",
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11"
+    )]
     pub body: ::core::option::Option<request::Body>,
 }
 /// Nested message and enum types in `Request`.
@@ -27,13 +30,15 @@ pub mod request {
         NextSpaceId(super::GetNextSpaceId),
         #[prost(message, tag = "10")]
         NextPostId(super::GetNextPostId),
+        #[prost(message, tag = "11")]
+        SpaceIdsByOwner(super::GetSpaceIdsByOwner),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Response {
     #[prost(
         oneof = "response::Body",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12"
     )]
     pub body: ::core::option::Option<response::Body>,
 }
@@ -63,6 +68,8 @@ pub mod response {
         NextSpaceId(super::NextSpaceId),
         #[prost(message, tag = "11")]
         NextPostId(super::NextPostId),
+        #[prost(message, tag = "12")]
+        SpaceIdsByOwner(super::SpaceIdsByOwner),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -138,6 +145,11 @@ pub struct GetSocialAccountByAccountId {
 pub struct GetNextSpaceId {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetNextPostId {}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetSpaceIdsByOwner {
+    #[prost(string, tag = "1")]
+    pub account_id: ::prost::alloc::string::String,
+}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WhoAndWhen {
     #[prost(string, tag = "1")]
@@ -351,4 +363,9 @@ pub struct NextSpaceId {
 pub struct NextPostId {
     #[prost(uint64, tag = "1")]
     pub id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SpaceIdsByOwner {
+    #[prost(uint64, repeated, tag = "1")]
+    pub space_ids: ::prost::alloc::vec::Vec<u64>,
 }

@@ -67,6 +67,17 @@ class Subsocial {
     return val.space;
   }
 
+  Future<List<SpaceId>> spaceIdsByOwner(String accountId) async {
+    final req = Request(
+      spaceIdsByOwner: GetSpaceIdsByOwner(
+        accountId: accountId,
+      ),
+    );
+    final res = await _dispatch(req);
+    final val = res.ensureSpaceIdsByOwner();
+    return val.spaceIds.map((e) => e.toInt()).toList();
+  }
+
   Future<Post> postById(PostId id) async {
     final req = Request(
       postById: GetPostById(postId: makeLongInt(id)),

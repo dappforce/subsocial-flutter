@@ -14,6 +14,7 @@ message Request {
     GetSocialAccountByAccountId social_account_by_account_id = 8;
     GetNextSpaceId next_space_id = 9;
     GetNextPostId next_post_id = 10;
+    GetSpaceIdsByOwner space_ids_by_owner = 11;
   }
 }
 
@@ -30,6 +31,7 @@ message Response {
     SocialAccountByAccountId social_account_by_account_id = 9;
     NextSpaceId next_space_id = 10;
     NextPostId next_post_id = 11;
+    SpaceIdsByOwner space_ids_by_owner = 12;
   }
 }
 
@@ -80,6 +82,10 @@ message GetSocialAccountByAccountId {
 message GetNextSpaceId {}
 
 message GetNextPostId {}
+
+message GetSpaceIdsByOwner {
+  string account_id = 1;
+}
 
 message WhoAndWhen {
   string account = 1;
@@ -207,4 +213,8 @@ message NextSpaceId {
 
 message NextPostId {
   uint64 id = 1;
+}
+
+message SpaceIdsByOwner {
+  repeated uint64 space_ids = 1 [packed = true];
 }

@@ -25,6 +25,7 @@ enum Request_Body {
   socialAccountByAccountId,
   nextSpaceId,
   nextPostId,
+  spaceIdsByOwner,
   notSet
 }
 
@@ -40,6 +41,7 @@ class Request extends $pb.GeneratedMessage {
     8: Request_Body.socialAccountByAccountId,
     9: Request_Body.nextSpaceId,
     10: Request_Body.nextPostId,
+    11: Request_Body.spaceIdsByOwner,
     0: Request_Body.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Request',
@@ -48,7 +50,7 @@ class Request extends $pb.GeneratedMessage {
               ? ''
               : 'subsocial'),
       createEmptyInstance: create)
-    ..oo(0, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    ..oo(0, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
     ..aOM<GetSpaceById>(
         1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceById',
         subBuilder: GetSpaceById.create)
@@ -67,6 +69,7 @@ class Request extends $pb.GeneratedMessage {
     ..aOM<GetSocialAccountByAccountId>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'socialAccountByAccountId', subBuilder: GetSocialAccountByAccountId.create)
     ..aOM<GetNextSpaceId>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'nextSpaceId', subBuilder: GetNextSpaceId.create)
     ..aOM<GetNextPostId>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'nextPostId', subBuilder: GetNextPostId.create)
+    ..aOM<GetSpaceIdsByOwner>(11, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceIdsByOwner', subBuilder: GetSpaceIdsByOwner.create)
     ..hasRequiredFields = false;
 
   Request._() : super();
@@ -81,6 +84,7 @@ class Request extends $pb.GeneratedMessage {
     GetSocialAccountByAccountId? socialAccountByAccountId,
     GetNextSpaceId? nextSpaceId,
     GetNextPostId? nextPostId,
+    GetSpaceIdsByOwner? spaceIdsByOwner,
   }) {
     final _result = create();
     if (spaceById != null) {
@@ -112,6 +116,9 @@ class Request extends $pb.GeneratedMessage {
     }
     if (nextPostId != null) {
       _result.nextPostId = nextPostId;
+    }
+    if (spaceIdsByOwner != null) {
+      _result.spaceIdsByOwner = spaceIdsByOwner;
     }
     return _result;
   }
@@ -283,6 +290,20 @@ class Request extends $pb.GeneratedMessage {
   void clearNextPostId() => clearField(10);
   @$pb.TagNumber(10)
   GetNextPostId ensureNextPostId() => $_ensure(9);
+
+  @$pb.TagNumber(11)
+  GetSpaceIdsByOwner get spaceIdsByOwner => $_getN(10);
+  @$pb.TagNumber(11)
+  set spaceIdsByOwner(GetSpaceIdsByOwner v) {
+    setField(11, v);
+  }
+
+  @$pb.TagNumber(11)
+  $core.bool hasSpaceIdsByOwner() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearSpaceIdsByOwner() => clearField(11);
+  @$pb.TagNumber(11)
+  GetSpaceIdsByOwner ensureSpaceIdsByOwner() => $_ensure(10);
 }
 
 enum Response_Body {
@@ -297,6 +318,7 @@ enum Response_Body {
   socialAccountByAccountId,
   nextSpaceId,
   nextPostId,
+  spaceIdsByOwner,
   notSet
 }
 
@@ -313,6 +335,7 @@ class Response extends $pb.GeneratedMessage {
     9: Response_Body.socialAccountByAccountId,
     10: Response_Body.nextSpaceId,
     11: Response_Body.nextPostId,
+    12: Response_Body.spaceIdsByOwner,
     0: Response_Body.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Response',
@@ -321,7 +344,7 @@ class Response extends $pb.GeneratedMessage {
               ? ''
               : 'subsocial'),
       createEmptyInstance: create)
-    ..oo(0, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
+    ..oo(0, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
     ..aOM<Error>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'error',
         subBuilder: Error.create)
     ..aOM<SpaceById>(
@@ -340,6 +363,7 @@ class Response extends $pb.GeneratedMessage {
     ..aOM<SocialAccountByAccountId>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'socialAccountByAccountId', subBuilder: SocialAccountByAccountId.create)
     ..aOM<NextSpaceId>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'nextSpaceId', subBuilder: NextSpaceId.create)
     ..aOM<NextPostId>(11, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'nextPostId', subBuilder: NextPostId.create)
+    ..aOM<SpaceIdsByOwner>(12, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceIdsByOwner', subBuilder: SpaceIdsByOwner.create)
     ..hasRequiredFields = false;
 
   Response._() : super();
@@ -355,6 +379,7 @@ class Response extends $pb.GeneratedMessage {
     SocialAccountByAccountId? socialAccountByAccountId,
     NextSpaceId? nextSpaceId,
     NextPostId? nextPostId,
+    SpaceIdsByOwner? spaceIdsByOwner,
   }) {
     final _result = create();
     if (error != null) {
@@ -389,6 +414,9 @@ class Response extends $pb.GeneratedMessage {
     }
     if (nextPostId != null) {
       _result.nextPostId = nextPostId;
+    }
+    if (spaceIdsByOwner != null) {
+      _result.spaceIdsByOwner = spaceIdsByOwner;
     }
     return _result;
   }
@@ -574,6 +602,20 @@ class Response extends $pb.GeneratedMessage {
   void clearNextPostId() => clearField(11);
   @$pb.TagNumber(11)
   NextPostId ensureNextPostId() => $_ensure(10);
+
+  @$pb.TagNumber(12)
+  SpaceIdsByOwner get spaceIdsByOwner => $_getN(11);
+  @$pb.TagNumber(12)
+  set spaceIdsByOwner(SpaceIdsByOwner v) {
+    setField(12, v);
+  }
+
+  @$pb.TagNumber(12)
+  $core.bool hasSpaceIdsByOwner() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearSpaceIdsByOwner() => clearField(12);
+  @$pb.TagNumber(12)
+  SpaceIdsByOwner ensureSpaceIdsByOwner() => $_ensure(11);
 }
 
 class Error extends $pb.GeneratedMessage {
@@ -1299,6 +1341,73 @@ class GetNextPostId extends $pb.GeneratedMessage {
   static GetNextPostId getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<GetNextPostId>(create);
   static GetNextPostId? _defaultInstance;
+}
+
+class GetSpaceIdsByOwner extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'GetSpaceIdsByOwner',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'accountId')
+    ..hasRequiredFields = false;
+
+  GetSpaceIdsByOwner._() : super();
+  factory GetSpaceIdsByOwner({
+    $core.String? accountId,
+  }) {
+    final _result = create();
+    if (accountId != null) {
+      _result.accountId = accountId;
+    }
+    return _result;
+  }
+  factory GetSpaceIdsByOwner.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory GetSpaceIdsByOwner.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  GetSpaceIdsByOwner clone() => GetSpaceIdsByOwner()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  GetSpaceIdsByOwner copyWith(void Function(GetSpaceIdsByOwner) updates) =>
+      super.copyWith((message) => updates(message as GetSpaceIdsByOwner))
+          as GetSpaceIdsByOwner; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetSpaceIdsByOwner create() => GetSpaceIdsByOwner._();
+  GetSpaceIdsByOwner createEmptyInstance() => create();
+  static $pb.PbList<GetSpaceIdsByOwner> createRepeated() =>
+      $pb.PbList<GetSpaceIdsByOwner>();
+  @$core.pragma('dart2js:noInline')
+  static GetSpaceIdsByOwner getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetSpaceIdsByOwner>(create);
+  static GetSpaceIdsByOwner? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get accountId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set accountId($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasAccountId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccountId() => clearField(1);
 }
 
 class WhoAndWhen extends $pb.GeneratedMessage {
@@ -3375,4 +3484,63 @@ class NextPostId extends $pb.GeneratedMessage {
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
+}
+
+class SpaceIdsByOwner extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'SpaceIdsByOwner',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..p<$fixnum.Int64>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'spaceIds',
+        $pb.PbFieldType.KU6)
+    ..hasRequiredFields = false;
+
+  SpaceIdsByOwner._() : super();
+  factory SpaceIdsByOwner({
+    $core.Iterable<$fixnum.Int64>? spaceIds,
+  }) {
+    final _result = create();
+    if (spaceIds != null) {
+      _result.spaceIds.addAll(spaceIds);
+    }
+    return _result;
+  }
+  factory SpaceIdsByOwner.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory SpaceIdsByOwner.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  SpaceIdsByOwner clone() => SpaceIdsByOwner()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  SpaceIdsByOwner copyWith(void Function(SpaceIdsByOwner) updates) =>
+      super.copyWith((message) => updates(message as SpaceIdsByOwner))
+          as SpaceIdsByOwner; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static SpaceIdsByOwner create() => SpaceIdsByOwner._();
+  SpaceIdsByOwner createEmptyInstance() => create();
+  static $pb.PbList<SpaceIdsByOwner> createRepeated() =>
+      $pb.PbList<SpaceIdsByOwner>();
+  @$core.pragma('dart2js:noInline')
+  static SpaceIdsByOwner getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SpaceIdsByOwner>(create);
+  static SpaceIdsByOwner? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$fixnum.Int64> get spaceIds => $_getList(0);
 }

@@ -77,3 +77,19 @@ impl<T: Spaces> SpaceIdByHandleStore<T> {
         }
     }
 }
+
+#[derive(Clone, Debug, Eq, Encode, PartialEq, subxt::Store)]
+pub struct SpaceIdsByOwnerStore<T: Spaces> {
+    #[store(returns = Vec<SpaceId>)]
+    account_id: T::AccountId,
+    __marker: PhantomData<T>,
+}
+
+impl<T: Spaces> SpaceIdsByOwnerStore<T> {
+    pub fn new(account_id: T::AccountId) -> Self {
+        Self {
+            account_id,
+            __marker: Default::default(),
+        }
+    }
+}
