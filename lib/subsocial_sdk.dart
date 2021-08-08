@@ -1,20 +1,20 @@
 import 'dart:async';
 import 'dart:ffi';
-
 import 'dart:io';
 
 import 'package:ffi/ffi.dart';
 import 'package:protobuf/protobuf.dart';
 import 'package:subsocial_sdk/allo_isolate.dart';
 import 'package:subsocial_sdk/ffi.dart';
-import 'package:subsocial_sdk/utils.dart';
-import 'package:subsocial_sdk/extensions.dart';
+import 'package:subsocial_sdk/ffi_ext.dart';
 import 'package:subsocial_sdk/generated/def.pb.dart';
+import 'package:subsocial_sdk/utils.dart';
 
 export 'generated/def.pb.dart';
 export 'generated/def.pbenum.dart';
 export 'ipfs.dart';
 export 'json_models.dart';
+export 'multi_query.dart';
 
 typedef PostId = int;
 typedef SpaceId = int;
