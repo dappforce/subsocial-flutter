@@ -61,6 +61,12 @@ pub async fn handle(
         RequestBody::SpacesFollowedByAccount(args) => {
             spaces_followed_by_account(client, args.account_id).await
         }
+        RequestBody::AccountFollowers(args) => {
+            account_followers(client, args.account_id).await
+        }
+        RequestBody::AccountsFollowedByAccount(args) => {
+            accounts_followed_by_account(client, args.account_id).await
+        }
     };
     let response = match result {
         Ok(body) => Response { body: Some(body) },
@@ -321,6 +327,57 @@ async fn spaces_followed_by_account(
         Some(space_ids) => {
             let body = ResponseBody::SpacesFollowedByAccount(
                 SpacesFollowedByAccount { space_ids },
+            );
+            Ok(body)
+        }
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("AccountId Not Found"),
+        }),
+    }
+}
+
+async fn account_followers(
+    client: &Client<SubsocialRuntime>,
+    account_id: String,
+) -> Result<ResponseBody, Error> {
+    let account_id = AccountId32::convert(account_id)?;
+    let store = profile_follows::AccountFollowersStore::new(account_id);
+    let maybe_account_ids = client.fetch(&store, None).await?;
+    match maybe_account_ids {
+        Some(account_ids) => {
+            let body = ResponseBody::AccountFollowers(AccountFollowers {
+                account_ids: account_ids
+                    .into_iter()
+                    .map(|v| v.to_string())
+                    .collect(),
+            });
+            Ok(body)
+        }
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("AccountId Not Found"),
+        }),
+    }
+}
+
+async fn accounts_followed_by_account(
+    client: &Client<SubsocialRuntime>,
+    account_id: String,
+) -> Result<ResponseBody, Error> {
+    let account_id = AccountId32::convert(account_id)?;
+    let store =
+        profile_follows::AccountsFollowedByAccountStore::new(account_id);
+    let maybe_account_ids = client.fetch(&store, None).await?;
+    match maybe_account_ids {
+        Some(account_ids) => {
+            let body = ResponseBody::AccountsFollowedByAccount(
+                AccountsFollowedByAccount {
+                    account_ids: account_ids
+                        .into_iter()
+                        .map(|v| v.to_string())
+                        .collect(),
+                },
             );
             Ok(body)
         }

@@ -28,6 +28,8 @@ enum Request_Body {
   spaceIdsByOwner,
   spaceFollowers,
   spacesFollowedByAccount,
+  accountFollowers,
+  accountsFollowedByAccount,
   notSet
 }
 
@@ -46,6 +48,8 @@ class Request extends $pb.GeneratedMessage {
     11: Request_Body.spaceIdsByOwner,
     12: Request_Body.spaceFollowers,
     13: Request_Body.spacesFollowedByAccount,
+    14: Request_Body.accountFollowers,
+    15: Request_Body.accountsFollowedByAccount,
     0: Request_Body.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Request',
@@ -54,7 +58,7 @@ class Request extends $pb.GeneratedMessage {
               ? ''
               : 'subsocial'),
       createEmptyInstance: create)
-    ..oo(0, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
+    ..oo(0, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
     ..aOM<GetSpaceById>(
         1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceById',
         subBuilder: GetSpaceById.create)
@@ -76,6 +80,8 @@ class Request extends $pb.GeneratedMessage {
     ..aOM<GetSpaceIdsByOwner>(11, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceIdsByOwner', subBuilder: GetSpaceIdsByOwner.create)
     ..aOM<GetSpaceFollowers>(12, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceFollowers', subBuilder: GetSpaceFollowers.create)
     ..aOM<GetSpacesFollowedByAccount>(13, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spacesFollowedByAccount', subBuilder: GetSpacesFollowedByAccount.create)
+    ..aOM<GetAccountFollowers>(14, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountFollowers', subBuilder: GetAccountFollowers.create)
+    ..aOM<GetAccountsFollowedByAccount>(15, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountsFollowedByAccount', subBuilder: GetAccountsFollowedByAccount.create)
     ..hasRequiredFields = false;
 
   Request._() : super();
@@ -93,6 +99,8 @@ class Request extends $pb.GeneratedMessage {
     GetSpaceIdsByOwner? spaceIdsByOwner,
     GetSpaceFollowers? spaceFollowers,
     GetSpacesFollowedByAccount? spacesFollowedByAccount,
+    GetAccountFollowers? accountFollowers,
+    GetAccountsFollowedByAccount? accountsFollowedByAccount,
   }) {
     final _result = create();
     if (spaceById != null) {
@@ -133,6 +141,12 @@ class Request extends $pb.GeneratedMessage {
     }
     if (spacesFollowedByAccount != null) {
       _result.spacesFollowedByAccount = spacesFollowedByAccount;
+    }
+    if (accountFollowers != null) {
+      _result.accountFollowers = accountFollowers;
+    }
+    if (accountsFollowedByAccount != null) {
+      _result.accountsFollowedByAccount = accountsFollowedByAccount;
     }
     return _result;
   }
@@ -346,6 +360,35 @@ class Request extends $pb.GeneratedMessage {
   void clearSpacesFollowedByAccount() => clearField(13);
   @$pb.TagNumber(13)
   GetSpacesFollowedByAccount ensureSpacesFollowedByAccount() => $_ensure(12);
+
+  @$pb.TagNumber(14)
+  GetAccountFollowers get accountFollowers => $_getN(13);
+  @$pb.TagNumber(14)
+  set accountFollowers(GetAccountFollowers v) {
+    setField(14, v);
+  }
+
+  @$pb.TagNumber(14)
+  $core.bool hasAccountFollowers() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearAccountFollowers() => clearField(14);
+  @$pb.TagNumber(14)
+  GetAccountFollowers ensureAccountFollowers() => $_ensure(13);
+
+  @$pb.TagNumber(15)
+  GetAccountsFollowedByAccount get accountsFollowedByAccount => $_getN(14);
+  @$pb.TagNumber(15)
+  set accountsFollowedByAccount(GetAccountsFollowedByAccount v) {
+    setField(15, v);
+  }
+
+  @$pb.TagNumber(15)
+  $core.bool hasAccountsFollowedByAccount() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearAccountsFollowedByAccount() => clearField(15);
+  @$pb.TagNumber(15)
+  GetAccountsFollowedByAccount ensureAccountsFollowedByAccount() =>
+      $_ensure(14);
 }
 
 enum Response_Body {
@@ -363,6 +406,8 @@ enum Response_Body {
   spaceIdsByOwner,
   spaceFollowers,
   spacesFollowedByAccount,
+  accountFollowers,
+  accountsFollowedByAccount,
   notSet
 }
 
@@ -382,6 +427,8 @@ class Response extends $pb.GeneratedMessage {
     12: Response_Body.spaceIdsByOwner,
     13: Response_Body.spaceFollowers,
     14: Response_Body.spacesFollowedByAccount,
+    15: Response_Body.accountFollowers,
+    16: Response_Body.accountsFollowedByAccount,
     0: Response_Body.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Response',
@@ -390,7 +437,7 @@ class Response extends $pb.GeneratedMessage {
               ? ''
               : 'subsocial'),
       createEmptyInstance: create)
-    ..oo(0, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14])
+    ..oo(0, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])
     ..aOM<Error>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'error',
         subBuilder: Error.create)
     ..aOM<SpaceById>(
@@ -412,6 +459,8 @@ class Response extends $pb.GeneratedMessage {
     ..aOM<SpaceIdsByOwner>(12, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceIdsByOwner', subBuilder: SpaceIdsByOwner.create)
     ..aOM<SpaceFollowers>(13, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceFollowers', subBuilder: SpaceFollowers.create)
     ..aOM<SpacesFollowedByAccount>(14, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spacesFollowedByAccount', subBuilder: SpacesFollowedByAccount.create)
+    ..aOM<AccountFollowers>(15, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountFollowers', subBuilder: AccountFollowers.create)
+    ..aOM<AccountsFollowedByAccount>(16, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountsFollowedByAccount', subBuilder: AccountsFollowedByAccount.create)
     ..hasRequiredFields = false;
 
   Response._() : super();
@@ -430,6 +479,8 @@ class Response extends $pb.GeneratedMessage {
     SpaceIdsByOwner? spaceIdsByOwner,
     SpaceFollowers? spaceFollowers,
     SpacesFollowedByAccount? spacesFollowedByAccount,
+    AccountFollowers? accountFollowers,
+    AccountsFollowedByAccount? accountsFollowedByAccount,
   }) {
     final _result = create();
     if (error != null) {
@@ -473,6 +524,12 @@ class Response extends $pb.GeneratedMessage {
     }
     if (spacesFollowedByAccount != null) {
       _result.spacesFollowedByAccount = spacesFollowedByAccount;
+    }
+    if (accountFollowers != null) {
+      _result.accountFollowers = accountFollowers;
+    }
+    if (accountsFollowedByAccount != null) {
+      _result.accountsFollowedByAccount = accountsFollowedByAccount;
     }
     return _result;
   }
@@ -700,6 +757,34 @@ class Response extends $pb.GeneratedMessage {
   void clearSpacesFollowedByAccount() => clearField(14);
   @$pb.TagNumber(14)
   SpacesFollowedByAccount ensureSpacesFollowedByAccount() => $_ensure(13);
+
+  @$pb.TagNumber(15)
+  AccountFollowers get accountFollowers => $_getN(14);
+  @$pb.TagNumber(15)
+  set accountFollowers(AccountFollowers v) {
+    setField(15, v);
+  }
+
+  @$pb.TagNumber(15)
+  $core.bool hasAccountFollowers() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearAccountFollowers() => clearField(15);
+  @$pb.TagNumber(15)
+  AccountFollowers ensureAccountFollowers() => $_ensure(14);
+
+  @$pb.TagNumber(16)
+  AccountsFollowedByAccount get accountsFollowedByAccount => $_getN(15);
+  @$pb.TagNumber(16)
+  set accountsFollowedByAccount(AccountsFollowedByAccount v) {
+    setField(16, v);
+  }
+
+  @$pb.TagNumber(16)
+  $core.bool hasAccountsFollowedByAccount() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearAccountsFollowedByAccount() => clearField(16);
+  @$pb.TagNumber(16)
+  AccountsFollowedByAccount ensureAccountsFollowedByAccount() => $_ensure(15);
 }
 
 class Error extends $pb.GeneratedMessage {
@@ -1619,6 +1704,144 @@ class GetSpacesFollowedByAccount extends $pb.GeneratedMessage {
   static GetSpacesFollowedByAccount getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<GetSpacesFollowedByAccount>(create);
   static GetSpacesFollowedByAccount? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get accountId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set accountId($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasAccountId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccountId() => clearField(1);
+}
+
+class GetAccountFollowers extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'GetAccountFollowers',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'accountId')
+    ..hasRequiredFields = false;
+
+  GetAccountFollowers._() : super();
+  factory GetAccountFollowers({
+    $core.String? accountId,
+  }) {
+    final _result = create();
+    if (accountId != null) {
+      _result.accountId = accountId;
+    }
+    return _result;
+  }
+  factory GetAccountFollowers.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory GetAccountFollowers.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  GetAccountFollowers clone() => GetAccountFollowers()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  GetAccountFollowers copyWith(void Function(GetAccountFollowers) updates) =>
+      super.copyWith((message) => updates(message as GetAccountFollowers))
+          as GetAccountFollowers; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetAccountFollowers create() => GetAccountFollowers._();
+  GetAccountFollowers createEmptyInstance() => create();
+  static $pb.PbList<GetAccountFollowers> createRepeated() =>
+      $pb.PbList<GetAccountFollowers>();
+  @$core.pragma('dart2js:noInline')
+  static GetAccountFollowers getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetAccountFollowers>(create);
+  static GetAccountFollowers? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get accountId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set accountId($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasAccountId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccountId() => clearField(1);
+}
+
+class GetAccountsFollowedByAccount extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'GetAccountsFollowedByAccount',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'accountId')
+    ..hasRequiredFields = false;
+
+  GetAccountsFollowedByAccount._() : super();
+  factory GetAccountsFollowedByAccount({
+    $core.String? accountId,
+  }) {
+    final _result = create();
+    if (accountId != null) {
+      _result.accountId = accountId;
+    }
+    return _result;
+  }
+  factory GetAccountsFollowedByAccount.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory GetAccountsFollowedByAccount.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  GetAccountsFollowedByAccount clone() =>
+      GetAccountsFollowedByAccount()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  GetAccountsFollowedByAccount copyWith(
+          void Function(GetAccountsFollowedByAccount) updates) =>
+      super.copyWith(
+              (message) => updates(message as GetAccountsFollowedByAccount))
+          as GetAccountsFollowedByAccount; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetAccountsFollowedByAccount create() =>
+      GetAccountsFollowedByAccount._();
+  GetAccountsFollowedByAccount createEmptyInstance() => create();
+  static $pb.PbList<GetAccountsFollowedByAccount> createRepeated() =>
+      $pb.PbList<GetAccountsFollowedByAccount>();
+  @$core.pragma('dart2js:noInline')
+  static GetAccountsFollowedByAccount getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetAccountsFollowedByAccount>(create);
+  static GetAccountsFollowedByAccount? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get accountId => $_getSZ(0);
@@ -3885,4 +4108,122 @@ class SpacesFollowedByAccount extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $core.List<$fixnum.Int64> get spaceIds => $_getList(0);
+}
+
+class AccountFollowers extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'AccountFollowers',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..pPS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'accountIds')
+    ..hasRequiredFields = false;
+
+  AccountFollowers._() : super();
+  factory AccountFollowers({
+    $core.Iterable<$core.String>? accountIds,
+  }) {
+    final _result = create();
+    if (accountIds != null) {
+      _result.accountIds.addAll(accountIds);
+    }
+    return _result;
+  }
+  factory AccountFollowers.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory AccountFollowers.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  AccountFollowers clone() => AccountFollowers()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  AccountFollowers copyWith(void Function(AccountFollowers) updates) =>
+      super.copyWith((message) => updates(message as AccountFollowers))
+          as AccountFollowers; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static AccountFollowers create() => AccountFollowers._();
+  AccountFollowers createEmptyInstance() => create();
+  static $pb.PbList<AccountFollowers> createRepeated() =>
+      $pb.PbList<AccountFollowers>();
+  @$core.pragma('dart2js:noInline')
+  static AccountFollowers getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<AccountFollowers>(create);
+  static AccountFollowers? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$core.String> get accountIds => $_getList(0);
+}
+
+class AccountsFollowedByAccount extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'AccountsFollowedByAccount',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..pPS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'accountIds')
+    ..hasRequiredFields = false;
+
+  AccountsFollowedByAccount._() : super();
+  factory AccountsFollowedByAccount({
+    $core.Iterable<$core.String>? accountIds,
+  }) {
+    final _result = create();
+    if (accountIds != null) {
+      _result.accountIds.addAll(accountIds);
+    }
+    return _result;
+  }
+  factory AccountsFollowedByAccount.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory AccountsFollowedByAccount.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  AccountsFollowedByAccount clone() =>
+      AccountsFollowedByAccount()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  AccountsFollowedByAccount copyWith(
+          void Function(AccountsFollowedByAccount) updates) =>
+      super.copyWith((message) => updates(message as AccountsFollowedByAccount))
+          as AccountsFollowedByAccount; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static AccountsFollowedByAccount create() => AccountsFollowedByAccount._();
+  AccountsFollowedByAccount createEmptyInstance() => create();
+  static $pb.PbList<AccountsFollowedByAccount> createRepeated() =>
+      $pb.PbList<AccountsFollowedByAccount>();
+  @$core.pragma('dart2js:noInline')
+  static AccountsFollowedByAccount getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<AccountsFollowedByAccount>(create);
+  static AccountsFollowedByAccount? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$core.String> get accountIds => $_getList(0);
 }

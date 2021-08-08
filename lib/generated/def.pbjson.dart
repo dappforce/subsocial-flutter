@@ -130,6 +130,24 @@ const Request$json = const {
       '9': 0,
       '10': 'spacesFollowedByAccount'
     },
+    const {
+      '1': 'account_followers',
+      '3': 14,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.GetAccountFollowers',
+      '9': 0,
+      '10': 'accountFollowers'
+    },
+    const {
+      '1': 'accounts_followed_by_account',
+      '3': 15,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.GetAccountsFollowedByAccount',
+      '9': 0,
+      '10': 'accountsFollowedByAccount'
+    },
   ],
   '8': const [
     const {'1': 'body'},
@@ -138,7 +156,7 @@ const Request$json = const {
 
 /// Descriptor for `Request`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List requestDescriptor = $convert.base64Decode(
-    'CgdSZXF1ZXN0EjkKC3NwYWNlX2J5X2lkGAEgASgLMhcuc3Vic29jaWFsLkdldFNwYWNlQnlJZEgAUglzcGFjZUJ5SWQSRQoPc3BhY2VfYnlfaGFuZGxlGAIgASgLMhsuc3Vic29jaWFsLkdldFNwYWNlQnlIYW5kbGVIAFINc3BhY2VCeUhhbmRsZRI2Cgpwb3N0X2J5X2lkGAMgASgLMhYuc3Vic29jaWFsLkdldFBvc3RCeUlkSABSCHBvc3RCeUlkElAKFHBvc3RfaWRzX2J5X3NwYWNlX2lkGAQgASgLMh4uc3Vic29jaWFsLkdldFBvc3RJZHNCeVNwYWNlSWRIAFIQcG9zdElkc0J5U3BhY2VJZBJCCg5yZWFjdGlvbl9ieV9pZBgFIAEoCzIaLnN1YnNvY2lhbC5HZXRSZWFjdGlvbkJ5SWRIAFIMcmVhY3Rpb25CeUlkElkKF3JlYWN0aW9uX2lkc19ieV9wb3N0X2lkGAYgASgLMiEuc3Vic29jaWFsLkdldFJlYWN0aW9uSWRzQnlQb3N0SWRIAFITcmVhY3Rpb25JZHNCeVBvc3RJZBJQChRyZXBseV9pZHNfYnlfcG9zdF9pZBgHIAEoCzIeLnN1YnNvY2lhbC5HZXRSZXBseUlkc0J5UG9zdElkSABSEHJlcGx5SWRzQnlQb3N0SWQSaAocc29jaWFsX2FjY291bnRfYnlfYWNjb3VudF9pZBgIIAEoCzImLnN1YnNvY2lhbC5HZXRTb2NpYWxBY2NvdW50QnlBY2NvdW50SWRIAFIYc29jaWFsQWNjb3VudEJ5QWNjb3VudElkEj8KDW5leHRfc3BhY2VfaWQYCSABKAsyGS5zdWJzb2NpYWwuR2V0TmV4dFNwYWNlSWRIAFILbmV4dFNwYWNlSWQSPAoMbmV4dF9wb3N0X2lkGAogASgLMhguc3Vic29jaWFsLkdldE5leHRQb3N0SWRIAFIKbmV4dFBvc3RJZBJMChJzcGFjZV9pZHNfYnlfb3duZXIYCyABKAsyHS5zdWJzb2NpYWwuR2V0U3BhY2VJZHNCeU93bmVySABSD3NwYWNlSWRzQnlPd25lchJHCg9zcGFjZV9mb2xsb3dlcnMYDCABKAsyHC5zdWJzb2NpYWwuR2V0U3BhY2VGb2xsb3dlcnNIAFIOc3BhY2VGb2xsb3dlcnMSZAoac3BhY2VzX2ZvbGxvd2VkX2J5X2FjY291bnQYDSABKAsyJS5zdWJzb2NpYWwuR2V0U3BhY2VzRm9sbG93ZWRCeUFjY291bnRIAFIXc3BhY2VzRm9sbG93ZWRCeUFjY291bnRCBgoEYm9keQ==');
+    'CgdSZXF1ZXN0EjkKC3NwYWNlX2J5X2lkGAEgASgLMhcuc3Vic29jaWFsLkdldFNwYWNlQnlJZEgAUglzcGFjZUJ5SWQSRQoPc3BhY2VfYnlfaGFuZGxlGAIgASgLMhsuc3Vic29jaWFsLkdldFNwYWNlQnlIYW5kbGVIAFINc3BhY2VCeUhhbmRsZRI2Cgpwb3N0X2J5X2lkGAMgASgLMhYuc3Vic29jaWFsLkdldFBvc3RCeUlkSABSCHBvc3RCeUlkElAKFHBvc3RfaWRzX2J5X3NwYWNlX2lkGAQgASgLMh4uc3Vic29jaWFsLkdldFBvc3RJZHNCeVNwYWNlSWRIAFIQcG9zdElkc0J5U3BhY2VJZBJCCg5yZWFjdGlvbl9ieV9pZBgFIAEoCzIaLnN1YnNvY2lhbC5HZXRSZWFjdGlvbkJ5SWRIAFIMcmVhY3Rpb25CeUlkElkKF3JlYWN0aW9uX2lkc19ieV9wb3N0X2lkGAYgASgLMiEuc3Vic29jaWFsLkdldFJlYWN0aW9uSWRzQnlQb3N0SWRIAFITcmVhY3Rpb25JZHNCeVBvc3RJZBJQChRyZXBseV9pZHNfYnlfcG9zdF9pZBgHIAEoCzIeLnN1YnNvY2lhbC5HZXRSZXBseUlkc0J5UG9zdElkSABSEHJlcGx5SWRzQnlQb3N0SWQSaAocc29jaWFsX2FjY291bnRfYnlfYWNjb3VudF9pZBgIIAEoCzImLnN1YnNvY2lhbC5HZXRTb2NpYWxBY2NvdW50QnlBY2NvdW50SWRIAFIYc29jaWFsQWNjb3VudEJ5QWNjb3VudElkEj8KDW5leHRfc3BhY2VfaWQYCSABKAsyGS5zdWJzb2NpYWwuR2V0TmV4dFNwYWNlSWRIAFILbmV4dFNwYWNlSWQSPAoMbmV4dF9wb3N0X2lkGAogASgLMhguc3Vic29jaWFsLkdldE5leHRQb3N0SWRIAFIKbmV4dFBvc3RJZBJMChJzcGFjZV9pZHNfYnlfb3duZXIYCyABKAsyHS5zdWJzb2NpYWwuR2V0U3BhY2VJZHNCeU93bmVySABSD3NwYWNlSWRzQnlPd25lchJHCg9zcGFjZV9mb2xsb3dlcnMYDCABKAsyHC5zdWJzb2NpYWwuR2V0U3BhY2VGb2xsb3dlcnNIAFIOc3BhY2VGb2xsb3dlcnMSZAoac3BhY2VzX2ZvbGxvd2VkX2J5X2FjY291bnQYDSABKAsyJS5zdWJzb2NpYWwuR2V0U3BhY2VzRm9sbG93ZWRCeUFjY291bnRIAFIXc3BhY2VzRm9sbG93ZWRCeUFjY291bnQSTQoRYWNjb3VudF9mb2xsb3dlcnMYDiABKAsyHi5zdWJzb2NpYWwuR2V0QWNjb3VudEZvbGxvd2Vyc0gAUhBhY2NvdW50Rm9sbG93ZXJzEmoKHGFjY291bnRzX2ZvbGxvd2VkX2J5X2FjY291bnQYDyABKAsyJy5zdWJzb2NpYWwuR2V0QWNjb3VudHNGb2xsb3dlZEJ5QWNjb3VudEgAUhlhY2NvdW50c0ZvbGxvd2VkQnlBY2NvdW50QgYKBGJvZHk=');
 @$core.Deprecated('Use responseDescriptor instead')
 const Response$json = const {
   '1': 'Response',
@@ -269,6 +287,24 @@ const Response$json = const {
       '9': 0,
       '10': 'spacesFollowedByAccount'
     },
+    const {
+      '1': 'account_followers',
+      '3': 15,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.AccountFollowers',
+      '9': 0,
+      '10': 'accountFollowers'
+    },
+    const {
+      '1': 'accounts_followed_by_account',
+      '3': 16,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.AccountsFollowedByAccount',
+      '9': 0,
+      '10': 'accountsFollowedByAccount'
+    },
   ],
   '8': const [
     const {'1': 'body'},
@@ -277,7 +313,7 @@ const Response$json = const {
 
 /// Descriptor for `Response`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List responseDescriptor = $convert.base64Decode(
-    'CghSZXNwb25zZRIoCgVlcnJvchgBIAEoCzIQLnN1YnNvY2lhbC5FcnJvckgAUgVlcnJvchI2CgtzcGFjZV9ieV9pZBgCIAEoCzIULnN1YnNvY2lhbC5TcGFjZUJ5SWRIAFIJc3BhY2VCeUlkEkIKD3NwYWNlX2J5X2hhbmRsZRgDIAEoCzIYLnN1YnNvY2lhbC5TcGFjZUJ5SGFuZGxlSABSDXNwYWNlQnlIYW5kbGUSMwoKcG9zdF9ieV9pZBgEIAEoCzITLnN1YnNvY2lhbC5Qb3N0QnlJZEgAUghwb3N0QnlJZBJNChRwb3N0X2lkc19ieV9zcGFjZV9pZBgFIAEoCzIbLnN1YnNvY2lhbC5Qb3N0SWRzQnlTcGFjZUlkSABSEHBvc3RJZHNCeVNwYWNlSWQSPwoOcmVhY3Rpb25fYnlfaWQYBiABKAsyFy5zdWJzb2NpYWwuUmVhY3Rpb25CeUlkSABSDHJlYWN0aW9uQnlJZBJWChdyZWFjdGlvbl9pZHNfYnlfcG9zdF9pZBgHIAEoCzIeLnN1YnNvY2lhbC5SZWFjdGlvbklkc0J5UG9zdElkSABSE3JlYWN0aW9uSWRzQnlQb3N0SWQSTQoUcmVwbHlfaWRzX2J5X3Bvc3RfaWQYCCABKAsyGy5zdWJzb2NpYWwuUmVwbHlJZHNCeVBvc3RJZEgAUhByZXBseUlkc0J5UG9zdElkEmUKHHNvY2lhbF9hY2NvdW50X2J5X2FjY291bnRfaWQYCSABKAsyIy5zdWJzb2NpYWwuU29jaWFsQWNjb3VudEJ5QWNjb3VudElkSABSGHNvY2lhbEFjY291bnRCeUFjY291bnRJZBI8Cg1uZXh0X3NwYWNlX2lkGAogASgLMhYuc3Vic29jaWFsLk5leHRTcGFjZUlkSABSC25leHRTcGFjZUlkEjkKDG5leHRfcG9zdF9pZBgLIAEoCzIVLnN1YnNvY2lhbC5OZXh0UG9zdElkSABSCm5leHRQb3N0SWQSSQoSc3BhY2VfaWRzX2J5X293bmVyGAwgASgLMhouc3Vic29jaWFsLlNwYWNlSWRzQnlPd25lckgAUg9zcGFjZUlkc0J5T3duZXISRAoPc3BhY2VfZm9sbG93ZXJzGA0gASgLMhkuc3Vic29jaWFsLlNwYWNlRm9sbG93ZXJzSABSDnNwYWNlRm9sbG93ZXJzEmEKGnNwYWNlc19mb2xsb3dlZF9ieV9hY2NvdW50GA4gASgLMiIuc3Vic29jaWFsLlNwYWNlc0ZvbGxvd2VkQnlBY2NvdW50SABSF3NwYWNlc0ZvbGxvd2VkQnlBY2NvdW50QgYKBGJvZHk=');
+    'CghSZXNwb25zZRIoCgVlcnJvchgBIAEoCzIQLnN1YnNvY2lhbC5FcnJvckgAUgVlcnJvchI2CgtzcGFjZV9ieV9pZBgCIAEoCzIULnN1YnNvY2lhbC5TcGFjZUJ5SWRIAFIJc3BhY2VCeUlkEkIKD3NwYWNlX2J5X2hhbmRsZRgDIAEoCzIYLnN1YnNvY2lhbC5TcGFjZUJ5SGFuZGxlSABSDXNwYWNlQnlIYW5kbGUSMwoKcG9zdF9ieV9pZBgEIAEoCzITLnN1YnNvY2lhbC5Qb3N0QnlJZEgAUghwb3N0QnlJZBJNChRwb3N0X2lkc19ieV9zcGFjZV9pZBgFIAEoCzIbLnN1YnNvY2lhbC5Qb3N0SWRzQnlTcGFjZUlkSABSEHBvc3RJZHNCeVNwYWNlSWQSPwoOcmVhY3Rpb25fYnlfaWQYBiABKAsyFy5zdWJzb2NpYWwuUmVhY3Rpb25CeUlkSABSDHJlYWN0aW9uQnlJZBJWChdyZWFjdGlvbl9pZHNfYnlfcG9zdF9pZBgHIAEoCzIeLnN1YnNvY2lhbC5SZWFjdGlvbklkc0J5UG9zdElkSABSE3JlYWN0aW9uSWRzQnlQb3N0SWQSTQoUcmVwbHlfaWRzX2J5X3Bvc3RfaWQYCCABKAsyGy5zdWJzb2NpYWwuUmVwbHlJZHNCeVBvc3RJZEgAUhByZXBseUlkc0J5UG9zdElkEmUKHHNvY2lhbF9hY2NvdW50X2J5X2FjY291bnRfaWQYCSABKAsyIy5zdWJzb2NpYWwuU29jaWFsQWNjb3VudEJ5QWNjb3VudElkSABSGHNvY2lhbEFjY291bnRCeUFjY291bnRJZBI8Cg1uZXh0X3NwYWNlX2lkGAogASgLMhYuc3Vic29jaWFsLk5leHRTcGFjZUlkSABSC25leHRTcGFjZUlkEjkKDG5leHRfcG9zdF9pZBgLIAEoCzIVLnN1YnNvY2lhbC5OZXh0UG9zdElkSABSCm5leHRQb3N0SWQSSQoSc3BhY2VfaWRzX2J5X293bmVyGAwgASgLMhouc3Vic29jaWFsLlNwYWNlSWRzQnlPd25lckgAUg9zcGFjZUlkc0J5T3duZXISRAoPc3BhY2VfZm9sbG93ZXJzGA0gASgLMhkuc3Vic29jaWFsLlNwYWNlRm9sbG93ZXJzSABSDnNwYWNlRm9sbG93ZXJzEmEKGnNwYWNlc19mb2xsb3dlZF9ieV9hY2NvdW50GA4gASgLMiIuc3Vic29jaWFsLlNwYWNlc0ZvbGxvd2VkQnlBY2NvdW50SABSF3NwYWNlc0ZvbGxvd2VkQnlBY2NvdW50EkoKEWFjY291bnRfZm9sbG93ZXJzGA8gASgLMhsuc3Vic29jaWFsLkFjY291bnRGb2xsb3dlcnNIAFIQYWNjb3VudEZvbGxvd2VycxJnChxhY2NvdW50c19mb2xsb3dlZF9ieV9hY2NvdW50GBAgASgLMiQuc3Vic29jaWFsLkFjY291bnRzRm9sbG93ZWRCeUFjY291bnRIAFIZYWNjb3VudHNGb2xsb3dlZEJ5QWNjb3VudEIGCgRib2R5');
 @$core.Deprecated('Use errorDescriptor instead')
 const Error$json = const {
   '1': 'Error',
@@ -454,6 +490,29 @@ const GetSpacesFollowedByAccount$json = const {
 final $typed_data.Uint8List getSpacesFollowedByAccountDescriptor =
     $convert.base64Decode(
         'ChpHZXRTcGFjZXNGb2xsb3dlZEJ5QWNjb3VudBIdCgphY2NvdW50X2lkGAEgASgJUglhY2NvdW50SWQ=');
+@$core.Deprecated('Use getAccountFollowersDescriptor instead')
+const GetAccountFollowers$json = const {
+  '1': 'GetAccountFollowers',
+  '2': const [
+    const {'1': 'account_id', '3': 1, '4': 1, '5': 9, '10': 'accountId'},
+  ],
+};
+
+/// Descriptor for `GetAccountFollowers`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getAccountFollowersDescriptor = $convert.base64Decode(
+    'ChNHZXRBY2NvdW50Rm9sbG93ZXJzEh0KCmFjY291bnRfaWQYASABKAlSCWFjY291bnRJZA==');
+@$core.Deprecated('Use getAccountsFollowedByAccountDescriptor instead')
+const GetAccountsFollowedByAccount$json = const {
+  '1': 'GetAccountsFollowedByAccount',
+  '2': const [
+    const {'1': 'account_id', '3': 1, '4': 1, '5': 9, '10': 'accountId'},
+  ],
+};
+
+/// Descriptor for `GetAccountsFollowedByAccount`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getAccountsFollowedByAccountDescriptor =
+    $convert.base64Decode(
+        'ChxHZXRBY2NvdW50c0ZvbGxvd2VkQnlBY2NvdW50Eh0KCmFjY291bnRfaWQYASABKAlSCWFjY291bnRJZA==');
 @$core.Deprecated('Use whoAndWhenDescriptor instead')
 const WhoAndWhen$json = const {
   '1': 'WhoAndWhen',
@@ -997,3 +1056,26 @@ const SpacesFollowedByAccount$json = const {
 final $typed_data.Uint8List spacesFollowedByAccountDescriptor =
     $convert.base64Decode(
         'ChdTcGFjZXNGb2xsb3dlZEJ5QWNjb3VudBIfCglzcGFjZV9pZHMYASADKARCAhABUghzcGFjZUlkcw==');
+@$core.Deprecated('Use accountFollowersDescriptor instead')
+const AccountFollowers$json = const {
+  '1': 'AccountFollowers',
+  '2': const [
+    const {'1': 'account_ids', '3': 1, '4': 3, '5': 9, '10': 'accountIds'},
+  ],
+};
+
+/// Descriptor for `AccountFollowers`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List accountFollowersDescriptor = $convert.base64Decode(
+    'ChBBY2NvdW50Rm9sbG93ZXJzEh8KC2FjY291bnRfaWRzGAEgAygJUgphY2NvdW50SWRz');
+@$core.Deprecated('Use accountsFollowedByAccountDescriptor instead')
+const AccountsFollowedByAccount$json = const {
+  '1': 'AccountsFollowedByAccount',
+  '2': const [
+    const {'1': 'account_ids', '3': 1, '4': 3, '5': 9, '10': 'accountIds'},
+  ],
+};
+
+/// Descriptor for `AccountsFollowedByAccount`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List accountsFollowedByAccountDescriptor =
+    $convert.base64Decode(
+        'ChlBY2NvdW50c0ZvbGxvd2VkQnlBY2NvdW50Eh8KC2FjY291bnRfaWRzGAEgAygJUgphY2NvdW50SWRz');

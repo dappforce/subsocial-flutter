@@ -17,6 +17,8 @@ message Request {
     GetSpaceIdsByOwner space_ids_by_owner = 11;
     GetSpaceFollowers space_followers = 12;
     GetSpacesFollowedByAccount spaces_followed_by_account = 13;
+    GetAccountFollowers account_followers = 14;
+    GetAccountsFollowedByAccount accounts_followed_by_account = 15;
   }
 }
 
@@ -36,6 +38,8 @@ message Response {
     SpaceIdsByOwner space_ids_by_owner = 12;
     SpaceFollowers space_followers = 13;
     SpacesFollowedByAccount spaces_followed_by_account = 14;
+    AccountFollowers account_followers = 15;
+    AccountsFollowedByAccount accounts_followed_by_account = 16;
   }
 }
 
@@ -99,6 +103,14 @@ message GetSpaceFollowers {
 }
 
 message GetSpacesFollowedByAccount {
+  string account_id = 1;
+}
+
+message GetAccountFollowers {
+  string account_id = 1;
+}
+
+message GetAccountsFollowedByAccount {
   string account_id = 1;
 }
 
@@ -245,4 +257,12 @@ message SpaceFollowers {
 
 message SpacesFollowedByAccount {
   repeated uint64 space_ids = 1 [packed = true];
+}
+
+message AccountFollowers {
+  repeated string account_ids = 1;
+}
+
+message AccountsFollowedByAccount {
+  repeated string account_ids = 1;
 }

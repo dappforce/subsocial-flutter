@@ -169,6 +169,26 @@ class Subsocial {
     return val.spaceIds.map((e) => e.toInt()).toList();
   }
 
+  Future<List<AccountId>> accountFollowers(AccountId accountId) async {
+    final req = Request(
+      accountFollowers: GetAccountFollowers(accountId: accountId),
+    );
+    final res = await _dispatch(req);
+    final val = res.ensureAccountFollowers();
+    return val.accountIds;
+  }
+
+  Future<List<AccountId>> accountsFollowedByAccount(AccountId accountId) async {
+    final req = Request(
+      accountsFollowedByAccount: GetAccountsFollowedByAccount(
+        accountId: accountId,
+      ),
+    );
+    final res = await _dispatch(req);
+    final val = res.ensureAccountsFollowedByAccount();
+    return val.accountIds;
+  }
+
   void dispose() {
     final result = _raw.subsocial_shutdown();
     _assertOk(result);

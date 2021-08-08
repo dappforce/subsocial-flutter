@@ -2,7 +2,7 @@
 pub struct Request {
     #[prost(
         oneof = "request::Body",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15"
     )]
     pub body: ::core::option::Option<request::Body>,
 }
@@ -36,13 +36,17 @@ pub mod request {
         SpaceFollowers(super::GetSpaceFollowers),
         #[prost(message, tag = "13")]
         SpacesFollowedByAccount(super::GetSpacesFollowedByAccount),
+        #[prost(message, tag = "14")]
+        AccountFollowers(super::GetAccountFollowers),
+        #[prost(message, tag = "15")]
+        AccountsFollowedByAccount(super::GetAccountsFollowedByAccount),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Response {
     #[prost(
         oneof = "response::Body",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16"
     )]
     pub body: ::core::option::Option<response::Body>,
 }
@@ -78,6 +82,10 @@ pub mod response {
         SpaceFollowers(super::SpaceFollowers),
         #[prost(message, tag = "14")]
         SpacesFollowedByAccount(super::SpacesFollowedByAccount),
+        #[prost(message, tag = "15")]
+        AccountFollowers(super::AccountFollowers),
+        #[prost(message, tag = "16")]
+        AccountsFollowedByAccount(super::AccountsFollowedByAccount),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -168,6 +176,16 @@ pub struct GetSpaceFollowers {
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSpacesFollowedByAccount {
+    #[prost(string, tag = "1")]
+    pub account_id: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetAccountFollowers {
+    #[prost(string, tag = "1")]
+    pub account_id: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetAccountsFollowedByAccount {
     #[prost(string, tag = "1")]
     pub account_id: ::prost::alloc::string::String,
 }
@@ -403,4 +421,14 @@ pub struct SpaceFollowers {
 pub struct SpacesFollowedByAccount {
     #[prost(uint64, repeated, tag = "1")]
     pub space_ids: ::prost::alloc::vec::Vec<u64>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AccountFollowers {
+    #[prost(string, repeated, tag = "1")]
+    pub account_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AccountsFollowedByAccount {
+    #[prost(string, repeated, tag = "1")]
+    pub account_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }

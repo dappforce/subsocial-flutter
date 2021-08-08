@@ -60,6 +60,7 @@ impl pallet::posts::Posts for SubsocialRuntime {}
 impl pallet::reactions::Reactions for SubsocialRuntime {}
 impl pallet::profiles::Profiles for SubsocialRuntime {}
 impl pallet::space_follows::SpaceFollows for SubsocialRuntime {}
+impl pallet::profile_follows::ProfileFollows for SubsocialRuntime {}
 
 #[cfg(test)]
 mod tests {
