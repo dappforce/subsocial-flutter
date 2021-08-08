@@ -21,11 +21,11 @@ class RawSubsoical {
 
   int subsocial_dispatch(
     int port,
-    ffi.Pointer<SharedBuffer> ptr,
+    ffi.Pointer<ArrayView> view,
   ) {
     return _subsocial_dispatch(
       port,
-      ptr,
+      view,
     );
   }
 
@@ -73,8 +73,8 @@ class RawSubsoical {
       _subsocial_shutdown_ptr.asFunction<_dart_subsocial_shutdown>();
 }
 
-/// Immutable View of Shared Buffer.
-class SharedBuffer extends ffi.Struct {
+/// Immutable View of Array of bytes.
+class ArrayView extends ffi.Struct {
   external ffi.Pointer<ffi.Uint8> buf;
 
   @ffi.Uint64()
@@ -87,12 +87,12 @@ class SubscoialConfig extends ffi.Struct {
 
 typedef _c_subsocial_dispatch = ffi.Int32 Function(
   ffi.Int64 port,
-  ffi.Pointer<SharedBuffer> ptr,
+  ffi.Pointer<ArrayView> view,
 );
 
 typedef _dart_subsocial_dispatch = int Function(
   int port,
-  ffi.Pointer<SharedBuffer> ptr,
+  ffi.Pointer<ArrayView> view,
 );
 
 typedef _c_subsocial_init_client = ffi.Int32 Function(

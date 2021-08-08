@@ -15,7 +15,9 @@ fn main() {
         language: cbindgen::Language::C,
         documentation_style: cbindgen::DocumentationStyle::C99,
         line_length: 100,
-        style: cbindgen::Style::Type,
+        style: cbindgen::Style::Tag,
+        no_includes: true,
+        sys_includes: vec![String::from("stdint.h")],
         ..Default::default()
     };
     cbindgen::Builder::new()

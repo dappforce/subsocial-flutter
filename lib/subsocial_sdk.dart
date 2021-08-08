@@ -32,8 +32,8 @@ class Subsocial {
       AlloIsolate(lib: dl).hook();
       final completer = Completer<dynamic>();
       final port = singleCompletePort(completer);
-      final config = malloc.call<SubscoialConfig>();
-      config.ref.url = "wss://rpc.subsocial.network".toNativeUtf8().cast();
+      final config = malloc.call<SubscoialConfig>()
+        ..ref.url = "wss://rpc.subsocial.network".toNativeUtf8().cast();
       final result = raw.subsocial_init_client(
         port.nativePort,
         config,
@@ -178,8 +178,8 @@ class Subsocial {
   Future<Response> _dispatch(Request req) async {
     final completer = Completer<List<int>>();
     final port = singleCompletePort(completer);
-    final ptr = req.writeToBuffer().asSharedBufferPtr();
-    final result = _raw.subsocial_dispatch(port.nativePort, ptr);
+    final view = req.writeToBuffer().asArrayViewPtr();
+    final result = _raw.subsocial_dispatch(port.nativePort, view);
     _assertOk(result);
     final resBytes = await completer.future;
     final res = Response.fromBuffer(resBytes);

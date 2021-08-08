@@ -1,8 +1,3 @@
-mod handler;
-mod pb;
-mod shared_buffer;
-mod transformer;
-
 use std::ffi::CStr;
 use std::os::raw::c_char;
 
@@ -12,9 +7,14 @@ use once_cell::sync::OnceCell;
 use sdk::runtime::SubsocialRuntime;
 use sdk::subxt;
 
+mod array_view;
+mod handler;
+mod pb;
+mod transformer;
+
+use array_view::ArrayView;
 use pb::subsocial;
 use prost::Message;
-use shared_buffer::SharedBuffer;
 
 static mut CLIENT: OnceCell<subxt::Client<SubsocialRuntime>> = OnceCell::new();
 
@@ -54,9 +54,9 @@ pub extern "C" fn subsocial_init_client(
 }
 
 #[no_mangle]
-pub extern "C" fn subsocial_dispatch(port: i64, ptr: Box<SharedBuffer>) -> i32 {
+pub extern "C" fn subsocial_dispatch(port: i64, view: Box<ArrayView>) -> i32 {
     let isolate = Isolate::new(port);
-    let req = match prost::Message::decode(ptr.as_slice()) {
+    let req = match prost::Message::decode(view.as_slice()) {
         Ok(v) => v,
         Err(e) => {
             let mut bytes = Vec::new();
