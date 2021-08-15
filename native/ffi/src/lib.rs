@@ -15,9 +15,13 @@ mod transformer;
 use dart_utils::Uint8List;
 use pb::subsocial;
 use prost::Message;
+use sdk::subxt::sp_core::sr25519::Pair as Sr25519Pair;
 
 /// Global Shared [subxt::Client] between all tasks.
 static CLIENT: OnceCell<subxt::Client<SubsocialRuntime>> = OnceCell::new();
+/// Global Shared [subxt::PairSigner] between all tasks.
+static mut SIGNER: OnceCell<subxt::PairSigner<SubsocialRuntime, Sr25519Pair>> =
+    OnceCell::new();
 
 #[derive(Debug, Clone)]
 #[repr(C)]

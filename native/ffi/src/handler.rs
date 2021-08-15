@@ -1,6 +1,7 @@
 use prost::Message;
 use sdk::pallet::*;
 use sdk::runtime::SubsocialRuntime;
+use sdk::subxt::sp_core::Pair;
 use sdk::subxt::sp_runtime::AccountId32;
 use sdk::subxt::Client;
 
@@ -67,6 +68,8 @@ pub async fn handle(
         RequestBody::AccountsFollowedByAccount(args) => {
             accounts_followed_by_account(client, args.account_id).await
         }
+        RequestBody::GenerateAccount(args) => generate_account(args),
+        RequestBody::ImportAccount(args) => import_account(args),
     };
     let response = match result {
         Ok(body) => Response { body: Some(body) },
@@ -386,4 +389,57 @@ async fn accounts_followed_by_account(
             msg: String::from("AccountId Not Found"),
         }),
     }
+}
+
+fn generate_account(
+    GenerateAccount { password }: GenerateAccount,
+) -> Result<ResponseBody, Error> {
+    let (pair, seed_phrase, _) =
+        crate::Sr25519Pair::generate_with_phrase(if password.is_empty() {
+            None
+        } else {
+            Some(password.as_str())
+        });
+    let pair = crate::subxt::PairSigner::new(pair);
+    let public_key = pair.signer().public().to_string();
+    unsafe {
+        let _old = crate::SIGNER.take();
+        crate::SIGNER
+            .set(pair)
+            .map_err(|_| ())
+            .expect("should never happen");
+    };
+    let body = ResponseBody::GeneratedAccount(GeneratedAccount {
+        seed_phrase,
+        public_key,
+    });
+    Ok(body)
+}
+
+fn import_account(
+    ImportAccount { password, suri }: ImportAccount,
+) -> Result<ResponseBody, Error> {
+    let (pair, _) = crate::Sr25519Pair::from_string_with_seed(
+        &suri,
+        if password.is_empty() {
+            None
+        } else {
+            Some(password.as_str())
+        },
+    )
+    .map_err(|_| {
+        // TODO(shekohex): handle each case of this error with proper error message.
+        crate::subxt::Error::Other(String::from("Invalid Phrase Format"))
+    })?;
+    let pair = crate::subxt::PairSigner::new(pair);
+    let public_key = pair.signer().public().to_string();
+    unsafe {
+        let _old = crate::SIGNER.take();
+        crate::SIGNER
+            .set(pair)
+            .map_err(|_| ())
+            .expect("should never happen");
+    };
+    let body = ResponseBody::ImportedAccount(ImportedAccount { public_key });
+    Ok(body)
 }

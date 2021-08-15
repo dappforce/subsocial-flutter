@@ -148,6 +148,24 @@ const Request$json = const {
       '9': 0,
       '10': 'accountsFollowedByAccount'
     },
+    const {
+      '1': 'generate_account',
+      '3': 16,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.GenerateAccount',
+      '9': 0,
+      '10': 'generateAccount'
+    },
+    const {
+      '1': 'import_account',
+      '3': 17,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.ImportAccount',
+      '9': 0,
+      '10': 'importAccount'
+    },
   ],
   '8': const [
     const {'1': 'body'},
@@ -156,7 +174,7 @@ const Request$json = const {
 
 /// Descriptor for `Request`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List requestDescriptor = $convert.base64Decode(
-    'CgdSZXF1ZXN0EjkKC3NwYWNlX2J5X2lkGAEgASgLMhcuc3Vic29jaWFsLkdldFNwYWNlQnlJZEgAUglzcGFjZUJ5SWQSRQoPc3BhY2VfYnlfaGFuZGxlGAIgASgLMhsuc3Vic29jaWFsLkdldFNwYWNlQnlIYW5kbGVIAFINc3BhY2VCeUhhbmRsZRI2Cgpwb3N0X2J5X2lkGAMgASgLMhYuc3Vic29jaWFsLkdldFBvc3RCeUlkSABSCHBvc3RCeUlkElAKFHBvc3RfaWRzX2J5X3NwYWNlX2lkGAQgASgLMh4uc3Vic29jaWFsLkdldFBvc3RJZHNCeVNwYWNlSWRIAFIQcG9zdElkc0J5U3BhY2VJZBJCCg5yZWFjdGlvbl9ieV9pZBgFIAEoCzIaLnN1YnNvY2lhbC5HZXRSZWFjdGlvbkJ5SWRIAFIMcmVhY3Rpb25CeUlkElkKF3JlYWN0aW9uX2lkc19ieV9wb3N0X2lkGAYgASgLMiEuc3Vic29jaWFsLkdldFJlYWN0aW9uSWRzQnlQb3N0SWRIAFITcmVhY3Rpb25JZHNCeVBvc3RJZBJQChRyZXBseV9pZHNfYnlfcG9zdF9pZBgHIAEoCzIeLnN1YnNvY2lhbC5HZXRSZXBseUlkc0J5UG9zdElkSABSEHJlcGx5SWRzQnlQb3N0SWQSaAocc29jaWFsX2FjY291bnRfYnlfYWNjb3VudF9pZBgIIAEoCzImLnN1YnNvY2lhbC5HZXRTb2NpYWxBY2NvdW50QnlBY2NvdW50SWRIAFIYc29jaWFsQWNjb3VudEJ5QWNjb3VudElkEj8KDW5leHRfc3BhY2VfaWQYCSABKAsyGS5zdWJzb2NpYWwuR2V0TmV4dFNwYWNlSWRIAFILbmV4dFNwYWNlSWQSPAoMbmV4dF9wb3N0X2lkGAogASgLMhguc3Vic29jaWFsLkdldE5leHRQb3N0SWRIAFIKbmV4dFBvc3RJZBJMChJzcGFjZV9pZHNfYnlfb3duZXIYCyABKAsyHS5zdWJzb2NpYWwuR2V0U3BhY2VJZHNCeU93bmVySABSD3NwYWNlSWRzQnlPd25lchJHCg9zcGFjZV9mb2xsb3dlcnMYDCABKAsyHC5zdWJzb2NpYWwuR2V0U3BhY2VGb2xsb3dlcnNIAFIOc3BhY2VGb2xsb3dlcnMSZAoac3BhY2VzX2ZvbGxvd2VkX2J5X2FjY291bnQYDSABKAsyJS5zdWJzb2NpYWwuR2V0U3BhY2VzRm9sbG93ZWRCeUFjY291bnRIAFIXc3BhY2VzRm9sbG93ZWRCeUFjY291bnQSTQoRYWNjb3VudF9mb2xsb3dlcnMYDiABKAsyHi5zdWJzb2NpYWwuR2V0QWNjb3VudEZvbGxvd2Vyc0gAUhBhY2NvdW50Rm9sbG93ZXJzEmoKHGFjY291bnRzX2ZvbGxvd2VkX2J5X2FjY291bnQYDyABKAsyJy5zdWJzb2NpYWwuR2V0QWNjb3VudHNGb2xsb3dlZEJ5QWNjb3VudEgAUhlhY2NvdW50c0ZvbGxvd2VkQnlBY2NvdW50QgYKBGJvZHk=');
+    'CgdSZXF1ZXN0EjkKC3NwYWNlX2J5X2lkGAEgASgLMhcuc3Vic29jaWFsLkdldFNwYWNlQnlJZEgAUglzcGFjZUJ5SWQSRQoPc3BhY2VfYnlfaGFuZGxlGAIgASgLMhsuc3Vic29jaWFsLkdldFNwYWNlQnlIYW5kbGVIAFINc3BhY2VCeUhhbmRsZRI2Cgpwb3N0X2J5X2lkGAMgASgLMhYuc3Vic29jaWFsLkdldFBvc3RCeUlkSABSCHBvc3RCeUlkElAKFHBvc3RfaWRzX2J5X3NwYWNlX2lkGAQgASgLMh4uc3Vic29jaWFsLkdldFBvc3RJZHNCeVNwYWNlSWRIAFIQcG9zdElkc0J5U3BhY2VJZBJCCg5yZWFjdGlvbl9ieV9pZBgFIAEoCzIaLnN1YnNvY2lhbC5HZXRSZWFjdGlvbkJ5SWRIAFIMcmVhY3Rpb25CeUlkElkKF3JlYWN0aW9uX2lkc19ieV9wb3N0X2lkGAYgASgLMiEuc3Vic29jaWFsLkdldFJlYWN0aW9uSWRzQnlQb3N0SWRIAFITcmVhY3Rpb25JZHNCeVBvc3RJZBJQChRyZXBseV9pZHNfYnlfcG9zdF9pZBgHIAEoCzIeLnN1YnNvY2lhbC5HZXRSZXBseUlkc0J5UG9zdElkSABSEHJlcGx5SWRzQnlQb3N0SWQSaAocc29jaWFsX2FjY291bnRfYnlfYWNjb3VudF9pZBgIIAEoCzImLnN1YnNvY2lhbC5HZXRTb2NpYWxBY2NvdW50QnlBY2NvdW50SWRIAFIYc29jaWFsQWNjb3VudEJ5QWNjb3VudElkEj8KDW5leHRfc3BhY2VfaWQYCSABKAsyGS5zdWJzb2NpYWwuR2V0TmV4dFNwYWNlSWRIAFILbmV4dFNwYWNlSWQSPAoMbmV4dF9wb3N0X2lkGAogASgLMhguc3Vic29jaWFsLkdldE5leHRQb3N0SWRIAFIKbmV4dFBvc3RJZBJMChJzcGFjZV9pZHNfYnlfb3duZXIYCyABKAsyHS5zdWJzb2NpYWwuR2V0U3BhY2VJZHNCeU93bmVySABSD3NwYWNlSWRzQnlPd25lchJHCg9zcGFjZV9mb2xsb3dlcnMYDCABKAsyHC5zdWJzb2NpYWwuR2V0U3BhY2VGb2xsb3dlcnNIAFIOc3BhY2VGb2xsb3dlcnMSZAoac3BhY2VzX2ZvbGxvd2VkX2J5X2FjY291bnQYDSABKAsyJS5zdWJzb2NpYWwuR2V0U3BhY2VzRm9sbG93ZWRCeUFjY291bnRIAFIXc3BhY2VzRm9sbG93ZWRCeUFjY291bnQSTQoRYWNjb3VudF9mb2xsb3dlcnMYDiABKAsyHi5zdWJzb2NpYWwuR2V0QWNjb3VudEZvbGxvd2Vyc0gAUhBhY2NvdW50Rm9sbG93ZXJzEmoKHGFjY291bnRzX2ZvbGxvd2VkX2J5X2FjY291bnQYDyABKAsyJy5zdWJzb2NpYWwuR2V0QWNjb3VudHNGb2xsb3dlZEJ5QWNjb3VudEgAUhlhY2NvdW50c0ZvbGxvd2VkQnlBY2NvdW50EkcKEGdlbmVyYXRlX2FjY291bnQYECABKAsyGi5zdWJzb2NpYWwuR2VuZXJhdGVBY2NvdW50SABSD2dlbmVyYXRlQWNjb3VudBJBCg5pbXBvcnRfYWNjb3VudBgRIAEoCzIYLnN1YnNvY2lhbC5JbXBvcnRBY2NvdW50SABSDWltcG9ydEFjY291bnRCBgoEYm9keQ==');
 @$core.Deprecated('Use responseDescriptor instead')
 const Response$json = const {
   '1': 'Response',
@@ -305,6 +323,24 @@ const Response$json = const {
       '9': 0,
       '10': 'accountsFollowedByAccount'
     },
+    const {
+      '1': 'generated_account',
+      '3': 17,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.GeneratedAccount',
+      '9': 0,
+      '10': 'generatedAccount'
+    },
+    const {
+      '1': 'imported_account',
+      '3': 18,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.ImportedAccount',
+      '9': 0,
+      '10': 'importedAccount'
+    },
   ],
   '8': const [
     const {'1': 'body'},
@@ -313,7 +349,7 @@ const Response$json = const {
 
 /// Descriptor for `Response`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List responseDescriptor = $convert.base64Decode(
-    'CghSZXNwb25zZRIoCgVlcnJvchgBIAEoCzIQLnN1YnNvY2lhbC5FcnJvckgAUgVlcnJvchI2CgtzcGFjZV9ieV9pZBgCIAEoCzIULnN1YnNvY2lhbC5TcGFjZUJ5SWRIAFIJc3BhY2VCeUlkEkIKD3NwYWNlX2J5X2hhbmRsZRgDIAEoCzIYLnN1YnNvY2lhbC5TcGFjZUJ5SGFuZGxlSABSDXNwYWNlQnlIYW5kbGUSMwoKcG9zdF9ieV9pZBgEIAEoCzITLnN1YnNvY2lhbC5Qb3N0QnlJZEgAUghwb3N0QnlJZBJNChRwb3N0X2lkc19ieV9zcGFjZV9pZBgFIAEoCzIbLnN1YnNvY2lhbC5Qb3N0SWRzQnlTcGFjZUlkSABSEHBvc3RJZHNCeVNwYWNlSWQSPwoOcmVhY3Rpb25fYnlfaWQYBiABKAsyFy5zdWJzb2NpYWwuUmVhY3Rpb25CeUlkSABSDHJlYWN0aW9uQnlJZBJWChdyZWFjdGlvbl9pZHNfYnlfcG9zdF9pZBgHIAEoCzIeLnN1YnNvY2lhbC5SZWFjdGlvbklkc0J5UG9zdElkSABSE3JlYWN0aW9uSWRzQnlQb3N0SWQSTQoUcmVwbHlfaWRzX2J5X3Bvc3RfaWQYCCABKAsyGy5zdWJzb2NpYWwuUmVwbHlJZHNCeVBvc3RJZEgAUhByZXBseUlkc0J5UG9zdElkEmUKHHNvY2lhbF9hY2NvdW50X2J5X2FjY291bnRfaWQYCSABKAsyIy5zdWJzb2NpYWwuU29jaWFsQWNjb3VudEJ5QWNjb3VudElkSABSGHNvY2lhbEFjY291bnRCeUFjY291bnRJZBI8Cg1uZXh0X3NwYWNlX2lkGAogASgLMhYuc3Vic29jaWFsLk5leHRTcGFjZUlkSABSC25leHRTcGFjZUlkEjkKDG5leHRfcG9zdF9pZBgLIAEoCzIVLnN1YnNvY2lhbC5OZXh0UG9zdElkSABSCm5leHRQb3N0SWQSSQoSc3BhY2VfaWRzX2J5X293bmVyGAwgASgLMhouc3Vic29jaWFsLlNwYWNlSWRzQnlPd25lckgAUg9zcGFjZUlkc0J5T3duZXISRAoPc3BhY2VfZm9sbG93ZXJzGA0gASgLMhkuc3Vic29jaWFsLlNwYWNlRm9sbG93ZXJzSABSDnNwYWNlRm9sbG93ZXJzEmEKGnNwYWNlc19mb2xsb3dlZF9ieV9hY2NvdW50GA4gASgLMiIuc3Vic29jaWFsLlNwYWNlc0ZvbGxvd2VkQnlBY2NvdW50SABSF3NwYWNlc0ZvbGxvd2VkQnlBY2NvdW50EkoKEWFjY291bnRfZm9sbG93ZXJzGA8gASgLMhsuc3Vic29jaWFsLkFjY291bnRGb2xsb3dlcnNIAFIQYWNjb3VudEZvbGxvd2VycxJnChxhY2NvdW50c19mb2xsb3dlZF9ieV9hY2NvdW50GBAgASgLMiQuc3Vic29jaWFsLkFjY291bnRzRm9sbG93ZWRCeUFjY291bnRIAFIZYWNjb3VudHNGb2xsb3dlZEJ5QWNjb3VudEIGCgRib2R5');
+    'CghSZXNwb25zZRIoCgVlcnJvchgBIAEoCzIQLnN1YnNvY2lhbC5FcnJvckgAUgVlcnJvchI2CgtzcGFjZV9ieV9pZBgCIAEoCzIULnN1YnNvY2lhbC5TcGFjZUJ5SWRIAFIJc3BhY2VCeUlkEkIKD3NwYWNlX2J5X2hhbmRsZRgDIAEoCzIYLnN1YnNvY2lhbC5TcGFjZUJ5SGFuZGxlSABSDXNwYWNlQnlIYW5kbGUSMwoKcG9zdF9ieV9pZBgEIAEoCzITLnN1YnNvY2lhbC5Qb3N0QnlJZEgAUghwb3N0QnlJZBJNChRwb3N0X2lkc19ieV9zcGFjZV9pZBgFIAEoCzIbLnN1YnNvY2lhbC5Qb3N0SWRzQnlTcGFjZUlkSABSEHBvc3RJZHNCeVNwYWNlSWQSPwoOcmVhY3Rpb25fYnlfaWQYBiABKAsyFy5zdWJzb2NpYWwuUmVhY3Rpb25CeUlkSABSDHJlYWN0aW9uQnlJZBJWChdyZWFjdGlvbl9pZHNfYnlfcG9zdF9pZBgHIAEoCzIeLnN1YnNvY2lhbC5SZWFjdGlvbklkc0J5UG9zdElkSABSE3JlYWN0aW9uSWRzQnlQb3N0SWQSTQoUcmVwbHlfaWRzX2J5X3Bvc3RfaWQYCCABKAsyGy5zdWJzb2NpYWwuUmVwbHlJZHNCeVBvc3RJZEgAUhByZXBseUlkc0J5UG9zdElkEmUKHHNvY2lhbF9hY2NvdW50X2J5X2FjY291bnRfaWQYCSABKAsyIy5zdWJzb2NpYWwuU29jaWFsQWNjb3VudEJ5QWNjb3VudElkSABSGHNvY2lhbEFjY291bnRCeUFjY291bnRJZBI8Cg1uZXh0X3NwYWNlX2lkGAogASgLMhYuc3Vic29jaWFsLk5leHRTcGFjZUlkSABSC25leHRTcGFjZUlkEjkKDG5leHRfcG9zdF9pZBgLIAEoCzIVLnN1YnNvY2lhbC5OZXh0UG9zdElkSABSCm5leHRQb3N0SWQSSQoSc3BhY2VfaWRzX2J5X293bmVyGAwgASgLMhouc3Vic29jaWFsLlNwYWNlSWRzQnlPd25lckgAUg9zcGFjZUlkc0J5T3duZXISRAoPc3BhY2VfZm9sbG93ZXJzGA0gASgLMhkuc3Vic29jaWFsLlNwYWNlRm9sbG93ZXJzSABSDnNwYWNlRm9sbG93ZXJzEmEKGnNwYWNlc19mb2xsb3dlZF9ieV9hY2NvdW50GA4gASgLMiIuc3Vic29jaWFsLlNwYWNlc0ZvbGxvd2VkQnlBY2NvdW50SABSF3NwYWNlc0ZvbGxvd2VkQnlBY2NvdW50EkoKEWFjY291bnRfZm9sbG93ZXJzGA8gASgLMhsuc3Vic29jaWFsLkFjY291bnRGb2xsb3dlcnNIAFIQYWNjb3VudEZvbGxvd2VycxJnChxhY2NvdW50c19mb2xsb3dlZF9ieV9hY2NvdW50GBAgASgLMiQuc3Vic29jaWFsLkFjY291bnRzRm9sbG93ZWRCeUFjY291bnRIAFIZYWNjb3VudHNGb2xsb3dlZEJ5QWNjb3VudBJKChFnZW5lcmF0ZWRfYWNjb3VudBgRIAEoCzIbLnN1YnNvY2lhbC5HZW5lcmF0ZWRBY2NvdW50SABSEGdlbmVyYXRlZEFjY291bnQSRwoQaW1wb3J0ZWRfYWNjb3VudBgSIAEoCzIaLnN1YnNvY2lhbC5JbXBvcnRlZEFjY291bnRIAFIPaW1wb3J0ZWRBY2NvdW50QgYKBGJvZHk=');
 @$core.Deprecated('Use errorDescriptor instead')
 const Error$json = const {
   '1': 'Error',
@@ -513,6 +549,29 @@ const GetAccountsFollowedByAccount$json = const {
 final $typed_data.Uint8List getAccountsFollowedByAccountDescriptor =
     $convert.base64Decode(
         'ChxHZXRBY2NvdW50c0ZvbGxvd2VkQnlBY2NvdW50Eh0KCmFjY291bnRfaWQYASABKAlSCWFjY291bnRJZA==');
+@$core.Deprecated('Use generateAccountDescriptor instead')
+const GenerateAccount$json = const {
+  '1': 'GenerateAccount',
+  '2': const [
+    const {'1': 'password', '3': 1, '4': 1, '5': 9, '10': 'password'},
+  ],
+};
+
+/// Descriptor for `GenerateAccount`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List generateAccountDescriptor = $convert.base64Decode(
+    'Cg9HZW5lcmF0ZUFjY291bnQSGgoIcGFzc3dvcmQYASABKAlSCHBhc3N3b3Jk');
+@$core.Deprecated('Use importAccountDescriptor instead')
+const ImportAccount$json = const {
+  '1': 'ImportAccount',
+  '2': const [
+    const {'1': 'password', '3': 1, '4': 1, '5': 9, '10': 'password'},
+    const {'1': 'suri', '3': 2, '4': 1, '5': 9, '10': 'suri'},
+  ],
+};
+
+/// Descriptor for `ImportAccount`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List importAccountDescriptor = $convert.base64Decode(
+    'Cg1JbXBvcnRBY2NvdW50EhoKCHBhc3N3b3JkGAEgASgJUghwYXNzd29yZBISCgRzdXJpGAIgASgJUgRzdXJp');
 @$core.Deprecated('Use whoAndWhenDescriptor instead')
 const WhoAndWhen$json = const {
   '1': 'WhoAndWhen',
@@ -1079,3 +1138,26 @@ const AccountsFollowedByAccount$json = const {
 final $typed_data.Uint8List accountsFollowedByAccountDescriptor =
     $convert.base64Decode(
         'ChlBY2NvdW50c0ZvbGxvd2VkQnlBY2NvdW50Eh8KC2FjY291bnRfaWRzGAEgAygJUgphY2NvdW50SWRz');
+@$core.Deprecated('Use generatedAccountDescriptor instead')
+const GeneratedAccount$json = const {
+  '1': 'GeneratedAccount',
+  '2': const [
+    const {'1': 'public_key', '3': 1, '4': 1, '5': 9, '10': 'publicKey'},
+    const {'1': 'seed_phrase', '3': 2, '4': 1, '5': 9, '10': 'seedPhrase'},
+  ],
+};
+
+/// Descriptor for `GeneratedAccount`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List generatedAccountDescriptor = $convert.base64Decode(
+    'ChBHZW5lcmF0ZWRBY2NvdW50Eh0KCnB1YmxpY19rZXkYASABKAlSCXB1YmxpY0tleRIfCgtzZWVkX3BocmFzZRgCIAEoCVIKc2VlZFBocmFzZQ==');
+@$core.Deprecated('Use importedAccountDescriptor instead')
+const ImportedAccount$json = const {
+  '1': 'ImportedAccount',
+  '2': const [
+    const {'1': 'public_key', '3': 1, '4': 1, '5': 9, '10': 'publicKey'},
+  ],
+};
+
+/// Descriptor for `ImportedAccount`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List importedAccountDescriptor = $convert.base64Decode(
+    'Cg9JbXBvcnRlZEFjY291bnQSHQoKcHVibGljX2tleRgBIAEoCVIJcHVibGljS2V5');

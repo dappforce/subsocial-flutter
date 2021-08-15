@@ -2,7 +2,7 @@
 pub struct Request {
     #[prost(
         oneof = "request::Body",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17"
     )]
     pub body: ::core::option::Option<request::Body>,
 }
@@ -40,13 +40,17 @@ pub mod request {
         AccountFollowers(super::GetAccountFollowers),
         #[prost(message, tag = "15")]
         AccountsFollowedByAccount(super::GetAccountsFollowedByAccount),
+        #[prost(message, tag = "16")]
+        GenerateAccount(super::GenerateAccount),
+        #[prost(message, tag = "17")]
+        ImportAccount(super::ImportAccount),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Response {
     #[prost(
         oneof = "response::Body",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18"
     )]
     pub body: ::core::option::Option<response::Body>,
 }
@@ -86,6 +90,10 @@ pub mod response {
         AccountFollowers(super::AccountFollowers),
         #[prost(message, tag = "16")]
         AccountsFollowedByAccount(super::AccountsFollowedByAccount),
+        #[prost(message, tag = "17")]
+        GeneratedAccount(super::GeneratedAccount),
+        #[prost(message, tag = "18")]
+        ImportedAccount(super::ImportedAccount),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -188,6 +196,18 @@ pub struct GetAccountFollowers {
 pub struct GetAccountsFollowedByAccount {
     #[prost(string, tag = "1")]
     pub account_id: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GenerateAccount {
+    #[prost(string, tag = "1")]
+    pub password: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ImportAccount {
+    #[prost(string, tag = "1")]
+    pub password: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub suri: ::prost::alloc::string::String,
 }
 // DATA
 
@@ -431,4 +451,16 @@ pub struct AccountFollowers {
 pub struct AccountsFollowedByAccount {
     #[prost(string, repeated, tag = "1")]
     pub account_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GeneratedAccount {
+    #[prost(string, tag = "1")]
+    pub public_key: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub seed_phrase: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ImportedAccount {
+    #[prost(string, tag = "1")]
+    pub public_key: ::prost::alloc::string::String,
 }

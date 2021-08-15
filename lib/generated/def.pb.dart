@@ -30,6 +30,8 @@ enum Request_Body {
   spacesFollowedByAccount,
   accountFollowers,
   accountsFollowedByAccount,
+  generateAccount,
+  importAccount,
   notSet
 }
 
@@ -50,6 +52,8 @@ class Request extends $pb.GeneratedMessage {
     13: Request_Body.spacesFollowedByAccount,
     14: Request_Body.accountFollowers,
     15: Request_Body.accountsFollowedByAccount,
+    16: Request_Body.generateAccount,
+    17: Request_Body.importAccount,
     0: Request_Body.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Request',
@@ -58,15 +62,14 @@ class Request extends $pb.GeneratedMessage {
               ? ''
               : 'subsocial'),
       createEmptyInstance: create)
-    ..oo(0, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
+    ..oo(0, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17])
     ..aOM<GetSpaceById>(
         1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceById',
         subBuilder: GetSpaceById.create)
     ..aOM<GetSpaceByHandle>(
         2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceByHandle',
         subBuilder: GetSpaceByHandle.create)
-    ..aOM<GetPostById>(
-        3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postById',
+    ..aOM<GetPostById>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postById',
         subBuilder: GetPostById.create)
     ..aOM<GetPostIdsBySpaceId>(
         4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postIdsBySpaceId',
@@ -82,6 +85,8 @@ class Request extends $pb.GeneratedMessage {
     ..aOM<GetSpacesFollowedByAccount>(13, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spacesFollowedByAccount', subBuilder: GetSpacesFollowedByAccount.create)
     ..aOM<GetAccountFollowers>(14, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountFollowers', subBuilder: GetAccountFollowers.create)
     ..aOM<GetAccountsFollowedByAccount>(15, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountsFollowedByAccount', subBuilder: GetAccountsFollowedByAccount.create)
+    ..aOM<GenerateAccount>(16, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'generateAccount', subBuilder: GenerateAccount.create)
+    ..aOM<ImportAccount>(17, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'importAccount', subBuilder: ImportAccount.create)
     ..hasRequiredFields = false;
 
   Request._() : super();
@@ -101,6 +106,8 @@ class Request extends $pb.GeneratedMessage {
     GetSpacesFollowedByAccount? spacesFollowedByAccount,
     GetAccountFollowers? accountFollowers,
     GetAccountsFollowedByAccount? accountsFollowedByAccount,
+    GenerateAccount? generateAccount,
+    ImportAccount? importAccount,
   }) {
     final _result = create();
     if (spaceById != null) {
@@ -147,6 +154,12 @@ class Request extends $pb.GeneratedMessage {
     }
     if (accountsFollowedByAccount != null) {
       _result.accountsFollowedByAccount = accountsFollowedByAccount;
+    }
+    if (generateAccount != null) {
+      _result.generateAccount = generateAccount;
+    }
+    if (importAccount != null) {
+      _result.importAccount = importAccount;
     }
     return _result;
   }
@@ -389,6 +402,34 @@ class Request extends $pb.GeneratedMessage {
   @$pb.TagNumber(15)
   GetAccountsFollowedByAccount ensureAccountsFollowedByAccount() =>
       $_ensure(14);
+
+  @$pb.TagNumber(16)
+  GenerateAccount get generateAccount => $_getN(15);
+  @$pb.TagNumber(16)
+  set generateAccount(GenerateAccount v) {
+    setField(16, v);
+  }
+
+  @$pb.TagNumber(16)
+  $core.bool hasGenerateAccount() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearGenerateAccount() => clearField(16);
+  @$pb.TagNumber(16)
+  GenerateAccount ensureGenerateAccount() => $_ensure(15);
+
+  @$pb.TagNumber(17)
+  ImportAccount get importAccount => $_getN(16);
+  @$pb.TagNumber(17)
+  set importAccount(ImportAccount v) {
+    setField(17, v);
+  }
+
+  @$pb.TagNumber(17)
+  $core.bool hasImportAccount() => $_has(16);
+  @$pb.TagNumber(17)
+  void clearImportAccount() => clearField(17);
+  @$pb.TagNumber(17)
+  ImportAccount ensureImportAccount() => $_ensure(16);
 }
 
 enum Response_Body {
@@ -408,6 +449,8 @@ enum Response_Body {
   spacesFollowedByAccount,
   accountFollowers,
   accountsFollowedByAccount,
+  generatedAccount,
+  importedAccount,
   notSet
 }
 
@@ -429,6 +472,8 @@ class Response extends $pb.GeneratedMessage {
     14: Response_Body.spacesFollowedByAccount,
     15: Response_Body.accountFollowers,
     16: Response_Body.accountsFollowedByAccount,
+    17: Response_Body.generatedAccount,
+    18: Response_Body.importedAccount,
     0: Response_Body.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Response',
@@ -437,7 +482,7 @@ class Response extends $pb.GeneratedMessage {
               ? ''
               : 'subsocial'),
       createEmptyInstance: create)
-    ..oo(0, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])
+    ..oo(0, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18])
     ..aOM<Error>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'error',
         subBuilder: Error.create)
     ..aOM<SpaceById>(
@@ -461,6 +506,8 @@ class Response extends $pb.GeneratedMessage {
     ..aOM<SpacesFollowedByAccount>(14, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spacesFollowedByAccount', subBuilder: SpacesFollowedByAccount.create)
     ..aOM<AccountFollowers>(15, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountFollowers', subBuilder: AccountFollowers.create)
     ..aOM<AccountsFollowedByAccount>(16, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountsFollowedByAccount', subBuilder: AccountsFollowedByAccount.create)
+    ..aOM<GeneratedAccount>(17, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'generatedAccount', subBuilder: GeneratedAccount.create)
+    ..aOM<ImportedAccount>(18, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'importedAccount', subBuilder: ImportedAccount.create)
     ..hasRequiredFields = false;
 
   Response._() : super();
@@ -481,6 +528,8 @@ class Response extends $pb.GeneratedMessage {
     SpacesFollowedByAccount? spacesFollowedByAccount,
     AccountFollowers? accountFollowers,
     AccountsFollowedByAccount? accountsFollowedByAccount,
+    GeneratedAccount? generatedAccount,
+    ImportedAccount? importedAccount,
   }) {
     final _result = create();
     if (error != null) {
@@ -530,6 +579,12 @@ class Response extends $pb.GeneratedMessage {
     }
     if (accountsFollowedByAccount != null) {
       _result.accountsFollowedByAccount = accountsFollowedByAccount;
+    }
+    if (generatedAccount != null) {
+      _result.generatedAccount = generatedAccount;
+    }
+    if (importedAccount != null) {
+      _result.importedAccount = importedAccount;
     }
     return _result;
   }
@@ -785,6 +840,34 @@ class Response extends $pb.GeneratedMessage {
   void clearAccountsFollowedByAccount() => clearField(16);
   @$pb.TagNumber(16)
   AccountsFollowedByAccount ensureAccountsFollowedByAccount() => $_ensure(15);
+
+  @$pb.TagNumber(17)
+  GeneratedAccount get generatedAccount => $_getN(16);
+  @$pb.TagNumber(17)
+  set generatedAccount(GeneratedAccount v) {
+    setField(17, v);
+  }
+
+  @$pb.TagNumber(17)
+  $core.bool hasGeneratedAccount() => $_has(16);
+  @$pb.TagNumber(17)
+  void clearGeneratedAccount() => clearField(17);
+  @$pb.TagNumber(17)
+  GeneratedAccount ensureGeneratedAccount() => $_ensure(16);
+
+  @$pb.TagNumber(18)
+  ImportedAccount get importedAccount => $_getN(17);
+  @$pb.TagNumber(18)
+  set importedAccount(ImportedAccount v) {
+    setField(18, v);
+  }
+
+  @$pb.TagNumber(18)
+  $core.bool hasImportedAccount() => $_has(17);
+  @$pb.TagNumber(18)
+  void clearImportedAccount() => clearField(18);
+  @$pb.TagNumber(18)
+  ImportedAccount ensureImportedAccount() => $_ensure(17);
 }
 
 class Error extends $pb.GeneratedMessage {
@@ -1854,6 +1937,161 @@ class GetAccountsFollowedByAccount extends $pb.GeneratedMessage {
   $core.bool hasAccountId() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccountId() => clearField(1);
+}
+
+class GenerateAccount extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'GenerateAccount',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'password')
+    ..hasRequiredFields = false;
+
+  GenerateAccount._() : super();
+  factory GenerateAccount({
+    $core.String? password,
+  }) {
+    final _result = create();
+    if (password != null) {
+      _result.password = password;
+    }
+    return _result;
+  }
+  factory GenerateAccount.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory GenerateAccount.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  GenerateAccount clone() => GenerateAccount()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  GenerateAccount copyWith(void Function(GenerateAccount) updates) =>
+      super.copyWith((message) => updates(message as GenerateAccount))
+          as GenerateAccount; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GenerateAccount create() => GenerateAccount._();
+  GenerateAccount createEmptyInstance() => create();
+  static $pb.PbList<GenerateAccount> createRepeated() =>
+      $pb.PbList<GenerateAccount>();
+  @$core.pragma('dart2js:noInline')
+  static GenerateAccount getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GenerateAccount>(create);
+  static GenerateAccount? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get password => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set password($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasPassword() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPassword() => clearField(1);
+}
+
+class ImportAccount extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'ImportAccount',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'password')
+    ..aOS(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'suri')
+    ..hasRequiredFields = false;
+
+  ImportAccount._() : super();
+  factory ImportAccount({
+    $core.String? password,
+    $core.String? suri,
+  }) {
+    final _result = create();
+    if (password != null) {
+      _result.password = password;
+    }
+    if (suri != null) {
+      _result.suri = suri;
+    }
+    return _result;
+  }
+  factory ImportAccount.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory ImportAccount.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  ImportAccount clone() => ImportAccount()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  ImportAccount copyWith(void Function(ImportAccount) updates) =>
+      super.copyWith((message) => updates(message as ImportAccount))
+          as ImportAccount; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ImportAccount create() => ImportAccount._();
+  ImportAccount createEmptyInstance() => create();
+  static $pb.PbList<ImportAccount> createRepeated() =>
+      $pb.PbList<ImportAccount>();
+  @$core.pragma('dart2js:noInline')
+  static ImportAccount getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ImportAccount>(create);
+  static ImportAccount? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get password => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set password($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasPassword() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPassword() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get suri => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set suri($core.String v) {
+    $_setString(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasSuri() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSuri() => clearField(2);
 }
 
 class WhoAndWhen extends $pb.GeneratedMessage {
@@ -4226,4 +4464,159 @@ class AccountsFollowedByAccount extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $core.List<$core.String> get accountIds => $_getList(0);
+}
+
+class GeneratedAccount extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'GeneratedAccount',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'publicKey')
+    ..aOS(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'seedPhrase')
+    ..hasRequiredFields = false;
+
+  GeneratedAccount._() : super();
+  factory GeneratedAccount({
+    $core.String? publicKey,
+    $core.String? seedPhrase,
+  }) {
+    final _result = create();
+    if (publicKey != null) {
+      _result.publicKey = publicKey;
+    }
+    if (seedPhrase != null) {
+      _result.seedPhrase = seedPhrase;
+    }
+    return _result;
+  }
+  factory GeneratedAccount.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory GeneratedAccount.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  GeneratedAccount clone() => GeneratedAccount()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  GeneratedAccount copyWith(void Function(GeneratedAccount) updates) =>
+      super.copyWith((message) => updates(message as GeneratedAccount))
+          as GeneratedAccount; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GeneratedAccount create() => GeneratedAccount._();
+  GeneratedAccount createEmptyInstance() => create();
+  static $pb.PbList<GeneratedAccount> createRepeated() =>
+      $pb.PbList<GeneratedAccount>();
+  @$core.pragma('dart2js:noInline')
+  static GeneratedAccount getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GeneratedAccount>(create);
+  static GeneratedAccount? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get publicKey => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set publicKey($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasPublicKey() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPublicKey() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get seedPhrase => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set seedPhrase($core.String v) {
+    $_setString(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasSeedPhrase() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSeedPhrase() => clearField(2);
+}
+
+class ImportedAccount extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'ImportedAccount',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'publicKey')
+    ..hasRequiredFields = false;
+
+  ImportedAccount._() : super();
+  factory ImportedAccount({
+    $core.String? publicKey,
+  }) {
+    final _result = create();
+    if (publicKey != null) {
+      _result.publicKey = publicKey;
+    }
+    return _result;
+  }
+  factory ImportedAccount.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory ImportedAccount.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  ImportedAccount clone() => ImportedAccount()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  ImportedAccount copyWith(void Function(ImportedAccount) updates) =>
+      super.copyWith((message) => updates(message as ImportedAccount))
+          as ImportedAccount; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ImportedAccount create() => ImportedAccount._();
+  ImportedAccount createEmptyInstance() => create();
+  static $pb.PbList<ImportedAccount> createRepeated() =>
+      $pb.PbList<ImportedAccount>();
+  @$core.pragma('dart2js:noInline')
+  static ImportedAccount getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ImportedAccount>(create);
+  static ImportedAccount? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get publicKey => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set publicKey($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasPublicKey() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPublicKey() => clearField(1);
 }

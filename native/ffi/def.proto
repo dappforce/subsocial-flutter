@@ -19,6 +19,8 @@ message Request {
     GetSpacesFollowedByAccount spaces_followed_by_account = 13;
     GetAccountFollowers account_followers = 14;
     GetAccountsFollowedByAccount accounts_followed_by_account = 15;
+    GenerateAccount generate_account = 16;
+    ImportAccount import_account = 17;
   }
 }
 
@@ -40,6 +42,8 @@ message Response {
     SpacesFollowedByAccount spaces_followed_by_account = 14;
     AccountFollowers account_followers = 15;
     AccountsFollowedByAccount accounts_followed_by_account = 16;
+    GeneratedAccount generated_account = 17;
+    ImportedAccount imported_account = 18;
   }
 }
 
@@ -112,6 +116,15 @@ message GetAccountFollowers {
 
 message GetAccountsFollowedByAccount {
   string account_id = 1;
+}
+
+message GenerateAccount {
+  string password = 1;
+}
+
+message ImportAccount {
+  string password = 1;
+  string suri = 2;
 }
 
 // DATA
@@ -265,4 +278,13 @@ message AccountFollowers {
 
 message AccountsFollowedByAccount {
   repeated string account_ids = 1;
+}
+
+message GeneratedAccount {
+  string public_key = 1;
+  string seed_phrase = 2;
+}
+
+message ImportedAccount {
+  string public_key = 1;
 }

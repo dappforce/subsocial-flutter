@@ -98,4 +98,22 @@ void main() {
     final followedSpaces = await sdk.spacesFollowedByAccount(space.owner);
     expect(followedSpaces.contains(space.id.toInt()), true);
   });
+
+  test('Generate Account', () async {
+    final sdk = await Subsocial.instance;
+    final account = await sdk.generateAccount();
+    expect(account.hasPublicKey(), true);
+    expect(account.hasSeedPhrase(), true);
+  });
+
+  test('Import Account', () async {
+    final sdk = await Subsocial.instance;
+    final account = await sdk.importAccount(suri: '//Alice');
+    expect(account.hasPublicKey(), true);
+
+    // generate and import.
+    final generated = await sdk.generateAccount();
+    final imported = await sdk.importAccount(suri: generated.seedPhrase);
+    expect(generated.publicKey, imported.publicKey);
+  });
 }

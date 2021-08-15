@@ -189,6 +189,62 @@ class Subsocial {
     return val.accountIds;
   }
 
+  /// Generates new Account and sets this account as the default account
+  /// for signing transactions.
+  Future<GeneratedAccount> generateAccount({String? password}) async {
+    final req = Request(generateAccount: GenerateAccount(password: password));
+    final res = await _dispatch(req);
+    final val = res.ensureGeneratedAccount();
+    return val;
+  }
+
+  /// Imports already generated Account and sets this account as the default account
+  /// for signing transactions, replacing any already accounts if there is any.
+  ///
+  /// Interprets the string `suri` in order to generate a key Pair.
+  /// Returns both the pair and an optional seed, in the
+  /// case that the pair can be expressed as a direct derivation from a seed (some cases, such as Sr25519 derivations
+  /// with path components, cannot).
+  ///
+  /// This takes a helper function to do the key generation from a phrase, password and
+  /// junction iterator.
+  ///
+  /// - If `suri` is a possibly `0x` prefixed 64-digit hex string, then it will be interpreted
+  /// directly as a `MiniSecretKey` (aka "seed" in `subkey`).
+  /// - If `suri` is a valid BIP-39 key phrase of 12, 15, 18, 21 or 24 words, then the key will
+  /// be derived from it. In this case:
+  ///   - the phrase may be followed by one or more items delimited by `/` characters.
+  ///   - the path may be followed by `///`, in which case everything after the `///` is treated
+  /// as a password.
+  /// - If `suri` begins with a `/` character it is prefixed with the Substrate public `DEV_PHRASE` and
+  /// interpreted as above.
+  ///
+  /// In this case they are interpreted as HDKD junctions; purely numeric items are interpreted as
+  /// integers, non-numeric items as strings. Junctions prefixed with `/` are interpreted as soft
+  /// junctions, and with `//` as hard junctions.
+  ///
+  /// There is no correspondence mapping between SURI strings and the keys they represent.
+  /// Two different non-identical strings can actually lead to the same secret being derived.
+  /// Notably, integer junction indices may be legally prefixed with arbitrary number of zeros.
+  /// Similarly an empty password (ending the SURI with `///`) is perfectly valid and will generally
+  /// be equivalent to no password at all.
+  ///
+  /// `None` is returned if no matches are found.
+  Future<ImportedAccount> importAccount({
+    required String suri,
+    String? password,
+  }) async {
+    final req = Request(
+      importAccount: ImportAccount(
+        password: password,
+        suri: suri,
+      ),
+    );
+    final res = await _dispatch(req);
+    final val = res.ensureImportedAccount();
+    return val;
+  }
+
   void dispose() {
     // currently, there is nothing to dispose.
   }
