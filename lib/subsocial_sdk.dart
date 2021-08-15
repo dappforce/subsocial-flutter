@@ -190,16 +190,14 @@ class Subsocial {
   }
 
   void dispose() {
-    final result = _raw.subsocial_shutdown();
-    _assertOk(result);
-    _instance = null;
+    // currently, there is nothing to dispose.
   }
 
   Future<Response> _dispatch(Request req) async {
     final completer = Completer<List<int>>();
     final port = singleCompletePort(completer);
-    final view = req.writeToBuffer().asArrayViewPtr();
-    final result = _raw.subsocial_dispatch(port.nativePort, view);
+    final buffer = req.writeToBuffer().asPtr();
+    final result = _raw.subsocial_dispatch(port.nativePort, buffer);
     _assertOk(result);
     final resBytes = await completer.future;
     final res = Response.fromBuffer(resBytes);

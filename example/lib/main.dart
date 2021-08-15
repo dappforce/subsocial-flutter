@@ -105,7 +105,10 @@ class SpaceWidget extends StatelessWidget {
     hasImage = hasImage && item.metadata.image!.isNotEmpty;
     final imageUrl =
         hasImage ? IpfsClient().mediaUrl(item.metadata.image!) : '';
-    final tags = item.metadata.tags.takeWhile((e) => e is String).map((e) => Chip(label: Text(e!))).toList();
+    final tags = item.metadata.tags
+        .takeWhile((e) => e is String)
+        .map((e) => Chip(label: Text(e!)))
+        .toList();
     return GestureDetector(
       onTap: () async {
         if (item.space.postsCount == 0) return; // no posts

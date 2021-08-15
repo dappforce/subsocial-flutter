@@ -21,11 +21,11 @@ class RawSubsoical {
 
   int subsocial_dispatch(
     int port,
-    ffi.Pointer<ArrayView> view,
+    ffi.Pointer<Uint8List> buffer,
   ) {
     return _subsocial_dispatch(
       port,
-      view,
+      buffer,
     );
   }
 
@@ -62,37 +62,30 @@ class RawSubsoical {
           'subsocial_link_me_plz');
   late final _dart_subsocial_link_me_plz _subsocial_link_me_plz =
       _subsocial_link_me_plz_ptr.asFunction<_dart_subsocial_link_me_plz>();
-
-  int subsocial_shutdown() {
-    return _subsocial_shutdown();
-  }
-
-  late final _subsocial_shutdown_ptr =
-      _lookup<ffi.NativeFunction<_c_subsocial_shutdown>>('subsocial_shutdown');
-  late final _dart_subsocial_shutdown _subsocial_shutdown =
-      _subsocial_shutdown_ptr.asFunction<_dart_subsocial_shutdown>();
-}
-
-/// Immutable View of Array of bytes.
-class ArrayView extends ffi.Struct {
-  external ffi.Pointer<ffi.Uint8> buf;
-
-  @ffi.Uint64()
-  external int len;
 }
 
 class SubscoialConfig extends ffi.Struct {
   external ffi.Pointer<ffi.Int8> url;
 }
 
+/// Owned version of Dart's [Uint8List] in Rust.
+///
+/// **Note**: Automatically frees the underlying memory allocated from Dart.
+class Uint8List extends ffi.Struct {
+  external ffi.Pointer<ffi.Uint8> buf;
+
+  @ffi.Uint64()
+  external int len;
+}
+
 typedef _c_subsocial_dispatch = ffi.Int32 Function(
   ffi.Int64 port,
-  ffi.Pointer<ArrayView> view,
+  ffi.Pointer<Uint8List> buffer,
 );
 
 typedef _dart_subsocial_dispatch = int Function(
   int port,
-  ffi.Pointer<ArrayView> view,
+  ffi.Pointer<Uint8List> buffer,
 );
 
 typedef _c_subsocial_init_client = ffi.Int32 Function(
@@ -108,7 +101,3 @@ typedef _dart_subsocial_init_client = int Function(
 typedef _c_subsocial_link_me_plz = ffi.Void Function();
 
 typedef _dart_subsocial_link_me_plz = void Function();
-
-typedef _c_subsocial_shutdown = ffi.Int32 Function();
-
-typedef _dart_subsocial_shutdown = int Function();
