@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ffi';
 import 'dart:io';
+import 'dart:typed_data' as typed_data;
 
 import 'package:ffi/ffi.dart';
 import 'package:protobuf/protobuf.dart';
@@ -250,7 +251,7 @@ class Subsocial {
   }
 
   Future<Response> _dispatch(Request req) async {
-    final completer = Completer<List<int>>();
+    final completer = Completer<typed_data.Uint8List>();
     final port = singleCompletePort(completer);
     final buffer = req.writeToBuffer().asPtr();
     final result = _raw.subsocial_dispatch(port.nativePort, buffer);
