@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os
+import sys
 import subprocess
 
 import requests
@@ -14,7 +15,8 @@ lib_name = 'subsocial'
 # Script arguments.
 
 base_url = f'https://github.com/{github_user}/{github_repo}/releases/latest/download'
-base_dir = os.path.join(os.getcwd(), 'packages', package_name)
+base_dir = os.path.join(os.getcwd(), 'packages', package_name) \
+    if len(sys.argv) < 2 else os.path.normpath(sys.argv[1])
 android_base = os.path.join(base_dir, 'android', 'src', 'main', 'jniLibs')
 ios_base = os.path.join(base_dir, 'ios')
 target_files: list = [
@@ -74,7 +76,7 @@ print('Please wait this could take some time, depending on your internet connect
 print()
 
 for (url, dest, filename, msg) in target_files:
-    print(f'Starting to download {filename} [{msg}]')
+    print(f'Starting to download {filename} [{msg}]\nDestination: {dest}')
     download(url, dest, filename)
 
 print('Finished downloading files.')
