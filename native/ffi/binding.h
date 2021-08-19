@@ -1,23 +1,20 @@
-#include <stdarg.h>
-#include <stdbool.h>
 #include <stdint.h>
-#include <stdlib.h>
 
-typedef struct {
+struct SubscoialConfig {
   const char *url;
-} SubscoialConfig;
+};
 
-// Immutable View of Shared Buffer.
-typedef struct {
+// Owned version of Dart's [Uint8List] in Rust.
+//
+// **Note**: Automatically frees the underlying memory allocated from Dart.
+struct Uint8List {
   uint8_t *buf;
   uintptr_t len;
-} SharedBuffer;
+};
 
-int32_t subsocial_init_client(int64_t port, SubscoialConfig *config);
+int32_t subsocial_init_client(int64_t port, struct SubscoialConfig *config);
 
-int32_t subsocial_dispatch(int64_t port, SharedBuffer *ptr);
-
-int32_t subsocial_shutdown(void);
+int32_t subsocial_dispatch(int64_t port, struct Uint8List *buffer);
 
 // a no-op function that forces xcode to link to our lib.
 // ## Safety

@@ -1,8 +1,3 @@
-mod handler;
-mod pb;
-mod shared_buffer;
-mod transformer;
-
 use std::ffi::CStr;
 use std::os::raw::c_char;
 
@@ -12,11 +7,21 @@ use once_cell::sync::OnceCell;
 use sdk::runtime::SubsocialRuntime;
 use sdk::subxt;
 
+mod dart_utils;
+mod handler;
+mod pb;
+mod transformer;
+
+use dart_utils::Uint8List;
 use pb::subsocial;
 use prost::Message;
-use shared_buffer::SharedBuffer;
+use sdk::subxt::sp_core::sr25519::Pair as Sr25519Pair;
 
-static mut CLIENT: OnceCell<subxt::Client<SubsocialRuntime>> = OnceCell::new();
+/// Global Shared [subxt::Client] between all tasks.
+static CLIENT: OnceCell<subxt::Client<SubsocialRuntime>> = OnceCell::new();
+/// Global Shared [subxt::PairSigner] between all tasks.
+static mut SIGNER: OnceCell<subxt::PairSigner<SubsocialRuntime, Sr25519Pair>> =
+    OnceCell::new();
 
 #[derive(Debug, Clone)]
 #[repr(C)]
@@ -31,7 +36,7 @@ pub extern "C" fn subsocial_init_client(
 ) -> i32 {
     let isolate = Isolate::new(port);
     // check if we already have a client
-    if unsafe { CLIENT.get().is_some() } {
+    if CLIENT.get().is_some() {
         isolate.post(());
         return 1; // we are good!
     }
@@ -42,11 +47,9 @@ pub extern "C" fn subsocial_init_client(
     };
     let task = isolate.catch_unwind(async move {
         let client = subxt::ClientBuilder::new().set_url(url).build().await?;
-        unsafe {
-            CLIENT.set(client).map_err(|_| {
-                subxt::Error::Other(String::from("Client already initialized"))
-            })
-        }?;
+        CLIENT.set(client).map_err(|_| {
+            subxt::Error::Other(String::from("Client already initialized"))
+        })?;
         Result::<_, subxt::Error>::Ok(())
     });
     task::spawn(task);
@@ -54,9 +57,9 @@ pub extern "C" fn subsocial_init_client(
 }
 
 #[no_mangle]
-pub extern "C" fn subsocial_dispatch(port: i64, ptr: Box<SharedBuffer>) -> i32 {
+pub extern "C" fn subsocial_dispatch(port: i64, buffer: Box<Uint8List>) -> i32 {
     let isolate = Isolate::new(port);
-    let req = match prost::Message::decode(ptr.as_slice()) {
+    let req = match prost::Message::decode(buffer.as_slice()) {
         Ok(v) => v,
         Err(e) => {
             let mut bytes = Vec::new();
@@ -71,24 +74,13 @@ pub extern "C" fn subsocial_dispatch(port: i64, ptr: Box<SharedBuffer>) -> i32 {
             return 0xbadc0de;
         }
     };
-    let client = match unsafe { CLIENT.get() } {
+    let client = match CLIENT.get() {
         Some(v) => v,
         None => return 0xdead,
     };
     let task = isolate.catch_unwind(handler::handle(client, req));
     task::spawn(task);
     1
-}
-
-#[no_mangle]
-pub extern "C" fn subsocial_shutdown() -> i32 {
-    match unsafe { CLIENT.take() } {
-        Some(client) => {
-            drop(client);
-            1
-        }
-        None => 0xdead,
-    }
 }
 
 /// a no-op function that forces xcode to link to our lib.

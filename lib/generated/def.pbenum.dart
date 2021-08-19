@@ -35,6 +35,11 @@ class Error_Kind extends $pb.ProtobufEnum {
       const $core.bool.fromEnvironment('protobuf.omit_enum_names')
           ? ''
           : 'KIND_NOT_FOUND');
+  static const Error_Kind KIND_SUBXT = Error_Kind._(
+      5,
+      const $core.bool.fromEnvironment('protobuf.omit_enum_names')
+          ? ''
+          : 'KIND_SUBXT');
 
   static const $core.List<Error_Kind> values = <Error_Kind>[
     KIND_UNKNOWN,
@@ -42,6 +47,7 @@ class Error_Kind extends $pb.ProtobufEnum {
     KIND_INVALID_PROTO,
     KIND_INVALID_REQUEST,
     KIND_NOT_FOUND,
+    KIND_SUBXT,
   ];
 
   static final $core.Map<$core.int, Error_Kind> _byValue =

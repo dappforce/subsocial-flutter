@@ -51,6 +51,12 @@ pub struct Comment {
 
 // Storage ..
 
+#[derive(Clone, Debug, Eq, Default, Encode, PartialEq, subxt::Store)]
+pub struct NextPostIdStore<T: Posts> {
+    #[store(returns = PostId)]
+    __marker: PhantomData<T>,
+}
+
 #[derive(Clone, Debug, Eq, Encode, PartialEq, subxt::Store)]
 pub struct PostByIdStore<T: Posts> {
     #[store(returns = Post<T>)]

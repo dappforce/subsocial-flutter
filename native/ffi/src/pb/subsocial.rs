@@ -1,6 +1,9 @@
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Request {
-    #[prost(oneof = "request::Body", tags = "1, 2, 3, 4, 5, 6, 7")]
+    #[prost(
+        oneof = "request::Body",
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17"
+    )]
     pub body: ::core::option::Option<request::Body>,
 }
 /// Nested message and enum types in `Request`.
@@ -21,11 +24,34 @@ pub mod request {
         ReactionIdsByPostId(super::GetReactionIdsByPostId),
         #[prost(message, tag = "7")]
         ReplyIdsByPostId(super::GetReplyIdsByPostId),
+        #[prost(message, tag = "8")]
+        SocialAccountByAccountId(super::GetSocialAccountByAccountId),
+        #[prost(message, tag = "9")]
+        NextSpaceId(super::GetNextSpaceId),
+        #[prost(message, tag = "10")]
+        NextPostId(super::GetNextPostId),
+        #[prost(message, tag = "11")]
+        SpaceIdsByOwner(super::GetSpaceIdsByOwner),
+        #[prost(message, tag = "12")]
+        SpaceFollowers(super::GetSpaceFollowers),
+        #[prost(message, tag = "13")]
+        SpacesFollowedByAccount(super::GetSpacesFollowedByAccount),
+        #[prost(message, tag = "14")]
+        AccountFollowers(super::GetAccountFollowers),
+        #[prost(message, tag = "15")]
+        AccountsFollowedByAccount(super::GetAccountsFollowedByAccount),
+        #[prost(message, tag = "16")]
+        GenerateAccount(super::GenerateAccount),
+        #[prost(message, tag = "17")]
+        ImportAccount(super::ImportAccount),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Response {
-    #[prost(oneof = "response::Body", tags = "1, 2, 3, 4, 5, 6, 7, 8")]
+    #[prost(
+        oneof = "response::Body",
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18"
+    )]
     pub body: ::core::option::Option<response::Body>,
 }
 /// Nested message and enum types in `Response`.
@@ -48,6 +74,26 @@ pub mod response {
         ReactionIdsByPostId(super::ReactionIdsByPostId),
         #[prost(message, tag = "8")]
         ReplyIdsByPostId(super::ReplyIdsByPostId),
+        #[prost(message, tag = "9")]
+        SocialAccountByAccountId(super::SocialAccountByAccountId),
+        #[prost(message, tag = "10")]
+        NextSpaceId(super::NextSpaceId),
+        #[prost(message, tag = "11")]
+        NextPostId(super::NextPostId),
+        #[prost(message, tag = "12")]
+        SpaceIdsByOwner(super::SpaceIdsByOwner),
+        #[prost(message, tag = "13")]
+        SpaceFollowers(super::SpaceFollowers),
+        #[prost(message, tag = "14")]
+        SpacesFollowedByAccount(super::SpacesFollowedByAccount),
+        #[prost(message, tag = "15")]
+        AccountFollowers(super::AccountFollowers),
+        #[prost(message, tag = "16")]
+        AccountsFollowedByAccount(super::AccountsFollowedByAccount),
+        #[prost(message, tag = "17")]
+        GeneratedAccount(super::GeneratedAccount),
+        #[prost(message, tag = "18")]
+        ImportedAccount(super::ImportedAccount),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -77,8 +123,11 @@ pub mod error {
         InvalidProto = 2,
         InvalidRequest = 3,
         NotFound = 4,
+        Subxt = 5,
     }
 }
+// REQUESTS
+
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSpaceById {
     #[prost(uint64, tag = "1")]
@@ -114,6 +163,54 @@ pub struct GetReplyIdsByPostId {
     #[prost(uint64, tag = "1")]
     pub post_id: u64,
 }
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetSocialAccountByAccountId {
+    #[prost(string, tag = "1")]
+    pub account_id: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetNextSpaceId {}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetNextPostId {}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetSpaceIdsByOwner {
+    #[prost(string, tag = "1")]
+    pub account_id: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetSpaceFollowers {
+    #[prost(uint64, tag = "1")]
+    pub space_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetSpacesFollowedByAccount {
+    #[prost(string, tag = "1")]
+    pub account_id: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetAccountFollowers {
+    #[prost(string, tag = "1")]
+    pub account_id: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetAccountsFollowedByAccount {
+    #[prost(string, tag = "1")]
+    pub account_id: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GenerateAccount {
+    #[prost(string, tag = "1")]
+    pub password: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ImportAccount {
+    #[prost(string, tag = "1")]
+    pub password: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub suri: ::prost::alloc::string::String,
+}
+// DATA
+
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WhoAndWhen {
     #[prost(string, tag = "1")]
@@ -257,6 +354,30 @@ pub mod reaction {
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SocialAccount {
+    #[prost(uint32, tag = "1")]
+    pub followers_count: u32,
+    #[prost(uint32, tag = "2")]
+    pub following_accounts_count: u32,
+    #[prost(uint32, tag = "3")]
+    pub following_spaces_count: u32,
+    #[prost(uint32, tag = "4")]
+    pub reputation: u32,
+    #[prost(message, optional, tag = "5")]
+    pub profile: ::core::option::Option<Profile>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Profile {
+    #[prost(message, optional, tag = "1")]
+    pub created: ::core::option::Option<WhoAndWhen>,
+    #[prost(message, optional, tag = "2")]
+    pub updated: ::core::option::Option<WhoAndWhen>,
+    #[prost(message, optional, tag = "3")]
+    pub content: ::core::option::Option<Content>,
+}
+// RESPONSES
+
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SpaceById {
     #[prost(message, optional, tag = "1")]
     pub space: ::core::option::Option<Space>,
@@ -290,4 +411,56 @@ pub struct ReactionIdsByPostId {
 pub struct ReplyIdsByPostId {
     #[prost(uint64, repeated, tag = "1")]
     pub reply_ids: ::prost::alloc::vec::Vec<u64>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SocialAccountByAccountId {
+    #[prost(message, optional, tag = "1")]
+    pub social_account: ::core::option::Option<SocialAccount>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NextSpaceId {
+    #[prost(uint64, tag = "1")]
+    pub id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NextPostId {
+    #[prost(uint64, tag = "1")]
+    pub id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SpaceIdsByOwner {
+    #[prost(uint64, repeated, tag = "1")]
+    pub space_ids: ::prost::alloc::vec::Vec<u64>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SpaceFollowers {
+    #[prost(string, repeated, tag = "1")]
+    pub account_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SpacesFollowedByAccount {
+    #[prost(uint64, repeated, tag = "1")]
+    pub space_ids: ::prost::alloc::vec::Vec<u64>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AccountFollowers {
+    #[prost(string, repeated, tag = "1")]
+    pub account_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AccountsFollowedByAccount {
+    #[prost(string, repeated, tag = "1")]
+    pub account_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GeneratedAccount {
+    #[prost(string, tag = "1")]
+    pub public_key: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub seed_phrase: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ImportedAccount {
+    #[prost(string, tag = "1")]
+    pub public_key: ::prost::alloc::string::String,
 }

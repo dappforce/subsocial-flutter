@@ -37,7 +37,6 @@ ffigen:
   output: 'lib/ffi.dart'
   name: 'RawSubsoical'
   description: 'Subscoial FFI Binding'
-  array-workaround: false
   sort: true
   comments:
     style: any

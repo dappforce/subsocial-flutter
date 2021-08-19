@@ -1,6 +1,10 @@
 use std::env;
 
 fn main() {
+    // Tell Cargo that if the given file changes, to rerun this build script.
+    println!("cargo:rerun-if-changed=def.proto");
+    println!("cargo:rerun-if-changed=src/lib.rs");
+
     prost_build::Config::new()
         .out_dir("src/pb")
         .compile_protos(&["def.proto"], &["."])
@@ -11,7 +15,9 @@ fn main() {
         language: cbindgen::Language::C,
         documentation_style: cbindgen::DocumentationStyle::C99,
         line_length: 100,
-        style: cbindgen::Style::Type,
+        style: cbindgen::Style::Tag,
+        no_includes: true,
+        sys_includes: vec![String::from("stdint.h")],
         ..Default::default()
     };
     cbindgen::Builder::new()

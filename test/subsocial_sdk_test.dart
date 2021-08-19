@@ -18,6 +18,15 @@ void main() {
     expect(space.id.toInt(), 1);
   });
 
+  test('Get SpaceIds By Owner', () async {
+    final sdk = await Subsocial.instance;
+    final space = await sdk.spaceById(1);
+    expect(space.hasOwner(), true);
+    expect(space.handle, "subsocial");
+    final spaceIds = await sdk.spaceIdsByOwner(space.owner);
+    expect(spaceIds.contains(space.id.toInt()), true);
+  });
+
   test('Get Space Posts', () async {
     final sdk = await Subsocial.instance;
     final space = await sdk.spaceByHandle("subsocial");
@@ -58,5 +67,53 @@ void main() {
       expect(reply.extensionValue.hasComment(), true);
       expect(reply.extensionValue.comment.rootPostId.toInt(), firstPostId);
     }
+  });
+
+  test('Get Social Accounts', () async {
+    final sdk = await Subsocial.instance;
+    final space = await sdk.spaceByHandle("subsocial");
+    final owner = await sdk.socialAccountByAccountId(space.owner);
+    expect(owner.hasProfile(), true);
+    expect(owner.profile.hasContent(), true);
+  });
+
+  test('Next {Space,Post}Id', () async {
+    final sdk = await Subsocial.instance;
+    final nextSpaceId = await sdk.nextSpaceId();
+    final nextPostId = await sdk.nextPostId();
+    expect(nextSpaceId > 0, true);
+    expect(nextPostId > 0, true);
+  });
+
+  test('Get Space Followers', () async {
+    final sdk = await Subsocial.instance;
+    final space = await sdk.spaceByHandle("subsocial");
+    final spaceFollowers = await sdk.spaceFollowers(space.id.toInt());
+    expect(spaceFollowers.length, space.followersCount);
+  });
+
+  test('Get Spaces Followed by AccountId', () async {
+    final sdk = await Subsocial.instance;
+    final space = await sdk.spaceByHandle("subsocial");
+    final followedSpaces = await sdk.spacesFollowedByAccount(space.owner);
+    expect(followedSpaces.contains(space.id.toInt()), true);
+  });
+
+  test('Generate Account', () async {
+    final sdk = await Subsocial.instance;
+    final account = await sdk.generateAccount();
+    expect(account.hasPublicKey(), true);
+    expect(account.hasSeedPhrase(), true);
+  });
+
+  test('Import Account', () async {
+    final sdk = await Subsocial.instance;
+    final account = await sdk.importAccount(suri: '//Alice');
+    expect(account.hasPublicKey(), true);
+
+    // generate and import.
+    final generated = await sdk.generateAccount();
+    final imported = await sdk.importAccount(suri: generated.seedPhrase);
+    expect(generated.publicKey, imported.publicKey);
   });
 }

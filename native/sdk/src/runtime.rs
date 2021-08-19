@@ -30,7 +30,7 @@ pub type Index = u32;
 pub type Hash = sp_core::H256;
 
 /// Subsocial Runtime.
-#[derive(Debug, Clone, Eq, PartialEq)]
+#[derive(Debug, Clone, Eq, PartialEq, Default)]
 pub struct SubsocialRuntime;
 
 impl subxt::Runtime for SubsocialRuntime {
@@ -54,9 +54,13 @@ impl Balances for SubsocialRuntime {
     type Balance = Balance;
 }
 
+// implementations for Subsoical Pallets
 impl pallet::spaces::Spaces for SubsocialRuntime {}
 impl pallet::posts::Posts for SubsocialRuntime {}
 impl pallet::reactions::Reactions for SubsocialRuntime {}
+impl pallet::profiles::Profiles for SubsocialRuntime {}
+impl pallet::space_follows::SpaceFollows for SubsocialRuntime {}
+impl pallet::profile_follows::ProfileFollows for SubsocialRuntime {}
 
 #[cfg(test)]
 mod tests {

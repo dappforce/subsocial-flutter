@@ -11,6 +11,16 @@ message Request {
     GetReactionById reaction_by_id = 5;
     GetReactionIdsByPostId reaction_ids_by_post_id = 6;
     GetReplyIdsByPostId reply_ids_by_post_id = 7;
+    GetSocialAccountByAccountId social_account_by_account_id = 8;
+    GetNextSpaceId next_space_id = 9;
+    GetNextPostId next_post_id = 10;
+    GetSpaceIdsByOwner space_ids_by_owner = 11;
+    GetSpaceFollowers space_followers = 12;
+    GetSpacesFollowedByAccount spaces_followed_by_account = 13;
+    GetAccountFollowers account_followers = 14;
+    GetAccountsFollowedByAccount accounts_followed_by_account = 15;
+    GenerateAccount generate_account = 16;
+    ImportAccount import_account = 17;
   }
 }
 
@@ -24,6 +34,16 @@ message Response {
     ReactionById reaction_by_id = 6;
     ReactionIdsByPostId reaction_ids_by_post_id = 7;
     ReplyIdsByPostId reply_ids_by_post_id = 8;
+    SocialAccountByAccountId social_account_by_account_id = 9;
+    NextSpaceId next_space_id = 10;
+    NextPostId next_post_id = 11;
+    SpaceIdsByOwner space_ids_by_owner = 12;
+    SpaceFollowers space_followers = 13;
+    SpacesFollowedByAccount spaces_followed_by_account = 14;
+    AccountFollowers account_followers = 15;
+    AccountsFollowedByAccount accounts_followed_by_account = 16;
+    GeneratedAccount generated_account = 17;
+    ImportedAccount imported_account = 18;
   }
 }
 
@@ -34,10 +54,13 @@ message Error {
     KIND_INVALID_PROTO = 2;
     KIND_INVALID_REQUEST = 3;
     KIND_NOT_FOUND = 4;
+    KIND_SUBXT = 5;
   }
   Kind kind = 1;
   string msg = 2;
 }
+
+// REQUESTS
 
 message GetSpaceById {
   uint64 space_id = 1;
@@ -66,6 +89,45 @@ message GetReactionIdsByPostId {
 message GetReplyIdsByPostId {
   uint64 post_id = 1;
 }
+
+message GetSocialAccountByAccountId {
+  string account_id = 1;
+}
+
+message GetNextSpaceId {}
+
+message GetNextPostId {}
+
+message GetSpaceIdsByOwner {
+  string account_id = 1;
+}
+
+message GetSpaceFollowers {
+  uint64 space_id = 1;
+}
+
+message GetSpacesFollowedByAccount {
+  string account_id = 1;
+}
+
+message GetAccountFollowers {
+  string account_id = 1;
+}
+
+message GetAccountsFollowedByAccount {
+  string account_id = 1;
+}
+
+message GenerateAccount {
+  string password = 1;
+}
+
+message ImportAccount {
+  string password = 1;
+  string suri = 2;
+}
+
+// DATA
 
 message WhoAndWhen {
   string account = 1;
@@ -141,6 +203,23 @@ message Reaction {
   ReactionKind kind = 4;
 }
 
+message SocialAccount {
+  uint32 followers_count = 1;
+  uint32 following_accounts_count = 2;
+  uint32 following_spaces_count = 3;
+  uint32 reputation = 4;
+  Profile profile = 5;
+}
+
+message Profile {
+  WhoAndWhen created = 1;
+  WhoAndWhen updated = 2;
+  Content content = 3;
+}
+
+// RESPONSES
+
+
 message SpaceById {
   Space space = 1;
 }
@@ -169,3 +248,43 @@ message ReplyIdsByPostId {
   repeated uint64 reply_ids = 1 [packed = true];
 }
 
+message SocialAccountByAccountId {
+  SocialAccount social_account = 1;
+}
+
+message NextSpaceId {
+  uint64 id = 1;
+}
+
+message NextPostId {
+  uint64 id = 1;
+}
+
+message SpaceIdsByOwner {
+  repeated uint64 space_ids = 1 [packed = true];
+}
+
+message SpaceFollowers {
+  repeated string account_ids = 1;
+}
+
+message SpacesFollowedByAccount {
+  repeated uint64 space_ids = 1 [packed = true];
+}
+
+message AccountFollowers {
+  repeated string account_ids = 1;
+}
+
+message AccountsFollowedByAccount {
+  repeated string account_ids = 1;
+}
+
+message GeneratedAccount {
+  string public_key = 1;
+  string seed_phrase = 2;
+}
+
+message ImportedAccount {
+  string public_key = 1;
+}

@@ -76,6 +76,96 @@ const Request$json = const {
       '9': 0,
       '10': 'replyIdsByPostId'
     },
+    const {
+      '1': 'social_account_by_account_id',
+      '3': 8,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.GetSocialAccountByAccountId',
+      '9': 0,
+      '10': 'socialAccountByAccountId'
+    },
+    const {
+      '1': 'next_space_id',
+      '3': 9,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.GetNextSpaceId',
+      '9': 0,
+      '10': 'nextSpaceId'
+    },
+    const {
+      '1': 'next_post_id',
+      '3': 10,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.GetNextPostId',
+      '9': 0,
+      '10': 'nextPostId'
+    },
+    const {
+      '1': 'space_ids_by_owner',
+      '3': 11,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.GetSpaceIdsByOwner',
+      '9': 0,
+      '10': 'spaceIdsByOwner'
+    },
+    const {
+      '1': 'space_followers',
+      '3': 12,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.GetSpaceFollowers',
+      '9': 0,
+      '10': 'spaceFollowers'
+    },
+    const {
+      '1': 'spaces_followed_by_account',
+      '3': 13,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.GetSpacesFollowedByAccount',
+      '9': 0,
+      '10': 'spacesFollowedByAccount'
+    },
+    const {
+      '1': 'account_followers',
+      '3': 14,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.GetAccountFollowers',
+      '9': 0,
+      '10': 'accountFollowers'
+    },
+    const {
+      '1': 'accounts_followed_by_account',
+      '3': 15,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.GetAccountsFollowedByAccount',
+      '9': 0,
+      '10': 'accountsFollowedByAccount'
+    },
+    const {
+      '1': 'generate_account',
+      '3': 16,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.GenerateAccount',
+      '9': 0,
+      '10': 'generateAccount'
+    },
+    const {
+      '1': 'import_account',
+      '3': 17,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.ImportAccount',
+      '9': 0,
+      '10': 'importAccount'
+    },
   ],
   '8': const [
     const {'1': 'body'},
@@ -84,7 +174,7 @@ const Request$json = const {
 
 /// Descriptor for `Request`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List requestDescriptor = $convert.base64Decode(
-    'CgdSZXF1ZXN0EjkKC3NwYWNlX2J5X2lkGAEgASgLMhcuc3Vic29jaWFsLkdldFNwYWNlQnlJZEgAUglzcGFjZUJ5SWQSRQoPc3BhY2VfYnlfaGFuZGxlGAIgASgLMhsuc3Vic29jaWFsLkdldFNwYWNlQnlIYW5kbGVIAFINc3BhY2VCeUhhbmRsZRI2Cgpwb3N0X2J5X2lkGAMgASgLMhYuc3Vic29jaWFsLkdldFBvc3RCeUlkSABSCHBvc3RCeUlkElAKFHBvc3RfaWRzX2J5X3NwYWNlX2lkGAQgASgLMh4uc3Vic29jaWFsLkdldFBvc3RJZHNCeVNwYWNlSWRIAFIQcG9zdElkc0J5U3BhY2VJZBJCCg5yZWFjdGlvbl9ieV9pZBgFIAEoCzIaLnN1YnNvY2lhbC5HZXRSZWFjdGlvbkJ5SWRIAFIMcmVhY3Rpb25CeUlkElkKF3JlYWN0aW9uX2lkc19ieV9wb3N0X2lkGAYgASgLMiEuc3Vic29jaWFsLkdldFJlYWN0aW9uSWRzQnlQb3N0SWRIAFITcmVhY3Rpb25JZHNCeVBvc3RJZBJQChRyZXBseV9pZHNfYnlfcG9zdF9pZBgHIAEoCzIeLnN1YnNvY2lhbC5HZXRSZXBseUlkc0J5UG9zdElkSABSEHJlcGx5SWRzQnlQb3N0SWRCBgoEYm9keQ==');
+    'CgdSZXF1ZXN0EjkKC3NwYWNlX2J5X2lkGAEgASgLMhcuc3Vic29jaWFsLkdldFNwYWNlQnlJZEgAUglzcGFjZUJ5SWQSRQoPc3BhY2VfYnlfaGFuZGxlGAIgASgLMhsuc3Vic29jaWFsLkdldFNwYWNlQnlIYW5kbGVIAFINc3BhY2VCeUhhbmRsZRI2Cgpwb3N0X2J5X2lkGAMgASgLMhYuc3Vic29jaWFsLkdldFBvc3RCeUlkSABSCHBvc3RCeUlkElAKFHBvc3RfaWRzX2J5X3NwYWNlX2lkGAQgASgLMh4uc3Vic29jaWFsLkdldFBvc3RJZHNCeVNwYWNlSWRIAFIQcG9zdElkc0J5U3BhY2VJZBJCCg5yZWFjdGlvbl9ieV9pZBgFIAEoCzIaLnN1YnNvY2lhbC5HZXRSZWFjdGlvbkJ5SWRIAFIMcmVhY3Rpb25CeUlkElkKF3JlYWN0aW9uX2lkc19ieV9wb3N0X2lkGAYgASgLMiEuc3Vic29jaWFsLkdldFJlYWN0aW9uSWRzQnlQb3N0SWRIAFITcmVhY3Rpb25JZHNCeVBvc3RJZBJQChRyZXBseV9pZHNfYnlfcG9zdF9pZBgHIAEoCzIeLnN1YnNvY2lhbC5HZXRSZXBseUlkc0J5UG9zdElkSABSEHJlcGx5SWRzQnlQb3N0SWQSaAocc29jaWFsX2FjY291bnRfYnlfYWNjb3VudF9pZBgIIAEoCzImLnN1YnNvY2lhbC5HZXRTb2NpYWxBY2NvdW50QnlBY2NvdW50SWRIAFIYc29jaWFsQWNjb3VudEJ5QWNjb3VudElkEj8KDW5leHRfc3BhY2VfaWQYCSABKAsyGS5zdWJzb2NpYWwuR2V0TmV4dFNwYWNlSWRIAFILbmV4dFNwYWNlSWQSPAoMbmV4dF9wb3N0X2lkGAogASgLMhguc3Vic29jaWFsLkdldE5leHRQb3N0SWRIAFIKbmV4dFBvc3RJZBJMChJzcGFjZV9pZHNfYnlfb3duZXIYCyABKAsyHS5zdWJzb2NpYWwuR2V0U3BhY2VJZHNCeU93bmVySABSD3NwYWNlSWRzQnlPd25lchJHCg9zcGFjZV9mb2xsb3dlcnMYDCABKAsyHC5zdWJzb2NpYWwuR2V0U3BhY2VGb2xsb3dlcnNIAFIOc3BhY2VGb2xsb3dlcnMSZAoac3BhY2VzX2ZvbGxvd2VkX2J5X2FjY291bnQYDSABKAsyJS5zdWJzb2NpYWwuR2V0U3BhY2VzRm9sbG93ZWRCeUFjY291bnRIAFIXc3BhY2VzRm9sbG93ZWRCeUFjY291bnQSTQoRYWNjb3VudF9mb2xsb3dlcnMYDiABKAsyHi5zdWJzb2NpYWwuR2V0QWNjb3VudEZvbGxvd2Vyc0gAUhBhY2NvdW50Rm9sbG93ZXJzEmoKHGFjY291bnRzX2ZvbGxvd2VkX2J5X2FjY291bnQYDyABKAsyJy5zdWJzb2NpYWwuR2V0QWNjb3VudHNGb2xsb3dlZEJ5QWNjb3VudEgAUhlhY2NvdW50c0ZvbGxvd2VkQnlBY2NvdW50EkcKEGdlbmVyYXRlX2FjY291bnQYECABKAsyGi5zdWJzb2NpYWwuR2VuZXJhdGVBY2NvdW50SABSD2dlbmVyYXRlQWNjb3VudBJBCg5pbXBvcnRfYWNjb3VudBgRIAEoCzIYLnN1YnNvY2lhbC5JbXBvcnRBY2NvdW50SABSDWltcG9ydEFjY291bnRCBgoEYm9keQ==');
 @$core.Deprecated('Use responseDescriptor instead')
 const Response$json = const {
   '1': 'Response',
@@ -161,6 +251,96 @@ const Response$json = const {
       '9': 0,
       '10': 'replyIdsByPostId'
     },
+    const {
+      '1': 'social_account_by_account_id',
+      '3': 9,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.SocialAccountByAccountId',
+      '9': 0,
+      '10': 'socialAccountByAccountId'
+    },
+    const {
+      '1': 'next_space_id',
+      '3': 10,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.NextSpaceId',
+      '9': 0,
+      '10': 'nextSpaceId'
+    },
+    const {
+      '1': 'next_post_id',
+      '3': 11,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.NextPostId',
+      '9': 0,
+      '10': 'nextPostId'
+    },
+    const {
+      '1': 'space_ids_by_owner',
+      '3': 12,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.SpaceIdsByOwner',
+      '9': 0,
+      '10': 'spaceIdsByOwner'
+    },
+    const {
+      '1': 'space_followers',
+      '3': 13,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.SpaceFollowers',
+      '9': 0,
+      '10': 'spaceFollowers'
+    },
+    const {
+      '1': 'spaces_followed_by_account',
+      '3': 14,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.SpacesFollowedByAccount',
+      '9': 0,
+      '10': 'spacesFollowedByAccount'
+    },
+    const {
+      '1': 'account_followers',
+      '3': 15,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.AccountFollowers',
+      '9': 0,
+      '10': 'accountFollowers'
+    },
+    const {
+      '1': 'accounts_followed_by_account',
+      '3': 16,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.AccountsFollowedByAccount',
+      '9': 0,
+      '10': 'accountsFollowedByAccount'
+    },
+    const {
+      '1': 'generated_account',
+      '3': 17,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.GeneratedAccount',
+      '9': 0,
+      '10': 'generatedAccount'
+    },
+    const {
+      '1': 'imported_account',
+      '3': 18,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.ImportedAccount',
+      '9': 0,
+      '10': 'importedAccount'
+    },
   ],
   '8': const [
     const {'1': 'body'},
@@ -169,7 +349,7 @@ const Response$json = const {
 
 /// Descriptor for `Response`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List responseDescriptor = $convert.base64Decode(
-    'CghSZXNwb25zZRIoCgVlcnJvchgBIAEoCzIQLnN1YnNvY2lhbC5FcnJvckgAUgVlcnJvchI2CgtzcGFjZV9ieV9pZBgCIAEoCzIULnN1YnNvY2lhbC5TcGFjZUJ5SWRIAFIJc3BhY2VCeUlkEkIKD3NwYWNlX2J5X2hhbmRsZRgDIAEoCzIYLnN1YnNvY2lhbC5TcGFjZUJ5SGFuZGxlSABSDXNwYWNlQnlIYW5kbGUSMwoKcG9zdF9ieV9pZBgEIAEoCzITLnN1YnNvY2lhbC5Qb3N0QnlJZEgAUghwb3N0QnlJZBJNChRwb3N0X2lkc19ieV9zcGFjZV9pZBgFIAEoCzIbLnN1YnNvY2lhbC5Qb3N0SWRzQnlTcGFjZUlkSABSEHBvc3RJZHNCeVNwYWNlSWQSPwoOcmVhY3Rpb25fYnlfaWQYBiABKAsyFy5zdWJzb2NpYWwuUmVhY3Rpb25CeUlkSABSDHJlYWN0aW9uQnlJZBJWChdyZWFjdGlvbl9pZHNfYnlfcG9zdF9pZBgHIAEoCzIeLnN1YnNvY2lhbC5SZWFjdGlvbklkc0J5UG9zdElkSABSE3JlYWN0aW9uSWRzQnlQb3N0SWQSTQoUcmVwbHlfaWRzX2J5X3Bvc3RfaWQYCCABKAsyGy5zdWJzb2NpYWwuUmVwbHlJZHNCeVBvc3RJZEgAUhByZXBseUlkc0J5UG9zdElkQgYKBGJvZHk=');
+    'CghSZXNwb25zZRIoCgVlcnJvchgBIAEoCzIQLnN1YnNvY2lhbC5FcnJvckgAUgVlcnJvchI2CgtzcGFjZV9ieV9pZBgCIAEoCzIULnN1YnNvY2lhbC5TcGFjZUJ5SWRIAFIJc3BhY2VCeUlkEkIKD3NwYWNlX2J5X2hhbmRsZRgDIAEoCzIYLnN1YnNvY2lhbC5TcGFjZUJ5SGFuZGxlSABSDXNwYWNlQnlIYW5kbGUSMwoKcG9zdF9ieV9pZBgEIAEoCzITLnN1YnNvY2lhbC5Qb3N0QnlJZEgAUghwb3N0QnlJZBJNChRwb3N0X2lkc19ieV9zcGFjZV9pZBgFIAEoCzIbLnN1YnNvY2lhbC5Qb3N0SWRzQnlTcGFjZUlkSABSEHBvc3RJZHNCeVNwYWNlSWQSPwoOcmVhY3Rpb25fYnlfaWQYBiABKAsyFy5zdWJzb2NpYWwuUmVhY3Rpb25CeUlkSABSDHJlYWN0aW9uQnlJZBJWChdyZWFjdGlvbl9pZHNfYnlfcG9zdF9pZBgHIAEoCzIeLnN1YnNvY2lhbC5SZWFjdGlvbklkc0J5UG9zdElkSABSE3JlYWN0aW9uSWRzQnlQb3N0SWQSTQoUcmVwbHlfaWRzX2J5X3Bvc3RfaWQYCCABKAsyGy5zdWJzb2NpYWwuUmVwbHlJZHNCeVBvc3RJZEgAUhByZXBseUlkc0J5UG9zdElkEmUKHHNvY2lhbF9hY2NvdW50X2J5X2FjY291bnRfaWQYCSABKAsyIy5zdWJzb2NpYWwuU29jaWFsQWNjb3VudEJ5QWNjb3VudElkSABSGHNvY2lhbEFjY291bnRCeUFjY291bnRJZBI8Cg1uZXh0X3NwYWNlX2lkGAogASgLMhYuc3Vic29jaWFsLk5leHRTcGFjZUlkSABSC25leHRTcGFjZUlkEjkKDG5leHRfcG9zdF9pZBgLIAEoCzIVLnN1YnNvY2lhbC5OZXh0UG9zdElkSABSCm5leHRQb3N0SWQSSQoSc3BhY2VfaWRzX2J5X293bmVyGAwgASgLMhouc3Vic29jaWFsLlNwYWNlSWRzQnlPd25lckgAUg9zcGFjZUlkc0J5T3duZXISRAoPc3BhY2VfZm9sbG93ZXJzGA0gASgLMhkuc3Vic29jaWFsLlNwYWNlRm9sbG93ZXJzSABSDnNwYWNlRm9sbG93ZXJzEmEKGnNwYWNlc19mb2xsb3dlZF9ieV9hY2NvdW50GA4gASgLMiIuc3Vic29jaWFsLlNwYWNlc0ZvbGxvd2VkQnlBY2NvdW50SABSF3NwYWNlc0ZvbGxvd2VkQnlBY2NvdW50EkoKEWFjY291bnRfZm9sbG93ZXJzGA8gASgLMhsuc3Vic29jaWFsLkFjY291bnRGb2xsb3dlcnNIAFIQYWNjb3VudEZvbGxvd2VycxJnChxhY2NvdW50c19mb2xsb3dlZF9ieV9hY2NvdW50GBAgASgLMiQuc3Vic29jaWFsLkFjY291bnRzRm9sbG93ZWRCeUFjY291bnRIAFIZYWNjb3VudHNGb2xsb3dlZEJ5QWNjb3VudBJKChFnZW5lcmF0ZWRfYWNjb3VudBgRIAEoCzIbLnN1YnNvY2lhbC5HZW5lcmF0ZWRBY2NvdW50SABSEGdlbmVyYXRlZEFjY291bnQSRwoQaW1wb3J0ZWRfYWNjb3VudBgSIAEoCzIaLnN1YnNvY2lhbC5JbXBvcnRlZEFjY291bnRIAFIPaW1wb3J0ZWRBY2NvdW50QgYKBGJvZHk=');
 @$core.Deprecated('Use errorDescriptor instead')
 const Error$json = const {
   '1': 'Error',
@@ -196,12 +376,13 @@ const Error_Kind$json = const {
     const {'1': 'KIND_INVALID_PROTO', '2': 2},
     const {'1': 'KIND_INVALID_REQUEST', '2': 3},
     const {'1': 'KIND_NOT_FOUND', '2': 4},
+    const {'1': 'KIND_SUBXT', '2': 5},
   ],
 };
 
 /// Descriptor for `Error`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List errorDescriptor = $convert.base64Decode(
-    'CgVFcnJvchIpCgRraW5kGAEgASgOMhUuc3Vic29jaWFsLkVycm9yLktpbmRSBGtpbmQSEAoDbXNnGAIgASgJUgNtc2cicAoES2luZBIQCgxLSU5EX1VOS05PV04QABIQCgxLSU5EX05FVFdPUksQARIWChJLSU5EX0lOVkFMSURfUFJPVE8QAhIYChRLSU5EX0lOVkFMSURfUkVRVUVTVBADEhIKDktJTkRfTk9UX0ZPVU5EEAQ=');
+    'CgVFcnJvchIpCgRraW5kGAEgASgOMhUuc3Vic29jaWFsLkVycm9yLktpbmRSBGtpbmQSEAoDbXNnGAIgASgJUgNtc2cigAEKBEtpbmQSEAoMS0lORF9VTktOT1dOEAASEAoMS0lORF9ORVRXT1JLEAESFgoSS0lORF9JTlZBTElEX1BST1RPEAISGAoUS0lORF9JTlZBTElEX1JFUVVFU1QQAxISCg5LSU5EX05PVF9GT1VORBAEEg4KCktJTkRfU1VCWFQQBQ==');
 @$core.Deprecated('Use getSpaceByIdDescriptor instead')
 const GetSpaceById$json = const {
   '1': 'GetSpaceById',
@@ -282,6 +463,115 @@ const GetReplyIdsByPostId$json = const {
 final $typed_data.Uint8List getReplyIdsByPostIdDescriptor =
     $convert.base64Decode(
         'ChNHZXRSZXBseUlkc0J5UG9zdElkEhcKB3Bvc3RfaWQYASABKARSBnBvc3RJZA==');
+@$core.Deprecated('Use getSocialAccountByAccountIdDescriptor instead')
+const GetSocialAccountByAccountId$json = const {
+  '1': 'GetSocialAccountByAccountId',
+  '2': const [
+    const {'1': 'account_id', '3': 1, '4': 1, '5': 9, '10': 'accountId'},
+  ],
+};
+
+/// Descriptor for `GetSocialAccountByAccountId`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getSocialAccountByAccountIdDescriptor =
+    $convert.base64Decode(
+        'ChtHZXRTb2NpYWxBY2NvdW50QnlBY2NvdW50SWQSHQoKYWNjb3VudF9pZBgBIAEoCVIJYWNjb3VudElk');
+@$core.Deprecated('Use getNextSpaceIdDescriptor instead')
+const GetNextSpaceId$json = const {
+  '1': 'GetNextSpaceId',
+};
+
+/// Descriptor for `GetNextSpaceId`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getNextSpaceIdDescriptor =
+    $convert.base64Decode('Cg5HZXROZXh0U3BhY2VJZA==');
+@$core.Deprecated('Use getNextPostIdDescriptor instead')
+const GetNextPostId$json = const {
+  '1': 'GetNextPostId',
+};
+
+/// Descriptor for `GetNextPostId`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getNextPostIdDescriptor =
+    $convert.base64Decode('Cg1HZXROZXh0UG9zdElk');
+@$core.Deprecated('Use getSpaceIdsByOwnerDescriptor instead')
+const GetSpaceIdsByOwner$json = const {
+  '1': 'GetSpaceIdsByOwner',
+  '2': const [
+    const {'1': 'account_id', '3': 1, '4': 1, '5': 9, '10': 'accountId'},
+  ],
+};
+
+/// Descriptor for `GetSpaceIdsByOwner`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getSpaceIdsByOwnerDescriptor =
+    $convert.base64Decode(
+        'ChJHZXRTcGFjZUlkc0J5T3duZXISHQoKYWNjb3VudF9pZBgBIAEoCVIJYWNjb3VudElk');
+@$core.Deprecated('Use getSpaceFollowersDescriptor instead')
+const GetSpaceFollowers$json = const {
+  '1': 'GetSpaceFollowers',
+  '2': const [
+    const {'1': 'space_id', '3': 1, '4': 1, '5': 4, '10': 'spaceId'},
+  ],
+};
+
+/// Descriptor for `GetSpaceFollowers`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getSpaceFollowersDescriptor = $convert.base64Decode(
+    'ChFHZXRTcGFjZUZvbGxvd2VycxIZCghzcGFjZV9pZBgBIAEoBFIHc3BhY2VJZA==');
+@$core.Deprecated('Use getSpacesFollowedByAccountDescriptor instead')
+const GetSpacesFollowedByAccount$json = const {
+  '1': 'GetSpacesFollowedByAccount',
+  '2': const [
+    const {'1': 'account_id', '3': 1, '4': 1, '5': 9, '10': 'accountId'},
+  ],
+};
+
+/// Descriptor for `GetSpacesFollowedByAccount`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getSpacesFollowedByAccountDescriptor =
+    $convert.base64Decode(
+        'ChpHZXRTcGFjZXNGb2xsb3dlZEJ5QWNjb3VudBIdCgphY2NvdW50X2lkGAEgASgJUglhY2NvdW50SWQ=');
+@$core.Deprecated('Use getAccountFollowersDescriptor instead')
+const GetAccountFollowers$json = const {
+  '1': 'GetAccountFollowers',
+  '2': const [
+    const {'1': 'account_id', '3': 1, '4': 1, '5': 9, '10': 'accountId'},
+  ],
+};
+
+/// Descriptor for `GetAccountFollowers`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getAccountFollowersDescriptor = $convert.base64Decode(
+    'ChNHZXRBY2NvdW50Rm9sbG93ZXJzEh0KCmFjY291bnRfaWQYASABKAlSCWFjY291bnRJZA==');
+@$core.Deprecated('Use getAccountsFollowedByAccountDescriptor instead')
+const GetAccountsFollowedByAccount$json = const {
+  '1': 'GetAccountsFollowedByAccount',
+  '2': const [
+    const {'1': 'account_id', '3': 1, '4': 1, '5': 9, '10': 'accountId'},
+  ],
+};
+
+/// Descriptor for `GetAccountsFollowedByAccount`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getAccountsFollowedByAccountDescriptor =
+    $convert.base64Decode(
+        'ChxHZXRBY2NvdW50c0ZvbGxvd2VkQnlBY2NvdW50Eh0KCmFjY291bnRfaWQYASABKAlSCWFjY291bnRJZA==');
+@$core.Deprecated('Use generateAccountDescriptor instead')
+const GenerateAccount$json = const {
+  '1': 'GenerateAccount',
+  '2': const [
+    const {'1': 'password', '3': 1, '4': 1, '5': 9, '10': 'password'},
+  ],
+};
+
+/// Descriptor for `GenerateAccount`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List generateAccountDescriptor = $convert.base64Decode(
+    'Cg9HZW5lcmF0ZUFjY291bnQSGgoIcGFzc3dvcmQYASABKAlSCHBhc3N3b3Jk');
+@$core.Deprecated('Use importAccountDescriptor instead')
+const ImportAccount$json = const {
+  '1': 'ImportAccount',
+  '2': const [
+    const {'1': 'password', '3': 1, '4': 1, '5': 9, '10': 'password'},
+    const {'1': 'suri', '3': 2, '4': 1, '5': 9, '10': 'suri'},
+  ],
+};
+
+/// Descriptor for `ImportAccount`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List importAccountDescriptor = $convert.base64Decode(
+    'Cg1JbXBvcnRBY2NvdW50EhoKCHBhc3N3b3JkGAEgASgJUghwYXNzd29yZBISCgRzdXJpGAIgASgJUgRzdXJp');
 @$core.Deprecated('Use whoAndWhenDescriptor instead')
 const WhoAndWhen$json = const {
   '1': 'WhoAndWhen',
@@ -536,6 +826,80 @@ const Reaction_ReactionKind$json = const {
 /// Descriptor for `Reaction`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List reactionDescriptor = $convert.base64Decode(
     'CghSZWFjdGlvbhIOCgJpZBgBIAEoBFICaWQSLwoHY3JlYXRlZBgCIAEoCzIVLnN1YnNvY2lhbC5XaG9BbmRXaGVuUgdjcmVhdGVkEi8KB3VwZGF0ZWQYAyABKAsyFS5zdWJzb2NpYWwuV2hvQW5kV2hlblIHdXBkYXRlZBI0CgRraW5kGAQgASgOMiAuc3Vic29jaWFsLlJlYWN0aW9uLlJlYWN0aW9uS2luZFIEa2luZCI3CgxSZWFjdGlvbktpbmQSCwoHVU5LTk9XThAAEgsKB1VQX1ZPVEUQARINCglET1dOX1ZPVEUQAg==');
+@$core.Deprecated('Use socialAccountDescriptor instead')
+const SocialAccount$json = const {
+  '1': 'SocialAccount',
+  '2': const [
+    const {
+      '1': 'followers_count',
+      '3': 1,
+      '4': 1,
+      '5': 13,
+      '10': 'followersCount'
+    },
+    const {
+      '1': 'following_accounts_count',
+      '3': 2,
+      '4': 1,
+      '5': 13,
+      '10': 'followingAccountsCount'
+    },
+    const {
+      '1': 'following_spaces_count',
+      '3': 3,
+      '4': 1,
+      '5': 13,
+      '10': 'followingSpacesCount'
+    },
+    const {'1': 'reputation', '3': 4, '4': 1, '5': 13, '10': 'reputation'},
+    const {
+      '1': 'profile',
+      '3': 5,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.Profile',
+      '10': 'profile'
+    },
+  ],
+};
+
+/// Descriptor for `SocialAccount`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List socialAccountDescriptor = $convert.base64Decode(
+    'Cg1Tb2NpYWxBY2NvdW50EicKD2ZvbGxvd2Vyc19jb3VudBgBIAEoDVIOZm9sbG93ZXJzQ291bnQSOAoYZm9sbG93aW5nX2FjY291bnRzX2NvdW50GAIgASgNUhZmb2xsb3dpbmdBY2NvdW50c0NvdW50EjQKFmZvbGxvd2luZ19zcGFjZXNfY291bnQYAyABKA1SFGZvbGxvd2luZ1NwYWNlc0NvdW50Eh4KCnJlcHV0YXRpb24YBCABKA1SCnJlcHV0YXRpb24SLAoHcHJvZmlsZRgFIAEoCzISLnN1YnNvY2lhbC5Qcm9maWxlUgdwcm9maWxl');
+@$core.Deprecated('Use profileDescriptor instead')
+const Profile$json = const {
+  '1': 'Profile',
+  '2': const [
+    const {
+      '1': 'created',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.WhoAndWhen',
+      '10': 'created'
+    },
+    const {
+      '1': 'updated',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.WhoAndWhen',
+      '10': 'updated'
+    },
+    const {
+      '1': 'content',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.Content',
+      '10': 'content'
+    },
+  ],
+};
+
+/// Descriptor for `Profile`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List profileDescriptor = $convert.base64Decode(
+    'CgdQcm9maWxlEi8KB2NyZWF0ZWQYASABKAsyFS5zdWJzb2NpYWwuV2hvQW5kV2hlblIHY3JlYXRlZBIvCgd1cGRhdGVkGAIgASgLMhUuc3Vic29jaWFsLldob0FuZFdoZW5SB3VwZGF0ZWQSLAoHY29udGVudBgDIAEoCzISLnN1YnNvY2lhbC5Db250ZW50Ugdjb250ZW50');
 @$core.Deprecated('Use spaceByIdDescriptor instead')
 const SpaceById$json = const {
   '1': 'SpaceById',
@@ -662,3 +1026,138 @@ const ReplyIdsByPostId$json = const {
 /// Descriptor for `ReplyIdsByPostId`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List replyIdsByPostIdDescriptor = $convert.base64Decode(
     'ChBSZXBseUlkc0J5UG9zdElkEh8KCXJlcGx5X2lkcxgBIAMoBEICEAFSCHJlcGx5SWRz');
+@$core.Deprecated('Use socialAccountByAccountIdDescriptor instead')
+const SocialAccountByAccountId$json = const {
+  '1': 'SocialAccountByAccountId',
+  '2': const [
+    const {
+      '1': 'social_account',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.SocialAccount',
+      '10': 'socialAccount'
+    },
+  ],
+};
+
+/// Descriptor for `SocialAccountByAccountId`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List socialAccountByAccountIdDescriptor =
+    $convert.base64Decode(
+        'ChhTb2NpYWxBY2NvdW50QnlBY2NvdW50SWQSPwoOc29jaWFsX2FjY291bnQYASABKAsyGC5zdWJzb2NpYWwuU29jaWFsQWNjb3VudFINc29jaWFsQWNjb3VudA==');
+@$core.Deprecated('Use nextSpaceIdDescriptor instead')
+const NextSpaceId$json = const {
+  '1': 'NextSpaceId',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+  ],
+};
+
+/// Descriptor for `NextSpaceId`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List nextSpaceIdDescriptor =
+    $convert.base64Decode('CgtOZXh0U3BhY2VJZBIOCgJpZBgBIAEoBFICaWQ=');
+@$core.Deprecated('Use nextPostIdDescriptor instead')
+const NextPostId$json = const {
+  '1': 'NextPostId',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+  ],
+};
+
+/// Descriptor for `NextPostId`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List nextPostIdDescriptor =
+    $convert.base64Decode('CgpOZXh0UG9zdElkEg4KAmlkGAEgASgEUgJpZA==');
+@$core.Deprecated('Use spaceIdsByOwnerDescriptor instead')
+const SpaceIdsByOwner$json = const {
+  '1': 'SpaceIdsByOwner',
+  '2': const [
+    const {
+      '1': 'space_ids',
+      '3': 1,
+      '4': 3,
+      '5': 4,
+      '8': const {'2': true},
+      '10': 'spaceIds',
+    },
+  ],
+};
+
+/// Descriptor for `SpaceIdsByOwner`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List spaceIdsByOwnerDescriptor = $convert.base64Decode(
+    'Cg9TcGFjZUlkc0J5T3duZXISHwoJc3BhY2VfaWRzGAEgAygEQgIQAVIIc3BhY2VJZHM=');
+@$core.Deprecated('Use spaceFollowersDescriptor instead')
+const SpaceFollowers$json = const {
+  '1': 'SpaceFollowers',
+  '2': const [
+    const {'1': 'account_ids', '3': 1, '4': 3, '5': 9, '10': 'accountIds'},
+  ],
+};
+
+/// Descriptor for `SpaceFollowers`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List spaceFollowersDescriptor = $convert.base64Decode(
+    'Cg5TcGFjZUZvbGxvd2VycxIfCgthY2NvdW50X2lkcxgBIAMoCVIKYWNjb3VudElkcw==');
+@$core.Deprecated('Use spacesFollowedByAccountDescriptor instead')
+const SpacesFollowedByAccount$json = const {
+  '1': 'SpacesFollowedByAccount',
+  '2': const [
+    const {
+      '1': 'space_ids',
+      '3': 1,
+      '4': 3,
+      '5': 4,
+      '8': const {'2': true},
+      '10': 'spaceIds',
+    },
+  ],
+};
+
+/// Descriptor for `SpacesFollowedByAccount`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List spacesFollowedByAccountDescriptor =
+    $convert.base64Decode(
+        'ChdTcGFjZXNGb2xsb3dlZEJ5QWNjb3VudBIfCglzcGFjZV9pZHMYASADKARCAhABUghzcGFjZUlkcw==');
+@$core.Deprecated('Use accountFollowersDescriptor instead')
+const AccountFollowers$json = const {
+  '1': 'AccountFollowers',
+  '2': const [
+    const {'1': 'account_ids', '3': 1, '4': 3, '5': 9, '10': 'accountIds'},
+  ],
+};
+
+/// Descriptor for `AccountFollowers`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List accountFollowersDescriptor = $convert.base64Decode(
+    'ChBBY2NvdW50Rm9sbG93ZXJzEh8KC2FjY291bnRfaWRzGAEgAygJUgphY2NvdW50SWRz');
+@$core.Deprecated('Use accountsFollowedByAccountDescriptor instead')
+const AccountsFollowedByAccount$json = const {
+  '1': 'AccountsFollowedByAccount',
+  '2': const [
+    const {'1': 'account_ids', '3': 1, '4': 3, '5': 9, '10': 'accountIds'},
+  ],
+};
+
+/// Descriptor for `AccountsFollowedByAccount`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List accountsFollowedByAccountDescriptor =
+    $convert.base64Decode(
+        'ChlBY2NvdW50c0ZvbGxvd2VkQnlBY2NvdW50Eh8KC2FjY291bnRfaWRzGAEgAygJUgphY2NvdW50SWRz');
+@$core.Deprecated('Use generatedAccountDescriptor instead')
+const GeneratedAccount$json = const {
+  '1': 'GeneratedAccount',
+  '2': const [
+    const {'1': 'public_key', '3': 1, '4': 1, '5': 9, '10': 'publicKey'},
+    const {'1': 'seed_phrase', '3': 2, '4': 1, '5': 9, '10': 'seedPhrase'},
+  ],
+};
+
+/// Descriptor for `GeneratedAccount`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List generatedAccountDescriptor = $convert.base64Decode(
+    'ChBHZW5lcmF0ZWRBY2NvdW50Eh0KCnB1YmxpY19rZXkYASABKAlSCXB1YmxpY0tleRIfCgtzZWVkX3BocmFzZRgCIAEoCVIKc2VlZFBocmFzZQ==');
+@$core.Deprecated('Use importedAccountDescriptor instead')
+const ImportedAccount$json = const {
+  '1': 'ImportedAccount',
+  '2': const [
+    const {'1': 'public_key', '3': 1, '4': 1, '5': 9, '10': 'publicKey'},
+  ],
+};
+
+/// Descriptor for `ImportedAccount`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List importedAccountDescriptor = $convert.base64Decode(
+    'Cg9JbXBvcnRlZEFjY291bnQSHQoKcHVibGljX2tleRgBIAEoCVIJcHVibGljS2V5');

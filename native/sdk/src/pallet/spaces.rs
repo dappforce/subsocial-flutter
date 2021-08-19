@@ -40,6 +40,12 @@ impl<T: Spaces> fmt::Display for Space<T> {
 
 // Storage ..
 
+#[derive(Clone, Debug, Eq, Default, Encode, PartialEq, subxt::Store)]
+pub struct NextSpaceIdStore<T: Spaces> {
+    #[store(returns = SpaceId)]
+    __marker: PhantomData<T>,
+}
+
 #[derive(Clone, Debug, Eq, Encode, PartialEq, subxt::Store)]
 pub struct SpaceByIdStore<T: Spaces> {
     #[store(returns = Space<T>)]
@@ -67,6 +73,22 @@ impl<T: Spaces> SpaceIdByHandleStore<T> {
     pub fn new(handle: impl Into<Vec<u8>>) -> Self {
         Self {
             handle: handle.into(),
+            __marker: Default::default(),
+        }
+    }
+}
+
+#[derive(Clone, Debug, Eq, Encode, PartialEq, subxt::Store)]
+pub struct SpaceIdsByOwnerStore<T: Spaces> {
+    #[store(returns = Vec<SpaceId>)]
+    account_id: T::AccountId,
+    __marker: PhantomData<T>,
+}
+
+impl<T: Spaces> SpaceIdsByOwnerStore<T> {
+    pub fn new(account_id: T::AccountId) -> Self {
+        Self {
+            account_id,
             __marker: Default::default(),
         }
     }
