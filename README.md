@@ -36,6 +36,13 @@ then rerun the `init.py` script to fetch the latest native libs.
 ./packages/subsocial_sdk/init.py
 ```
 
+## To run the example app
+Run the following script
+
+```bash
+./init.py .
+```
+
 ## Development, Setup and, Tools
 
 > Note these instructions only for who are working on the development of the SDK
