@@ -27,7 +27,7 @@ then use the SDK as any other flutter package.
 Simply run:
 
 ```bash
-git submodule foreach git pull
+git submodule foreach git pull origin main
 ```
 
 then rerun the `init.py` script to fetch the latest native libs.
