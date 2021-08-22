@@ -14,6 +14,8 @@ frame-support = { default-features = false, version = '2.0.1' }
 frame-system = { default-features = false, version = '2.0.1' }
 pallet-timestamp = { default-features = false, version = '2.0.1' }
 sp-std = { default-features = false, version = '2.0.1' }
+sp-runtime = { default-features = false, version = '2.0.1' }
+
 
 [dev-dependencies]
 async-std = { version = "1.8", features = ["attributes"] }

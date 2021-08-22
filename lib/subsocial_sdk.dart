@@ -246,6 +246,54 @@ class Subsocial {
     return val;
   }
 
+  Future<PostReactionCreated> createPostReaction({
+    required PostId postId,
+    required Reaction_Kind kind,
+  }) async {
+    final req = Request(
+      createPostReaction: CreatePostReaction(
+        postId: makeLongInt(postId),
+        kind: kind,
+      ),
+    );
+    final res = await _dispatch(req);
+    final val = res.ensurePostReactionCreated();
+    return val;
+  }
+
+  Future<PostCreated> createPost({
+    required PostExtension extensionValue,
+    required Content content,
+    SpaceId? spaceId,
+  }) async {
+    final req = Request(
+      createPost: CreatePost(
+        spaceId: spaceId != null ? makeLongInt(spaceId) : null,
+        content: content,
+        extensionValue: extensionValue,
+      ),
+    );
+    final res = await _dispatch(req);
+    final val = res.ensurePostCreated();
+    return val;
+  }
+
+  Future<PostUpdated> updatePost({
+    required PostId postId,
+    Content? content,
+    bool? hidden,
+  }) async {
+    final req = Request(
+      updatePost: UpdatePost(
+        postId: makeLongInt(postId),
+        postUpdate: PostUpdate(content: content, hidden: hidden),
+      ),
+    );
+    final res = await _dispatch(req);
+    final val = res.ensurePostUpdated();
+    return val;
+  }
+
   void dispose() {
     // currently, there is nothing to dispose.
   }
@@ -253,6 +301,7 @@ class Subsocial {
   Future<Response> _dispatch(Request req) async {
     final completer = Completer<typed_data.Uint8List>();
     final port = singleCompletePort(completer);
+    // automaticlly freed in the rust side.
     final buffer = req.writeToBuffer().asPtr();
     final result = _raw.subsocial_dispatch(port.nativePort, buffer);
     _assertOk(result);

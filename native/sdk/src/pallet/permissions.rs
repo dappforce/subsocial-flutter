@@ -5,7 +5,7 @@ use sp_std::collections::btree_set::BTreeSet;
 use sp_std::prelude::*;
 use subxt::sp_runtime::RuntimeDebug;
 
-use super::utils::SpaceId;
+use super::SpaceId;
 
 #[derive(
     Encode, Decode, Ord, PartialOrd, Clone, Eq, PartialEq, RuntimeDebug,

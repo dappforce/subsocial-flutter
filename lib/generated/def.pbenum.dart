@@ -57,33 +57,32 @@ class Error_Kind extends $pb.ProtobufEnum {
   const Error_Kind._($core.int v, $core.String n) : super(v, n);
 }
 
-class Reaction_ReactionKind extends $pb.ProtobufEnum {
-  static const Reaction_ReactionKind UNKNOWN = Reaction_ReactionKind._(
+class Reaction_Kind extends $pb.ProtobufEnum {
+  static const Reaction_Kind UNKNOWN = Reaction_Kind._(
       0,
       const $core.bool.fromEnvironment('protobuf.omit_enum_names')
           ? ''
           : 'UNKNOWN');
-  static const Reaction_ReactionKind UP_VOTE = Reaction_ReactionKind._(
+  static const Reaction_Kind UP_VOTE = Reaction_Kind._(
       1,
       const $core.bool.fromEnvironment('protobuf.omit_enum_names')
           ? ''
           : 'UP_VOTE');
-  static const Reaction_ReactionKind DOWN_VOTE = Reaction_ReactionKind._(
+  static const Reaction_Kind DOWN_VOTE = Reaction_Kind._(
       2,
       const $core.bool.fromEnvironment('protobuf.omit_enum_names')
           ? ''
           : 'DOWN_VOTE');
 
-  static const $core.List<Reaction_ReactionKind> values =
-      <Reaction_ReactionKind>[
+  static const $core.List<Reaction_Kind> values = <Reaction_Kind>[
     UNKNOWN,
     UP_VOTE,
     DOWN_VOTE,
   ];
 
-  static final $core.Map<$core.int, Reaction_ReactionKind> _byValue =
+  static final $core.Map<$core.int, Reaction_Kind> _byValue =
       $pb.ProtobufEnum.initByValue(values);
-  static Reaction_ReactionKind? valueOf($core.int value) => _byValue[value];
+  static Reaction_Kind? valueOf($core.int value) => _byValue[value];
 
-  const Reaction_ReactionKind._($core.int v, $core.String n) : super(v, n);
+  const Reaction_Kind._($core.int v, $core.String n) : super(v, n);
 }

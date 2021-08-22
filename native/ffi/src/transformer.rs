@@ -23,6 +23,15 @@ impl From<sdk::subxt::Error> for Error {
     fn from(e: sdk::subxt::Error) -> Self {
         Self {
             kind: error::Kind::Subxt.into(),
+            msg: format!("{}", e),
+        }
+    }
+}
+
+impl From<sdk::codec::Error> for Error {
+    fn from(e: sdk::codec::Error) -> Self {
+        Self {
+            kind: error::Kind::Subxt.into(),
             msg: e.to_string(),
         }
     }
@@ -56,8 +65,23 @@ impl From<utils::Content> for Content {
     }
 }
 
-impl From<posts::PostExtension> for PostExtension {
-    fn from(extension: posts::PostExtension) -> Self {
+impl From<Content> for utils::Content {
+    fn from(content: Content) -> Self {
+        use content::Value;
+        let val = match content.value {
+            Some(val) => val,
+            None => return Self::None,
+        };
+        match val {
+            Value::Raw(bytes) => Self::Raw(bytes),
+            Value::Ipfs(cid) => Self::IPFS(cid.into_bytes()),
+            Value::Hyper(val) => Self::Hyper(val.into_bytes()),
+        }
+    }
+}
+
+impl From<posts::PostExtension<SubsocialRuntime>> for PostExtension {
+    fn from(extension: posts::PostExtension<SubsocialRuntime>) -> Self {
         use post_extension::Value;
         match extension {
             posts::PostExtension::Comment(comment) => PostExtension {
@@ -69,9 +93,31 @@ impl From<posts::PostExtension> for PostExtension {
             posts::PostExtension::SharedPost(id) => PostExtension {
                 value: Some(Value::SharedPost(SharedPost { root_post_id: id })),
             },
-            posts::PostExtension::RegularPost => {
-                unimplemented!("Should be None!")
-            }
+            posts::PostExtension::RegularPost => PostExtension {
+                value: Some(Value::RegularPost(RegularPost {})),
+            },
+        }
+    }
+}
+
+impl From<PostExtension> for posts::PostExtension<SubsocialRuntime> {
+    fn from(ext: PostExtension) -> Self {
+        use post_extension::Value;
+        let val = match ext.value {
+            Some(val) => val,
+            None => return Self::RegularPost,
+        };
+        match val {
+            Value::RegularPost(_) => Self::RegularPost,
+            Value::Comment(comment) => Self::Comment(posts::Comment {
+                parent_id: if comment.parent_id != 0 {
+                    Some(comment.parent_id)
+                } else {
+                    None
+                },
+                root_post_id: comment.root_post_id,
+            }),
+            Value::SharedPost(val) => Self::SharedPost(val.root_post_id),
         }
     }
 }
@@ -136,25 +182,38 @@ impl From<posts::Post<SubsocialRuntime>> for Post {
     }
 }
 
-impl From<reactions::ReactionKind> for reaction::ReactionKind {
+impl From<PostUpdate> for posts::PostUpdate<SubsocialRuntime> {
+    fn from(update: PostUpdate) -> Self {
+        Self::new(update.content.map(Into::into), Some(update.hidden))
+    }
+}
+
+impl From<reactions::ReactionKind> for reaction::Kind {
     fn from(k: reactions::ReactionKind) -> Self {
         match k {
-            reactions::ReactionKind::Upvote => reaction::ReactionKind::UpVote,
-            reactions::ReactionKind::Downvote => {
-                reaction::ReactionKind::DownVote
-            }
+            reactions::ReactionKind::Upvote => reaction::Kind::UpVote,
+            reactions::ReactionKind::Downvote => reaction::Kind::DownVote,
+        }
+    }
+}
+
+impl From<reaction::Kind> for reactions::ReactionKind {
+    fn from(k: reaction::Kind) -> Self {
+        match k {
+            reaction::Kind::Unknown => reactions::ReactionKind::Upvote,
+            reaction::Kind::UpVote => reactions::ReactionKind::Upvote,
+            reaction::Kind::DownVote => reactions::ReactionKind::Downvote,
         }
     }
 }
 
 impl From<reactions::Reaction<SubsocialRuntime>> for Reaction {
     fn from(reaction: reactions::Reaction<SubsocialRuntime>) -> Self {
-        use reaction::ReactionKind;
         Self {
             id: reaction.id,
             created: Some(reaction.created.into()),
             updated: reaction.updated.map(Into::into),
-            kind: ReactionKind::from(reaction.kind).into(),
+            kind: reaction::Kind::from(reaction.kind).into(),
         }
     }
 }

@@ -2,7 +2,7 @@
 pub struct Request {
     #[prost(
         oneof = "request::Body",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20"
     )]
     pub body: ::core::option::Option<request::Body>,
 }
@@ -44,13 +44,19 @@ pub mod request {
         GenerateAccount(super::GenerateAccount),
         #[prost(message, tag = "17")]
         ImportAccount(super::ImportAccount),
+        #[prost(message, tag = "18")]
+        CreatePostReaction(super::CreatePostReaction),
+        #[prost(message, tag = "19")]
+        CreatePost(super::CreatePost),
+        #[prost(message, tag = "20")]
+        UpdatePost(super::UpdatePost),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Response {
     #[prost(
         oneof = "response::Body",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21"
     )]
     pub body: ::core::option::Option<response::Body>,
 }
@@ -94,6 +100,12 @@ pub mod response {
         GeneratedAccount(super::GeneratedAccount),
         #[prost(message, tag = "18")]
         ImportedAccount(super::ImportedAccount),
+        #[prost(message, tag = "19")]
+        PostReactionCreated(super::PostReactionCreated),
+        #[prost(message, tag = "20")]
+        PostCreated(super::PostCreated),
+        #[prost(message, tag = "21")]
+        PostUpdated(super::PostUpdated),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -209,6 +221,29 @@ pub struct ImportAccount {
     #[prost(string, tag = "2")]
     pub suri: ::prost::alloc::string::String,
 }
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CreatePostReaction {
+    #[prost(uint64, tag = "1")]
+    pub post_id: u64,
+    #[prost(enumeration = "reaction::Kind", tag = "2")]
+    pub kind: i32,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CreatePost {
+    #[prost(uint64, tag = "1")]
+    pub space_id: u64,
+    #[prost(message, optional, tag = "2")]
+    pub extension_value: ::core::option::Option<PostExtension>,
+    #[prost(message, optional, tag = "3")]
+    pub content: ::core::option::Option<Content>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdatePost {
+    #[prost(uint64, tag = "1")]
+    pub post_id: u64,
+    #[prost(message, optional, tag = "2")]
+    pub post_update: ::core::option::Option<PostUpdate>,
+}
 // DATA
 
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -238,8 +273,10 @@ pub mod content {
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RegularPost {}
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PostExtension {
-    #[prost(oneof = "post_extension::Value", tags = "1, 2")]
+    #[prost(oneof = "post_extension::Value", tags = "1, 2, 3")]
     pub value: ::core::option::Option<post_extension::Value>,
 }
 /// Nested message and enum types in `PostExtension`.
@@ -247,8 +284,10 @@ pub mod post_extension {
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Value {
         #[prost(message, tag = "1")]
-        Comment(super::Comment),
+        RegularPost(super::RegularPost),
         #[prost(message, tag = "2")]
+        Comment(super::Comment),
+        #[prost(message, tag = "3")]
         SharedPost(super::SharedPost),
     }
 }
@@ -330,7 +369,7 @@ pub struct Reaction {
     pub created: ::core::option::Option<WhoAndWhen>,
     #[prost(message, optional, tag = "3")]
     pub updated: ::core::option::Option<WhoAndWhen>,
-    #[prost(enumeration = "reaction::ReactionKind", tag = "4")]
+    #[prost(enumeration = "reaction::Kind", tag = "4")]
     pub kind: i32,
 }
 /// Nested message and enum types in `Reaction`.
@@ -347,7 +386,7 @@ pub mod reaction {
         ::prost::Enumeration,
     )]
     #[repr(i32)]
-    pub enum ReactionKind {
+    pub enum Kind {
         Unknown = 0,
         UpVote = 1,
         DownVote = 2,
@@ -374,6 +413,13 @@ pub struct Profile {
     pub updated: ::core::option::Option<WhoAndWhen>,
     #[prost(message, optional, tag = "3")]
     pub content: ::core::option::Option<Content>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PostUpdate {
+    #[prost(message, optional, tag = "1")]
+    pub content: ::core::option::Option<Content>,
+    #[prost(bool, tag = "2")]
+    pub hidden: bool,
 }
 // RESPONSES
 
@@ -463,4 +509,25 @@ pub struct GeneratedAccount {
 pub struct ImportedAccount {
     #[prost(string, tag = "1")]
     pub public_key: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PostReactionCreated {
+    #[prost(uint64, tag = "1")]
+    pub post_id: u64,
+    #[prost(uint64, tag = "2")]
+    pub reaction_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PostCreated {
+    #[prost(string, tag = "1")]
+    pub account_id: ::prost::alloc::string::String,
+    #[prost(uint64, tag = "2")]
+    pub post_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PostUpdated {
+    #[prost(string, tag = "1")]
+    pub account_id: ::prost::alloc::string::String,
+    #[prost(uint64, tag = "2")]
+    pub post_id: u64,
 }

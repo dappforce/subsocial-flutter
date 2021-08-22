@@ -5,13 +5,18 @@ use sdk::subxt::sp_core::Pair;
 use sdk::subxt::sp_runtime::AccountId32;
 use sdk::subxt::Client;
 
+use sdk::pallet::posts::*;
+use sdk::pallet::reactions::*;
+
 use crate::pb::subsocial::request::Body as RequestBody;
 use crate::pb::subsocial::response::Body as ResponseBody;
 use crate::pb::subsocial::*;
 use crate::transformer::*;
+use crate::Signer;
 
 pub async fn handle(
     client: &Client<SubsocialRuntime>,
+    signer: &Signer,
     req: Request,
 ) -> Vec<u8> {
     let body = match req.body {
@@ -70,6 +75,15 @@ pub async fn handle(
         }
         RequestBody::GenerateAccount(args) => generate_account(args),
         RequestBody::ImportAccount(args) => import_account(args),
+        RequestBody::CreatePostReaction(args) => {
+            create_post_reaction(client, signer, args).await
+        }
+        RequestBody::CreatePost(args) => {
+            create_post(client, signer, args).await
+        }
+        RequestBody::UpdatePost(args) => {
+            update_post(client, signer, args).await
+        }
     };
     let response = match result {
         Ok(body) => Response { body: Some(body) },
@@ -442,4 +456,114 @@ fn import_account(
     };
     let body = ResponseBody::ImportedAccount(ImportedAccount { public_key });
     Ok(body)
+}
+
+async fn create_post_reaction(
+    client: &Client<SubsocialRuntime>,
+    signer: &Signer,
+    CreatePostReaction { post_id, kind }: CreatePostReaction,
+) -> Result<ResponseBody, Error> {
+    let kind = reaction::Kind::from_i32(kind).unwrap_or_default();
+    let maybe_event = client
+        .create_post_reaction_and_watch(signer, post_id, kind.into())
+        .await?
+        .find_event::<PostReactionCreatedEvent<_>>()?;
+    match maybe_event {
+        Some(event) => {
+            let body = ResponseBody::PostReactionCreated(PostReactionCreated {
+                post_id,
+                reaction_id: event.reaction_id,
+            });
+            Ok(body)
+        }
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("Post Reaction Created Event Not Found"),
+        }),
+    }
+}
+
+async fn create_post(
+    client: &Client<SubsocialRuntime>,
+    signer: &Signer,
+    CreatePost {
+        space_id,
+        extension_value,
+        content,
+    }: CreatePost,
+) -> Result<ResponseBody, Error> {
+    let maybe_space_id = if space_id != 0 { Some(space_id) } else { None };
+    let extension = match extension_value {
+        Some(val) => val.into(),
+        None => {
+            return Err(Error {
+                kind: error::Kind::InvalidRequest.into(),
+                msg: String::from("Missing extension value"),
+            })
+        }
+    };
+    let content = match content {
+        Some(val) => val.into(),
+        None => {
+            return Err(Error {
+                kind: error::Kind::InvalidRequest.into(),
+                msg: String::from("Missing content value"),
+            })
+        }
+    };
+
+    let maybe_event = client
+        .create_post_and_watch(signer, maybe_space_id, extension, content)
+        .await?
+        .find_event::<PostCreatedEvent<_>>()?;
+    match maybe_event {
+        Some(event) => {
+            let body = ResponseBody::PostCreated(PostCreated {
+                post_id: event.post_id,
+                account_id: event.account_id.to_string(),
+            });
+            Ok(body)
+        }
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("Post Created Event Not Found"),
+        }),
+    }
+}
+
+async fn update_post(
+    client: &Client<SubsocialRuntime>,
+    signer: &Signer,
+    UpdatePost {
+        post_id,
+        post_update,
+    }: UpdatePost,
+) -> Result<ResponseBody, Error> {
+    let update = match post_update {
+        Some(val) => val.into(),
+        None => {
+            return Err(Error {
+                kind: error::Kind::InvalidRequest.into(),
+                msg: String::from("Missing post update value"),
+            })
+        }
+    };
+
+    let maybe_event = client
+        .update_post_and_watch(signer, post_id, update)
+        .await?
+        .find_event::<PostUpdatedEvent<_>>()?;
+    match maybe_event {
+        Some(event) => {
+            let body = ResponseBody::PostUpdated(PostUpdated {
+                post_id: event.post_id,
+                account_id: event.account_id.to_string(),
+            });
+            Ok(body)
+        }
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("Post Updated Event Not Found"),
+        }),
+    }
 }

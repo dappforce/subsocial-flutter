@@ -20,6 +20,7 @@ pub type Signature = MultiSignature;
 pub type AccountId =
     <<Signature as Verify>::Signer as IdentifyAccount>::AccountId;
 
+pub type Address = crate::multiaddress::MultiAddress<AccountId, ()>;
 /// Balance of an account.
 pub type Balance = u128;
 
@@ -41,7 +42,7 @@ impl subxt::Runtime for SubsocialRuntime {
 impl System for SubsocialRuntime {
     type AccountData = AccountData<BalanceOf<Self>>;
     type AccountId = AccountId;
-    type Address = AccountId;
+    type Address = Address;
     type BlockNumber = u32;
     type Extrinsic = OpaqueExtrinsic;
     type Hash = Hash;
@@ -55,9 +56,22 @@ impl Balances for SubsocialRuntime {
 }
 
 // implementations for Subsoical Pallets
-impl pallet::spaces::Spaces for SubsocialRuntime {}
-impl pallet::posts::Posts for SubsocialRuntime {}
-impl pallet::reactions::Reactions for SubsocialRuntime {}
+impl pallet::spaces::Spaces for SubsocialRuntime {
+    type SpaceId = pallet::SpaceId;
+}
+
+impl pallet::posts::Posts for SubsocialRuntime {
+    type PostId = pallet::PostId;
+}
+
+impl pallet::reactions::Reactions for SubsocialRuntime {
+    type ReactionId = pallet::ReactionId;
+    // FIXME: this should be implemented in the scores pallet.
+    type PostReactionScores = ();
+    // FIXME: this should be from the scores pallet.
+    type ScoringAction = u8;
+}
+
 impl pallet::profiles::Profiles for SubsocialRuntime {}
 impl pallet::space_follows::SpaceFollows for SubsocialRuntime {}
 impl pallet::profile_follows::ProfileFollows for SubsocialRuntime {}

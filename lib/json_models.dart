@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:subsocial_sdk/subsocial_sdk.dart';
 
@@ -23,6 +25,15 @@ class PostMetadata {
     }
     image = json['image'] as String?;
     title = json['title'] as String?;
+  }
+
+  String toJson() {
+    return jsonEncode({
+      'title': title,
+      'image': image,
+      'tags': tags,
+      'body': body,
+    });
   }
 }
 

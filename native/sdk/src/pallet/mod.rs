@@ -7,3 +7,9 @@ pub mod space_follows;
 pub mod spaces;
 pub mod traits;
 pub mod utils;
+
+// Parameters types
+
+pub type SpaceId = u64;
+pub type PostId = u64;
+pub type ReactionId = u64;

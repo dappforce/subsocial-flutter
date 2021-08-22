@@ -1,14 +1,27 @@
 use std::fmt;
-use std::marker::PhantomData;
 
 use codec::{Decode, Encode};
+use subxt::balances::*;
 use subxt::system::*;
 
-use super::posts::PostId;
+use super::posts::*;
 use super::utils::WhoAndWhen;
 
 #[subxt::module]
-pub trait Reactions: System {}
+pub trait Reactions: System + Balances + Posts {
+    type PostReactionScores: Default + Decode + Encode + Send + Sync + 'static;
+    type ScoringAction: Default + Decode + Encode + Send + Sync + 'static;
+    type ReactionId: From<u64>
+        + Into<u64>
+        + Default
+        + Encode
+        + Decode
+        + Copy
+        + Clone
+        + Send
+        + Sync
+        + 'static;
+}
 
 pub type ReactionId = u64;
 
@@ -20,7 +33,7 @@ pub enum ReactionKind {
 
 #[derive(Encode, Decode, Clone, Eq, PartialEq, Debug)]
 pub struct Reaction<T: Reactions> {
-    pub id: ReactionId,
+    pub id: T::ReactionId,
     pub created: WhoAndWhen<T>,
     pub updated: Option<WhoAndWhen<T>>,
     pub kind: ReactionKind,
@@ -32,7 +45,7 @@ impl<T: Reactions> fmt::Display for Reaction<T> {
             ReactionKind::Upvote => "👍",
             ReactionKind::Downvote => "👎",
         };
-        write!(f, "Reaction #{} {}", self.id, emo)?;
+        write!(f, "Reaction #{} {}", self.id.into(), emo)?;
         Ok(())
     }
 }
@@ -42,31 +55,40 @@ impl<T: Reactions> fmt::Display for Reaction<T> {
 #[derive(Clone, Debug, Eq, Encode, PartialEq, subxt::Store)]
 pub struct ReactionByIdStore<T: Reactions> {
     #[store(returns = Reaction<T>)]
-    reaction_id: ReactionId,
-    __marker: PhantomData<T>,
+    reaction_id: T::ReactionId,
 }
 
 impl<T: Reactions> ReactionByIdStore<T> {
-    pub fn new(reaction_id: ReactionId) -> Self {
-        Self {
-            reaction_id,
-            __marker: Default::default(),
-        }
+    pub fn new(reaction_id: T::ReactionId) -> Self {
+        Self { reaction_id }
     }
 }
 
 #[derive(Clone, Debug, Eq, Encode, PartialEq, subxt::Store)]
 pub struct ReactionIdsByPostIdStore<T: Reactions> {
-    #[store(returns = Vec<ReactionId>)]
-    post_id: PostId,
-    __marker: PhantomData<T>,
+    #[store(returns = Vec<T::ReactionId>)]
+    post_id: T::PostId,
 }
 
 impl<T: Reactions> ReactionIdsByPostIdStore<T> {
-    pub fn new(post_id: PostId) -> Self {
-        Self {
-            post_id,
-            __marker: Default::default(),
-        }
+    pub fn new(post_id: T::PostId) -> Self {
+        Self { post_id }
     }
+}
+
+// Calls ..
+
+#[derive(Clone, Debug, Encode, Eq, PartialEq, subxt::Call)]
+pub struct CreatePostReactionCall<T: Reactions> {
+    post_id: T::PostId,
+    kind: ReactionKind,
+}
+
+// Events ..
+
+#[derive(Clone, Debug, Encode, Decode, Eq, PartialEq, subxt::Event)]
+pub struct PostReactionCreatedEvent<T: Reactions> {
+    pub account_id: T::AccountId,
+    pub post_id: T::PostId,
+    pub reaction_id: T::ReactionId,
 }
