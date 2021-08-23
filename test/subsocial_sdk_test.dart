@@ -133,5 +133,5 @@ void main() {
     );
     expect(event.postId.toInt(), randomPostId);
     expect(event.hasReactionId(), true);
-  });
+  }, skip: true);
 }
