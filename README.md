@@ -27,13 +27,20 @@ then use the SDK as any other flutter package.
 Simply run:
 
 ```bash
-git submodule foreach git pull
+git submodule foreach git pull origin main
 ```
 
 then rerun the `init.py` script to fetch the latest native libs.
 
 ```bash
 ./packages/subsocial_sdk/init.py
+```
+
+## To run the example app
+Run the following script
+
+```bash
+./init.py .
 ```
 
 ## Development, Setup and, Tools
