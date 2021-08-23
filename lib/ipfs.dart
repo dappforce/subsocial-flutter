@@ -42,10 +42,10 @@ class IpfsClient {
     List<String> cids,
     T Function(Map<String, dynamic>) converter,
   ) async {
-    final result = await _client.get<Map<String, dynamic>>(
+    final result = await _client.post<Map<String, dynamic>>(
       _kIpfsBaseUrl,
-      queryParameters: {
-        'cids': cids.join(','),
+      data: {
+        'cids': cids,
       },
       options: Options(
         contentType: ContentType.json.value,
