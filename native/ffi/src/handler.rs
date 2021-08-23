@@ -166,16 +166,10 @@ async fn posts_ids_by_space_id(
     let store = posts::PostIdsBySpaceIdStore::new(space_id);
     let maybe_ids = client.fetch(&store, None).await?;
     match maybe_ids {
-        Some(ids) => {
-            let body = ResponseBody::PostIdsBySpaceId(PostIdsBySpaceId {
-                post_ids: ids,
-            });
-            Ok(body)
-        }
-        None => Err(Error {
-            kind: error::Kind::NotFound.into(),
-            msg: String::from("Space Not Found"),
-        }),
+        Some(ids) => Ok(ResponseBody::PostIdsBySpaceId(PostIdsBySpaceId {
+            post_ids: ids,
+        })),
+        None => Ok(ResponseBody::PostIdsBySpaceId(Default::default())),
     }
 }
 
@@ -207,15 +201,11 @@ async fn reactions_ids_by_post_id(
     let maybe_ids = client.fetch(&store, None).await?;
     match maybe_ids {
         Some(ids) => {
-            let body = ResponseBody::ReactionIdsByPostId(ReactionIdsByPostId {
+            Ok(ResponseBody::ReactionIdsByPostId(ReactionIdsByPostId {
                 reaction_ids: ids,
-            });
-            Ok(body)
+            }))
         }
-        None => Err(Error {
-            kind: error::Kind::NotFound.into(),
-            msg: String::from("Post Not Found"),
-        }),
+        None => Ok(ResponseBody::ReactionIdsByPostId(Default::default())),
     }
 }
 
@@ -269,16 +259,10 @@ async fn reply_ids_by_post_id(
     let store = posts::ReplyIdsByPostIdStore::new(post_id);
     let maybe_ids = client.fetch(&store, None).await?;
     match maybe_ids {
-        Some(ids) => {
-            let body = ResponseBody::ReplyIdsByPostId(ReplyIdsByPostId {
-                reply_ids: ids,
-            });
-            Ok(body)
-        }
-        None => Err(Error {
-            kind: error::Kind::NotFound.into(),
-            msg: String::from("Post Not Found"),
-        }),
+        Some(ids) => Ok(ResponseBody::ReplyIdsByPostId(ReplyIdsByPostId {
+            reply_ids: ids,
+        })),
+        None => Ok(ResponseBody::ReplyIdsByPostId(Default::default())),
     }
 }
 
@@ -288,11 +272,8 @@ async fn next_space_id(
     let store = spaces::NextSpaceIdStore::default();
     let maybe_id = client.fetch(&store, None).await?;
     match maybe_id {
-        Some(id) => {
-            let body = ResponseBody::NextSpaceId(NextSpaceId { id });
-            Ok(body)
-        }
-        None => unreachable!(),
+        Some(id) => Ok(ResponseBody::NextSpaceId(NextSpaceId { id })),
+        None => Ok(ResponseBody::NextSpaceId(Default::default())),
     }
 }
 
@@ -302,11 +283,8 @@ async fn next_post_id(
     let store = posts::NextPostIdStore::default();
     let maybe_id = client.fetch(&store, None).await?;
     match maybe_id {
-        Some(id) => {
-            let body = ResponseBody::NextPostId(NextPostId { id });
-            Ok(body)
-        }
-        None => unreachable!(),
+        Some(id) => Ok(ResponseBody::NextPostId(NextPostId { id })),
+        None => Ok(ResponseBody::NextPostId(Default::default())),
     }
 }
 
@@ -341,12 +319,9 @@ async fn spaces_followed_by_account(
     let store = space_follows::SpacesFollowedByAccountStore::new(account_id);
     let maybe_space_ids = client.fetch(&store, None).await?;
     match maybe_space_ids {
-        Some(space_ids) => {
-            let body = ResponseBody::SpacesFollowedByAccount(
-                SpacesFollowedByAccount { space_ids },
-            );
-            Ok(body)
-        }
+        Some(space_ids) => Ok(ResponseBody::SpacesFollowedByAccount(
+            SpacesFollowedByAccount { space_ids },
+        )),
         None => Err(Error {
             kind: error::Kind::NotFound.into(),
             msg: String::from("AccountId Not Found"),
