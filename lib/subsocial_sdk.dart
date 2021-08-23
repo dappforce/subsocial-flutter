@@ -294,6 +294,15 @@ class Subsocial {
     return val;
   }
 
+  Future<SpaceFollowed> followSpace({required SpaceId spaceId}) async {
+    final req = Request(
+      followSpace: FollowSpace(spaceId: makeLongInt(spaceId)),
+    );
+    final res = await _dispatch(req);
+    final val = res.ensureSpaceFollowed();
+    return val;
+  }
+
   void dispose() {
     // currently, there is nothing to dispose.
   }

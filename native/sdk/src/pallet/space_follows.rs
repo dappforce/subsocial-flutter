@@ -1,4 +1,4 @@
-use codec::Encode;
+use codec::{Decode, Encode};
 use subxt::balances::*;
 use subxt::system::*;
 
@@ -31,4 +31,19 @@ impl<T: SpaceFollows> SpacesFollowedByAccountStore<T> {
     pub fn new(account_id: T::AccountId) -> Self {
         Self { account_id }
     }
+}
+
+// Calls ..
+
+#[derive(Clone, Encode, Eq, PartialEq, subxt::Call)]
+pub struct FollowSpaceCall<T: SpaceFollows> {
+    space_id: T::SpaceId,
+}
+
+// Events ..
+
+#[derive(Clone, Debug, Encode, Decode, Eq, PartialEq, subxt::Event)]
+pub struct SpaceFollowedEvent<T: SpaceFollows> {
+    pub follower: T::AccountId,
+    pub space_id: T::SpaceId,
 }

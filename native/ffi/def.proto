@@ -24,8 +24,10 @@ message Request {
     CreatePostReaction create_post_reaction = 18;
     CreatePost create_post = 19;
     UpdatePost update_post = 20;
+    FollowSpace follow_space = 21;
   }
 }
+
 
 message Response {
   oneof body {
@@ -50,6 +52,7 @@ message Response {
     PostReactionCreated post_reaction_created = 19;
     PostCreated post_created = 20;
     PostUpdated post_updated = 21;
+    SpaceFollowed space_followed = 22;
   }
 }
 
@@ -147,6 +150,10 @@ message CreatePost {
 message UpdatePost {
   uint64 post_id = 1;
   PostUpdate post_update = 2;
+}
+
+message FollowSpace {
+  uint64 space_id = 1;
 }
 
 // DATA
@@ -332,4 +339,9 @@ message PostCreated {
 message PostUpdated {
   string account_id = 1;
   uint64 post_id = 2;
+}
+
+message SpaceFollowed {
+  string follower = 1;
+  uint64 space_id = 2;
 }

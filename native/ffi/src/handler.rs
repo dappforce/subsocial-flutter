@@ -7,6 +7,7 @@ use sdk::subxt::Client;
 
 use sdk::pallet::posts::*;
 use sdk::pallet::reactions::*;
+use sdk::pallet::space_follows::*;
 
 use crate::pb::subsocial::request::Body as RequestBody;
 use crate::pb::subsocial::response::Body as ResponseBody;
@@ -83,6 +84,9 @@ pub async fn handle(
         }
         RequestBody::UpdatePost(args) => {
             update_post(client, signer, args).await
+        }
+        RequestBody::FollowSpace(args) => {
+            follow_space(client, signer, args).await
         }
     };
     let response = match result {
@@ -539,6 +543,27 @@ async fn update_post(
         None => Err(Error {
             kind: error::Kind::NotFound.into(),
             msg: String::from("Post Updated Event Not Found"),
+        }),
+    }
+}
+
+async fn follow_space(
+    client: &Client<SubsocialRuntime>,
+    signer: &Signer,
+    FollowSpace { space_id }: FollowSpace,
+) -> Result<ResponseBody, Error> {
+    let maybe_event = client
+        .follow_space_and_watch(signer, space_id)
+        .await?
+        .find_event::<SpaceFollowedEvent<_>>()?;
+    match maybe_event {
+        Some(event) => Ok(ResponseBody::SpaceFollowed(SpaceFollowed {
+            space_id: event.space_id,
+            follower: event.follower.to_string(),
+        })),
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("Space Followed Event Not Found"),
         }),
     }
 }

@@ -2,7 +2,7 @@
 pub struct Request {
     #[prost(
         oneof = "request::Body",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21"
     )]
     pub body: ::core::option::Option<request::Body>,
 }
@@ -50,13 +50,15 @@ pub mod request {
         CreatePost(super::CreatePost),
         #[prost(message, tag = "20")]
         UpdatePost(super::UpdatePost),
+        #[prost(message, tag = "21")]
+        FollowSpace(super::FollowSpace),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Response {
     #[prost(
         oneof = "response::Body",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22"
     )]
     pub body: ::core::option::Option<response::Body>,
 }
@@ -106,6 +108,8 @@ pub mod response {
         PostCreated(super::PostCreated),
         #[prost(message, tag = "21")]
         PostUpdated(super::PostUpdated),
+        #[prost(message, tag = "22")]
+        SpaceFollowed(super::SpaceFollowed),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -243,6 +247,11 @@ pub struct UpdatePost {
     pub post_id: u64,
     #[prost(message, optional, tag = "2")]
     pub post_update: ::core::option::Option<PostUpdate>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FollowSpace {
+    #[prost(uint64, tag = "1")]
+    pub space_id: u64,
 }
 // DATA
 
@@ -530,4 +539,11 @@ pub struct PostUpdated {
     pub account_id: ::prost::alloc::string::String,
     #[prost(uint64, tag = "2")]
     pub post_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SpaceFollowed {
+    #[prost(string, tag = "1")]
+    pub follower: ::prost::alloc::string::String,
+    #[prost(uint64, tag = "2")]
+    pub space_id: u64,
 }
