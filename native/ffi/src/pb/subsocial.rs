@@ -2,7 +2,7 @@
 pub struct Request {
     #[prost(
         oneof = "request::Body",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24"
     )]
     pub body: ::core::option::Option<request::Body>,
 }
@@ -52,13 +52,19 @@ pub mod request {
         UpdatePost(super::UpdatePost),
         #[prost(message, tag = "21")]
         FollowSpace(super::FollowSpace),
+        #[prost(message, tag = "22")]
+        IsAccountFollower(super::IsAccountFollower),
+        #[prost(message, tag = "23")]
+        IsSpaceFollower(super::IsSpaceFollower),
+        #[prost(message, tag = "24")]
+        IsPostSharedByAccount(super::IsPostSharedByAccount),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Response {
     #[prost(
         oneof = "response::Body",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25"
     )]
     pub body: ::core::option::Option<response::Body>,
 }
@@ -110,6 +116,12 @@ pub mod response {
         PostUpdated(super::PostUpdated),
         #[prost(message, tag = "22")]
         SpaceFollowed(super::SpaceFollowed),
+        #[prost(bool, tag = "23")]
+        IsAccountFollower(bool),
+        #[prost(bool, tag = "24")]
+        IsSpaceFollower(bool),
+        #[prost(bool, tag = "25")]
+        IsPostSharedByAccount(bool),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -252,6 +264,21 @@ pub struct UpdatePost {
 pub struct FollowSpace {
     #[prost(uint64, tag = "1")]
     pub space_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct IsAccountFollower {
+    #[prost(string, tag = "1")]
+    pub account_id: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct IsSpaceFollower {
+    #[prost(uint64, tag = "1")]
+    pub space_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct IsPostSharedByAccount {
+    #[prost(uint64, tag = "1")]
+    pub post_id: u64,
 }
 // DATA
 

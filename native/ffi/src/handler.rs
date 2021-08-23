@@ -88,6 +88,15 @@ pub async fn handle(
         RequestBody::FollowSpace(args) => {
             follow_space(client, signer, args).await
         }
+        RequestBody::IsAccountFollower(args) => {
+            is_account_follower(client, signer, args).await
+        }
+        RequestBody::IsSpaceFollower(args) => {
+            is_space_follower(client, signer, args).await
+        }
+        RequestBody::IsPostSharedByAccount(args) => {
+            is_post_shared_by_account(client, signer, args).await
+        }
     };
     let response = match result {
         Ok(body) => Response { body: Some(body) },
@@ -566,4 +575,44 @@ async fn follow_space(
             msg: String::from("Space Followed Event Not Found"),
         }),
     }
+}
+
+async fn is_account_follower(
+    client: &Client<SubsocialRuntime>,
+    signer: &Signer,
+    IsAccountFollower { account_id }: IsAccountFollower,
+) -> Result<ResponseBody, Error> {
+    use sdk::subxt::Signer;
+    let account_id = AccountId32::convert(account_id)?;
+    let my_account_id = signer.account_id().clone();
+    let store = profile_follows::AccountFollowedByAccountStore::new(
+        account_id,
+        my_account_id,
+    );
+    let response = client.fetch_or_default(&store, None).await?;
+    Ok(ResponseBody::IsAccountFollower(response))
+}
+
+async fn is_space_follower(
+    client: &Client<SubsocialRuntime>,
+    signer: &Signer,
+    IsSpaceFollower { space_id }: IsSpaceFollower,
+) -> Result<ResponseBody, Error> {
+    use sdk::subxt::Signer;
+    let my_account_id = signer.account_id().clone();
+    let store = space_follows::SpaceFollowedByAccountStore::new(
+        my_account_id,
+        space_id,
+    );
+    let response = client.fetch_or_default(&store, None).await?;
+    Ok(ResponseBody::IsSpaceFollower(response))
+}
+
+async fn is_post_shared_by_account(
+    _client: &Client<SubsocialRuntime>,
+    _signer: &Signer,
+    IsPostSharedByAccount { post_id: _ }: IsPostSharedByAccount,
+) -> Result<ResponseBody, Error> {
+    // TODO(shekohex): implement this function.
+    Ok(ResponseBody::IsPostSharedByAccount(false))
 }

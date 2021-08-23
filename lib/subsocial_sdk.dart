@@ -303,6 +303,30 @@ class Subsocial {
     return val;
   }
 
+  Future<bool> isAccountFollower({required AccountId accountId}) async {
+    final req = Request(
+      isAccountFollower: IsAccountFollower(accountId: accountId),
+    );
+    final res = await _dispatch(req);
+    return res.isAccountFollower;
+  }
+
+  Future<bool> isSpaceFollower({required SpaceId spaceId}) async {
+    final req = Request(
+      isSpaceFollower: IsSpaceFollower(spaceId: makeLongInt(spaceId)),
+    );
+    final res = await _dispatch(req);
+    return res.isSpaceFollower;
+  }
+
+  Future<bool> isPostSharedByAccount({required PostId postId}) async {
+    final req = Request(
+      isPostSharedByAccount: IsPostSharedByAccount(postId: makeLongInt(postId)),
+    );
+    final res = await _dispatch(req);
+    return res.isPostSharedByAccount;
+  }
+
   void dispose() {
     // currently, there is nothing to dispose.
   }

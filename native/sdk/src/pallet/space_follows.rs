@@ -33,6 +33,22 @@ impl<T: SpaceFollows> SpacesFollowedByAccountStore<T> {
     }
 }
 
+#[derive(Clone, Debug, Eq, Encode, PartialEq, subxt::Store)]
+pub struct SpaceFollowedByAccountStore<T: SpaceFollows> {
+    #[store(returns = bool)]
+    account_id: T::AccountId,
+    space_id: T::SpaceId,
+}
+
+impl<T: SpaceFollows> SpaceFollowedByAccountStore<T> {
+    pub fn new(account_id: T::AccountId, space_id: T::SpaceId) -> Self {
+        Self {
+            account_id,
+            space_id,
+        }
+    }
+}
+
 // Calls ..
 
 #[derive(Clone, Encode, Eq, PartialEq, subxt::Call)]

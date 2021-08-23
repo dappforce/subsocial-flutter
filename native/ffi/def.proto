@@ -25,6 +25,9 @@ message Request {
     CreatePost create_post = 19;
     UpdatePost update_post = 20;
     FollowSpace follow_space = 21;
+    IsAccountFollower is_account_follower = 22;
+    IsSpaceFollower is_space_follower = 23;
+    IsPostSharedByAccount is_post_shared_by_account = 24;
   }
 }
 
@@ -53,6 +56,9 @@ message Response {
     PostCreated post_created = 20;
     PostUpdated post_updated = 21;
     SpaceFollowed space_followed = 22;
+    bool is_account_follower = 23;
+    bool is_space_follower = 24;
+    bool is_post_shared_by_account = 25;
   }
 }
 
@@ -154,6 +160,18 @@ message UpdatePost {
 
 message FollowSpace {
   uint64 space_id = 1;
+}
+
+message IsAccountFollower {
+  string account_id = 1;
+}
+
+message IsSpaceFollower {
+  uint64 space_id = 1;
+}
+
+message IsPostSharedByAccount {
+  uint64 post_id = 1;
 }
 
 // DATA
