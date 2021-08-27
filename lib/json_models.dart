@@ -3,15 +3,15 @@ import 'package:subsocial_sdk/subsocial_sdk.dart';
 
 class PostMetadata {
   late String body;
-  late List<String> tags;
-  late String? title;
-  late String? image;
+  List<String>? tags;
+  String? title;
+  String? image;
   String? link;
   String? canonical;
 
   PostMetadata({
     required this.body,
-    required this.tags,
+    this.tags,
     this.title,
     this.image,
     this.link,
@@ -22,8 +22,6 @@ class PostMetadata {
     body = json['body'] as String;
     if (json['tags'] != null) {
       tags = (json['tags'] as List<dynamic>).cast();
-    } else {
-      tags = [];
     }
     image = json['image'] as String?;
     title = json['title'] as String?;
