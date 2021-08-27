@@ -6,7 +6,6 @@ void main() {
     final jsonPosts = [
       {
         "body": "\n\n> Example body.34234_",
-        "tags": [],
         "title": "Polkadot Digest 27 Aug 2021"
       },
       {
