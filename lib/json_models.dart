@@ -6,12 +6,16 @@ class PostMetadata {
   late List<String> tags;
   late String? title;
   late String? image;
+  String? link;
+  String? canonical;
 
   PostMetadata({
     required this.body,
     required this.tags,
     this.title,
     this.image,
+    this.link,
+    this.canonical,
   });
 
   PostMetadata.fromJson(Map<String, dynamic> json) {
@@ -23,6 +27,8 @@ class PostMetadata {
     }
     image = json['image'] as String?;
     title = json['title'] as String?;
+    link = json['link'] as String?;
+    canonical = json['canonical'] as String?;
   }
 }
 
