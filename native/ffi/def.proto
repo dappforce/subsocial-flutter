@@ -21,8 +21,16 @@ message Request {
     GetAccountsFollowedByAccount accounts_followed_by_account = 15;
     GenerateAccount generate_account = 16;
     ImportAccount import_account = 17;
+    CreatePostReaction create_post_reaction = 18;
+    CreatePost create_post = 19;
+    UpdatePost update_post = 20;
+    FollowSpace follow_space = 21;
+    IsAccountFollower is_account_follower = 22;
+    IsSpaceFollower is_space_follower = 23;
+    IsPostSharedByAccount is_post_shared_by_account = 24;
   }
 }
+
 
 message Response {
   oneof body {
@@ -44,6 +52,13 @@ message Response {
     AccountsFollowedByAccount accounts_followed_by_account = 16;
     GeneratedAccount generated_account = 17;
     ImportedAccount imported_account = 18;
+    PostReactionCreated post_reaction_created = 19;
+    PostCreated post_created = 20;
+    PostUpdated post_updated = 21;
+    SpaceFollowed space_followed = 22;
+    bool is_account_follower = 23;
+    bool is_space_follower = 24;
+    bool is_post_shared_by_account = 25;
   }
 }
 
@@ -127,6 +142,38 @@ message ImportAccount {
   string suri = 2;
 }
 
+message CreatePostReaction {
+  uint64 post_id = 1;
+  Reaction.Kind kind = 2;
+}
+
+message CreatePost {
+  uint64 space_id = 1;
+  PostExtension extension_value = 2;
+  Content content = 3;
+}
+
+message UpdatePost {
+  uint64 post_id = 1;
+  PostUpdate post_update = 2;
+}
+
+message FollowSpace {
+  uint64 space_id = 1;
+}
+
+message IsAccountFollower {
+  string account_id = 1;
+}
+
+message IsSpaceFollower {
+  uint64 space_id = 1;
+}
+
+message IsPostSharedByAccount {
+  uint64 post_id = 1;
+}
+
 // DATA
 
 message WhoAndWhen {
@@ -143,10 +190,13 @@ message Content {
   }
 }
 
+message RegularPost {}
+
 message PostExtension {
   oneof value {
-    Comment comment = 1;
-    SharedPost shared_post = 2;
+    RegularPost regular_post = 1;
+    Comment comment = 2;
+    SharedPost shared_post = 3;
   }
 }
 
@@ -192,7 +242,7 @@ message SharedPost {
 }
 
 message Reaction {
-  enum ReactionKind {
+  enum Kind {
     UNKNOWN = 0;
     UP_VOTE = 1;
     DOWN_VOTE = 2;
@@ -200,7 +250,7 @@ message Reaction {
   uint64 id = 1;
   WhoAndWhen created = 2;
   WhoAndWhen updated = 3;
-  ReactionKind kind = 4;
+  Kind kind = 4;
 }
 
 message SocialAccount {
@@ -215,6 +265,11 @@ message Profile {
   WhoAndWhen created = 1;
   WhoAndWhen updated = 2;
   Content content = 3;
+}
+
+message PostUpdate {
+  Content content = 1;
+  bool hidden = 2;
 }
 
 // RESPONSES
@@ -287,4 +342,24 @@ message GeneratedAccount {
 
 message ImportedAccount {
   string public_key = 1;
+}
+
+message PostReactionCreated {
+  uint64 post_id = 1;
+  uint64 reaction_id = 2;
+}
+
+message PostCreated {
+  string account_id = 1;
+  uint64 post_id = 2;
+}
+
+message PostUpdated {
+  string account_id = 1;
+  uint64 post_id = 2;
+}
+
+message SpaceFollowed {
+  string follower = 1;
+  uint64 space_id = 2;
 }

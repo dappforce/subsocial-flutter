@@ -19,9 +19,10 @@ use sdk::subxt::sp_core::sr25519::Pair as Sr25519Pair;
 
 /// Global Shared [subxt::Client] between all tasks.
 static CLIENT: OnceCell<subxt::Client<SubsocialRuntime>> = OnceCell::new();
+type Signer = subxt::PairSigner<SubsocialRuntime, Sr25519Pair>;
+
 /// Global Shared [subxt::PairSigner] between all tasks.
-static mut SIGNER: OnceCell<subxt::PairSigner<SubsocialRuntime, Sr25519Pair>> =
-    OnceCell::new();
+static mut SIGNER: OnceCell<Signer> = OnceCell::new();
 
 #[derive(Debug, Clone)]
 #[repr(C)]
@@ -78,7 +79,8 @@ pub extern "C" fn subsocial_dispatch(port: i64, buffer: Box<Uint8List>) -> i32 {
         Some(v) => v,
         None => return 0xdead,
     };
-    let task = isolate.catch_unwind(handler::handle(client, req));
+    let signer = unsafe { SIGNER.get_or_init(dummy_signer) };
+    let task = isolate.catch_unwind(handler::handle(client, signer, req));
     task::spawn(task);
     1
 }
@@ -89,3 +91,8 @@ pub extern "C" fn subsocial_dispatch(port: i64, buffer: Box<Uint8List>) -> i32 {
 #[inline(never)]
 #[no_mangle]
 pub unsafe extern "C" fn subsocial_link_me_plz() {}
+
+fn dummy_signer() -> Signer {
+    let (pair, _) = Sr25519Pair::from_entropy(&[0u8; 32], None);
+    Signer::new(pair)
+}

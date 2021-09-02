@@ -5,13 +5,19 @@ use sdk::subxt::sp_core::Pair;
 use sdk::subxt::sp_runtime::AccountId32;
 use sdk::subxt::Client;
 
+use sdk::pallet::posts::*;
+use sdk::pallet::reactions::*;
+use sdk::pallet::space_follows::*;
+
 use crate::pb::subsocial::request::Body as RequestBody;
 use crate::pb::subsocial::response::Body as ResponseBody;
 use crate::pb::subsocial::*;
 use crate::transformer::*;
+use crate::Signer;
 
 pub async fn handle(
     client: &Client<SubsocialRuntime>,
+    signer: &Signer,
     req: Request,
 ) -> Vec<u8> {
     let body = match req.body {
@@ -70,6 +76,27 @@ pub async fn handle(
         }
         RequestBody::GenerateAccount(args) => generate_account(args),
         RequestBody::ImportAccount(args) => import_account(args),
+        RequestBody::CreatePostReaction(args) => {
+            create_post_reaction(client, signer, args).await
+        }
+        RequestBody::CreatePost(args) => {
+            create_post(client, signer, args).await
+        }
+        RequestBody::UpdatePost(args) => {
+            update_post(client, signer, args).await
+        }
+        RequestBody::FollowSpace(args) => {
+            follow_space(client, signer, args).await
+        }
+        RequestBody::IsAccountFollower(args) => {
+            is_account_follower(client, signer, args).await
+        }
+        RequestBody::IsSpaceFollower(args) => {
+            is_space_follower(client, signer, args).await
+        }
+        RequestBody::IsPostSharedByAccount(args) => {
+            is_post_shared_by_account(client, signer, args).await
+        }
     };
     let response = match result {
         Ok(body) => Response { body: Some(body) },
@@ -152,16 +179,10 @@ async fn posts_ids_by_space_id(
     let store = posts::PostIdsBySpaceIdStore::new(space_id);
     let maybe_ids = client.fetch(&store, None).await?;
     match maybe_ids {
-        Some(ids) => {
-            let body = ResponseBody::PostIdsBySpaceId(PostIdsBySpaceId {
-                post_ids: ids,
-            });
-            Ok(body)
-        }
-        None => Err(Error {
-            kind: error::Kind::NotFound.into(),
-            msg: String::from("Space Not Found"),
-        }),
+        Some(ids) => Ok(ResponseBody::PostIdsBySpaceId(PostIdsBySpaceId {
+            post_ids: ids,
+        })),
+        None => Ok(ResponseBody::PostIdsBySpaceId(Default::default())),
     }
 }
 
@@ -193,15 +214,11 @@ async fn reactions_ids_by_post_id(
     let maybe_ids = client.fetch(&store, None).await?;
     match maybe_ids {
         Some(ids) => {
-            let body = ResponseBody::ReactionIdsByPostId(ReactionIdsByPostId {
+            Ok(ResponseBody::ReactionIdsByPostId(ReactionIdsByPostId {
                 reaction_ids: ids,
-            });
-            Ok(body)
+            }))
         }
-        None => Err(Error {
-            kind: error::Kind::NotFound.into(),
-            msg: String::from("Post Not Found"),
-        }),
+        None => Ok(ResponseBody::ReactionIdsByPostId(Default::default())),
     }
 }
 
@@ -255,16 +272,10 @@ async fn reply_ids_by_post_id(
     let store = posts::ReplyIdsByPostIdStore::new(post_id);
     let maybe_ids = client.fetch(&store, None).await?;
     match maybe_ids {
-        Some(ids) => {
-            let body = ResponseBody::ReplyIdsByPostId(ReplyIdsByPostId {
-                reply_ids: ids,
-            });
-            Ok(body)
-        }
-        None => Err(Error {
-            kind: error::Kind::NotFound.into(),
-            msg: String::from("Post Not Found"),
-        }),
+        Some(ids) => Ok(ResponseBody::ReplyIdsByPostId(ReplyIdsByPostId {
+            reply_ids: ids,
+        })),
+        None => Ok(ResponseBody::ReplyIdsByPostId(Default::default())),
     }
 }
 
@@ -274,11 +285,8 @@ async fn next_space_id(
     let store = spaces::NextSpaceIdStore::default();
     let maybe_id = client.fetch(&store, None).await?;
     match maybe_id {
-        Some(id) => {
-            let body = ResponseBody::NextSpaceId(NextSpaceId { id });
-            Ok(body)
-        }
-        None => unreachable!(),
+        Some(id) => Ok(ResponseBody::NextSpaceId(NextSpaceId { id })),
+        None => Ok(ResponseBody::NextSpaceId(Default::default())),
     }
 }
 
@@ -288,11 +296,8 @@ async fn next_post_id(
     let store = posts::NextPostIdStore::default();
     let maybe_id = client.fetch(&store, None).await?;
     match maybe_id {
-        Some(id) => {
-            let body = ResponseBody::NextPostId(NextPostId { id });
-            Ok(body)
-        }
-        None => unreachable!(),
+        Some(id) => Ok(ResponseBody::NextPostId(NextPostId { id })),
+        None => Ok(ResponseBody::NextPostId(Default::default())),
     }
 }
 
@@ -327,12 +332,9 @@ async fn spaces_followed_by_account(
     let store = space_follows::SpacesFollowedByAccountStore::new(account_id);
     let maybe_space_ids = client.fetch(&store, None).await?;
     match maybe_space_ids {
-        Some(space_ids) => {
-            let body = ResponseBody::SpacesFollowedByAccount(
-                SpacesFollowedByAccount { space_ids },
-            );
-            Ok(body)
-        }
+        Some(space_ids) => Ok(ResponseBody::SpacesFollowedByAccount(
+            SpacesFollowedByAccount { space_ids },
+        )),
         None => Err(Error {
             kind: error::Kind::NotFound.into(),
             msg: String::from("AccountId Not Found"),
@@ -442,4 +444,175 @@ fn import_account(
     };
     let body = ResponseBody::ImportedAccount(ImportedAccount { public_key });
     Ok(body)
+}
+
+async fn create_post_reaction(
+    client: &Client<SubsocialRuntime>,
+    signer: &Signer,
+    CreatePostReaction { post_id, kind }: CreatePostReaction,
+) -> Result<ResponseBody, Error> {
+    let kind = reaction::Kind::from_i32(kind).unwrap_or_default();
+    let maybe_event = client
+        .create_post_reaction_and_watch(signer, post_id, kind.into())
+        .await?
+        .find_event::<PostReactionCreatedEvent<_>>()?;
+    match maybe_event {
+        Some(event) => {
+            let body = ResponseBody::PostReactionCreated(PostReactionCreated {
+                post_id,
+                reaction_id: event.reaction_id,
+            });
+            Ok(body)
+        }
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("Post Reaction Created Event Not Found"),
+        }),
+    }
+}
+
+async fn create_post(
+    client: &Client<SubsocialRuntime>,
+    signer: &Signer,
+    CreatePost {
+        space_id,
+        extension_value,
+        content,
+    }: CreatePost,
+) -> Result<ResponseBody, Error> {
+    let maybe_space_id = if space_id != 0 { Some(space_id) } else { None };
+    let extension = match extension_value {
+        Some(val) => val.into(),
+        None => {
+            return Err(Error {
+                kind: error::Kind::InvalidRequest.into(),
+                msg: String::from("Missing extension value"),
+            })
+        }
+    };
+    let content = match content {
+        Some(val) => val.into(),
+        None => {
+            return Err(Error {
+                kind: error::Kind::InvalidRequest.into(),
+                msg: String::from("Missing content value"),
+            })
+        }
+    };
+
+    let maybe_event = client
+        .create_post_and_watch(signer, maybe_space_id, extension, content)
+        .await?
+        .find_event::<PostCreatedEvent<_>>()?;
+    match maybe_event {
+        Some(event) => {
+            let body = ResponseBody::PostCreated(PostCreated {
+                post_id: event.post_id,
+                account_id: event.account_id.to_string(),
+            });
+            Ok(body)
+        }
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("Post Created Event Not Found"),
+        }),
+    }
+}
+
+async fn update_post(
+    client: &Client<SubsocialRuntime>,
+    signer: &Signer,
+    UpdatePost {
+        post_id,
+        post_update,
+    }: UpdatePost,
+) -> Result<ResponseBody, Error> {
+    let update = match post_update {
+        Some(val) => val.into(),
+        None => {
+            return Err(Error {
+                kind: error::Kind::InvalidRequest.into(),
+                msg: String::from("Missing post update value"),
+            })
+        }
+    };
+
+    let maybe_event = client
+        .update_post_and_watch(signer, post_id, update)
+        .await?
+        .find_event::<PostUpdatedEvent<_>>()?;
+    match maybe_event {
+        Some(event) => {
+            let body = ResponseBody::PostUpdated(PostUpdated {
+                post_id: event.post_id,
+                account_id: event.account_id.to_string(),
+            });
+            Ok(body)
+        }
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("Post Updated Event Not Found"),
+        }),
+    }
+}
+
+async fn follow_space(
+    client: &Client<SubsocialRuntime>,
+    signer: &Signer,
+    FollowSpace { space_id }: FollowSpace,
+) -> Result<ResponseBody, Error> {
+    let maybe_event = client
+        .follow_space_and_watch(signer, space_id)
+        .await?
+        .find_event::<SpaceFollowedEvent<_>>()?;
+    match maybe_event {
+        Some(event) => Ok(ResponseBody::SpaceFollowed(SpaceFollowed {
+            space_id: event.space_id,
+            follower: event.follower.to_string(),
+        })),
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("Space Followed Event Not Found"),
+        }),
+    }
+}
+
+async fn is_account_follower(
+    client: &Client<SubsocialRuntime>,
+    signer: &Signer,
+    IsAccountFollower { account_id }: IsAccountFollower,
+) -> Result<ResponseBody, Error> {
+    use sdk::subxt::Signer;
+    let account_id = AccountId32::convert(account_id)?;
+    let my_account_id = signer.account_id().clone();
+    let store = profile_follows::AccountFollowedByAccountStore::new(
+        account_id,
+        my_account_id,
+    );
+    let response = client.fetch_or_default(&store, None).await?;
+    Ok(ResponseBody::IsAccountFollower(response))
+}
+
+async fn is_space_follower(
+    client: &Client<SubsocialRuntime>,
+    signer: &Signer,
+    IsSpaceFollower { space_id }: IsSpaceFollower,
+) -> Result<ResponseBody, Error> {
+    use sdk::subxt::Signer;
+    let my_account_id = signer.account_id().clone();
+    let store = space_follows::SpaceFollowedByAccountStore::new(
+        my_account_id,
+        space_id,
+    );
+    let response = client.fetch_or_default(&store, None).await?;
+    Ok(ResponseBody::IsSpaceFollower(response))
+}
+
+async fn is_post_shared_by_account(
+    _client: &Client<SubsocialRuntime>,
+    _signer: &Signer,
+    IsPostSharedByAccount { post_id: _ }: IsPostSharedByAccount,
+) -> Result<ResponseBody, Error> {
+    // TODO(shekohex): implement this function.
+    Ok(ResponseBody::IsPostSharedByAccount(false))
 }

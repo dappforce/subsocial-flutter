@@ -166,6 +166,69 @@ const Request$json = const {
       '9': 0,
       '10': 'importAccount'
     },
+    const {
+      '1': 'create_post_reaction',
+      '3': 18,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.CreatePostReaction',
+      '9': 0,
+      '10': 'createPostReaction'
+    },
+    const {
+      '1': 'create_post',
+      '3': 19,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.CreatePost',
+      '9': 0,
+      '10': 'createPost'
+    },
+    const {
+      '1': 'update_post',
+      '3': 20,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.UpdatePost',
+      '9': 0,
+      '10': 'updatePost'
+    },
+    const {
+      '1': 'follow_space',
+      '3': 21,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.FollowSpace',
+      '9': 0,
+      '10': 'followSpace'
+    },
+    const {
+      '1': 'is_account_follower',
+      '3': 22,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.IsAccountFollower',
+      '9': 0,
+      '10': 'isAccountFollower'
+    },
+    const {
+      '1': 'is_space_follower',
+      '3': 23,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.IsSpaceFollower',
+      '9': 0,
+      '10': 'isSpaceFollower'
+    },
+    const {
+      '1': 'is_post_shared_by_account',
+      '3': 24,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.IsPostSharedByAccount',
+      '9': 0,
+      '10': 'isPostSharedByAccount'
+    },
   ],
   '8': const [
     const {'1': 'body'},
@@ -174,7 +237,7 @@ const Request$json = const {
 
 /// Descriptor for `Request`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List requestDescriptor = $convert.base64Decode(
-    'CgdSZXF1ZXN0EjkKC3NwYWNlX2J5X2lkGAEgASgLMhcuc3Vic29jaWFsLkdldFNwYWNlQnlJZEgAUglzcGFjZUJ5SWQSRQoPc3BhY2VfYnlfaGFuZGxlGAIgASgLMhsuc3Vic29jaWFsLkdldFNwYWNlQnlIYW5kbGVIAFINc3BhY2VCeUhhbmRsZRI2Cgpwb3N0X2J5X2lkGAMgASgLMhYuc3Vic29jaWFsLkdldFBvc3RCeUlkSABSCHBvc3RCeUlkElAKFHBvc3RfaWRzX2J5X3NwYWNlX2lkGAQgASgLMh4uc3Vic29jaWFsLkdldFBvc3RJZHNCeVNwYWNlSWRIAFIQcG9zdElkc0J5U3BhY2VJZBJCCg5yZWFjdGlvbl9ieV9pZBgFIAEoCzIaLnN1YnNvY2lhbC5HZXRSZWFjdGlvbkJ5SWRIAFIMcmVhY3Rpb25CeUlkElkKF3JlYWN0aW9uX2lkc19ieV9wb3N0X2lkGAYgASgLMiEuc3Vic29jaWFsLkdldFJlYWN0aW9uSWRzQnlQb3N0SWRIAFITcmVhY3Rpb25JZHNCeVBvc3RJZBJQChRyZXBseV9pZHNfYnlfcG9zdF9pZBgHIAEoCzIeLnN1YnNvY2lhbC5HZXRSZXBseUlkc0J5UG9zdElkSABSEHJlcGx5SWRzQnlQb3N0SWQSaAocc29jaWFsX2FjY291bnRfYnlfYWNjb3VudF9pZBgIIAEoCzImLnN1YnNvY2lhbC5HZXRTb2NpYWxBY2NvdW50QnlBY2NvdW50SWRIAFIYc29jaWFsQWNjb3VudEJ5QWNjb3VudElkEj8KDW5leHRfc3BhY2VfaWQYCSABKAsyGS5zdWJzb2NpYWwuR2V0TmV4dFNwYWNlSWRIAFILbmV4dFNwYWNlSWQSPAoMbmV4dF9wb3N0X2lkGAogASgLMhguc3Vic29jaWFsLkdldE5leHRQb3N0SWRIAFIKbmV4dFBvc3RJZBJMChJzcGFjZV9pZHNfYnlfb3duZXIYCyABKAsyHS5zdWJzb2NpYWwuR2V0U3BhY2VJZHNCeU93bmVySABSD3NwYWNlSWRzQnlPd25lchJHCg9zcGFjZV9mb2xsb3dlcnMYDCABKAsyHC5zdWJzb2NpYWwuR2V0U3BhY2VGb2xsb3dlcnNIAFIOc3BhY2VGb2xsb3dlcnMSZAoac3BhY2VzX2ZvbGxvd2VkX2J5X2FjY291bnQYDSABKAsyJS5zdWJzb2NpYWwuR2V0U3BhY2VzRm9sbG93ZWRCeUFjY291bnRIAFIXc3BhY2VzRm9sbG93ZWRCeUFjY291bnQSTQoRYWNjb3VudF9mb2xsb3dlcnMYDiABKAsyHi5zdWJzb2NpYWwuR2V0QWNjb3VudEZvbGxvd2Vyc0gAUhBhY2NvdW50Rm9sbG93ZXJzEmoKHGFjY291bnRzX2ZvbGxvd2VkX2J5X2FjY291bnQYDyABKAsyJy5zdWJzb2NpYWwuR2V0QWNjb3VudHNGb2xsb3dlZEJ5QWNjb3VudEgAUhlhY2NvdW50c0ZvbGxvd2VkQnlBY2NvdW50EkcKEGdlbmVyYXRlX2FjY291bnQYECABKAsyGi5zdWJzb2NpYWwuR2VuZXJhdGVBY2NvdW50SABSD2dlbmVyYXRlQWNjb3VudBJBCg5pbXBvcnRfYWNjb3VudBgRIAEoCzIYLnN1YnNvY2lhbC5JbXBvcnRBY2NvdW50SABSDWltcG9ydEFjY291bnRCBgoEYm9keQ==');
+    'CgdSZXF1ZXN0EjkKC3NwYWNlX2J5X2lkGAEgASgLMhcuc3Vic29jaWFsLkdldFNwYWNlQnlJZEgAUglzcGFjZUJ5SWQSRQoPc3BhY2VfYnlfaGFuZGxlGAIgASgLMhsuc3Vic29jaWFsLkdldFNwYWNlQnlIYW5kbGVIAFINc3BhY2VCeUhhbmRsZRI2Cgpwb3N0X2J5X2lkGAMgASgLMhYuc3Vic29jaWFsLkdldFBvc3RCeUlkSABSCHBvc3RCeUlkElAKFHBvc3RfaWRzX2J5X3NwYWNlX2lkGAQgASgLMh4uc3Vic29jaWFsLkdldFBvc3RJZHNCeVNwYWNlSWRIAFIQcG9zdElkc0J5U3BhY2VJZBJCCg5yZWFjdGlvbl9ieV9pZBgFIAEoCzIaLnN1YnNvY2lhbC5HZXRSZWFjdGlvbkJ5SWRIAFIMcmVhY3Rpb25CeUlkElkKF3JlYWN0aW9uX2lkc19ieV9wb3N0X2lkGAYgASgLMiEuc3Vic29jaWFsLkdldFJlYWN0aW9uSWRzQnlQb3N0SWRIAFITcmVhY3Rpb25JZHNCeVBvc3RJZBJQChRyZXBseV9pZHNfYnlfcG9zdF9pZBgHIAEoCzIeLnN1YnNvY2lhbC5HZXRSZXBseUlkc0J5UG9zdElkSABSEHJlcGx5SWRzQnlQb3N0SWQSaAocc29jaWFsX2FjY291bnRfYnlfYWNjb3VudF9pZBgIIAEoCzImLnN1YnNvY2lhbC5HZXRTb2NpYWxBY2NvdW50QnlBY2NvdW50SWRIAFIYc29jaWFsQWNjb3VudEJ5QWNjb3VudElkEj8KDW5leHRfc3BhY2VfaWQYCSABKAsyGS5zdWJzb2NpYWwuR2V0TmV4dFNwYWNlSWRIAFILbmV4dFNwYWNlSWQSPAoMbmV4dF9wb3N0X2lkGAogASgLMhguc3Vic29jaWFsLkdldE5leHRQb3N0SWRIAFIKbmV4dFBvc3RJZBJMChJzcGFjZV9pZHNfYnlfb3duZXIYCyABKAsyHS5zdWJzb2NpYWwuR2V0U3BhY2VJZHNCeU93bmVySABSD3NwYWNlSWRzQnlPd25lchJHCg9zcGFjZV9mb2xsb3dlcnMYDCABKAsyHC5zdWJzb2NpYWwuR2V0U3BhY2VGb2xsb3dlcnNIAFIOc3BhY2VGb2xsb3dlcnMSZAoac3BhY2VzX2ZvbGxvd2VkX2J5X2FjY291bnQYDSABKAsyJS5zdWJzb2NpYWwuR2V0U3BhY2VzRm9sbG93ZWRCeUFjY291bnRIAFIXc3BhY2VzRm9sbG93ZWRCeUFjY291bnQSTQoRYWNjb3VudF9mb2xsb3dlcnMYDiABKAsyHi5zdWJzb2NpYWwuR2V0QWNjb3VudEZvbGxvd2Vyc0gAUhBhY2NvdW50Rm9sbG93ZXJzEmoKHGFjY291bnRzX2ZvbGxvd2VkX2J5X2FjY291bnQYDyABKAsyJy5zdWJzb2NpYWwuR2V0QWNjb3VudHNGb2xsb3dlZEJ5QWNjb3VudEgAUhlhY2NvdW50c0ZvbGxvd2VkQnlBY2NvdW50EkcKEGdlbmVyYXRlX2FjY291bnQYECABKAsyGi5zdWJzb2NpYWwuR2VuZXJhdGVBY2NvdW50SABSD2dlbmVyYXRlQWNjb3VudBJBCg5pbXBvcnRfYWNjb3VudBgRIAEoCzIYLnN1YnNvY2lhbC5JbXBvcnRBY2NvdW50SABSDWltcG9ydEFjY291bnQSUQoUY3JlYXRlX3Bvc3RfcmVhY3Rpb24YEiABKAsyHS5zdWJzb2NpYWwuQ3JlYXRlUG9zdFJlYWN0aW9uSABSEmNyZWF0ZVBvc3RSZWFjdGlvbhI4CgtjcmVhdGVfcG9zdBgTIAEoCzIVLnN1YnNvY2lhbC5DcmVhdGVQb3N0SABSCmNyZWF0ZVBvc3QSOAoLdXBkYXRlX3Bvc3QYFCABKAsyFS5zdWJzb2NpYWwuVXBkYXRlUG9zdEgAUgp1cGRhdGVQb3N0EjsKDGZvbGxvd19zcGFjZRgVIAEoCzIWLnN1YnNvY2lhbC5Gb2xsb3dTcGFjZUgAUgtmb2xsb3dTcGFjZRJOChNpc19hY2NvdW50X2ZvbGxvd2VyGBYgASgLMhwuc3Vic29jaWFsLklzQWNjb3VudEZvbGxvd2VySABSEWlzQWNjb3VudEZvbGxvd2VyEkgKEWlzX3NwYWNlX2ZvbGxvd2VyGBcgASgLMhouc3Vic29jaWFsLklzU3BhY2VGb2xsb3dlckgAUg9pc1NwYWNlRm9sbG93ZXISXAoZaXNfcG9zdF9zaGFyZWRfYnlfYWNjb3VudBgYIAEoCzIgLnN1YnNvY2lhbC5Jc1Bvc3RTaGFyZWRCeUFjY291bnRIAFIVaXNQb3N0U2hhcmVkQnlBY2NvdW50QgYKBGJvZHk=');
 @$core.Deprecated('Use responseDescriptor instead')
 const Response$json = const {
   '1': 'Response',
@@ -341,6 +404,66 @@ const Response$json = const {
       '9': 0,
       '10': 'importedAccount'
     },
+    const {
+      '1': 'post_reaction_created',
+      '3': 19,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.PostReactionCreated',
+      '9': 0,
+      '10': 'postReactionCreated'
+    },
+    const {
+      '1': 'post_created',
+      '3': 20,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.PostCreated',
+      '9': 0,
+      '10': 'postCreated'
+    },
+    const {
+      '1': 'post_updated',
+      '3': 21,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.PostUpdated',
+      '9': 0,
+      '10': 'postUpdated'
+    },
+    const {
+      '1': 'space_followed',
+      '3': 22,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.SpaceFollowed',
+      '9': 0,
+      '10': 'spaceFollowed'
+    },
+    const {
+      '1': 'is_account_follower',
+      '3': 23,
+      '4': 1,
+      '5': 8,
+      '9': 0,
+      '10': 'isAccountFollower'
+    },
+    const {
+      '1': 'is_space_follower',
+      '3': 24,
+      '4': 1,
+      '5': 8,
+      '9': 0,
+      '10': 'isSpaceFollower'
+    },
+    const {
+      '1': 'is_post_shared_by_account',
+      '3': 25,
+      '4': 1,
+      '5': 8,
+      '9': 0,
+      '10': 'isPostSharedByAccount'
+    },
   ],
   '8': const [
     const {'1': 'body'},
@@ -349,7 +472,7 @@ const Response$json = const {
 
 /// Descriptor for `Response`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List responseDescriptor = $convert.base64Decode(
-    'CghSZXNwb25zZRIoCgVlcnJvchgBIAEoCzIQLnN1YnNvY2lhbC5FcnJvckgAUgVlcnJvchI2CgtzcGFjZV9ieV9pZBgCIAEoCzIULnN1YnNvY2lhbC5TcGFjZUJ5SWRIAFIJc3BhY2VCeUlkEkIKD3NwYWNlX2J5X2hhbmRsZRgDIAEoCzIYLnN1YnNvY2lhbC5TcGFjZUJ5SGFuZGxlSABSDXNwYWNlQnlIYW5kbGUSMwoKcG9zdF9ieV9pZBgEIAEoCzITLnN1YnNvY2lhbC5Qb3N0QnlJZEgAUghwb3N0QnlJZBJNChRwb3N0X2lkc19ieV9zcGFjZV9pZBgFIAEoCzIbLnN1YnNvY2lhbC5Qb3N0SWRzQnlTcGFjZUlkSABSEHBvc3RJZHNCeVNwYWNlSWQSPwoOcmVhY3Rpb25fYnlfaWQYBiABKAsyFy5zdWJzb2NpYWwuUmVhY3Rpb25CeUlkSABSDHJlYWN0aW9uQnlJZBJWChdyZWFjdGlvbl9pZHNfYnlfcG9zdF9pZBgHIAEoCzIeLnN1YnNvY2lhbC5SZWFjdGlvbklkc0J5UG9zdElkSABSE3JlYWN0aW9uSWRzQnlQb3N0SWQSTQoUcmVwbHlfaWRzX2J5X3Bvc3RfaWQYCCABKAsyGy5zdWJzb2NpYWwuUmVwbHlJZHNCeVBvc3RJZEgAUhByZXBseUlkc0J5UG9zdElkEmUKHHNvY2lhbF9hY2NvdW50X2J5X2FjY291bnRfaWQYCSABKAsyIy5zdWJzb2NpYWwuU29jaWFsQWNjb3VudEJ5QWNjb3VudElkSABSGHNvY2lhbEFjY291bnRCeUFjY291bnRJZBI8Cg1uZXh0X3NwYWNlX2lkGAogASgLMhYuc3Vic29jaWFsLk5leHRTcGFjZUlkSABSC25leHRTcGFjZUlkEjkKDG5leHRfcG9zdF9pZBgLIAEoCzIVLnN1YnNvY2lhbC5OZXh0UG9zdElkSABSCm5leHRQb3N0SWQSSQoSc3BhY2VfaWRzX2J5X293bmVyGAwgASgLMhouc3Vic29jaWFsLlNwYWNlSWRzQnlPd25lckgAUg9zcGFjZUlkc0J5T3duZXISRAoPc3BhY2VfZm9sbG93ZXJzGA0gASgLMhkuc3Vic29jaWFsLlNwYWNlRm9sbG93ZXJzSABSDnNwYWNlRm9sbG93ZXJzEmEKGnNwYWNlc19mb2xsb3dlZF9ieV9hY2NvdW50GA4gASgLMiIuc3Vic29jaWFsLlNwYWNlc0ZvbGxvd2VkQnlBY2NvdW50SABSF3NwYWNlc0ZvbGxvd2VkQnlBY2NvdW50EkoKEWFjY291bnRfZm9sbG93ZXJzGA8gASgLMhsuc3Vic29jaWFsLkFjY291bnRGb2xsb3dlcnNIAFIQYWNjb3VudEZvbGxvd2VycxJnChxhY2NvdW50c19mb2xsb3dlZF9ieV9hY2NvdW50GBAgASgLMiQuc3Vic29jaWFsLkFjY291bnRzRm9sbG93ZWRCeUFjY291bnRIAFIZYWNjb3VudHNGb2xsb3dlZEJ5QWNjb3VudBJKChFnZW5lcmF0ZWRfYWNjb3VudBgRIAEoCzIbLnN1YnNvY2lhbC5HZW5lcmF0ZWRBY2NvdW50SABSEGdlbmVyYXRlZEFjY291bnQSRwoQaW1wb3J0ZWRfYWNjb3VudBgSIAEoCzIaLnN1YnNvY2lhbC5JbXBvcnRlZEFjY291bnRIAFIPaW1wb3J0ZWRBY2NvdW50QgYKBGJvZHk=');
+    'CghSZXNwb25zZRIoCgVlcnJvchgBIAEoCzIQLnN1YnNvY2lhbC5FcnJvckgAUgVlcnJvchI2CgtzcGFjZV9ieV9pZBgCIAEoCzIULnN1YnNvY2lhbC5TcGFjZUJ5SWRIAFIJc3BhY2VCeUlkEkIKD3NwYWNlX2J5X2hhbmRsZRgDIAEoCzIYLnN1YnNvY2lhbC5TcGFjZUJ5SGFuZGxlSABSDXNwYWNlQnlIYW5kbGUSMwoKcG9zdF9ieV9pZBgEIAEoCzITLnN1YnNvY2lhbC5Qb3N0QnlJZEgAUghwb3N0QnlJZBJNChRwb3N0X2lkc19ieV9zcGFjZV9pZBgFIAEoCzIbLnN1YnNvY2lhbC5Qb3N0SWRzQnlTcGFjZUlkSABSEHBvc3RJZHNCeVNwYWNlSWQSPwoOcmVhY3Rpb25fYnlfaWQYBiABKAsyFy5zdWJzb2NpYWwuUmVhY3Rpb25CeUlkSABSDHJlYWN0aW9uQnlJZBJWChdyZWFjdGlvbl9pZHNfYnlfcG9zdF9pZBgHIAEoCzIeLnN1YnNvY2lhbC5SZWFjdGlvbklkc0J5UG9zdElkSABSE3JlYWN0aW9uSWRzQnlQb3N0SWQSTQoUcmVwbHlfaWRzX2J5X3Bvc3RfaWQYCCABKAsyGy5zdWJzb2NpYWwuUmVwbHlJZHNCeVBvc3RJZEgAUhByZXBseUlkc0J5UG9zdElkEmUKHHNvY2lhbF9hY2NvdW50X2J5X2FjY291bnRfaWQYCSABKAsyIy5zdWJzb2NpYWwuU29jaWFsQWNjb3VudEJ5QWNjb3VudElkSABSGHNvY2lhbEFjY291bnRCeUFjY291bnRJZBI8Cg1uZXh0X3NwYWNlX2lkGAogASgLMhYuc3Vic29jaWFsLk5leHRTcGFjZUlkSABSC25leHRTcGFjZUlkEjkKDG5leHRfcG9zdF9pZBgLIAEoCzIVLnN1YnNvY2lhbC5OZXh0UG9zdElkSABSCm5leHRQb3N0SWQSSQoSc3BhY2VfaWRzX2J5X293bmVyGAwgASgLMhouc3Vic29jaWFsLlNwYWNlSWRzQnlPd25lckgAUg9zcGFjZUlkc0J5T3duZXISRAoPc3BhY2VfZm9sbG93ZXJzGA0gASgLMhkuc3Vic29jaWFsLlNwYWNlRm9sbG93ZXJzSABSDnNwYWNlRm9sbG93ZXJzEmEKGnNwYWNlc19mb2xsb3dlZF9ieV9hY2NvdW50GA4gASgLMiIuc3Vic29jaWFsLlNwYWNlc0ZvbGxvd2VkQnlBY2NvdW50SABSF3NwYWNlc0ZvbGxvd2VkQnlBY2NvdW50EkoKEWFjY291bnRfZm9sbG93ZXJzGA8gASgLMhsuc3Vic29jaWFsLkFjY291bnRGb2xsb3dlcnNIAFIQYWNjb3VudEZvbGxvd2VycxJnChxhY2NvdW50c19mb2xsb3dlZF9ieV9hY2NvdW50GBAgASgLMiQuc3Vic29jaWFsLkFjY291bnRzRm9sbG93ZWRCeUFjY291bnRIAFIZYWNjb3VudHNGb2xsb3dlZEJ5QWNjb3VudBJKChFnZW5lcmF0ZWRfYWNjb3VudBgRIAEoCzIbLnN1YnNvY2lhbC5HZW5lcmF0ZWRBY2NvdW50SABSEGdlbmVyYXRlZEFjY291bnQSRwoQaW1wb3J0ZWRfYWNjb3VudBgSIAEoCzIaLnN1YnNvY2lhbC5JbXBvcnRlZEFjY291bnRIAFIPaW1wb3J0ZWRBY2NvdW50ElQKFXBvc3RfcmVhY3Rpb25fY3JlYXRlZBgTIAEoCzIeLnN1YnNvY2lhbC5Qb3N0UmVhY3Rpb25DcmVhdGVkSABSE3Bvc3RSZWFjdGlvbkNyZWF0ZWQSOwoMcG9zdF9jcmVhdGVkGBQgASgLMhYuc3Vic29jaWFsLlBvc3RDcmVhdGVkSABSC3Bvc3RDcmVhdGVkEjsKDHBvc3RfdXBkYXRlZBgVIAEoCzIWLnN1YnNvY2lhbC5Qb3N0VXBkYXRlZEgAUgtwb3N0VXBkYXRlZBJBCg5zcGFjZV9mb2xsb3dlZBgWIAEoCzIYLnN1YnNvY2lhbC5TcGFjZUZvbGxvd2VkSABSDXNwYWNlRm9sbG93ZWQSMAoTaXNfYWNjb3VudF9mb2xsb3dlchgXIAEoCEgAUhFpc0FjY291bnRGb2xsb3dlchIsChFpc19zcGFjZV9mb2xsb3dlchgYIAEoCEgAUg9pc1NwYWNlRm9sbG93ZXISOgoZaXNfcG9zdF9zaGFyZWRfYnlfYWNjb3VudBgZIAEoCEgAUhVpc1Bvc3RTaGFyZWRCeUFjY291bnRCBgoEYm9keQ==');
 @$core.Deprecated('Use errorDescriptor instead')
 const Error$json = const {
   '1': 'Error',
@@ -572,6 +695,116 @@ const ImportAccount$json = const {
 /// Descriptor for `ImportAccount`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List importAccountDescriptor = $convert.base64Decode(
     'Cg1JbXBvcnRBY2NvdW50EhoKCHBhc3N3b3JkGAEgASgJUghwYXNzd29yZBISCgRzdXJpGAIgASgJUgRzdXJp');
+@$core.Deprecated('Use createPostReactionDescriptor instead')
+const CreatePostReaction$json = const {
+  '1': 'CreatePostReaction',
+  '2': const [
+    const {'1': 'post_id', '3': 1, '4': 1, '5': 4, '10': 'postId'},
+    const {
+      '1': 'kind',
+      '3': 2,
+      '4': 1,
+      '5': 14,
+      '6': '.subsocial.Reaction.Kind',
+      '10': 'kind'
+    },
+  ],
+};
+
+/// Descriptor for `CreatePostReaction`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List createPostReactionDescriptor = $convert.base64Decode(
+    'ChJDcmVhdGVQb3N0UmVhY3Rpb24SFwoHcG9zdF9pZBgBIAEoBFIGcG9zdElkEiwKBGtpbmQYAiABKA4yGC5zdWJzb2NpYWwuUmVhY3Rpb24uS2luZFIEa2luZA==');
+@$core.Deprecated('Use createPostDescriptor instead')
+const CreatePost$json = const {
+  '1': 'CreatePost',
+  '2': const [
+    const {'1': 'space_id', '3': 1, '4': 1, '5': 4, '10': 'spaceId'},
+    const {
+      '1': 'extension_value',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.PostExtension',
+      '10': 'extensionValue'
+    },
+    const {
+      '1': 'content',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.Content',
+      '10': 'content'
+    },
+  ],
+};
+
+/// Descriptor for `CreatePost`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List createPostDescriptor = $convert.base64Decode(
+    'CgpDcmVhdGVQb3N0EhkKCHNwYWNlX2lkGAEgASgEUgdzcGFjZUlkEkEKD2V4dGVuc2lvbl92YWx1ZRgCIAEoCzIYLnN1YnNvY2lhbC5Qb3N0RXh0ZW5zaW9uUg5leHRlbnNpb25WYWx1ZRIsCgdjb250ZW50GAMgASgLMhIuc3Vic29jaWFsLkNvbnRlbnRSB2NvbnRlbnQ=');
+@$core.Deprecated('Use updatePostDescriptor instead')
+const UpdatePost$json = const {
+  '1': 'UpdatePost',
+  '2': const [
+    const {'1': 'post_id', '3': 1, '4': 1, '5': 4, '10': 'postId'},
+    const {
+      '1': 'post_update',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.PostUpdate',
+      '10': 'postUpdate'
+    },
+  ],
+};
+
+/// Descriptor for `UpdatePost`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updatePostDescriptor = $convert.base64Decode(
+    'CgpVcGRhdGVQb3N0EhcKB3Bvc3RfaWQYASABKARSBnBvc3RJZBI2Cgtwb3N0X3VwZGF0ZRgCIAEoCzIVLnN1YnNvY2lhbC5Qb3N0VXBkYXRlUgpwb3N0VXBkYXRl');
+@$core.Deprecated('Use followSpaceDescriptor instead')
+const FollowSpace$json = const {
+  '1': 'FollowSpace',
+  '2': const [
+    const {'1': 'space_id', '3': 1, '4': 1, '5': 4, '10': 'spaceId'},
+  ],
+};
+
+/// Descriptor for `FollowSpace`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List followSpaceDescriptor = $convert
+    .base64Decode('CgtGb2xsb3dTcGFjZRIZCghzcGFjZV9pZBgBIAEoBFIHc3BhY2VJZA==');
+@$core.Deprecated('Use isAccountFollowerDescriptor instead')
+const IsAccountFollower$json = const {
+  '1': 'IsAccountFollower',
+  '2': const [
+    const {'1': 'account_id', '3': 1, '4': 1, '5': 9, '10': 'accountId'},
+  ],
+};
+
+/// Descriptor for `IsAccountFollower`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List isAccountFollowerDescriptor = $convert.base64Decode(
+    'ChFJc0FjY291bnRGb2xsb3dlchIdCgphY2NvdW50X2lkGAEgASgJUglhY2NvdW50SWQ=');
+@$core.Deprecated('Use isSpaceFollowerDescriptor instead')
+const IsSpaceFollower$json = const {
+  '1': 'IsSpaceFollower',
+  '2': const [
+    const {'1': 'space_id', '3': 1, '4': 1, '5': 4, '10': 'spaceId'},
+  ],
+};
+
+/// Descriptor for `IsSpaceFollower`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List isSpaceFollowerDescriptor = $convert.base64Decode(
+    'Cg9Jc1NwYWNlRm9sbG93ZXISGQoIc3BhY2VfaWQYASABKARSB3NwYWNlSWQ=');
+@$core.Deprecated('Use isPostSharedByAccountDescriptor instead')
+const IsPostSharedByAccount$json = const {
+  '1': 'IsPostSharedByAccount',
+  '2': const [
+    const {'1': 'post_id', '3': 1, '4': 1, '5': 4, '10': 'postId'},
+  ],
+};
+
+/// Descriptor for `IsPostSharedByAccount`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List isPostSharedByAccountDescriptor =
+    $convert.base64Decode(
+        'ChVJc1Bvc3RTaGFyZWRCeUFjY291bnQSFwoHcG9zdF9pZBgBIAEoBFIGcG9zdElk');
 @$core.Deprecated('Use whoAndWhenDescriptor instead')
 const WhoAndWhen$json = const {
   '1': 'WhoAndWhen',
@@ -601,13 +834,30 @@ const Content$json = const {
 /// Descriptor for `Content`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List contentDescriptor = $convert.base64Decode(
     'CgdDb250ZW50EhIKA3JhdxgBIAEoDEgAUgNyYXcSFAoEaXBmcxgCIAEoCUgAUgRpcGZzEhYKBWh5cGVyGAMgASgJSABSBWh5cGVyQgcKBXZhbHVl');
+@$core.Deprecated('Use regularPostDescriptor instead')
+const RegularPost$json = const {
+  '1': 'RegularPost',
+};
+
+/// Descriptor for `RegularPost`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List regularPostDescriptor =
+    $convert.base64Decode('CgtSZWd1bGFyUG9zdA==');
 @$core.Deprecated('Use postExtensionDescriptor instead')
 const PostExtension$json = const {
   '1': 'PostExtension',
   '2': const [
     const {
-      '1': 'comment',
+      '1': 'regular_post',
       '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.RegularPost',
+      '9': 0,
+      '10': 'regularPost'
+    },
+    const {
+      '1': 'comment',
+      '3': 2,
       '4': 1,
       '5': 11,
       '6': '.subsocial.Comment',
@@ -616,7 +866,7 @@ const PostExtension$json = const {
     },
     const {
       '1': 'shared_post',
-      '3': 2,
+      '3': 3,
       '4': 1,
       '5': 11,
       '6': '.subsocial.SharedPost',
@@ -631,7 +881,7 @@ const PostExtension$json = const {
 
 /// Descriptor for `PostExtension`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List postExtensionDescriptor = $convert.base64Decode(
-    'Cg1Qb3N0RXh0ZW5zaW9uEi4KB2NvbW1lbnQYASABKAsyEi5zdWJzb2NpYWwuQ29tbWVudEgAUgdjb21tZW50EjgKC3NoYXJlZF9wb3N0GAIgASgLMhUuc3Vic29jaWFsLlNoYXJlZFBvc3RIAFIKc2hhcmVkUG9zdEIHCgV2YWx1ZQ==');
+    'Cg1Qb3N0RXh0ZW5zaW9uEjsKDHJlZ3VsYXJfcG9zdBgBIAEoCzIWLnN1YnNvY2lhbC5SZWd1bGFyUG9zdEgAUgtyZWd1bGFyUG9zdBIuCgdjb21tZW50GAIgASgLMhIuc3Vic29jaWFsLkNvbW1lbnRIAFIHY29tbWVudBI4CgtzaGFyZWRfcG9zdBgDIAEoCzIVLnN1YnNvY2lhbC5TaGFyZWRQb3N0SABSCnNoYXJlZFBvc3RCBwoFdmFsdWU=');
 @$core.Deprecated('Use spaceDescriptor instead')
 const Space$json = const {
   '1': 'Space',
@@ -806,16 +1056,16 @@ const Reaction$json = const {
       '3': 4,
       '4': 1,
       '5': 14,
-      '6': '.subsocial.Reaction.ReactionKind',
+      '6': '.subsocial.Reaction.Kind',
       '10': 'kind'
     },
   ],
-  '4': const [Reaction_ReactionKind$json],
+  '4': const [Reaction_Kind$json],
 };
 
 @$core.Deprecated('Use reactionDescriptor instead')
-const Reaction_ReactionKind$json = const {
-  '1': 'ReactionKind',
+const Reaction_Kind$json = const {
+  '1': 'Kind',
   '2': const [
     const {'1': 'UNKNOWN', '2': 0},
     const {'1': 'UP_VOTE', '2': 1},
@@ -825,7 +1075,7 @@ const Reaction_ReactionKind$json = const {
 
 /// Descriptor for `Reaction`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List reactionDescriptor = $convert.base64Decode(
-    'CghSZWFjdGlvbhIOCgJpZBgBIAEoBFICaWQSLwoHY3JlYXRlZBgCIAEoCzIVLnN1YnNvY2lhbC5XaG9BbmRXaGVuUgdjcmVhdGVkEi8KB3VwZGF0ZWQYAyABKAsyFS5zdWJzb2NpYWwuV2hvQW5kV2hlblIHdXBkYXRlZBI0CgRraW5kGAQgASgOMiAuc3Vic29jaWFsLlJlYWN0aW9uLlJlYWN0aW9uS2luZFIEa2luZCI3CgxSZWFjdGlvbktpbmQSCwoHVU5LTk9XThAAEgsKB1VQX1ZPVEUQARINCglET1dOX1ZPVEUQAg==');
+    'CghSZWFjdGlvbhIOCgJpZBgBIAEoBFICaWQSLwoHY3JlYXRlZBgCIAEoCzIVLnN1YnNvY2lhbC5XaG9BbmRXaGVuUgdjcmVhdGVkEi8KB3VwZGF0ZWQYAyABKAsyFS5zdWJzb2NpYWwuV2hvQW5kV2hlblIHdXBkYXRlZBIsCgRraW5kGAQgASgOMhguc3Vic29jaWFsLlJlYWN0aW9uLktpbmRSBGtpbmQiLwoES2luZBILCgdVTktOT1dOEAASCwoHVVBfVk9URRABEg0KCURPV05fVk9URRAC');
 @$core.Deprecated('Use socialAccountDescriptor instead')
 const SocialAccount$json = const {
   '1': 'SocialAccount',
@@ -900,6 +1150,25 @@ const Profile$json = const {
 /// Descriptor for `Profile`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List profileDescriptor = $convert.base64Decode(
     'CgdQcm9maWxlEi8KB2NyZWF0ZWQYASABKAsyFS5zdWJzb2NpYWwuV2hvQW5kV2hlblIHY3JlYXRlZBIvCgd1cGRhdGVkGAIgASgLMhUuc3Vic29jaWFsLldob0FuZFdoZW5SB3VwZGF0ZWQSLAoHY29udGVudBgDIAEoCzISLnN1YnNvY2lhbC5Db250ZW50Ugdjb250ZW50');
+@$core.Deprecated('Use postUpdateDescriptor instead')
+const PostUpdate$json = const {
+  '1': 'PostUpdate',
+  '2': const [
+    const {
+      '1': 'content',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.subsocial.Content',
+      '10': 'content'
+    },
+    const {'1': 'hidden', '3': 2, '4': 1, '5': 8, '10': 'hidden'},
+  ],
+};
+
+/// Descriptor for `PostUpdate`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List postUpdateDescriptor = $convert.base64Decode(
+    'CgpQb3N0VXBkYXRlEiwKB2NvbnRlbnQYASABKAsyEi5zdWJzb2NpYWwuQ29udGVudFIHY29udGVudBIWCgZoaWRkZW4YAiABKAhSBmhpZGRlbg==');
 @$core.Deprecated('Use spaceByIdDescriptor instead')
 const SpaceById$json = const {
   '1': 'SpaceById',
@@ -1161,3 +1430,51 @@ const ImportedAccount$json = const {
 /// Descriptor for `ImportedAccount`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List importedAccountDescriptor = $convert.base64Decode(
     'Cg9JbXBvcnRlZEFjY291bnQSHQoKcHVibGljX2tleRgBIAEoCVIJcHVibGljS2V5');
+@$core.Deprecated('Use postReactionCreatedDescriptor instead')
+const PostReactionCreated$json = const {
+  '1': 'PostReactionCreated',
+  '2': const [
+    const {'1': 'post_id', '3': 1, '4': 1, '5': 4, '10': 'postId'},
+    const {'1': 'reaction_id', '3': 2, '4': 1, '5': 4, '10': 'reactionId'},
+  ],
+};
+
+/// Descriptor for `PostReactionCreated`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List postReactionCreatedDescriptor = $convert.base64Decode(
+    'ChNQb3N0UmVhY3Rpb25DcmVhdGVkEhcKB3Bvc3RfaWQYASABKARSBnBvc3RJZBIfCgtyZWFjdGlvbl9pZBgCIAEoBFIKcmVhY3Rpb25JZA==');
+@$core.Deprecated('Use postCreatedDescriptor instead')
+const PostCreated$json = const {
+  '1': 'PostCreated',
+  '2': const [
+    const {'1': 'account_id', '3': 1, '4': 1, '5': 9, '10': 'accountId'},
+    const {'1': 'post_id', '3': 2, '4': 1, '5': 4, '10': 'postId'},
+  ],
+};
+
+/// Descriptor for `PostCreated`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List postCreatedDescriptor = $convert.base64Decode(
+    'CgtQb3N0Q3JlYXRlZBIdCgphY2NvdW50X2lkGAEgASgJUglhY2NvdW50SWQSFwoHcG9zdF9pZBgCIAEoBFIGcG9zdElk');
+@$core.Deprecated('Use postUpdatedDescriptor instead')
+const PostUpdated$json = const {
+  '1': 'PostUpdated',
+  '2': const [
+    const {'1': 'account_id', '3': 1, '4': 1, '5': 9, '10': 'accountId'},
+    const {'1': 'post_id', '3': 2, '4': 1, '5': 4, '10': 'postId'},
+  ],
+};
+
+/// Descriptor for `PostUpdated`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List postUpdatedDescriptor = $convert.base64Decode(
+    'CgtQb3N0VXBkYXRlZBIdCgphY2NvdW50X2lkGAEgASgJUglhY2NvdW50SWQSFwoHcG9zdF9pZBgCIAEoBFIGcG9zdElk');
+@$core.Deprecated('Use spaceFollowedDescriptor instead')
+const SpaceFollowed$json = const {
+  '1': 'SpaceFollowed',
+  '2': const [
+    const {'1': 'follower', '3': 1, '4': 1, '5': 9, '10': 'follower'},
+    const {'1': 'space_id', '3': 2, '4': 1, '5': 4, '10': 'spaceId'},
+  ],
+};
+
+/// Descriptor for `SpaceFollowed`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List spaceFollowedDescriptor = $convert.base64Decode(
+    'Cg1TcGFjZUZvbGxvd2VkEhoKCGZvbGxvd2VyGAEgASgJUghmb2xsb3dlchIZCghzcGFjZV9pZBgCIAEoBFIHc3BhY2VJZA==');

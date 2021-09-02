@@ -3,7 +3,8 @@ use frame_support::dispatch::{DispatchError, DispatchResult};
 use super::permissions::{
     SpacePermission, SpacePermissions, SpacePermissionsContext,
 };
-use super::utils::{Content, SpaceId, User};
+use super::utils::{Content, User};
+use super::SpaceId;
 
 /// Minimal set of fields from Space struct that are required by roles pallet.
 pub struct SpaceForRoles<AccountId> {

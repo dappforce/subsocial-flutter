@@ -1,7 +1,11 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:subsocial_sdk/subsocial_sdk.dart';
 
 void main() {
+  final suri = Platform.environment['SURI'] ?? '//Alice';
   test('Get Space with Id', () async {
     final sdk = await Subsocial.instance;
     final space = await sdk.spaceById(1);
@@ -116,4 +120,18 @@ void main() {
     final imported = await sdk.importAccount(suri: generated.seedPhrase);
     expect(generated.publicKey, imported.publicKey);
   });
+
+  test('Create Post Reaction', () async {
+    final sdk = await Subsocial.instance;
+    final account = await sdk.importAccount(suri: suri);
+    expect(account.hasPublicKey(), true);
+    final lastPostId = await sdk.nextPostId();
+    final randomPostId = Random.secure().nextInt(lastPostId - 1);
+    final event = await sdk.createPostReaction(
+      postId: randomPostId,
+      kind: Reaction_Kind.UP_VOTE,
+    );
+    expect(event.postId.toInt(), randomPostId);
+    expect(event.hasReactionId(), true);
+  }, skip: true);
 }

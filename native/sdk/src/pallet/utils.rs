@@ -1,11 +1,10 @@
 use std::fmt;
 
 use codec::{Decode, Encode};
-
 use sp_std::prelude::*;
 use subxt::system::System;
 
-pub type SpaceId = u64;
+use super::SpaceId;
 
 #[derive(Encode, Decode, Clone, Eq, PartialEq, Debug)]
 pub struct WhoAndWhen<T: System> {
