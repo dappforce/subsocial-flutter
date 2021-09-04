@@ -116,7 +116,9 @@ jobs:
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
-          prerelease: false
+          # create a prerelease only if the release,
+          # tag or the branch name contains "signer"
+          prerelease: ${{ contains(github.ref, "signer") }}
           files: |
             build/libsubsocial-aarch64-linux-android.so
             build/libsubsocial-x86_64-linux-android.so
