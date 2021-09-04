@@ -108,10 +108,10 @@ def get_releases():
 
 # Init script code.
 
-get_releases()
 print(f'Starting downloading Native libraries for {package_name} ..')
 print('Please wait this could take some time, depending on your internet connection.')
 print()
+get_releases()
 print('Finished downloading files.')
 print()
 subprocess.call(['flutter', 'pub', 'get'])
