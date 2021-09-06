@@ -2,7 +2,7 @@
 
 ## Usage
 
-in your flutter project run the following commands to add the SDK to your project as a package.
+In your flutter project run the following commands to add the SDK to your project as a package.
 
 ```bash
 git submodule add https://github.com/dappforce/subsocial-flutter.git packages/subsocial_sdk
@@ -34,6 +34,25 @@ then rerun the `init.py` script to fetch the latest native libs.
 
 ```bash
 ./packages/subsocial_sdk/init.py
+```
+
+**To use a prerelese version of the SDK**
+
+then run the following command
+
+```bash
+./packages/subsocial_sdk/init.py --dev
+```
+it will also print the tag/release of this prerelese
+so make sure to switch the git module to that branch too.
+
+```bash
+cd ./packages/subsocial_sdk
+git checkout RELEASE_NAME_HERE
+cd ..
+# Then add + commit your changes
+# and then just run
+git submodule update --recursive
 ```
 
 ## To run the example app
