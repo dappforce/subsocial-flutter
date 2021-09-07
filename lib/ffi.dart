@@ -34,6 +34,34 @@ class RawSubsoical {
   late final _dart_subsocial_dispatch _subsocial_dispatch =
       _subsocial_dispatch_ptr.asFunction<_dart_subsocial_dispatch>();
 
+  /// Dispose (a la drop) the Client and all active connections.
+  /// if the client is still there, it will close it and return `1`
+  /// otherwise, returns 0xdead.
+  int subsocial_dispose_client() {
+    return _subsocial_dispose_client();
+  }
+
+  late final _subsocial_dispose_client_ptr =
+      _lookup<ffi.NativeFunction<_c_subsocial_dispose_client>>(
+          'subsocial_dispose_client');
+  late final _dart_subsocial_dispose_client _subsocial_dispose_client =
+      _subsocial_dispose_client_ptr
+          .asFunction<_dart_subsocial_dispose_client>();
+
+  /// Dispose (a la drop) the Signer and zerozie the memory.
+  /// if the signer is still there, it will drop it and return `1`
+  /// otherwise, returns 0xdead.
+  int subsocial_dispose_signer() {
+    return _subsocial_dispose_signer();
+  }
+
+  late final _subsocial_dispose_signer_ptr =
+      _lookup<ffi.NativeFunction<_c_subsocial_dispose_signer>>(
+          'subsocial_dispose_signer');
+  late final _dart_subsocial_dispose_signer _subsocial_dispose_signer =
+      _subsocial_dispose_signer_ptr
+          .asFunction<_dart_subsocial_dispose_signer>();
+
   int subsocial_init_client(
     int port,
     ffi.Pointer<SubscoialConfig> config,
@@ -87,6 +115,14 @@ typedef _dart_subsocial_dispatch = int Function(
   int port,
   ffi.Pointer<Uint8List> buffer,
 );
+
+typedef _c_subsocial_dispose_client = ffi.Int32 Function();
+
+typedef _dart_subsocial_dispose_client = int Function();
+
+typedef _c_subsocial_dispose_signer = ffi.Int32 Function();
+
+typedef _dart_subsocial_dispose_signer = int Function();
 
 typedef _c_subsocial_init_client = ffi.Int32 Function(
   ffi.Int64 port,

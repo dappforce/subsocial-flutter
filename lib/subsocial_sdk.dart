@@ -98,6 +98,21 @@ class Subsocial {
     return val.reaction;
   }
 
+  Future<ReactionId> postReactionIdByAccount({
+    required PostId postId,
+    required AccountId accountId,
+  }) async {
+    final req = Request(
+      postReactionIdByAccount: GetPostReactionIdByAccount(
+        postId: makeLongInt(postId),
+        accountId: accountId,
+      ),
+    );
+    final res = await _dispatch(req);
+    final val = res.ensurePostReactionIdByAccount();
+    return val.reactionId.toInt();
+  }
+
   Future<List<PostId>> postsIdsBySpaceId(SpaceId id) async {
     final req = Request(
       postIdsBySpaceId: GetPostIdsBySpaceId(spaceId: makeLongInt(id)),
@@ -246,6 +261,27 @@ class Subsocial {
     return val;
   }
 
+  Future<CurrentAccountId> currentAccountId() async {
+    final req = Request(currentAccountId: GetCurrentAccountId());
+    final res = await _dispatch(req);
+    final val = res.ensureCurrentAccountId();
+    return val;
+  }
+
+  Future<ProfileCreated> createProfile({required Content content}) async {
+    final req = Request(createProfile: CreateProfile(content: content));
+    final res = await _dispatch(req);
+    final val = res.ensureProfileCreated();
+    return val;
+  }
+
+  Future<ProfileUpdated> updateProfile({Content? content}) async {
+    final req = Request(updateProfile: UpdateProfile(maybeContent: content));
+    final res = await _dispatch(req);
+    final val = res.ensureProfileUpdated();
+    return val;
+  }
+
   Future<PostReactionCreated> createPostReaction({
     required PostId postId,
     required Reaction_Kind kind,
@@ -258,6 +294,38 @@ class Subsocial {
     );
     final res = await _dispatch(req);
     final val = res.ensurePostReactionCreated();
+    return val;
+  }
+
+  Future<PostReactionUpdated> updatePostReaction({
+    required PostId postId,
+    required ReactionId reactionId,
+    required Reaction_Kind kind,
+  }) async {
+    final req = Request(
+      updatePostReaction: UpdatePostReaction(
+        postId: makeLongInt(postId),
+        reactionId: makeLongInt(reactionId),
+        newKind: kind,
+      ),
+    );
+    final res = await _dispatch(req);
+    final val = res.ensurePostReactionUpdated();
+    return val;
+  }
+
+  Future<PostReactionDeleted> deletePostReaction({
+    required PostId postId,
+    required ReactionId reactionId,
+  }) async {
+    final req = Request(
+      deletePostReaction: DeletePostReaction(
+        postId: makeLongInt(postId),
+        reactionId: makeLongInt(reactionId),
+      ),
+    );
+    final res = await _dispatch(req);
+    final val = res.ensurePostReactionDeleted();
     return val;
   }
 
@@ -303,6 +371,69 @@ class Subsocial {
     return val;
   }
 
+  Future<SpaceUnfollowed> unfollowSpace({required SpaceId spaceId}) async {
+    final req = Request(
+      unfollowSpace: UnfollowSpace(spaceId: makeLongInt(spaceId)),
+    );
+    final res = await _dispatch(req);
+    final val = res.ensureSpaceUnfollowed();
+    return val;
+  }
+
+  Future<SpaceCreated> createSpace({
+    SpaceId? parentId,
+    String? handle,
+    required Content content,
+  }) async {
+    final req = Request(
+      createSpace: CreateSpace(
+        parentId: parentId != null ? makeLongInt(parentId) : null,
+        handle: handle,
+        content: content,
+      ),
+    );
+    final res = await _dispatch(req);
+    final val = res.ensureSpaceCreated();
+    return val;
+  }
+
+  Future<SpaceUpdated> updateSpace({
+    required SpaceId spaceId,
+    required SpaceUpdate update,
+  }) async {
+    final req = Request(
+      updateSpace: UpdateSpace(
+        spaceId: makeLongInt(spaceId),
+        update: update,
+      ),
+    );
+    final res = await _dispatch(req);
+    final val = res.ensureSpaceUpdated();
+    return val;
+  }
+
+  Future<AccountFollowed> followAccount({
+    required AccountId accountId,
+  }) async {
+    final req = Request(
+      followAccount: FollowAccount(accountId: accountId),
+    );
+    final res = await _dispatch(req);
+    final val = res.ensureAccountFollowed();
+    return val;
+  }
+
+  Future<AccountUnfollowed> unfollowAccount({
+    required AccountId accountId,
+  }) async {
+    final req = Request(
+      unfollowAccount: UnfollowAccount(accountId: accountId),
+    );
+    final res = await _dispatch(req);
+    final val = res.ensureAccountUnfollowed();
+    return val;
+  }
+
   Future<bool> isAccountFollower({required AccountId accountId}) async {
     final req = Request(
       isAccountFollower: IsAccountFollower(accountId: accountId),
@@ -327,8 +458,21 @@ class Subsocial {
     return res.isPostSharedByAccount;
   }
 
+  /// Clear-out the current Signer from the memory.
+  void clearSigner() {
+    _raw.subsocial_dispose_signer();
+  }
+
+  /// Dispose everything.
+  /// Note: This would cancel all the requests, and clear out
+  /// the current signer from the memory.
   void dispose() {
-    // currently, there is nothing to dispose.
+    _raw.subsocial_dispose_client();
+    _raw.subsocial_dispose_signer();
+    // set the instance to be null.
+    // so next time we call the SDK
+    // it should create new instance.
+    _instance = null;
   }
 
   Future<Response> _dispatch(Request req) async {

@@ -41,6 +41,15 @@ pub struct Space<T: Spaces> {
     pub permissions: Option<SpacePermissions>,
 }
 
+#[derive(Encode, Decode, Clone, Eq, PartialEq, Debug)]
+pub struct SpaceUpdate<T: Spaces> {
+    pub parent_id: Option<Option<T::SpaceId>>,
+    pub handle: Option<Option<Vec<u8>>>,
+    pub content: Option<Content>,
+    pub hidden: Option<bool>,
+    pub permissions: Option<Option<SpacePermissions>>,
+}
+
 impl<T: Spaces> fmt::Display for Space<T> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let id: u64 = self.id.into();
@@ -103,4 +112,34 @@ impl<T: Spaces> SpaceIdsByOwnerStore<T> {
             __marker: Default::default(),
         }
     }
+}
+
+// Calls ...
+
+#[derive(Clone, Encode, Eq, PartialEq, subxt::Call)]
+pub struct CreateSpaceCall<T: Spaces> {
+    parent_id_opt: Option<T::SpaceId>,
+    handle_opt: Option<Vec<u8>>,
+    content: Content,
+    permissions_opt: Option<SpacePermissions>,
+}
+
+#[derive(Clone, Encode, Eq, PartialEq, subxt::Call)]
+pub struct UpdateSpaceCall<T: Spaces> {
+    space_id: T::SpaceId,
+    update: SpaceUpdate<T>,
+}
+
+// Events ...
+
+#[derive(Clone, Debug, Encode, Decode, Eq, PartialEq, subxt::Event)]
+pub struct SpaceCreatedEvent<T: Spaces> {
+    pub account_id: T::AccountId,
+    pub space_id: T::SpaceId,
+}
+
+#[derive(Clone, Debug, Encode, Decode, Eq, PartialEq, subxt::Event)]
+pub struct SpaceUpdatedEvent<T: Spaces> {
+    pub account_id: T::AccountId,
+    pub space_id: T::SpaceId,
 }

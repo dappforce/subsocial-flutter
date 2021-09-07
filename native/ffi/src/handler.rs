@@ -1,13 +1,18 @@
 use prost::Message;
 use sdk::pallet::*;
 use sdk::runtime::SubsocialRuntime;
+use sdk::subxt::sp_core::crypto::Ss58AddressFormat;
+use sdk::subxt::sp_core::crypto::Ss58Codec;
 use sdk::subxt::sp_core::Pair;
 use sdk::subxt::sp_runtime::AccountId32;
 use sdk::subxt::Client;
 
 use sdk::pallet::posts::*;
+use sdk::pallet::profile_follows::*;
+use sdk::pallet::profiles::*;
 use sdk::pallet::reactions::*;
 use sdk::pallet::space_follows::*;
+use sdk::pallet::spaces::*;
 
 use crate::pb::subsocial::request::Body as RequestBody;
 use crate::pb::subsocial::response::Body as ResponseBody;
@@ -56,6 +61,9 @@ pub async fn handle(
         RequestBody::ReactionById(args) => {
             reaction_by_id(client, args.reaction_id).await
         }
+        RequestBody::PostReactionIdByAccount(args) => {
+            post_reaction_id_by_account(client, args).await
+        }
         RequestBody::ReplyIdsByPostId(args) => {
             reply_ids_by_post_id(client, args.post_id).await
         }
@@ -76,8 +84,15 @@ pub async fn handle(
         }
         RequestBody::GenerateAccount(args) => generate_account(args),
         RequestBody::ImportAccount(args) => import_account(args),
+        RequestBody::CurrentAccountId(_) => current_account_id(signer),
         RequestBody::CreatePostReaction(args) => {
             create_post_reaction(client, signer, args).await
+        }
+        RequestBody::UpdatePostReaction(args) => {
+            update_post_reaction(client, signer, args).await
+        }
+        RequestBody::DeletePostReaction(args) => {
+            delete_post_reaction(client, signer, args).await
         }
         RequestBody::CreatePost(args) => {
             create_post(client, signer, args).await
@@ -88,6 +103,9 @@ pub async fn handle(
         RequestBody::FollowSpace(args) => {
             follow_space(client, signer, args).await
         }
+        RequestBody::UnfollowSpace(args) => {
+            unfollow_space(client, signer, args).await
+        }
         RequestBody::IsAccountFollower(args) => {
             is_account_follower(client, signer, args).await
         }
@@ -96,6 +114,24 @@ pub async fn handle(
         }
         RequestBody::IsPostSharedByAccount(args) => {
             is_post_shared_by_account(client, signer, args).await
+        }
+        RequestBody::CreateProfile(args) => {
+            create_profile(client, signer, args).await
+        }
+        RequestBody::UpdateProfile(args) => {
+            update_profile(client, signer, args).await
+        }
+        RequestBody::CreateSpace(args) => {
+            create_space(client, signer, args).await
+        }
+        RequestBody::UpdateSpace(args) => {
+            update_space(client, signer, args).await
+        }
+        RequestBody::FollowAccount(args) => {
+            follow_account(client, signer, args).await
+        }
+        RequestBody::UnfollowAccount(args) => {
+            unfollow_account(client, signer, args).await
         }
     };
     let response = match result {
@@ -242,6 +278,31 @@ async fn reaction_by_id(
     }
 }
 
+async fn post_reaction_id_by_account(
+    client: &Client<SubsocialRuntime>,
+    GetPostReactionIdByAccount {
+        account_id,
+        post_id,
+    }: GetPostReactionIdByAccount,
+) -> Result<ResponseBody, Error> {
+    let account_id = AccountId32::convert(account_id)?;
+    let store =
+        reactions::PostReactionIdByAccountStore::new(account_id, post_id);
+    let maybe_reaction_id = client.fetch(&store, None).await?;
+    match maybe_reaction_id {
+        Some(reaction_id) => {
+            let body = ResponseBody::PostReactionIdByAccount(
+                PostReactionIdByAccount { reaction_id },
+            );
+            Ok(body)
+        }
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("PostReactionId by Account Not Found"),
+        }),
+    }
+}
+
 async fn social_account_by_account_id(
     client: &Client<SubsocialRuntime>,
     account_id: String,
@@ -312,7 +373,11 @@ async fn space_followers(
             let body = ResponseBody::SpaceFollowers(SpaceFollowers {
                 account_ids: account_ids
                     .into_iter()
-                    .map(|v| v.to_string())
+                    .map(|v| {
+                        v.to_ss58check_with_version(
+                            Ss58AddressFormat::SubsocialAccount,
+                        )
+                    })
                     .collect(),
             });
             Ok(body)
@@ -354,7 +419,11 @@ async fn account_followers(
             let body = ResponseBody::AccountFollowers(AccountFollowers {
                 account_ids: account_ids
                     .into_iter()
-                    .map(|v| v.to_string())
+                    .map(|v| {
+                        v.to_ss58check_with_version(
+                            Ss58AddressFormat::SubsocialAccount,
+                        )
+                    })
                     .collect(),
             });
             Ok(body)
@@ -380,7 +449,11 @@ async fn accounts_followed_by_account(
                 AccountsFollowedByAccount {
                     account_ids: account_ids
                         .into_iter()
-                        .map(|v| v.to_string())
+                        .map(|v| {
+                            v.to_ss58check_with_version(
+                                Ss58AddressFormat::SubsocialAccount,
+                            )
+                        })
                         .collect(),
                 },
             );
@@ -393,6 +466,15 @@ async fn accounts_followed_by_account(
     }
 }
 
+fn current_account_id(signer: &Signer) -> Result<ResponseBody, Error> {
+    let account_id = signer
+        .signer()
+        .public()
+        .to_ss58check_with_version(Ss58AddressFormat::SubsocialAccount);
+    let body = ResponseBody::CurrentAccountId(CurrentAccountId { account_id });
+    Ok(body)
+}
+
 fn generate_account(
     GenerateAccount { password }: GenerateAccount,
 ) -> Result<ResponseBody, Error> {
@@ -403,7 +485,10 @@ fn generate_account(
             Some(password.as_str())
         });
     let pair = crate::subxt::PairSigner::new(pair);
-    let public_key = pair.signer().public().to_string();
+    let public_key = pair
+        .signer()
+        .public()
+        .to_ss58check_with_version(Ss58AddressFormat::SubsocialAccount);
     unsafe {
         let _old = crate::SIGNER.take();
         crate::SIGNER
@@ -434,7 +519,10 @@ fn import_account(
         crate::subxt::Error::Other(String::from("Invalid Phrase Format"))
     })?;
     let pair = crate::subxt::PairSigner::new(pair);
-    let public_key = pair.signer().public().to_string();
+    let public_key = pair
+        .signer()
+        .public()
+        .to_ss58check_with_version(Ss58AddressFormat::SubsocialAccount);
     unsafe {
         let _old = crate::SIGNER.take();
         crate::SIGNER
@@ -467,6 +555,67 @@ async fn create_post_reaction(
         None => Err(Error {
             kind: error::Kind::NotFound.into(),
             msg: String::from("Post Reaction Created Event Not Found"),
+        }),
+    }
+}
+
+async fn update_post_reaction(
+    client: &Client<SubsocialRuntime>,
+    signer: &Signer,
+    UpdatePostReaction {
+        post_id,
+        reaction_id,
+        new_kind,
+    }: UpdatePostReaction,
+) -> Result<ResponseBody, Error> {
+    let kind = reaction::Kind::from_i32(new_kind).unwrap_or_default();
+    let maybe_event = client
+        .update_post_reaction_and_watch(
+            signer,
+            post_id,
+            reaction_id,
+            kind.into(),
+        )
+        .await?
+        .find_event::<PostReactionUpdatedEvent<_>>()?;
+    match maybe_event {
+        Some(event) => {
+            let body = ResponseBody::PostReactionUpdated(PostReactionUpdated {
+                post_id,
+                reaction_id: event.reaction_id,
+            });
+            Ok(body)
+        }
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("Post Reaction Updated Event Not Found"),
+        }),
+    }
+}
+
+async fn delete_post_reaction(
+    client: &Client<SubsocialRuntime>,
+    signer: &Signer,
+    DeletePostReaction {
+        post_id,
+        reaction_id,
+    }: DeletePostReaction,
+) -> Result<ResponseBody, Error> {
+    let maybe_event = client
+        .delete_post_reaction_and_watch(signer, post_id, reaction_id)
+        .await?
+        .find_event::<PostReactionDeletedEvent<_>>()?;
+    match maybe_event {
+        Some(event) => {
+            let body = ResponseBody::PostReactionDeleted(PostReactionDeleted {
+                post_id,
+                reaction_id: event.reaction_id,
+            });
+            Ok(body)
+        }
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("Post Reaction Deletedd Event Not Found"),
         }),
     }
 }
@@ -508,7 +657,9 @@ async fn create_post(
         Some(event) => {
             let body = ResponseBody::PostCreated(PostCreated {
                 post_id: event.post_id,
-                account_id: event.account_id.to_string(),
+                account_id: event.account_id.to_ss58check_with_version(
+                    Ss58AddressFormat::SubsocialAccount,
+                ),
             });
             Ok(body)
         }
@@ -545,7 +696,9 @@ async fn update_post(
         Some(event) => {
             let body = ResponseBody::PostUpdated(PostUpdated {
                 post_id: event.post_id,
-                account_id: event.account_id.to_string(),
+                account_id: event.account_id.to_ss58check_with_version(
+                    Ss58AddressFormat::SubsocialAccount,
+                ),
             });
             Ok(body)
         }
@@ -568,11 +721,36 @@ async fn follow_space(
     match maybe_event {
         Some(event) => Ok(ResponseBody::SpaceFollowed(SpaceFollowed {
             space_id: event.space_id,
-            follower: event.follower.to_string(),
+            follower: event
+                .follower
+                .to_ss58check_with_version(Ss58AddressFormat::SubsocialAccount),
         })),
         None => Err(Error {
             kind: error::Kind::NotFound.into(),
             msg: String::from("Space Followed Event Not Found"),
+        }),
+    }
+}
+
+async fn unfollow_space(
+    client: &Client<SubsocialRuntime>,
+    signer: &Signer,
+    UnfollowSpace { space_id }: UnfollowSpace,
+) -> Result<ResponseBody, Error> {
+    let maybe_event = client
+        .unfollow_space_and_watch(signer, space_id)
+        .await?
+        .find_event::<SpaceUnfollowedEvent<_>>()?;
+    match maybe_event {
+        Some(event) => Ok(ResponseBody::SpaceUnfollowed(SpaceUnfollowed {
+            space_id: event.space_id,
+            follower: event
+                .follower
+                .to_ss58check_with_version(Ss58AddressFormat::SubsocialAccount),
+        })),
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("Space Unfollowed Event Not Found"),
         }),
     }
 }
@@ -615,4 +793,217 @@ async fn is_post_shared_by_account(
 ) -> Result<ResponseBody, Error> {
     // TODO(shekohex): implement this function.
     Ok(ResponseBody::IsPostSharedByAccount(false))
+}
+
+async fn create_profile(
+    client: &Client<SubsocialRuntime>,
+    signer: &Signer,
+    CreateProfile { content }: CreateProfile,
+) -> Result<ResponseBody, Error> {
+    let content = match content {
+        Some(val) => val.into(),
+        None => {
+            return Err(Error {
+                kind: error::Kind::InvalidRequest.into(),
+                msg: String::from("Missing content value"),
+            })
+        }
+    };
+
+    let maybe_event = client
+        .create_profile_and_watch(signer, content)
+        .await?
+        .find_event::<ProfileCreatedEvent<_>>()?;
+    match maybe_event {
+        Some(event) => {
+            let body = ResponseBody::ProfileCreated(ProfileCreated {
+                account_id: event.account_id.to_ss58check_with_version(
+                    Ss58AddressFormat::SubsocialAccount,
+                ),
+            });
+            Ok(body)
+        }
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("Profile Created Event Not Found"),
+        }),
+    }
+}
+
+async fn update_profile(
+    client: &Client<SubsocialRuntime>,
+    signer: &Signer,
+    UpdateProfile { maybe_content }: UpdateProfile,
+) -> Result<ResponseBody, Error> {
+    let update = ProfileUpdate {
+        content: maybe_content.map(Into::into),
+    };
+    let maybe_event = client
+        .update_profile_and_watch(signer, update)
+        .await?
+        .find_event::<ProfileUpdatedEvent<_>>()?;
+    match maybe_event {
+        Some(event) => {
+            let body = ResponseBody::ProfileUpdated(ProfileUpdated {
+                account_id: event.account_id.to_ss58check_with_version(
+                    Ss58AddressFormat::SubsocialAccount,
+                ),
+            });
+            Ok(body)
+        }
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("Profile Updated Event Not Found"),
+        }),
+    }
+}
+
+async fn create_space(
+    client: &Client<SubsocialRuntime>,
+    signer: &Signer,
+    CreateSpace {
+        parent_id,
+        handle,
+        content,
+    }: CreateSpace,
+) -> Result<ResponseBody, Error> {
+    let maybe_parent_id = if parent_id != 0 {
+        Some(parent_id)
+    } else {
+        None
+    };
+    let maybe_handle = if handle.is_empty() {
+        None
+    } else {
+        Some(handle.into_bytes())
+    };
+    let content = match content {
+        Some(val) => val.into(),
+        None => {
+            return Err(Error {
+                kind: error::Kind::InvalidRequest.into(),
+                msg: String::from("Missing content value"),
+            })
+        }
+    };
+
+    let maybe_event = client
+        .create_space_and_watch(
+            signer,
+            maybe_parent_id,
+            maybe_handle,
+            content,
+            None,
+        )
+        .await?
+        .find_event::<SpaceCreatedEvent<_>>()?;
+    match maybe_event {
+        Some(event) => {
+            let body = ResponseBody::SpaceCreated(SpaceCreated {
+                space_id: event.space_id,
+                account_id: event.account_id.to_ss58check_with_version(
+                    Ss58AddressFormat::SubsocialAccount,
+                ),
+            });
+            Ok(body)
+        }
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("Space Created Event Not Found"),
+        }),
+    }
+}
+
+async fn update_space(
+    client: &Client<SubsocialRuntime>,
+    signer: &Signer,
+    UpdateSpace { space_id, update }: UpdateSpace,
+) -> Result<ResponseBody, Error> {
+    let update = match update {
+        Some(val) => val.into(),
+        None => {
+            return Err(Error {
+                kind: error::Kind::InvalidRequest.into(),
+                msg: String::from("Missing update value"),
+            })
+        }
+    };
+
+    let maybe_event = client
+        .update_space_and_watch(signer, space_id, update)
+        .await?
+        .find_event::<SpaceUpdatedEvent<_>>()?;
+    match maybe_event {
+        Some(event) => {
+            let body = ResponseBody::SpaceUpdated(SpaceUpdated {
+                space_id: event.space_id,
+                account_id: event.account_id.to_ss58check_with_version(
+                    Ss58AddressFormat::SubsocialAccount,
+                ),
+            });
+            Ok(body)
+        }
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("Space Updated Event Not Found"),
+        }),
+    }
+}
+
+async fn follow_account(
+    client: &Client<SubsocialRuntime>,
+    signer: &Signer,
+    FollowAccount { account_id }: FollowAccount,
+) -> Result<ResponseBody, Error> {
+    let account_id = AccountId32::convert(account_id)?;
+    let maybe_event = client
+        .follow_account_and_watch(signer, account_id)
+        .await?
+        .find_event::<AccountFollowedEvent<_>>()?;
+    match maybe_event {
+        Some(event) => {
+            let body = ResponseBody::AccountFollowed(AccountFollowed {
+                follower: event.follower.to_ss58check_with_version(
+                    Ss58AddressFormat::SubsocialAccount,
+                ),
+                following: event.following.to_ss58check_with_version(
+                    Ss58AddressFormat::SubsocialAccount,
+                ),
+            });
+            Ok(body)
+        }
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("Account Followed Event Not Found"),
+        }),
+    }
+}
+
+async fn unfollow_account(
+    client: &Client<SubsocialRuntime>,
+    signer: &Signer,
+    UnfollowAccount { account_id }: UnfollowAccount,
+) -> Result<ResponseBody, Error> {
+    let account_id = AccountId32::convert(account_id)?;
+    let maybe_event = client
+        .unfollow_account_and_watch(signer, account_id)
+        .await?
+        .find_event::<AccountUnfollowedEvent<_>>()?;
+    match maybe_event {
+        Some(event) => {
+            let body = ResponseBody::AccountUnfollowed(AccountUnfollowed {
+                follower: event.follower.to_ss58check_with_version(
+                    Ss58AddressFormat::SubsocialAccount,
+                ),
+                unfollowing: event.unfollowing.to_ss58check_with_version(
+                    Ss58AddressFormat::SubsocialAccount,
+                ),
+            });
+            Ok(body)
+        }
+        None => Err(Error {
+            kind: error::Kind::NotFound.into(),
+            msg: String::from("Account Unfollowed Event Not Found"),
+        }),
+    }
 }

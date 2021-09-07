@@ -76,6 +76,22 @@ impl<T: Reactions> ReactionIdsByPostIdStore<T> {
     }
 }
 
+#[derive(Clone, Debug, Eq, Encode, PartialEq, subxt::Store)]
+pub struct PostReactionIdByAccountStore<T: Reactions> {
+    #[store(returns = T::ReactionId)]
+    account_id: T::AccountId,
+    post_id: T::PostId,
+}
+
+impl<T: Reactions> PostReactionIdByAccountStore<T> {
+    pub fn new(account_id: T::AccountId, post_id: T::PostId) -> Self {
+        Self {
+            account_id,
+            post_id,
+        }
+    }
+}
+
 // Calls ..
 
 #[derive(Clone, Debug, Encode, Eq, PartialEq, subxt::Call)]
@@ -84,10 +100,37 @@ pub struct CreatePostReactionCall<T: Reactions> {
     kind: ReactionKind,
 }
 
+#[derive(Clone, Debug, Encode, Eq, PartialEq, subxt::Call)]
+pub struct UpdatePostReactionCall<T: Reactions> {
+    post_id: T::PostId,
+    reaction_id: T::ReactionId,
+    new_kind: ReactionKind,
+}
+
+#[derive(Clone, Debug, Encode, Eq, PartialEq, subxt::Call)]
+pub struct DeletePostReactionCall<T: Reactions> {
+    post_id: T::PostId,
+    reaction_id: T::ReactionId,
+}
+
 // Events ..
 
 #[derive(Clone, Debug, Encode, Decode, Eq, PartialEq, subxt::Event)]
 pub struct PostReactionCreatedEvent<T: Reactions> {
+    pub account_id: T::AccountId,
+    pub post_id: T::PostId,
+    pub reaction_id: T::ReactionId,
+}
+
+#[derive(Clone, Debug, Encode, Decode, Eq, PartialEq, subxt::Event)]
+pub struct PostReactionUpdatedEvent<T: Reactions> {
+    pub account_id: T::AccountId,
+    pub post_id: T::PostId,
+    pub reaction_id: T::ReactionId,
+}
+
+#[derive(Clone, Debug, Encode, Decode, Eq, PartialEq, subxt::Event)]
+pub struct PostReactionDeletedEvent<T: Reactions> {
     pub account_id: T::AccountId,
     pub post_id: T::PostId,
     pub reaction_id: T::ReactionId,

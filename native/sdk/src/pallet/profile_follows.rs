@@ -1,4 +1,4 @@
-use codec::Encode;
+use codec::{Decode, Encode};
 use subxt::system::*;
 
 #[subxt::module]
@@ -47,4 +47,30 @@ impl<T: ProfileFollows> AccountFollowedByAccountStore<T> {
             account_two_id,
         }
     }
+}
+
+// Calls ...
+
+#[derive(Clone, Encode, Eq, PartialEq, subxt::Call)]
+pub struct FollowAccountCall<T: ProfileFollows> {
+    account: T::AccountId,
+}
+
+#[derive(Clone, Encode, Eq, PartialEq, subxt::Call)]
+pub struct UnfollowAccountCall<T: ProfileFollows> {
+    account: T::AccountId,
+}
+
+// Events ...
+
+#[derive(Clone, Debug, Encode, Decode, Eq, PartialEq, subxt::Event)]
+pub struct AccountFollowedEvent<T: ProfileFollows> {
+    pub follower: T::AccountId,
+    pub following: T::AccountId,
+}
+
+#[derive(Clone, Debug, Encode, Decode, Eq, PartialEq, subxt::Event)]
+pub struct AccountUnfollowedEvent<T: ProfileFollows> {
+    pub follower: T::AccountId,
+    pub unfollowing: T::AccountId,
 }
