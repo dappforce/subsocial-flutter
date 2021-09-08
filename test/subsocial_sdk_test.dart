@@ -134,4 +134,16 @@ void main() {
     expect(event.postId.toInt(), randomPostId);
     expect(event.hasReactionId(), true);
   }, skip: true);
+
+  test('(un)followSpace', () async {
+    final sdk = await Subsocial.instance;
+    final account = await sdk.importAccount(suri: suri);
+    expect(account.hasPublicKey(), true);
+    final lastSpaceId = await sdk.nextSpaceId();
+    final spaceId = Random.secure().nextInt(lastSpaceId - 1);
+    final spaceFollowed = await sdk.followSpace(spaceId: spaceId);
+    expect(spaceFollowed.spaceId.toInt(), spaceId);
+    final spaceUnfollowed = await sdk.unfollowSpace(spaceId: spaceId);
+    expect(spaceUnfollowed.spaceId.toInt(), spaceId);
+  }, skip: true);
 }

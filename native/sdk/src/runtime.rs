@@ -58,18 +58,18 @@ impl Balances for SubsocialRuntime {
 // implementations for Subsoical Pallets
 impl pallet::spaces::Spaces for SubsocialRuntime {
     type SpaceId = pallet::SpaceId;
+    // FIXME: this should be from the scores pallet.
+    type ScoringAction = u8;
 }
 
 impl pallet::posts::Posts for SubsocialRuntime {
     type PostId = pallet::PostId;
+    // FIXME: this should be implemented in the scores pallet.
+    type PostReactionScores = ();
 }
 
 impl pallet::reactions::Reactions for SubsocialRuntime {
     type ReactionId = pallet::ReactionId;
-    // FIXME: this should be implemented in the scores pallet.
-    type PostReactionScores = ();
-    // FIXME: this should be from the scores pallet.
-    type ScoringAction = u8;
 }
 
 impl pallet::profiles::Profiles for SubsocialRuntime {}

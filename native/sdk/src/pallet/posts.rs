@@ -22,6 +22,7 @@ pub trait Posts: System + Balances + Spaces {
         + Send
         + Sync
         + 'static;
+    type PostReactionScores: Default + Decode + Encode + Send + Sync + 'static;
 }
 
 #[derive(Encode, Decode, Clone, Eq, PartialEq, Debug)]

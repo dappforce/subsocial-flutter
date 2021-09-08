@@ -9,8 +9,6 @@ use super::utils::WhoAndWhen;
 
 #[subxt::module]
 pub trait Reactions: System + Balances + Posts {
-    type PostReactionScores: Default + Decode + Encode + Send + Sync + 'static;
-    type ScoringAction: Default + Decode + Encode + Send + Sync + 'static;
     type ReactionId: From<u64>
         + Into<u64>
         + Default

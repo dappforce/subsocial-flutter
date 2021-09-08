@@ -22,6 +22,7 @@ pub trait Spaces: System + Balances {
         + Send
         + Sync
         + 'static;
+    type ScoringAction: Default + Decode + Encode + Send + Sync + 'static;
 }
 
 #[derive(Encode, Decode, Clone, Eq, PartialEq, Debug)]
