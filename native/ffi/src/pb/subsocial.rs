@@ -2,7 +2,7 @@
 pub struct Request {
     #[prost(
         oneof = "request::Body",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35"
     )]
     pub body: ::core::option::Option<request::Body>,
 }
@@ -58,13 +58,35 @@ pub mod request {
         IsSpaceFollower(super::IsSpaceFollower),
         #[prost(message, tag = "24")]
         IsPostSharedByAccount(super::IsPostSharedByAccount),
+        #[prost(message, tag = "25")]
+        UnfollowSpace(super::UnfollowSpace),
+        #[prost(message, tag = "26")]
+        UpdatePostReaction(super::UpdatePostReaction),
+        #[prost(message, tag = "27")]
+        DeletePostReaction(super::DeletePostReaction),
+        #[prost(message, tag = "28")]
+        CreateProfile(super::CreateProfile),
+        #[prost(message, tag = "29")]
+        UpdateProfile(super::UpdateProfile),
+        #[prost(message, tag = "30")]
+        CurrentAccountId(super::GetCurrentAccountId),
+        #[prost(message, tag = "31")]
+        CreateSpace(super::CreateSpace),
+        #[prost(message, tag = "32")]
+        UpdateSpace(super::UpdateSpace),
+        #[prost(message, tag = "33")]
+        FollowAccount(super::FollowAccount),
+        #[prost(message, tag = "34")]
+        UnfollowAccount(super::UnfollowAccount),
+        #[prost(message, tag = "35")]
+        PostReactionIdByAccount(super::GetPostReactionIdByAccount),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Response {
     #[prost(
         oneof = "response::Body",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36"
     )]
     pub body: ::core::option::Option<response::Body>,
 }
@@ -122,6 +144,28 @@ pub mod response {
         IsSpaceFollower(bool),
         #[prost(bool, tag = "25")]
         IsPostSharedByAccount(bool),
+        #[prost(message, tag = "26")]
+        SpaceUnfollowed(super::SpaceUnfollowed),
+        #[prost(message, tag = "27")]
+        PostReactionUpdated(super::PostReactionUpdated),
+        #[prost(message, tag = "28")]
+        PostReactionDeleted(super::PostReactionDeleted),
+        #[prost(message, tag = "29")]
+        ProfileCreated(super::ProfileCreated),
+        #[prost(message, tag = "30")]
+        ProfileUpdated(super::ProfileUpdated),
+        #[prost(message, tag = "31")]
+        CurrentAccountId(super::CurrentAccountId),
+        #[prost(message, tag = "32")]
+        SpaceCreated(super::SpaceCreated),
+        #[prost(message, tag = "33")]
+        SpaceUpdated(super::SpaceUpdated),
+        #[prost(message, tag = "34")]
+        AccountFollowed(super::AccountFollowed),
+        #[prost(message, tag = "35")]
+        AccountUnfollowed(super::AccountUnfollowed),
+        #[prost(message, tag = "36")]
+        PostReactionIdByAccount(super::PostReactionIdByAccount),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -201,6 +245,8 @@ pub struct GetNextSpaceId {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetNextPostId {}
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetCurrentAccountId {}
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSpaceIdsByOwner {
     #[prost(string, tag = "1")]
     pub account_id: ::prost::alloc::string::String,
@@ -224,6 +270,13 @@ pub struct GetAccountFollowers {
 pub struct GetAccountsFollowedByAccount {
     #[prost(string, tag = "1")]
     pub account_id: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetPostReactionIdByAccount {
+    #[prost(string, tag = "1")]
+    pub account_id: ::prost::alloc::string::String,
+    #[prost(uint64, tag = "2")]
+    pub post_id: u64,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateAccount {
@@ -266,6 +319,11 @@ pub struct FollowSpace {
     pub space_id: u64,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UnfollowSpace {
+    #[prost(uint64, tag = "1")]
+    pub space_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IsAccountFollower {
     #[prost(string, tag = "1")]
     pub account_id: ::prost::alloc::string::String,
@@ -279,6 +337,59 @@ pub struct IsSpaceFollower {
 pub struct IsPostSharedByAccount {
     #[prost(uint64, tag = "1")]
     pub post_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdatePostReaction {
+    #[prost(uint64, tag = "1")]
+    pub post_id: u64,
+    #[prost(uint64, tag = "2")]
+    pub reaction_id: u64,
+    #[prost(enumeration = "reaction::Kind", tag = "3")]
+    pub new_kind: i32,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeletePostReaction {
+    #[prost(uint64, tag = "1")]
+    pub post_id: u64,
+    #[prost(uint64, tag = "2")]
+    pub reaction_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CreateProfile {
+    #[prost(message, optional, tag = "1")]
+    pub content: ::core::option::Option<Content>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdateProfile {
+    #[prost(message, optional, tag = "1")]
+    pub maybe_content: ::core::option::Option<Content>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CreateSpace {
+    #[prost(uint64, tag = "1")]
+    pub parent_id: u64,
+    #[prost(string, tag = "2")]
+    pub handle: ::prost::alloc::string::String,
+    /// TODO(@shekohex): add `SpacePermissions`.
+    #[prost(message, optional, tag = "3")]
+    pub content: ::core::option::Option<Content>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdateSpace {
+    #[prost(uint64, tag = "1")]
+    pub space_id: u64,
+    #[prost(message, optional, tag = "2")]
+    pub update: ::core::option::Option<SpaceUpdate>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FollowAccount {
+    #[prost(string, tag = "1")]
+    pub account_id: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UnfollowAccount {
+    #[prost(string, tag = "1")]
+    pub account_id: ::prost::alloc::string::String,
 }
 // DATA
 
@@ -457,6 +568,18 @@ pub struct PostUpdate {
     #[prost(bool, tag = "2")]
     pub hidden: bool,
 }
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SpaceUpdate {
+    #[prost(uint64, tag = "1")]
+    pub parent_id: u64,
+    #[prost(string, tag = "2")]
+    pub handle: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "3")]
+    pub content: ::core::option::Option<Content>,
+    /// TODO(@shekohex): add `SpacePermissions` here.
+    #[prost(bool, tag = "4")]
+    pub hidden: bool,
+}
 // RESPONSES
 
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -508,6 +631,11 @@ pub struct NextSpaceId {
 pub struct NextPostId {
     #[prost(uint64, tag = "1")]
     pub id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CurrentAccountId {
+    #[prost(string, tag = "1")]
+    pub account_id: ::prost::alloc::string::String,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SpaceIdsByOwner {
@@ -573,4 +701,68 @@ pub struct SpaceFollowed {
     pub follower: ::prost::alloc::string::String,
     #[prost(uint64, tag = "2")]
     pub space_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SpaceUnfollowed {
+    #[prost(string, tag = "1")]
+    pub follower: ::prost::alloc::string::String,
+    #[prost(uint64, tag = "2")]
+    pub space_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PostReactionUpdated {
+    #[prost(uint64, tag = "1")]
+    pub post_id: u64,
+    #[prost(uint64, tag = "2")]
+    pub reaction_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PostReactionDeleted {
+    #[prost(uint64, tag = "1")]
+    pub post_id: u64,
+    #[prost(uint64, tag = "2")]
+    pub reaction_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ProfileCreated {
+    #[prost(string, tag = "1")]
+    pub account_id: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ProfileUpdated {
+    #[prost(string, tag = "1")]
+    pub account_id: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SpaceCreated {
+    #[prost(string, tag = "1")]
+    pub account_id: ::prost::alloc::string::String,
+    #[prost(uint64, tag = "2")]
+    pub space_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SpaceUpdated {
+    #[prost(string, tag = "1")]
+    pub account_id: ::prost::alloc::string::String,
+    #[prost(uint64, tag = "2")]
+    pub space_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AccountFollowed {
+    #[prost(string, tag = "1")]
+    pub follower: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub following: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AccountUnfollowed {
+    #[prost(string, tag = "1")]
+    pub follower: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub unfollowing: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PostReactionIdByAccount {
+    #[prost(uint64, tag = "1")]
+    pub reaction_id: u64,
 }

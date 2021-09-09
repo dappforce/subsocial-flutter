@@ -1,6 +1,6 @@
 use sdk::pallet::{posts, profiles, reactions, spaces, utils};
 use sdk::runtime::SubsocialRuntime;
-use sdk::subxt::sp_core::crypto::Ss58Codec;
+use sdk::subxt::sp_core::crypto::{Ss58AddressFormat, Ss58Codec};
 use sdk::subxt::sp_runtime::AccountId32;
 
 use crate::pb::subsocial::*;
@@ -40,7 +40,9 @@ impl From<sdk::codec::Error> for Error {
 impl From<utils::WhoAndWhen<SubsocialRuntime>> for WhoAndWhen {
     fn from(v: utils::WhoAndWhen<SubsocialRuntime>) -> Self {
         Self {
-            account: v.account.to_string(),
+            account: v
+                .account
+                .to_ss58check_with_version(Ss58AddressFormat::SubsocialAccount),
             block_number: v.block.into(),
             time: v.time,
         }
@@ -129,7 +131,9 @@ impl From<spaces::Space<SubsocialRuntime>> for Space {
             id: space.id,
             created: Some(space.created.into()),
             updated: space.updated.map(Into::into),
-            owner: space.owner.to_string(),
+            owner: space
+                .owner
+                .to_ss58check_with_version(Ss58AddressFormat::SubsocialAccount),
             parent_id: space.parent_id.unwrap_or_default(),
             handle: space
                 .handle
@@ -159,7 +163,9 @@ impl From<posts::Post<SubsocialRuntime>> for Post {
             id: post.id,
             created: Some(post.created.into()),
             updated: post.updated.map(Into::into),
-            owner: post.owner.to_string(),
+            owner: post
+                .owner
+                .to_ss58check_with_version(Ss58AddressFormat::SubsocialAccount),
             space_id: post.space_id.unwrap_or_default(),
             content: if post.content == Content::None {
                 None
@@ -236,6 +242,26 @@ impl From<profiles::SocialAccount<SubsocialRuntime>> for SocialAccount {
             reputation: account.reputation,
             following_spaces_count: account.following_spaces_count.into(),
             following_accounts_count: account.following_accounts_count.into(),
+        }
+    }
+}
+
+impl From<SpaceUpdate> for spaces::SpaceUpdate<SubsocialRuntime> {
+    fn from(v: SpaceUpdate) -> Self {
+        Self {
+            content: v.content.map(Into::into),
+            hidden: Some(v.hidden),
+            handle: if v.handle.is_empty() {
+                None
+            } else {
+                Some(Some(v.handle.into_bytes()))
+            },
+            parent_id: if v.parent_id == 0 {
+                None
+            } else {
+                Some(Some(v.parent_id))
+            },
+            permissions: None,
         }
     }
 }

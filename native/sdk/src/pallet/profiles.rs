@@ -24,6 +24,11 @@ pub struct Profile<T: Profiles> {
     pub content: Content,
 }
 
+#[derive(Encode, Decode, Clone, Eq, PartialEq, Debug)]
+pub struct ProfileUpdate {
+    pub content: Option<Content>,
+}
+
 // Storage ..
 
 #[derive(Clone, Debug, Eq, Encode, PartialEq, subxt::Store)]
@@ -40,4 +45,29 @@ impl<T: Profiles> SocialAccountByIdStore<T> {
             __marker: Default::default(),
         }
     }
+}
+// Calls ...
+
+#[derive(Clone, Debug, Encode, Eq, PartialEq, subxt::Call)]
+pub struct CreateProfileCall<T: Profiles> {
+    content: Content,
+    __marker: PhantomData<T>,
+}
+
+#[derive(Clone, Debug, Encode, Eq, PartialEq, subxt::Call)]
+pub struct UpdateProfileCall<T: Profiles> {
+    update: ProfileUpdate,
+    __marker: PhantomData<T>,
+}
+
+// Events ...
+
+#[derive(Clone, Debug, Encode, Decode, Eq, PartialEq, subxt::Event)]
+pub struct ProfileCreatedEvent<T: Profiles> {
+    pub account_id: T::AccountId,
+}
+
+#[derive(Clone, Debug, Encode, Decode, Eq, PartialEq, subxt::Event)]
+pub struct ProfileUpdatedEvent<T: Profiles> {
+    pub account_id: T::AccountId,
 }

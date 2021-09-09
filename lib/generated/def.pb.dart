@@ -39,6 +39,17 @@ enum Request_Body {
   isAccountFollower,
   isSpaceFollower,
   isPostSharedByAccount,
+  unfollowSpace,
+  updatePostReaction,
+  deletePostReaction,
+  createProfile,
+  updateProfile,
+  currentAccountId,
+  createSpace,
+  updateSpace,
+  followAccount,
+  unfollowAccount,
+  postReactionIdByAccount,
   notSet
 }
 
@@ -68,6 +79,17 @@ class Request extends $pb.GeneratedMessage {
     22: Request_Body.isAccountFollower,
     23: Request_Body.isSpaceFollower,
     24: Request_Body.isPostSharedByAccount,
+    25: Request_Body.unfollowSpace,
+    26: Request_Body.updatePostReaction,
+    27: Request_Body.deletePostReaction,
+    28: Request_Body.createProfile,
+    29: Request_Body.updateProfile,
+    30: Request_Body.currentAccountId,
+    31: Request_Body.createSpace,
+    32: Request_Body.updateSpace,
+    33: Request_Body.followAccount,
+    34: Request_Body.unfollowAccount,
+    35: Request_Body.postReactionIdByAccount,
     0: Request_Body.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Request',
@@ -100,7 +122,18 @@ class Request extends $pb.GeneratedMessage {
       21,
       22,
       23,
-      24
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35
     ])
     ..aOM<GetSpaceById>(
         1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceById',
@@ -133,6 +166,17 @@ class Request extends $pb.GeneratedMessage {
     ..aOM<IsAccountFollower>(22, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isAccountFollower', subBuilder: IsAccountFollower.create)
     ..aOM<IsSpaceFollower>(23, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isSpaceFollower', subBuilder: IsSpaceFollower.create)
     ..aOM<IsPostSharedByAccount>(24, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isPostSharedByAccount', subBuilder: IsPostSharedByAccount.create)
+    ..aOM<UnfollowSpace>(25, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'unfollowSpace', subBuilder: UnfollowSpace.create)
+    ..aOM<UpdatePostReaction>(26, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatePostReaction', subBuilder: UpdatePostReaction.create)
+    ..aOM<DeletePostReaction>(27, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'deletePostReaction', subBuilder: DeletePostReaction.create)
+    ..aOM<CreateProfile>(28, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createProfile', subBuilder: CreateProfile.create)
+    ..aOM<UpdateProfile>(29, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updateProfile', subBuilder: UpdateProfile.create)
+    ..aOM<GetCurrentAccountId>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'currentAccountId', subBuilder: GetCurrentAccountId.create)
+    ..aOM<CreateSpace>(31, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createSpace', subBuilder: CreateSpace.create)
+    ..aOM<UpdateSpace>(32, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updateSpace', subBuilder: UpdateSpace.create)
+    ..aOM<FollowAccount>(33, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'followAccount', subBuilder: FollowAccount.create)
+    ..aOM<UnfollowAccount>(34, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'unfollowAccount', subBuilder: UnfollowAccount.create)
+    ..aOM<GetPostReactionIdByAccount>(35, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postReactionIdByAccount', subBuilder: GetPostReactionIdByAccount.create)
     ..hasRequiredFields = false;
 
   Request._() : super();
@@ -161,6 +205,17 @@ class Request extends $pb.GeneratedMessage {
     IsAccountFollower? isAccountFollower,
     IsSpaceFollower? isSpaceFollower,
     IsPostSharedByAccount? isPostSharedByAccount,
+    UnfollowSpace? unfollowSpace,
+    UpdatePostReaction? updatePostReaction,
+    DeletePostReaction? deletePostReaction,
+    CreateProfile? createProfile,
+    UpdateProfile? updateProfile,
+    GetCurrentAccountId? currentAccountId,
+    CreateSpace? createSpace,
+    UpdateSpace? updateSpace,
+    FollowAccount? followAccount,
+    UnfollowAccount? unfollowAccount,
+    GetPostReactionIdByAccount? postReactionIdByAccount,
   }) {
     final _result = create();
     if (spaceById != null) {
@@ -234,6 +289,39 @@ class Request extends $pb.GeneratedMessage {
     }
     if (isPostSharedByAccount != null) {
       _result.isPostSharedByAccount = isPostSharedByAccount;
+    }
+    if (unfollowSpace != null) {
+      _result.unfollowSpace = unfollowSpace;
+    }
+    if (updatePostReaction != null) {
+      _result.updatePostReaction = updatePostReaction;
+    }
+    if (deletePostReaction != null) {
+      _result.deletePostReaction = deletePostReaction;
+    }
+    if (createProfile != null) {
+      _result.createProfile = createProfile;
+    }
+    if (updateProfile != null) {
+      _result.updateProfile = updateProfile;
+    }
+    if (currentAccountId != null) {
+      _result.currentAccountId = currentAccountId;
+    }
+    if (createSpace != null) {
+      _result.createSpace = createSpace;
+    }
+    if (updateSpace != null) {
+      _result.updateSpace = updateSpace;
+    }
+    if (followAccount != null) {
+      _result.followAccount = followAccount;
+    }
+    if (unfollowAccount != null) {
+      _result.unfollowAccount = unfollowAccount;
+    }
+    if (postReactionIdByAccount != null) {
+      _result.postReactionIdByAccount = postReactionIdByAccount;
     }
     return _result;
   }
@@ -602,6 +690,160 @@ class Request extends $pb.GeneratedMessage {
   void clearIsPostSharedByAccount() => clearField(24);
   @$pb.TagNumber(24)
   IsPostSharedByAccount ensureIsPostSharedByAccount() => $_ensure(23);
+
+  @$pb.TagNumber(25)
+  UnfollowSpace get unfollowSpace => $_getN(24);
+  @$pb.TagNumber(25)
+  set unfollowSpace(UnfollowSpace v) {
+    setField(25, v);
+  }
+
+  @$pb.TagNumber(25)
+  $core.bool hasUnfollowSpace() => $_has(24);
+  @$pb.TagNumber(25)
+  void clearUnfollowSpace() => clearField(25);
+  @$pb.TagNumber(25)
+  UnfollowSpace ensureUnfollowSpace() => $_ensure(24);
+
+  @$pb.TagNumber(26)
+  UpdatePostReaction get updatePostReaction => $_getN(25);
+  @$pb.TagNumber(26)
+  set updatePostReaction(UpdatePostReaction v) {
+    setField(26, v);
+  }
+
+  @$pb.TagNumber(26)
+  $core.bool hasUpdatePostReaction() => $_has(25);
+  @$pb.TagNumber(26)
+  void clearUpdatePostReaction() => clearField(26);
+  @$pb.TagNumber(26)
+  UpdatePostReaction ensureUpdatePostReaction() => $_ensure(25);
+
+  @$pb.TagNumber(27)
+  DeletePostReaction get deletePostReaction => $_getN(26);
+  @$pb.TagNumber(27)
+  set deletePostReaction(DeletePostReaction v) {
+    setField(27, v);
+  }
+
+  @$pb.TagNumber(27)
+  $core.bool hasDeletePostReaction() => $_has(26);
+  @$pb.TagNumber(27)
+  void clearDeletePostReaction() => clearField(27);
+  @$pb.TagNumber(27)
+  DeletePostReaction ensureDeletePostReaction() => $_ensure(26);
+
+  @$pb.TagNumber(28)
+  CreateProfile get createProfile => $_getN(27);
+  @$pb.TagNumber(28)
+  set createProfile(CreateProfile v) {
+    setField(28, v);
+  }
+
+  @$pb.TagNumber(28)
+  $core.bool hasCreateProfile() => $_has(27);
+  @$pb.TagNumber(28)
+  void clearCreateProfile() => clearField(28);
+  @$pb.TagNumber(28)
+  CreateProfile ensureCreateProfile() => $_ensure(27);
+
+  @$pb.TagNumber(29)
+  UpdateProfile get updateProfile => $_getN(28);
+  @$pb.TagNumber(29)
+  set updateProfile(UpdateProfile v) {
+    setField(29, v);
+  }
+
+  @$pb.TagNumber(29)
+  $core.bool hasUpdateProfile() => $_has(28);
+  @$pb.TagNumber(29)
+  void clearUpdateProfile() => clearField(29);
+  @$pb.TagNumber(29)
+  UpdateProfile ensureUpdateProfile() => $_ensure(28);
+
+  @$pb.TagNumber(30)
+  GetCurrentAccountId get currentAccountId => $_getN(29);
+  @$pb.TagNumber(30)
+  set currentAccountId(GetCurrentAccountId v) {
+    setField(30, v);
+  }
+
+  @$pb.TagNumber(30)
+  $core.bool hasCurrentAccountId() => $_has(29);
+  @$pb.TagNumber(30)
+  void clearCurrentAccountId() => clearField(30);
+  @$pb.TagNumber(30)
+  GetCurrentAccountId ensureCurrentAccountId() => $_ensure(29);
+
+  @$pb.TagNumber(31)
+  CreateSpace get createSpace => $_getN(30);
+  @$pb.TagNumber(31)
+  set createSpace(CreateSpace v) {
+    setField(31, v);
+  }
+
+  @$pb.TagNumber(31)
+  $core.bool hasCreateSpace() => $_has(30);
+  @$pb.TagNumber(31)
+  void clearCreateSpace() => clearField(31);
+  @$pb.TagNumber(31)
+  CreateSpace ensureCreateSpace() => $_ensure(30);
+
+  @$pb.TagNumber(32)
+  UpdateSpace get updateSpace => $_getN(31);
+  @$pb.TagNumber(32)
+  set updateSpace(UpdateSpace v) {
+    setField(32, v);
+  }
+
+  @$pb.TagNumber(32)
+  $core.bool hasUpdateSpace() => $_has(31);
+  @$pb.TagNumber(32)
+  void clearUpdateSpace() => clearField(32);
+  @$pb.TagNumber(32)
+  UpdateSpace ensureUpdateSpace() => $_ensure(31);
+
+  @$pb.TagNumber(33)
+  FollowAccount get followAccount => $_getN(32);
+  @$pb.TagNumber(33)
+  set followAccount(FollowAccount v) {
+    setField(33, v);
+  }
+
+  @$pb.TagNumber(33)
+  $core.bool hasFollowAccount() => $_has(32);
+  @$pb.TagNumber(33)
+  void clearFollowAccount() => clearField(33);
+  @$pb.TagNumber(33)
+  FollowAccount ensureFollowAccount() => $_ensure(32);
+
+  @$pb.TagNumber(34)
+  UnfollowAccount get unfollowAccount => $_getN(33);
+  @$pb.TagNumber(34)
+  set unfollowAccount(UnfollowAccount v) {
+    setField(34, v);
+  }
+
+  @$pb.TagNumber(34)
+  $core.bool hasUnfollowAccount() => $_has(33);
+  @$pb.TagNumber(34)
+  void clearUnfollowAccount() => clearField(34);
+  @$pb.TagNumber(34)
+  UnfollowAccount ensureUnfollowAccount() => $_ensure(33);
+
+  @$pb.TagNumber(35)
+  GetPostReactionIdByAccount get postReactionIdByAccount => $_getN(34);
+  @$pb.TagNumber(35)
+  set postReactionIdByAccount(GetPostReactionIdByAccount v) {
+    setField(35, v);
+  }
+
+  @$pb.TagNumber(35)
+  $core.bool hasPostReactionIdByAccount() => $_has(34);
+  @$pb.TagNumber(35)
+  void clearPostReactionIdByAccount() => clearField(35);
+  @$pb.TagNumber(35)
+  GetPostReactionIdByAccount ensurePostReactionIdByAccount() => $_ensure(34);
 }
 
 enum Response_Body {
@@ -630,6 +872,17 @@ enum Response_Body {
   isAccountFollower,
   isSpaceFollower,
   isPostSharedByAccount,
+  spaceUnfollowed,
+  postReactionUpdated,
+  postReactionDeleted,
+  profileCreated,
+  profileUpdated,
+  currentAccountId,
+  spaceCreated,
+  spaceUpdated,
+  accountFollowed,
+  accountUnfollowed,
+  postReactionIdByAccount,
   notSet
 }
 
@@ -660,6 +913,17 @@ class Response extends $pb.GeneratedMessage {
     23: Response_Body.isAccountFollower,
     24: Response_Body.isSpaceFollower,
     25: Response_Body.isPostSharedByAccount,
+    26: Response_Body.spaceUnfollowed,
+    27: Response_Body.postReactionUpdated,
+    28: Response_Body.postReactionDeleted,
+    29: Response_Body.profileCreated,
+    30: Response_Body.profileUpdated,
+    31: Response_Body.currentAccountId,
+    32: Response_Body.spaceCreated,
+    33: Response_Body.spaceUpdated,
+    34: Response_Body.accountFollowed,
+    35: Response_Body.accountUnfollowed,
+    36: Response_Body.postReactionIdByAccount,
     0: Response_Body.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Response',
@@ -693,7 +957,18 @@ class Response extends $pb.GeneratedMessage {
       22,
       23,
       24,
-      25
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36
     ])
     ..aOM<Error>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'error',
         subBuilder: Error.create)
@@ -727,6 +1002,17 @@ class Response extends $pb.GeneratedMessage {
     ..aOB(23, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isAccountFollower')
     ..aOB(24, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isSpaceFollower')
     ..aOB(25, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isPostSharedByAccount')
+    ..aOM<SpaceUnfollowed>(26, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceUnfollowed', subBuilder: SpaceUnfollowed.create)
+    ..aOM<PostReactionUpdated>(27, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postReactionUpdated', subBuilder: PostReactionUpdated.create)
+    ..aOM<PostReactionDeleted>(28, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postReactionDeleted', subBuilder: PostReactionDeleted.create)
+    ..aOM<ProfileCreated>(29, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'profileCreated', subBuilder: ProfileCreated.create)
+    ..aOM<ProfileUpdated>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'profileUpdated', subBuilder: ProfileUpdated.create)
+    ..aOM<CurrentAccountId>(31, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'currentAccountId', subBuilder: CurrentAccountId.create)
+    ..aOM<SpaceCreated>(32, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceCreated', subBuilder: SpaceCreated.create)
+    ..aOM<SpaceUpdated>(33, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceUpdated', subBuilder: SpaceUpdated.create)
+    ..aOM<AccountFollowed>(34, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountFollowed', subBuilder: AccountFollowed.create)
+    ..aOM<AccountUnfollowed>(35, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountUnfollowed', subBuilder: AccountUnfollowed.create)
+    ..aOM<PostReactionIdByAccount>(36, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postReactionIdByAccount', subBuilder: PostReactionIdByAccount.create)
     ..hasRequiredFields = false;
 
   Response._() : super();
@@ -756,6 +1042,17 @@ class Response extends $pb.GeneratedMessage {
     $core.bool? isAccountFollower,
     $core.bool? isSpaceFollower,
     $core.bool? isPostSharedByAccount,
+    SpaceUnfollowed? spaceUnfollowed,
+    PostReactionUpdated? postReactionUpdated,
+    PostReactionDeleted? postReactionDeleted,
+    ProfileCreated? profileCreated,
+    ProfileUpdated? profileUpdated,
+    CurrentAccountId? currentAccountId,
+    SpaceCreated? spaceCreated,
+    SpaceUpdated? spaceUpdated,
+    AccountFollowed? accountFollowed,
+    AccountUnfollowed? accountUnfollowed,
+    PostReactionIdByAccount? postReactionIdByAccount,
   }) {
     final _result = create();
     if (error != null) {
@@ -832,6 +1129,39 @@ class Response extends $pb.GeneratedMessage {
     }
     if (isPostSharedByAccount != null) {
       _result.isPostSharedByAccount = isPostSharedByAccount;
+    }
+    if (spaceUnfollowed != null) {
+      _result.spaceUnfollowed = spaceUnfollowed;
+    }
+    if (postReactionUpdated != null) {
+      _result.postReactionUpdated = postReactionUpdated;
+    }
+    if (postReactionDeleted != null) {
+      _result.postReactionDeleted = postReactionDeleted;
+    }
+    if (profileCreated != null) {
+      _result.profileCreated = profileCreated;
+    }
+    if (profileUpdated != null) {
+      _result.profileUpdated = profileUpdated;
+    }
+    if (currentAccountId != null) {
+      _result.currentAccountId = currentAccountId;
+    }
+    if (spaceCreated != null) {
+      _result.spaceCreated = spaceCreated;
+    }
+    if (spaceUpdated != null) {
+      _result.spaceUpdated = spaceUpdated;
+    }
+    if (accountFollowed != null) {
+      _result.accountFollowed = accountFollowed;
+    }
+    if (accountUnfollowed != null) {
+      _result.accountUnfollowed = accountUnfollowed;
+    }
+    if (postReactionIdByAccount != null) {
+      _result.postReactionIdByAccount = postReactionIdByAccount;
     }
     return _result;
   }
@@ -1207,6 +1537,160 @@ class Response extends $pb.GeneratedMessage {
   $core.bool hasIsPostSharedByAccount() => $_has(24);
   @$pb.TagNumber(25)
   void clearIsPostSharedByAccount() => clearField(25);
+
+  @$pb.TagNumber(26)
+  SpaceUnfollowed get spaceUnfollowed => $_getN(25);
+  @$pb.TagNumber(26)
+  set spaceUnfollowed(SpaceUnfollowed v) {
+    setField(26, v);
+  }
+
+  @$pb.TagNumber(26)
+  $core.bool hasSpaceUnfollowed() => $_has(25);
+  @$pb.TagNumber(26)
+  void clearSpaceUnfollowed() => clearField(26);
+  @$pb.TagNumber(26)
+  SpaceUnfollowed ensureSpaceUnfollowed() => $_ensure(25);
+
+  @$pb.TagNumber(27)
+  PostReactionUpdated get postReactionUpdated => $_getN(26);
+  @$pb.TagNumber(27)
+  set postReactionUpdated(PostReactionUpdated v) {
+    setField(27, v);
+  }
+
+  @$pb.TagNumber(27)
+  $core.bool hasPostReactionUpdated() => $_has(26);
+  @$pb.TagNumber(27)
+  void clearPostReactionUpdated() => clearField(27);
+  @$pb.TagNumber(27)
+  PostReactionUpdated ensurePostReactionUpdated() => $_ensure(26);
+
+  @$pb.TagNumber(28)
+  PostReactionDeleted get postReactionDeleted => $_getN(27);
+  @$pb.TagNumber(28)
+  set postReactionDeleted(PostReactionDeleted v) {
+    setField(28, v);
+  }
+
+  @$pb.TagNumber(28)
+  $core.bool hasPostReactionDeleted() => $_has(27);
+  @$pb.TagNumber(28)
+  void clearPostReactionDeleted() => clearField(28);
+  @$pb.TagNumber(28)
+  PostReactionDeleted ensurePostReactionDeleted() => $_ensure(27);
+
+  @$pb.TagNumber(29)
+  ProfileCreated get profileCreated => $_getN(28);
+  @$pb.TagNumber(29)
+  set profileCreated(ProfileCreated v) {
+    setField(29, v);
+  }
+
+  @$pb.TagNumber(29)
+  $core.bool hasProfileCreated() => $_has(28);
+  @$pb.TagNumber(29)
+  void clearProfileCreated() => clearField(29);
+  @$pb.TagNumber(29)
+  ProfileCreated ensureProfileCreated() => $_ensure(28);
+
+  @$pb.TagNumber(30)
+  ProfileUpdated get profileUpdated => $_getN(29);
+  @$pb.TagNumber(30)
+  set profileUpdated(ProfileUpdated v) {
+    setField(30, v);
+  }
+
+  @$pb.TagNumber(30)
+  $core.bool hasProfileUpdated() => $_has(29);
+  @$pb.TagNumber(30)
+  void clearProfileUpdated() => clearField(30);
+  @$pb.TagNumber(30)
+  ProfileUpdated ensureProfileUpdated() => $_ensure(29);
+
+  @$pb.TagNumber(31)
+  CurrentAccountId get currentAccountId => $_getN(30);
+  @$pb.TagNumber(31)
+  set currentAccountId(CurrentAccountId v) {
+    setField(31, v);
+  }
+
+  @$pb.TagNumber(31)
+  $core.bool hasCurrentAccountId() => $_has(30);
+  @$pb.TagNumber(31)
+  void clearCurrentAccountId() => clearField(31);
+  @$pb.TagNumber(31)
+  CurrentAccountId ensureCurrentAccountId() => $_ensure(30);
+
+  @$pb.TagNumber(32)
+  SpaceCreated get spaceCreated => $_getN(31);
+  @$pb.TagNumber(32)
+  set spaceCreated(SpaceCreated v) {
+    setField(32, v);
+  }
+
+  @$pb.TagNumber(32)
+  $core.bool hasSpaceCreated() => $_has(31);
+  @$pb.TagNumber(32)
+  void clearSpaceCreated() => clearField(32);
+  @$pb.TagNumber(32)
+  SpaceCreated ensureSpaceCreated() => $_ensure(31);
+
+  @$pb.TagNumber(33)
+  SpaceUpdated get spaceUpdated => $_getN(32);
+  @$pb.TagNumber(33)
+  set spaceUpdated(SpaceUpdated v) {
+    setField(33, v);
+  }
+
+  @$pb.TagNumber(33)
+  $core.bool hasSpaceUpdated() => $_has(32);
+  @$pb.TagNumber(33)
+  void clearSpaceUpdated() => clearField(33);
+  @$pb.TagNumber(33)
+  SpaceUpdated ensureSpaceUpdated() => $_ensure(32);
+
+  @$pb.TagNumber(34)
+  AccountFollowed get accountFollowed => $_getN(33);
+  @$pb.TagNumber(34)
+  set accountFollowed(AccountFollowed v) {
+    setField(34, v);
+  }
+
+  @$pb.TagNumber(34)
+  $core.bool hasAccountFollowed() => $_has(33);
+  @$pb.TagNumber(34)
+  void clearAccountFollowed() => clearField(34);
+  @$pb.TagNumber(34)
+  AccountFollowed ensureAccountFollowed() => $_ensure(33);
+
+  @$pb.TagNumber(35)
+  AccountUnfollowed get accountUnfollowed => $_getN(34);
+  @$pb.TagNumber(35)
+  set accountUnfollowed(AccountUnfollowed v) {
+    setField(35, v);
+  }
+
+  @$pb.TagNumber(35)
+  $core.bool hasAccountUnfollowed() => $_has(34);
+  @$pb.TagNumber(35)
+  void clearAccountUnfollowed() => clearField(35);
+  @$pb.TagNumber(35)
+  AccountUnfollowed ensureAccountUnfollowed() => $_ensure(34);
+
+  @$pb.TagNumber(36)
+  PostReactionIdByAccount get postReactionIdByAccount => $_getN(35);
+  @$pb.TagNumber(36)
+  set postReactionIdByAccount(PostReactionIdByAccount v) {
+    setField(36, v);
+  }
+
+  @$pb.TagNumber(36)
+  $core.bool hasPostReactionIdByAccount() => $_has(35);
+  @$pb.TagNumber(36)
+  void clearPostReactionIdByAccount() => clearField(36);
+  @$pb.TagNumber(36)
+  PostReactionIdByAccount ensurePostReactionIdByAccount() => $_ensure(35);
 }
 
 class Error extends $pb.GeneratedMessage {
@@ -1934,6 +2418,48 @@ class GetNextPostId extends $pb.GeneratedMessage {
   static GetNextPostId? _defaultInstance;
 }
 
+class GetCurrentAccountId extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'GetCurrentAccountId',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..hasRequiredFields = false;
+
+  GetCurrentAccountId._() : super();
+  factory GetCurrentAccountId() => create();
+  factory GetCurrentAccountId.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory GetCurrentAccountId.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  GetCurrentAccountId clone() => GetCurrentAccountId()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  GetCurrentAccountId copyWith(void Function(GetCurrentAccountId) updates) =>
+      super.copyWith((message) => updates(message as GetCurrentAccountId))
+          as GetCurrentAccountId; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetCurrentAccountId create() => GetCurrentAccountId._();
+  GetCurrentAccountId createEmptyInstance() => create();
+  static $pb.PbList<GetCurrentAccountId> createRepeated() =>
+      $pb.PbList<GetCurrentAccountId>();
+  @$core.pragma('dart2js:noInline')
+  static GetCurrentAccountId getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetCurrentAccountId>(create);
+  static GetCurrentAccountId? _defaultInstance;
+}
+
 class GetSpaceIdsByOwner extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       const $core.bool.fromEnvironment('protobuf.omit_message_names')
@@ -2276,6 +2802,99 @@ class GetAccountsFollowedByAccount extends $pb.GeneratedMessage {
   $core.bool hasAccountId() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccountId() => clearField(1);
+}
+
+class GetPostReactionIdByAccount extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'GetPostReactionIdByAccount',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'accountId')
+    ..a<$fixnum.Int64>(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'postId',
+        $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false;
+
+  GetPostReactionIdByAccount._() : super();
+  factory GetPostReactionIdByAccount({
+    $core.String? accountId,
+    $fixnum.Int64? postId,
+  }) {
+    final _result = create();
+    if (accountId != null) {
+      _result.accountId = accountId;
+    }
+    if (postId != null) {
+      _result.postId = postId;
+    }
+    return _result;
+  }
+  factory GetPostReactionIdByAccount.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory GetPostReactionIdByAccount.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  GetPostReactionIdByAccount clone() =>
+      GetPostReactionIdByAccount()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  GetPostReactionIdByAccount copyWith(
+          void Function(GetPostReactionIdByAccount) updates) =>
+      super.copyWith(
+              (message) => updates(message as GetPostReactionIdByAccount))
+          as GetPostReactionIdByAccount; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetPostReactionIdByAccount create() => GetPostReactionIdByAccount._();
+  GetPostReactionIdByAccount createEmptyInstance() => create();
+  static $pb.PbList<GetPostReactionIdByAccount> createRepeated() =>
+      $pb.PbList<GetPostReactionIdByAccount>();
+  @$core.pragma('dart2js:noInline')
+  static GetPostReactionIdByAccount getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetPostReactionIdByAccount>(create);
+  static GetPostReactionIdByAccount? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get accountId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set accountId($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasAccountId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccountId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get postId => $_getI64(1);
+  @$pb.TagNumber(2)
+  set postId($fixnum.Int64 v) {
+    $_setInt64(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasPostId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPostId() => clearField(2);
 }
 
 class GenerateAccount extends $pb.GeneratedMessage {
@@ -2781,6 +3400,75 @@ class FollowSpace extends $pb.GeneratedMessage {
   void clearSpaceId() => clearField(1);
 }
 
+class UnfollowSpace extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'UnfollowSpace',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..a<$fixnum.Int64>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'spaceId',
+        $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false;
+
+  UnfollowSpace._() : super();
+  factory UnfollowSpace({
+    $fixnum.Int64? spaceId,
+  }) {
+    final _result = create();
+    if (spaceId != null) {
+      _result.spaceId = spaceId;
+    }
+    return _result;
+  }
+  factory UnfollowSpace.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory UnfollowSpace.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  UnfollowSpace clone() => UnfollowSpace()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  UnfollowSpace copyWith(void Function(UnfollowSpace) updates) =>
+      super.copyWith((message) => updates(message as UnfollowSpace))
+          as UnfollowSpace; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UnfollowSpace create() => UnfollowSpace._();
+  UnfollowSpace createEmptyInstance() => create();
+  static $pb.PbList<UnfollowSpace> createRepeated() =>
+      $pb.PbList<UnfollowSpace>();
+  @$core.pragma('dart2js:noInline')
+  static UnfollowSpace getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<UnfollowSpace>(create);
+  static UnfollowSpace? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get spaceId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set spaceId($fixnum.Int64 v) {
+    $_setInt64(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasSpaceId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSpaceId() => clearField(1);
+}
+
 class IsAccountFollower extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       const $core.bool.fromEnvironment('protobuf.omit_message_names')
@@ -2986,6 +3674,663 @@ class IsPostSharedByAccount extends $pb.GeneratedMessage {
   $core.bool hasPostId() => $_has(0);
   @$pb.TagNumber(1)
   void clearPostId() => clearField(1);
+}
+
+class UpdatePostReaction extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'UpdatePostReaction',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postId', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reactionId', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..e<Reaction_Kind>(
+        3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'newKind', $pb.PbFieldType.OE,
+        defaultOrMaker: Reaction_Kind.UNKNOWN,
+        valueOf: Reaction_Kind.valueOf,
+        enumValues: Reaction_Kind.values)
+    ..hasRequiredFields = false;
+
+  UpdatePostReaction._() : super();
+  factory UpdatePostReaction({
+    $fixnum.Int64? postId,
+    $fixnum.Int64? reactionId,
+    Reaction_Kind? newKind,
+  }) {
+    final _result = create();
+    if (postId != null) {
+      _result.postId = postId;
+    }
+    if (reactionId != null) {
+      _result.reactionId = reactionId;
+    }
+    if (newKind != null) {
+      _result.newKind = newKind;
+    }
+    return _result;
+  }
+  factory UpdatePostReaction.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory UpdatePostReaction.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  UpdatePostReaction clone() => UpdatePostReaction()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  UpdatePostReaction copyWith(void Function(UpdatePostReaction) updates) =>
+      super.copyWith((message) => updates(message as UpdatePostReaction))
+          as UpdatePostReaction; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UpdatePostReaction create() => UpdatePostReaction._();
+  UpdatePostReaction createEmptyInstance() => create();
+  static $pb.PbList<UpdatePostReaction> createRepeated() =>
+      $pb.PbList<UpdatePostReaction>();
+  @$core.pragma('dart2js:noInline')
+  static UpdatePostReaction getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<UpdatePostReaction>(create);
+  static UpdatePostReaction? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get postId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set postId($fixnum.Int64 v) {
+    $_setInt64(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasPostId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPostId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get reactionId => $_getI64(1);
+  @$pb.TagNumber(2)
+  set reactionId($fixnum.Int64 v) {
+    $_setInt64(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasReactionId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearReactionId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  Reaction_Kind get newKind => $_getN(2);
+  @$pb.TagNumber(3)
+  set newKind(Reaction_Kind v) {
+    setField(3, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasNewKind() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearNewKind() => clearField(3);
+}
+
+class DeletePostReaction extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'DeletePostReaction',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..a<$fixnum.Int64>(
+        1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postId', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reactionId',
+        $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false;
+
+  DeletePostReaction._() : super();
+  factory DeletePostReaction({
+    $fixnum.Int64? postId,
+    $fixnum.Int64? reactionId,
+  }) {
+    final _result = create();
+    if (postId != null) {
+      _result.postId = postId;
+    }
+    if (reactionId != null) {
+      _result.reactionId = reactionId;
+    }
+    return _result;
+  }
+  factory DeletePostReaction.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory DeletePostReaction.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  DeletePostReaction clone() => DeletePostReaction()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  DeletePostReaction copyWith(void Function(DeletePostReaction) updates) =>
+      super.copyWith((message) => updates(message as DeletePostReaction))
+          as DeletePostReaction; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static DeletePostReaction create() => DeletePostReaction._();
+  DeletePostReaction createEmptyInstance() => create();
+  static $pb.PbList<DeletePostReaction> createRepeated() =>
+      $pb.PbList<DeletePostReaction>();
+  @$core.pragma('dart2js:noInline')
+  static DeletePostReaction getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<DeletePostReaction>(create);
+  static DeletePostReaction? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get postId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set postId($fixnum.Int64 v) {
+    $_setInt64(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasPostId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPostId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get reactionId => $_getI64(1);
+  @$pb.TagNumber(2)
+  set reactionId($fixnum.Int64 v) {
+    $_setInt64(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasReactionId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearReactionId() => clearField(2);
+}
+
+class CreateProfile extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'CreateProfile',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..aOM<Content>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'content',
+        subBuilder: Content.create)
+    ..hasRequiredFields = false;
+
+  CreateProfile._() : super();
+  factory CreateProfile({
+    Content? content,
+  }) {
+    final _result = create();
+    if (content != null) {
+      _result.content = content;
+    }
+    return _result;
+  }
+  factory CreateProfile.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory CreateProfile.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  CreateProfile clone() => CreateProfile()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  CreateProfile copyWith(void Function(CreateProfile) updates) =>
+      super.copyWith((message) => updates(message as CreateProfile))
+          as CreateProfile; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static CreateProfile create() => CreateProfile._();
+  CreateProfile createEmptyInstance() => create();
+  static $pb.PbList<CreateProfile> createRepeated() =>
+      $pb.PbList<CreateProfile>();
+  @$core.pragma('dart2js:noInline')
+  static CreateProfile getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<CreateProfile>(create);
+  static CreateProfile? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  Content get content => $_getN(0);
+  @$pb.TagNumber(1)
+  set content(Content v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasContent() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearContent() => clearField(1);
+  @$pb.TagNumber(1)
+  Content ensureContent() => $_ensure(0);
+}
+
+class UpdateProfile extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'UpdateProfile',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..aOM<Content>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'maybeContent',
+        subBuilder: Content.create)
+    ..hasRequiredFields = false;
+
+  UpdateProfile._() : super();
+  factory UpdateProfile({
+    Content? maybeContent,
+  }) {
+    final _result = create();
+    if (maybeContent != null) {
+      _result.maybeContent = maybeContent;
+    }
+    return _result;
+  }
+  factory UpdateProfile.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory UpdateProfile.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  UpdateProfile clone() => UpdateProfile()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  UpdateProfile copyWith(void Function(UpdateProfile) updates) =>
+      super.copyWith((message) => updates(message as UpdateProfile))
+          as UpdateProfile; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UpdateProfile create() => UpdateProfile._();
+  UpdateProfile createEmptyInstance() => create();
+  static $pb.PbList<UpdateProfile> createRepeated() =>
+      $pb.PbList<UpdateProfile>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateProfile getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<UpdateProfile>(create);
+  static UpdateProfile? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  Content get maybeContent => $_getN(0);
+  @$pb.TagNumber(1)
+  set maybeContent(Content v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasMaybeContent() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMaybeContent() => clearField(1);
+  @$pb.TagNumber(1)
+  Content ensureMaybeContent() => $_ensure(0);
+}
+
+class CreateSpace extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'CreateSpace',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..a<$fixnum.Int64>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'parentId',
+        $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'handle')
+    ..aOM<Content>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'content', subBuilder: Content.create)
+    ..hasRequiredFields = false;
+
+  CreateSpace._() : super();
+  factory CreateSpace({
+    $fixnum.Int64? parentId,
+    $core.String? handle,
+    Content? content,
+  }) {
+    final _result = create();
+    if (parentId != null) {
+      _result.parentId = parentId;
+    }
+    if (handle != null) {
+      _result.handle = handle;
+    }
+    if (content != null) {
+      _result.content = content;
+    }
+    return _result;
+  }
+  factory CreateSpace.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory CreateSpace.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  CreateSpace clone() => CreateSpace()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  CreateSpace copyWith(void Function(CreateSpace) updates) =>
+      super.copyWith((message) => updates(message as CreateSpace))
+          as CreateSpace; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static CreateSpace create() => CreateSpace._();
+  CreateSpace createEmptyInstance() => create();
+  static $pb.PbList<CreateSpace> createRepeated() => $pb.PbList<CreateSpace>();
+  @$core.pragma('dart2js:noInline')
+  static CreateSpace getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<CreateSpace>(create);
+  static CreateSpace? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get parentId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set parentId($fixnum.Int64 v) {
+    $_setInt64(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasParentId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearParentId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get handle => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set handle($core.String v) {
+    $_setString(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasHandle() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearHandle() => clearField(2);
+
+  @$pb.TagNumber(3)
+  Content get content => $_getN(2);
+  @$pb.TagNumber(3)
+  set content(Content v) {
+    setField(3, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasContent() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearContent() => clearField(3);
+  @$pb.TagNumber(3)
+  Content ensureContent() => $_ensure(2);
+}
+
+class UpdateSpace extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'UpdateSpace',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..a<$fixnum.Int64>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'spaceId',
+        $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOM<SpaceUpdate>(
+        2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'update',
+        subBuilder: SpaceUpdate.create)
+    ..hasRequiredFields = false;
+
+  UpdateSpace._() : super();
+  factory UpdateSpace({
+    $fixnum.Int64? spaceId,
+    SpaceUpdate? update,
+  }) {
+    final _result = create();
+    if (spaceId != null) {
+      _result.spaceId = spaceId;
+    }
+    if (update != null) {
+      _result.update = update;
+    }
+    return _result;
+  }
+  factory UpdateSpace.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory UpdateSpace.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  UpdateSpace clone() => UpdateSpace()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  UpdateSpace copyWith(void Function(UpdateSpace) updates) =>
+      super.copyWith((message) => updates(message as UpdateSpace))
+          as UpdateSpace; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UpdateSpace create() => UpdateSpace._();
+  UpdateSpace createEmptyInstance() => create();
+  static $pb.PbList<UpdateSpace> createRepeated() => $pb.PbList<UpdateSpace>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateSpace getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<UpdateSpace>(create);
+  static UpdateSpace? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get spaceId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set spaceId($fixnum.Int64 v) {
+    $_setInt64(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasSpaceId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSpaceId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  SpaceUpdate get update => $_getN(1);
+  @$pb.TagNumber(2)
+  set update(SpaceUpdate v) {
+    setField(2, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasUpdate() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUpdate() => clearField(2);
+  @$pb.TagNumber(2)
+  SpaceUpdate ensureUpdate() => $_ensure(1);
+}
+
+class FollowAccount extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'FollowAccount',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'accountId')
+    ..hasRequiredFields = false;
+
+  FollowAccount._() : super();
+  factory FollowAccount({
+    $core.String? accountId,
+  }) {
+    final _result = create();
+    if (accountId != null) {
+      _result.accountId = accountId;
+    }
+    return _result;
+  }
+  factory FollowAccount.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory FollowAccount.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  FollowAccount clone() => FollowAccount()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  FollowAccount copyWith(void Function(FollowAccount) updates) =>
+      super.copyWith((message) => updates(message as FollowAccount))
+          as FollowAccount; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static FollowAccount create() => FollowAccount._();
+  FollowAccount createEmptyInstance() => create();
+  static $pb.PbList<FollowAccount> createRepeated() =>
+      $pb.PbList<FollowAccount>();
+  @$core.pragma('dart2js:noInline')
+  static FollowAccount getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FollowAccount>(create);
+  static FollowAccount? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get accountId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set accountId($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasAccountId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccountId() => clearField(1);
+}
+
+class UnfollowAccount extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'UnfollowAccount',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'accountId')
+    ..hasRequiredFields = false;
+
+  UnfollowAccount._() : super();
+  factory UnfollowAccount({
+    $core.String? accountId,
+  }) {
+    final _result = create();
+    if (accountId != null) {
+      _result.accountId = accountId;
+    }
+    return _result;
+  }
+  factory UnfollowAccount.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory UnfollowAccount.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  UnfollowAccount clone() => UnfollowAccount()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  UnfollowAccount copyWith(void Function(UnfollowAccount) updates) =>
+      super.copyWith((message) => updates(message as UnfollowAccount))
+          as UnfollowAccount; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UnfollowAccount create() => UnfollowAccount._();
+  UnfollowAccount createEmptyInstance() => create();
+  static $pb.PbList<UnfollowAccount> createRepeated() =>
+      $pb.PbList<UnfollowAccount>();
+  @$core.pragma('dart2js:noInline')
+  static UnfollowAccount getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<UnfollowAccount>(create);
+  static UnfollowAccount? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get accountId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set accountId($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasAccountId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccountId() => clearField(1);
 }
 
 class WhoAndWhen extends $pb.GeneratedMessage {
@@ -4550,6 +5895,128 @@ class PostUpdate extends $pb.GeneratedMessage {
   void clearHidden() => clearField(2);
 }
 
+class SpaceUpdate extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'SpaceUpdate',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..a<$fixnum.Int64>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'parentId',
+        $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'handle')
+    ..aOM<Content>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'content', subBuilder: Content.create)
+    ..aOB(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hidden')
+    ..hasRequiredFields = false;
+
+  SpaceUpdate._() : super();
+  factory SpaceUpdate({
+    $fixnum.Int64? parentId,
+    $core.String? handle,
+    Content? content,
+    $core.bool? hidden,
+  }) {
+    final _result = create();
+    if (parentId != null) {
+      _result.parentId = parentId;
+    }
+    if (handle != null) {
+      _result.handle = handle;
+    }
+    if (content != null) {
+      _result.content = content;
+    }
+    if (hidden != null) {
+      _result.hidden = hidden;
+    }
+    return _result;
+  }
+  factory SpaceUpdate.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory SpaceUpdate.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  SpaceUpdate clone() => SpaceUpdate()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  SpaceUpdate copyWith(void Function(SpaceUpdate) updates) =>
+      super.copyWith((message) => updates(message as SpaceUpdate))
+          as SpaceUpdate; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static SpaceUpdate create() => SpaceUpdate._();
+  SpaceUpdate createEmptyInstance() => create();
+  static $pb.PbList<SpaceUpdate> createRepeated() => $pb.PbList<SpaceUpdate>();
+  @$core.pragma('dart2js:noInline')
+  static SpaceUpdate getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SpaceUpdate>(create);
+  static SpaceUpdate? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get parentId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set parentId($fixnum.Int64 v) {
+    $_setInt64(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasParentId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearParentId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get handle => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set handle($core.String v) {
+    $_setString(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasHandle() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearHandle() => clearField(2);
+
+  @$pb.TagNumber(3)
+  Content get content => $_getN(2);
+  @$pb.TagNumber(3)
+  set content(Content v) {
+    setField(3, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasContent() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearContent() => clearField(3);
+  @$pb.TagNumber(3)
+  Content ensureContent() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $core.bool get hidden => $_getBF(3);
+  @$pb.TagNumber(4)
+  set hidden($core.bool v) {
+    $_setBool(3, v);
+  }
+
+  @$pb.TagNumber(4)
+  $core.bool hasHidden() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearHidden() => clearField(4);
+}
+
 class SpaceById extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       const $core.bool.fromEnvironment('protobuf.omit_message_names')
@@ -5211,6 +6678,73 @@ class NextPostId extends $pb.GeneratedMessage {
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
+}
+
+class CurrentAccountId extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'CurrentAccountId',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'accountId')
+    ..hasRequiredFields = false;
+
+  CurrentAccountId._() : super();
+  factory CurrentAccountId({
+    $core.String? accountId,
+  }) {
+    final _result = create();
+    if (accountId != null) {
+      _result.accountId = accountId;
+    }
+    return _result;
+  }
+  factory CurrentAccountId.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory CurrentAccountId.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  CurrentAccountId clone() => CurrentAccountId()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  CurrentAccountId copyWith(void Function(CurrentAccountId) updates) =>
+      super.copyWith((message) => updates(message as CurrentAccountId))
+          as CurrentAccountId; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static CurrentAccountId create() => CurrentAccountId._();
+  CurrentAccountId createEmptyInstance() => create();
+  static $pb.PbList<CurrentAccountId> createRepeated() =>
+      $pb.PbList<CurrentAccountId>();
+  @$core.pragma('dart2js:noInline')
+  static CurrentAccountId getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<CurrentAccountId>(create);
+  static CurrentAccountId? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get accountId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set accountId($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasAccountId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccountId() => clearField(1);
 }
 
 class SpaceIdsByOwner extends $pb.GeneratedMessage {
@@ -6016,4 +7550,827 @@ class SpaceFollowed extends $pb.GeneratedMessage {
   $core.bool hasSpaceId() => $_has(1);
   @$pb.TagNumber(2)
   void clearSpaceId() => clearField(2);
+}
+
+class SpaceUnfollowed extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'SpaceUnfollowed',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'follower')
+    ..a<$fixnum.Int64>(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'spaceId',
+        $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false;
+
+  SpaceUnfollowed._() : super();
+  factory SpaceUnfollowed({
+    $core.String? follower,
+    $fixnum.Int64? spaceId,
+  }) {
+    final _result = create();
+    if (follower != null) {
+      _result.follower = follower;
+    }
+    if (spaceId != null) {
+      _result.spaceId = spaceId;
+    }
+    return _result;
+  }
+  factory SpaceUnfollowed.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory SpaceUnfollowed.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  SpaceUnfollowed clone() => SpaceUnfollowed()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  SpaceUnfollowed copyWith(void Function(SpaceUnfollowed) updates) =>
+      super.copyWith((message) => updates(message as SpaceUnfollowed))
+          as SpaceUnfollowed; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static SpaceUnfollowed create() => SpaceUnfollowed._();
+  SpaceUnfollowed createEmptyInstance() => create();
+  static $pb.PbList<SpaceUnfollowed> createRepeated() =>
+      $pb.PbList<SpaceUnfollowed>();
+  @$core.pragma('dart2js:noInline')
+  static SpaceUnfollowed getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SpaceUnfollowed>(create);
+  static SpaceUnfollowed? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get follower => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set follower($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasFollower() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFollower() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get spaceId => $_getI64(1);
+  @$pb.TagNumber(2)
+  set spaceId($fixnum.Int64 v) {
+    $_setInt64(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasSpaceId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSpaceId() => clearField(2);
+}
+
+class PostReactionUpdated extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'PostReactionUpdated',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..a<$fixnum.Int64>(
+        1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postId', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reactionId',
+        $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false;
+
+  PostReactionUpdated._() : super();
+  factory PostReactionUpdated({
+    $fixnum.Int64? postId,
+    $fixnum.Int64? reactionId,
+  }) {
+    final _result = create();
+    if (postId != null) {
+      _result.postId = postId;
+    }
+    if (reactionId != null) {
+      _result.reactionId = reactionId;
+    }
+    return _result;
+  }
+  factory PostReactionUpdated.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory PostReactionUpdated.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  PostReactionUpdated clone() => PostReactionUpdated()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  PostReactionUpdated copyWith(void Function(PostReactionUpdated) updates) =>
+      super.copyWith((message) => updates(message as PostReactionUpdated))
+          as PostReactionUpdated; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static PostReactionUpdated create() => PostReactionUpdated._();
+  PostReactionUpdated createEmptyInstance() => create();
+  static $pb.PbList<PostReactionUpdated> createRepeated() =>
+      $pb.PbList<PostReactionUpdated>();
+  @$core.pragma('dart2js:noInline')
+  static PostReactionUpdated getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PostReactionUpdated>(create);
+  static PostReactionUpdated? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get postId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set postId($fixnum.Int64 v) {
+    $_setInt64(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasPostId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPostId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get reactionId => $_getI64(1);
+  @$pb.TagNumber(2)
+  set reactionId($fixnum.Int64 v) {
+    $_setInt64(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasReactionId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearReactionId() => clearField(2);
+}
+
+class PostReactionDeleted extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'PostReactionDeleted',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..a<$fixnum.Int64>(
+        1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postId', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reactionId',
+        $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false;
+
+  PostReactionDeleted._() : super();
+  factory PostReactionDeleted({
+    $fixnum.Int64? postId,
+    $fixnum.Int64? reactionId,
+  }) {
+    final _result = create();
+    if (postId != null) {
+      _result.postId = postId;
+    }
+    if (reactionId != null) {
+      _result.reactionId = reactionId;
+    }
+    return _result;
+  }
+  factory PostReactionDeleted.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory PostReactionDeleted.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  PostReactionDeleted clone() => PostReactionDeleted()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  PostReactionDeleted copyWith(void Function(PostReactionDeleted) updates) =>
+      super.copyWith((message) => updates(message as PostReactionDeleted))
+          as PostReactionDeleted; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static PostReactionDeleted create() => PostReactionDeleted._();
+  PostReactionDeleted createEmptyInstance() => create();
+  static $pb.PbList<PostReactionDeleted> createRepeated() =>
+      $pb.PbList<PostReactionDeleted>();
+  @$core.pragma('dart2js:noInline')
+  static PostReactionDeleted getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PostReactionDeleted>(create);
+  static PostReactionDeleted? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get postId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set postId($fixnum.Int64 v) {
+    $_setInt64(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasPostId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPostId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get reactionId => $_getI64(1);
+  @$pb.TagNumber(2)
+  set reactionId($fixnum.Int64 v) {
+    $_setInt64(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasReactionId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearReactionId() => clearField(2);
+}
+
+class ProfileCreated extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'ProfileCreated',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'accountId')
+    ..hasRequiredFields = false;
+
+  ProfileCreated._() : super();
+  factory ProfileCreated({
+    $core.String? accountId,
+  }) {
+    final _result = create();
+    if (accountId != null) {
+      _result.accountId = accountId;
+    }
+    return _result;
+  }
+  factory ProfileCreated.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory ProfileCreated.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  ProfileCreated clone() => ProfileCreated()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  ProfileCreated copyWith(void Function(ProfileCreated) updates) =>
+      super.copyWith((message) => updates(message as ProfileCreated))
+          as ProfileCreated; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ProfileCreated create() => ProfileCreated._();
+  ProfileCreated createEmptyInstance() => create();
+  static $pb.PbList<ProfileCreated> createRepeated() =>
+      $pb.PbList<ProfileCreated>();
+  @$core.pragma('dart2js:noInline')
+  static ProfileCreated getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ProfileCreated>(create);
+  static ProfileCreated? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get accountId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set accountId($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasAccountId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccountId() => clearField(1);
+}
+
+class ProfileUpdated extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'ProfileUpdated',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'accountId')
+    ..hasRequiredFields = false;
+
+  ProfileUpdated._() : super();
+  factory ProfileUpdated({
+    $core.String? accountId,
+  }) {
+    final _result = create();
+    if (accountId != null) {
+      _result.accountId = accountId;
+    }
+    return _result;
+  }
+  factory ProfileUpdated.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory ProfileUpdated.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  ProfileUpdated clone() => ProfileUpdated()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  ProfileUpdated copyWith(void Function(ProfileUpdated) updates) =>
+      super.copyWith((message) => updates(message as ProfileUpdated))
+          as ProfileUpdated; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ProfileUpdated create() => ProfileUpdated._();
+  ProfileUpdated createEmptyInstance() => create();
+  static $pb.PbList<ProfileUpdated> createRepeated() =>
+      $pb.PbList<ProfileUpdated>();
+  @$core.pragma('dart2js:noInline')
+  static ProfileUpdated getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ProfileUpdated>(create);
+  static ProfileUpdated? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get accountId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set accountId($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasAccountId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccountId() => clearField(1);
+}
+
+class SpaceCreated extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'SpaceCreated',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'accountId')
+    ..a<$fixnum.Int64>(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'spaceId',
+        $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false;
+
+  SpaceCreated._() : super();
+  factory SpaceCreated({
+    $core.String? accountId,
+    $fixnum.Int64? spaceId,
+  }) {
+    final _result = create();
+    if (accountId != null) {
+      _result.accountId = accountId;
+    }
+    if (spaceId != null) {
+      _result.spaceId = spaceId;
+    }
+    return _result;
+  }
+  factory SpaceCreated.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory SpaceCreated.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  SpaceCreated clone() => SpaceCreated()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  SpaceCreated copyWith(void Function(SpaceCreated) updates) =>
+      super.copyWith((message) => updates(message as SpaceCreated))
+          as SpaceCreated; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static SpaceCreated create() => SpaceCreated._();
+  SpaceCreated createEmptyInstance() => create();
+  static $pb.PbList<SpaceCreated> createRepeated() =>
+      $pb.PbList<SpaceCreated>();
+  @$core.pragma('dart2js:noInline')
+  static SpaceCreated getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SpaceCreated>(create);
+  static SpaceCreated? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get accountId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set accountId($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasAccountId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccountId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get spaceId => $_getI64(1);
+  @$pb.TagNumber(2)
+  set spaceId($fixnum.Int64 v) {
+    $_setInt64(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasSpaceId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSpaceId() => clearField(2);
+}
+
+class SpaceUpdated extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'SpaceUpdated',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'accountId')
+    ..a<$fixnum.Int64>(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'spaceId',
+        $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false;
+
+  SpaceUpdated._() : super();
+  factory SpaceUpdated({
+    $core.String? accountId,
+    $fixnum.Int64? spaceId,
+  }) {
+    final _result = create();
+    if (accountId != null) {
+      _result.accountId = accountId;
+    }
+    if (spaceId != null) {
+      _result.spaceId = spaceId;
+    }
+    return _result;
+  }
+  factory SpaceUpdated.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory SpaceUpdated.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  SpaceUpdated clone() => SpaceUpdated()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  SpaceUpdated copyWith(void Function(SpaceUpdated) updates) =>
+      super.copyWith((message) => updates(message as SpaceUpdated))
+          as SpaceUpdated; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static SpaceUpdated create() => SpaceUpdated._();
+  SpaceUpdated createEmptyInstance() => create();
+  static $pb.PbList<SpaceUpdated> createRepeated() =>
+      $pb.PbList<SpaceUpdated>();
+  @$core.pragma('dart2js:noInline')
+  static SpaceUpdated getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SpaceUpdated>(create);
+  static SpaceUpdated? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get accountId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set accountId($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasAccountId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccountId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get spaceId => $_getI64(1);
+  @$pb.TagNumber(2)
+  set spaceId($fixnum.Int64 v) {
+    $_setInt64(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasSpaceId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSpaceId() => clearField(2);
+}
+
+class AccountFollowed extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'AccountFollowed',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'follower')
+    ..aOS(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'following')
+    ..hasRequiredFields = false;
+
+  AccountFollowed._() : super();
+  factory AccountFollowed({
+    $core.String? follower,
+    $core.String? following,
+  }) {
+    final _result = create();
+    if (follower != null) {
+      _result.follower = follower;
+    }
+    if (following != null) {
+      _result.following = following;
+    }
+    return _result;
+  }
+  factory AccountFollowed.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory AccountFollowed.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  AccountFollowed clone() => AccountFollowed()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  AccountFollowed copyWith(void Function(AccountFollowed) updates) =>
+      super.copyWith((message) => updates(message as AccountFollowed))
+          as AccountFollowed; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static AccountFollowed create() => AccountFollowed._();
+  AccountFollowed createEmptyInstance() => create();
+  static $pb.PbList<AccountFollowed> createRepeated() =>
+      $pb.PbList<AccountFollowed>();
+  @$core.pragma('dart2js:noInline')
+  static AccountFollowed getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<AccountFollowed>(create);
+  static AccountFollowed? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get follower => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set follower($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasFollower() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFollower() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get following => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set following($core.String v) {
+    $_setString(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasFollowing() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFollowing() => clearField(2);
+}
+
+class AccountUnfollowed extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'AccountUnfollowed',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'follower')
+    ..aOS(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'unfollowing')
+    ..hasRequiredFields = false;
+
+  AccountUnfollowed._() : super();
+  factory AccountUnfollowed({
+    $core.String? follower,
+    $core.String? unfollowing,
+  }) {
+    final _result = create();
+    if (follower != null) {
+      _result.follower = follower;
+    }
+    if (unfollowing != null) {
+      _result.unfollowing = unfollowing;
+    }
+    return _result;
+  }
+  factory AccountUnfollowed.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory AccountUnfollowed.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  AccountUnfollowed clone() => AccountUnfollowed()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  AccountUnfollowed copyWith(void Function(AccountUnfollowed) updates) =>
+      super.copyWith((message) => updates(message as AccountUnfollowed))
+          as AccountUnfollowed; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static AccountUnfollowed create() => AccountUnfollowed._();
+  AccountUnfollowed createEmptyInstance() => create();
+  static $pb.PbList<AccountUnfollowed> createRepeated() =>
+      $pb.PbList<AccountUnfollowed>();
+  @$core.pragma('dart2js:noInline')
+  static AccountUnfollowed getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<AccountUnfollowed>(create);
+  static AccountUnfollowed? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get follower => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set follower($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasFollower() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFollower() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get unfollowing => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set unfollowing($core.String v) {
+    $_setString(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasUnfollowing() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUnfollowing() => clearField(2);
+}
+
+class PostReactionIdByAccount extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'PostReactionIdByAccount',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..a<$fixnum.Int64>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'reactionId',
+        $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false;
+
+  PostReactionIdByAccount._() : super();
+  factory PostReactionIdByAccount({
+    $fixnum.Int64? reactionId,
+  }) {
+    final _result = create();
+    if (reactionId != null) {
+      _result.reactionId = reactionId;
+    }
+    return _result;
+  }
+  factory PostReactionIdByAccount.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory PostReactionIdByAccount.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  PostReactionIdByAccount clone() =>
+      PostReactionIdByAccount()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  PostReactionIdByAccount copyWith(
+          void Function(PostReactionIdByAccount) updates) =>
+      super.copyWith((message) => updates(message as PostReactionIdByAccount))
+          as PostReactionIdByAccount; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static PostReactionIdByAccount create() => PostReactionIdByAccount._();
+  PostReactionIdByAccount createEmptyInstance() => create();
+  static $pb.PbList<PostReactionIdByAccount> createRepeated() =>
+      $pb.PbList<PostReactionIdByAccount>();
+  @$core.pragma('dart2js:noInline')
+  static PostReactionIdByAccount getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PostReactionIdByAccount>(create);
+  static PostReactionIdByAccount? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get reactionId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set reactionId($fixnum.Int64 v) {
+    $_setInt64(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasReactionId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearReactionId() => clearField(1);
 }

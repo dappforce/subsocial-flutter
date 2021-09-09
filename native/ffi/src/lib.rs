@@ -18,9 +18,9 @@ use prost::Message;
 use sdk::subxt::sp_core::sr25519::Pair as Sr25519Pair;
 
 /// Global Shared [subxt::Client] between all tasks.
-static CLIENT: OnceCell<subxt::Client<SubsocialRuntime>> = OnceCell::new();
-type Signer = subxt::PairSigner<SubsocialRuntime, Sr25519Pair>;
+static mut CLIENT: OnceCell<subxt::Client<SubsocialRuntime>> = OnceCell::new();
 
+type Signer = subxt::PairSigner<SubsocialRuntime, Sr25519Pair>;
 /// Global Shared [subxt::PairSigner] between all tasks.
 static mut SIGNER: OnceCell<Signer> = OnceCell::new();
 
@@ -37,7 +37,7 @@ pub extern "C" fn subsocial_init_client(
 ) -> i32 {
     let isolate = Isolate::new(port);
     // check if we already have a client
-    if CLIENT.get().is_some() {
+    if unsafe { CLIENT.get() }.is_some() {
         isolate.post(());
         return 1; // we are good!
     }
@@ -48,7 +48,7 @@ pub extern "C" fn subsocial_init_client(
     };
     let task = isolate.catch_unwind(async move {
         let client = subxt::ClientBuilder::new().set_url(url).build().await?;
-        CLIENT.set(client).map_err(|_| {
+        unsafe { CLIENT.set(client) }.map_err(|_| {
             subxt::Error::Other(String::from("Client already initialized"))
         })?;
         Result::<_, subxt::Error>::Ok(())
@@ -75,7 +75,7 @@ pub extern "C" fn subsocial_dispatch(port: i64, buffer: Box<Uint8List>) -> i32 {
             return 0xbadc0de;
         }
     };
-    let client = match CLIENT.get() {
+    let client = match unsafe { CLIENT.get() } {
         Some(v) => v,
         None => return 0xdead,
     };
@@ -83,6 +83,36 @@ pub extern "C" fn subsocial_dispatch(port: i64, buffer: Box<Uint8List>) -> i32 {
     let task = isolate.catch_unwind(handler::handle(client, signer, req));
     task::spawn(task);
     1
+}
+
+/// Dispose (a la drop) the Client and all active connections.
+/// if the client is still there, it will close it and return `1`
+/// otherwise, returns 0xdead.
+#[no_mangle]
+pub extern "C" fn subsocial_dispose_client() -> i32 {
+    match unsafe { CLIENT.take() } {
+        Some(old_client) => {
+            // Drop it
+            drop(old_client);
+            1
+        }
+        None => 0xdead,
+    }
+}
+
+/// Dispose (a la drop) the Signer and zerozie the memory.
+/// if the signer is still there, it will drop it and return `1`
+/// otherwise, returns 0xdead.
+#[no_mangle]
+pub extern "C" fn subsocial_dispose_signer() -> i32 {
+    match unsafe { SIGNER.take() } {
+        Some(old_signer) => {
+            // it gets zeroized when it is dropped.
+            drop(old_signer);
+            1
+        }
+        None => 0xdead,
+    }
 }
 
 /// a no-op function that forces xcode to link to our lib.

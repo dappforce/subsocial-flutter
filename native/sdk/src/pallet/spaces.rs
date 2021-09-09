@@ -22,6 +22,7 @@ pub trait Spaces: System + Balances {
         + Send
         + Sync
         + 'static;
+    type ScoringAction: Default + Decode + Encode + Send + Sync + 'static;
 }
 
 #[derive(Encode, Decode, Clone, Eq, PartialEq, Debug)]
@@ -39,6 +40,15 @@ pub struct Space<T: Spaces> {
     pub followers_count: u32,
     pub score: i32,
     pub permissions: Option<SpacePermissions>,
+}
+
+#[derive(Encode, Decode, Clone, Eq, PartialEq, Debug)]
+pub struct SpaceUpdate<T: Spaces> {
+    pub parent_id: Option<Option<T::SpaceId>>,
+    pub handle: Option<Option<Vec<u8>>>,
+    pub content: Option<Content>,
+    pub hidden: Option<bool>,
+    pub permissions: Option<Option<SpacePermissions>>,
 }
 
 impl<T: Spaces> fmt::Display for Space<T> {
@@ -103,4 +113,34 @@ impl<T: Spaces> SpaceIdsByOwnerStore<T> {
             __marker: Default::default(),
         }
     }
+}
+
+// Calls ...
+
+#[derive(Clone, Encode, Eq, PartialEq, subxt::Call)]
+pub struct CreateSpaceCall<T: Spaces> {
+    parent_id_opt: Option<T::SpaceId>,
+    handle_opt: Option<Vec<u8>>,
+    content: Content,
+    permissions_opt: Option<SpacePermissions>,
+}
+
+#[derive(Clone, Encode, Eq, PartialEq, subxt::Call)]
+pub struct UpdateSpaceCall<T: Spaces> {
+    space_id: T::SpaceId,
+    update: SpaceUpdate<T>,
+}
+
+// Events ...
+
+#[derive(Clone, Debug, Encode, Decode, Eq, PartialEq, subxt::Event)]
+pub struct SpaceCreatedEvent<T: Spaces> {
+    pub account_id: T::AccountId,
+    pub space_id: T::SpaceId,
+}
+
+#[derive(Clone, Debug, Encode, Decode, Eq, PartialEq, subxt::Event)]
+pub struct SpaceUpdatedEvent<T: Spaces> {
+    pub account_id: T::AccountId,
+    pub space_id: T::SpaceId,
 }
