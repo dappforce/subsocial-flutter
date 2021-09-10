@@ -77,15 +77,13 @@ impl<T: Reactions> ReactionIdsByPostIdStore<T> {
 #[derive(Clone, Debug, Eq, Encode, PartialEq, subxt::Store)]
 pub struct PostReactionIdByAccountStore<T: Reactions> {
     #[store(returns = T::ReactionId)]
-    account_id: T::AccountId,
-    post_id: T::PostId,
+    key: (T::AccountId, T::PostId),
 }
 
 impl<T: Reactions> PostReactionIdByAccountStore<T> {
     pub fn new(account_id: T::AccountId, post_id: T::PostId) -> Self {
         Self {
-            account_id,
-            post_id,
+            key: (account_id, post_id),
         }
     }
 }

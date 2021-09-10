@@ -146,4 +146,15 @@ void main() {
     final spaceUnfollowed = await sdk.unfollowSpace(spaceId: spaceId);
     expect(spaceUnfollowed.spaceId.toInt(), spaceId);
   }, skip: true);
+
+  test('postReactionIdByAccount', () async {
+    final sdk = await Subsocial.instance;
+    const postId = 19544;
+    const accountId = "3pYyydiZfeTL7iVxcYqw9bVyPbFXdVHSomUNzg4SpdycD5tg";
+    final reactionId = await sdk.postReactionIdByAccount(
+      postId: postId,
+      accountId: accountId,
+    );
+    expect(reactionId, 32967);
+  });
 }
