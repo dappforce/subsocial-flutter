@@ -12,7 +12,17 @@ struct Uint8List {
   uintptr_t len;
 };
 
-int32_t subsocial_init_client(int64_t port, struct SubscoialConfig *config);
+// Init the SDK
+//
+// ### Safety
+// This should only called once, in the beginning of the application.
+// otherwise it would be **UB** if called more than once while there is other calls to the SDK.
+//
+// However, you can call this again, if you disposed the client and the signer.
+//
+// We added checks as a safety mechanism, to ensure no UB would happen,
+// but take care that not all paths are tested here.
+int32_t subsocial_init_sdk(int64_t port, struct SubscoialConfig *config);
 
 int32_t subsocial_dispatch(int64_t port, struct Uint8List *buffer);
 

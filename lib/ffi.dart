@@ -62,21 +62,30 @@ class RawSubsoical {
       _subsocial_dispose_signer_ptr
           .asFunction<_dart_subsocial_dispose_signer>();
 
-  int subsocial_init_client(
+  /// Init the SDK
+  ///
+  /// ### Safety
+  /// This should only called once, in the beginning of the application.
+  /// otherwise it would be **UB** if called more than once while there is other calls to the SDK.
+  ///
+  /// However, you can call this again, if you disposed the client and the signer.
+  ///
+  /// We added checks as a safety mechanism, to ensure no UB would happen,
+  /// but take care that not all paths are tested here.
+  int subsocial_init_sdk(
     int port,
     ffi.Pointer<SubscoialConfig> config,
   ) {
-    return _subsocial_init_client(
+    return _subsocial_init_sdk(
       port,
       config,
     );
   }
 
-  late final _subsocial_init_client_ptr =
-      _lookup<ffi.NativeFunction<_c_subsocial_init_client>>(
-          'subsocial_init_client');
-  late final _dart_subsocial_init_client _subsocial_init_client =
-      _subsocial_init_client_ptr.asFunction<_dart_subsocial_init_client>();
+  late final _subsocial_init_sdk_ptr =
+      _lookup<ffi.NativeFunction<_c_subsocial_init_sdk>>('subsocial_init_sdk');
+  late final _dart_subsocial_init_sdk _subsocial_init_sdk =
+      _subsocial_init_sdk_ptr.asFunction<_dart_subsocial_init_sdk>();
 
   /// a no-op function that forces xcode to link to our lib.
   /// ## Safety
@@ -124,12 +133,12 @@ typedef _c_subsocial_dispose_signer = ffi.Int32 Function();
 
 typedef _dart_subsocial_dispose_signer = int Function();
 
-typedef _c_subsocial_init_client = ffi.Int32 Function(
+typedef _c_subsocial_init_sdk = ffi.Int32 Function(
   ffi.Int64 port,
   ffi.Pointer<SubscoialConfig> config,
 );
 
-typedef _dart_subsocial_init_client = int Function(
+typedef _dart_subsocial_init_sdk = int Function(
   int port,
   ffi.Pointer<SubscoialConfig> config,
 );

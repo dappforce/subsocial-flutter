@@ -2,7 +2,7 @@
 pub struct Request {
     #[prost(
         oneof = "request::Body",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36"
     )]
     pub body: ::core::option::Option<request::Body>,
 }
@@ -80,13 +80,15 @@ pub mod request {
         UnfollowAccount(super::UnfollowAccount),
         #[prost(message, tag = "35")]
         PostReactionIdByAccount(super::GetPostReactionIdByAccount),
+        #[prost(message, tag = "36")]
+        QueryAccountData(super::QueryAccountData),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Response {
     #[prost(
         oneof = "response::Body",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37"
     )]
     pub body: ::core::option::Option<response::Body>,
 }
@@ -166,6 +168,8 @@ pub mod response {
         AccountUnfollowed(super::AccountUnfollowed),
         #[prost(message, tag = "36")]
         PostReactionIdByAccount(super::PostReactionIdByAccount),
+        #[prost(message, tag = "37")]
+        AccountData(super::AccountData),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -277,6 +281,11 @@ pub struct GetPostReactionIdByAccount {
     pub account_id: ::prost::alloc::string::String,
     #[prost(uint64, tag = "2")]
     pub post_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct QueryAccountData {
+    #[prost(string, tag = "1")]
+    pub account_id: ::prost::alloc::string::String,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateAccount {
@@ -765,4 +774,15 @@ pub struct AccountUnfollowed {
 pub struct PostReactionIdByAccount {
     #[prost(uint64, tag = "1")]
     pub reaction_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AccountData {
+    #[prost(string, tag = "1")]
+    pub free_balance: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub reserved_balance: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub misc_frozen_balance: ::prost::alloc::string::String,
+    #[prost(string, tag = "4")]
+    pub fee_frozen_balance: ::prost::alloc::string::String,
 }
