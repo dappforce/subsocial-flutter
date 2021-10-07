@@ -6,6 +6,12 @@ import 'package:subsocial_sdk/subsocial_sdk.dart';
 
 void main() {
   final suri = Platform.environment['SURI'] ?? '//Alice';
+
+  setUp(() async {
+    final sdk = await Subsocial.instance;
+    sdk.clearSigner();
+  });
+
   test('Get Space with Id', () async {
     final sdk = await Subsocial.instance;
     final space = await sdk.spaceById(1);
