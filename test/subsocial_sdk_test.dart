@@ -171,5 +171,5 @@ void main() {
     final account = await sdk.importAccount(suri: suri);
     final signer = (await sdk.currentAccountId()).accountId;
     expect(signer, account.publicKey);
-  });
+  }, skip: true);
 }
