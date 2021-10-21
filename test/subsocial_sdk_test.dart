@@ -6,10 +6,20 @@ import 'package:subsocial_sdk/subsocial_sdk.dart';
 
 void main() {
   final suri = Platform.environment['SURI'] ?? '//Alice';
+
   test('Get Space with Id', () async {
     final sdk = await Subsocial.instance;
     final space = await sdk.spaceById(1);
     expect(space.handle, "subsocial");
+  });
+
+  test('Get AccountData with AccountId', () async {
+    final sdk = await Subsocial.instance;
+    final space = await sdk.spaceById(1);
+    final accountData = await sdk.queryAccountData(space.owner);
+    final freeBalance = BigInt.parse(accountData.freeBalance);
+    final balanceAboveZero = freeBalance > BigInt.zero;
+    expect(balanceAboveZero, true);
   });
 
   test('Get Space with handle', () async {

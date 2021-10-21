@@ -29,26 +29,37 @@ static mut SIGNER: OnceCell<Signer> = OnceCell::new();
 pub struct SubscoialConfig {
     url: *const c_char,
 }
-
+/// Init the SDK
+///
+/// ### Safety
+/// This should only called once, in the beginning of the application.
+/// otherwise it would be **UB** if called more than once while there is other calls to the SDK.
+///
+/// However, you can call this again, if you disposed the client and the signer.
+///
+/// We added checks as a safety mechanism, to ensure no UB would happen,
+/// but take care that not all paths are tested here.
 #[no_mangle]
-pub extern "C" fn subsocial_init_client(
+pub unsafe extern "C" fn subsocial_init_sdk(
     port: i64,
     config: Box<SubscoialConfig>,
 ) -> i32 {
     let isolate = Isolate::new(port);
     // check if we already have a client
-    if unsafe { CLIENT.get() }.is_some() {
+    if CLIENT.get().is_some() {
         isolate.post(());
         return 1; // we are good!
     }
-    let url = unsafe {
-        CStr::from_ptr(config.url)
-            .to_str()
-            .unwrap_or("wss://rpc.subsocial.network")
-    };
+    let url = CStr::from_ptr(config.url)
+        .to_str()
+        .unwrap_or("wss://rpc.subsocial.network");
+    // only init it with default value once.
+    if SIGNER.get().is_none() {
+        let _ = SIGNER.set(dummy_signer());
+    }
     let task = isolate.catch_unwind(async move {
         let client = subxt::ClientBuilder::new().set_url(url).build().await?;
-        unsafe { CLIENT.set(client) }.map_err(|_| {
+        CLIENT.set(client).map_err(|_| {
             subxt::Error::Other(String::from("Client already initialized"))
         })?;
         Result::<_, subxt::Error>::Ok(())
@@ -79,7 +90,10 @@ pub extern "C" fn subsocial_dispatch(port: i64, buffer: Box<Uint8List>) -> i32 {
         Some(v) => v,
         None => return 0xdead,
     };
-    let signer = unsafe { SIGNER.get_or_init(dummy_signer) };
+    let signer = match unsafe { SIGNER.get_mut() } {
+        Some(v) => v,
+        None => return 0xdead,
+    };
     let task = isolate.catch_unwind(handler::handle(client, signer, req));
     task::spawn(task);
     1
