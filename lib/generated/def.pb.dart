@@ -50,6 +50,7 @@ enum Request_Body {
   followAccount,
   unfollowAccount,
   postReactionIdByAccount,
+  queryAccountData,
   notSet
 }
 
@@ -90,6 +91,7 @@ class Request extends $pb.GeneratedMessage {
     33: Request_Body.followAccount,
     34: Request_Body.unfollowAccount,
     35: Request_Body.postReactionIdByAccount,
+    36: Request_Body.queryAccountData,
     0: Request_Body.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Request',
@@ -133,7 +135,8 @@ class Request extends $pb.GeneratedMessage {
       32,
       33,
       34,
-      35
+      35,
+      36
     ])
     ..aOM<GetSpaceById>(
         1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceById',
@@ -177,6 +180,7 @@ class Request extends $pb.GeneratedMessage {
     ..aOM<FollowAccount>(33, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'followAccount', subBuilder: FollowAccount.create)
     ..aOM<UnfollowAccount>(34, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'unfollowAccount', subBuilder: UnfollowAccount.create)
     ..aOM<GetPostReactionIdByAccount>(35, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postReactionIdByAccount', subBuilder: GetPostReactionIdByAccount.create)
+    ..aOM<QueryAccountData>(36, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'queryAccountData', subBuilder: QueryAccountData.create)
     ..hasRequiredFields = false;
 
   Request._() : super();
@@ -216,6 +220,7 @@ class Request extends $pb.GeneratedMessage {
     FollowAccount? followAccount,
     UnfollowAccount? unfollowAccount,
     GetPostReactionIdByAccount? postReactionIdByAccount,
+    QueryAccountData? queryAccountData,
   }) {
     final _result = create();
     if (spaceById != null) {
@@ -322,6 +327,9 @@ class Request extends $pb.GeneratedMessage {
     }
     if (postReactionIdByAccount != null) {
       _result.postReactionIdByAccount = postReactionIdByAccount;
+    }
+    if (queryAccountData != null) {
+      _result.queryAccountData = queryAccountData;
     }
     return _result;
   }
@@ -844,6 +852,20 @@ class Request extends $pb.GeneratedMessage {
   void clearPostReactionIdByAccount() => clearField(35);
   @$pb.TagNumber(35)
   GetPostReactionIdByAccount ensurePostReactionIdByAccount() => $_ensure(34);
+
+  @$pb.TagNumber(36)
+  QueryAccountData get queryAccountData => $_getN(35);
+  @$pb.TagNumber(36)
+  set queryAccountData(QueryAccountData v) {
+    setField(36, v);
+  }
+
+  @$pb.TagNumber(36)
+  $core.bool hasQueryAccountData() => $_has(35);
+  @$pb.TagNumber(36)
+  void clearQueryAccountData() => clearField(36);
+  @$pb.TagNumber(36)
+  QueryAccountData ensureQueryAccountData() => $_ensure(35);
 }
 
 enum Response_Body {
@@ -883,6 +905,7 @@ enum Response_Body {
   accountFollowed,
   accountUnfollowed,
   postReactionIdByAccount,
+  accountData,
   notSet
 }
 
@@ -924,6 +947,7 @@ class Response extends $pb.GeneratedMessage {
     34: Response_Body.accountFollowed,
     35: Response_Body.accountUnfollowed,
     36: Response_Body.postReactionIdByAccount,
+    37: Response_Body.accountData,
     0: Response_Body.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Response',
@@ -968,7 +992,8 @@ class Response extends $pb.GeneratedMessage {
       33,
       34,
       35,
-      36
+      36,
+      37
     ])
     ..aOM<Error>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'error',
         subBuilder: Error.create)
@@ -1013,6 +1038,7 @@ class Response extends $pb.GeneratedMessage {
     ..aOM<AccountFollowed>(34, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountFollowed', subBuilder: AccountFollowed.create)
     ..aOM<AccountUnfollowed>(35, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountUnfollowed', subBuilder: AccountUnfollowed.create)
     ..aOM<PostReactionIdByAccount>(36, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postReactionIdByAccount', subBuilder: PostReactionIdByAccount.create)
+    ..aOM<AccountData>(37, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountData', subBuilder: AccountData.create)
     ..hasRequiredFields = false;
 
   Response._() : super();
@@ -1053,6 +1079,7 @@ class Response extends $pb.GeneratedMessage {
     AccountFollowed? accountFollowed,
     AccountUnfollowed? accountUnfollowed,
     PostReactionIdByAccount? postReactionIdByAccount,
+    AccountData? accountData,
   }) {
     final _result = create();
     if (error != null) {
@@ -1162,6 +1189,9 @@ class Response extends $pb.GeneratedMessage {
     }
     if (postReactionIdByAccount != null) {
       _result.postReactionIdByAccount = postReactionIdByAccount;
+    }
+    if (accountData != null) {
+      _result.accountData = accountData;
     }
     return _result;
   }
@@ -1691,6 +1721,20 @@ class Response extends $pb.GeneratedMessage {
   void clearPostReactionIdByAccount() => clearField(36);
   @$pb.TagNumber(36)
   PostReactionIdByAccount ensurePostReactionIdByAccount() => $_ensure(35);
+
+  @$pb.TagNumber(37)
+  AccountData get accountData => $_getN(36);
+  @$pb.TagNumber(37)
+  set accountData(AccountData v) {
+    setField(37, v);
+  }
+
+  @$pb.TagNumber(37)
+  $core.bool hasAccountData() => $_has(36);
+  @$pb.TagNumber(37)
+  void clearAccountData() => clearField(37);
+  @$pb.TagNumber(37)
+  AccountData ensureAccountData() => $_ensure(36);
 }
 
 class Error extends $pb.GeneratedMessage {
@@ -2895,6 +2939,73 @@ class GetPostReactionIdByAccount extends $pb.GeneratedMessage {
   $core.bool hasPostId() => $_has(1);
   @$pb.TagNumber(2)
   void clearPostId() => clearField(2);
+}
+
+class QueryAccountData extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'QueryAccountData',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'accountId')
+    ..hasRequiredFields = false;
+
+  QueryAccountData._() : super();
+  factory QueryAccountData({
+    $core.String? accountId,
+  }) {
+    final _result = create();
+    if (accountId != null) {
+      _result.accountId = accountId;
+    }
+    return _result;
+  }
+  factory QueryAccountData.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory QueryAccountData.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  QueryAccountData clone() => QueryAccountData()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  QueryAccountData copyWith(void Function(QueryAccountData) updates) =>
+      super.copyWith((message) => updates(message as QueryAccountData))
+          as QueryAccountData; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static QueryAccountData create() => QueryAccountData._();
+  QueryAccountData createEmptyInstance() => create();
+  static $pb.PbList<QueryAccountData> createRepeated() =>
+      $pb.PbList<QueryAccountData>();
+  @$core.pragma('dart2js:noInline')
+  static QueryAccountData getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<QueryAccountData>(create);
+  static QueryAccountData? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get accountId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set accountId($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasAccountId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccountId() => clearField(1);
 }
 
 class GenerateAccount extends $pb.GeneratedMessage {
@@ -8373,4 +8484,130 @@ class PostReactionIdByAccount extends $pb.GeneratedMessage {
   $core.bool hasReactionId() => $_has(0);
   @$pb.TagNumber(1)
   void clearReactionId() => clearField(1);
+}
+
+class AccountData extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'AccountData',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..aOS(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'freeBalance')
+    ..aOS(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'reservedBalance')
+    ..aOS(
+        3,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'miscFrozenBalance')
+    ..aOS(4,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'feeFrozenBalance')
+    ..hasRequiredFields = false;
+
+  AccountData._() : super();
+  factory AccountData({
+    $core.String? freeBalance,
+    $core.String? reservedBalance,
+    $core.String? miscFrozenBalance,
+    $core.String? feeFrozenBalance,
+  }) {
+    final _result = create();
+    if (freeBalance != null) {
+      _result.freeBalance = freeBalance;
+    }
+    if (reservedBalance != null) {
+      _result.reservedBalance = reservedBalance;
+    }
+    if (miscFrozenBalance != null) {
+      _result.miscFrozenBalance = miscFrozenBalance;
+    }
+    if (feeFrozenBalance != null) {
+      _result.feeFrozenBalance = feeFrozenBalance;
+    }
+    return _result;
+  }
+  factory AccountData.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory AccountData.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  AccountData clone() => AccountData()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  AccountData copyWith(void Function(AccountData) updates) =>
+      super.copyWith((message) => updates(message as AccountData))
+          as AccountData; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static AccountData create() => AccountData._();
+  AccountData createEmptyInstance() => create();
+  static $pb.PbList<AccountData> createRepeated() => $pb.PbList<AccountData>();
+  @$core.pragma('dart2js:noInline')
+  static AccountData getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<AccountData>(create);
+  static AccountData? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get freeBalance => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set freeBalance($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasFreeBalance() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFreeBalance() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get reservedBalance => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set reservedBalance($core.String v) {
+    $_setString(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasReservedBalance() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearReservedBalance() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get miscFrozenBalance => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set miscFrozenBalance($core.String v) {
+    $_setString(2, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasMiscFrozenBalance() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMiscFrozenBalance() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get feeFrozenBalance => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set feeFrozenBalance($core.String v) {
+    $_setString(3, v);
+  }
+
+  @$pb.TagNumber(4)
+  $core.bool hasFeeFrozenBalance() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearFeeFrozenBalance() => clearField(4);
 }

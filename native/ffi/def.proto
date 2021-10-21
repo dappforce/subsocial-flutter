@@ -39,6 +39,7 @@ message Request {
     FollowAccount follow_account = 33;
     UnfollowAccount unfollow_account = 34;
     GetPostReactionIdByAccount post_reaction_id_by_account = 35;
+    QueryAccountData query_account_data = 36;
   }
 }
 
@@ -81,6 +82,7 @@ message Response {
     AccountFollowed account_followed = 34;
     AccountUnfollowed account_unfollowed = 35;
     PostReactionIdByAccount post_reaction_id_by_account = 36;
+    AccountData account_data = 37;
   }
 }
 
@@ -160,6 +162,10 @@ message GetAccountsFollowedByAccount {
 message GetPostReactionIdByAccount {
   string account_id = 1;
   uint64 post_id = 2;
+}
+
+message QueryAccountData {
+  string account_id = 1;
 }
 
 message GenerateAccount {
@@ -354,7 +360,6 @@ message SpaceUpdate {
 
 // RESPONSES
 
-
 message SpaceById {
   Space space = 1;
 }
@@ -493,4 +498,11 @@ message AccountUnfollowed {
 
 message PostReactionIdByAccount {
   uint64 reaction_id = 1;
+}
+
+message AccountData {
+  string free_balance = 1;
+  string reserved_balance = 2;
+  string misc_frozen_balance = 3;
+  string fee_frozen_balance = 4;
 }

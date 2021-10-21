@@ -35,7 +35,7 @@ class Subsocial {
       final port = singleCompletePort(completer);
       final config = malloc.call<SubscoialConfig>()
         ..ref.url = "wss://rpc.subsocial.network".toNativeUtf8().cast();
-      final result = raw.subsocial_init_client(
+      final result = raw.subsocial_init_sdk(
         port.nativePort,
         config,
       );
@@ -138,6 +138,17 @@ class Subsocial {
     final res = await _dispatch(req);
     final val = res.ensureReplyIdsByPostId();
     return val.replyIds.map((e) => e.toInt()).toList();
+  }
+
+  Future<AccountData> queryAccountData(AccountId accountId) async {
+    final req = Request(
+      queryAccountData: QueryAccountData(
+        accountId: accountId,
+      ),
+    );
+    final res = await _dispatch(req);
+    final val = res.ensureAccountData();
+    return val;
   }
 
   Future<SocialAccount> socialAccountByAccountId(AccountId accountId) async {
@@ -459,6 +470,7 @@ class Subsocial {
   }
 
   /// Clear-out the current Signer from the memory.
+  /// to set the signer again, call the `importAccount` method.
   void clearSigner() {
     _raw.subsocial_dispose_signer();
   }

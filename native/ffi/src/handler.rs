@@ -13,6 +13,7 @@ use sdk::pallet::profiles::*;
 use sdk::pallet::reactions::*;
 use sdk::pallet::space_follows::*;
 use sdk::pallet::spaces::*;
+use sdk::subxt::system::AccountStoreExt;
 
 use crate::pb::subsocial::request::Body as RequestBody;
 use crate::pb::subsocial::response::Body as ResponseBody;
@@ -22,7 +23,7 @@ use crate::Signer;
 
 pub async fn handle(
     client: &Client<SubsocialRuntime>,
-    signer: &Signer,
+    signer: &mut Signer,
     req: Request,
 ) -> Vec<u8> {
     let body = match req.body {
@@ -42,6 +43,9 @@ pub async fn handle(
     let result = match body {
         RequestBody::NextSpaceId(_) => next_space_id(client).await,
         RequestBody::NextPostId(_) => next_post_id(client).await,
+        RequestBody::QueryAccountData(args) => {
+            query_account_data(client, args.account_id).await
+        }
         RequestBody::SpaceById(args) => {
             space_by_id(client, args.space_id).await
         }
@@ -86,24 +90,31 @@ pub async fn handle(
         RequestBody::ImportAccount(args) => import_account(args),
         RequestBody::CurrentAccountId(_) => current_account_id(signer),
         RequestBody::CreatePostReaction(args) => {
+            signer.increment_nonce();
             create_post_reaction(client, signer, args).await
         }
         RequestBody::UpdatePostReaction(args) => {
+            signer.increment_nonce();
             update_post_reaction(client, signer, args).await
         }
         RequestBody::DeletePostReaction(args) => {
+            signer.increment_nonce();
             delete_post_reaction(client, signer, args).await
         }
         RequestBody::CreatePost(args) => {
+            signer.increment_nonce();
             create_post(client, signer, args).await
         }
         RequestBody::UpdatePost(args) => {
+            signer.increment_nonce();
             update_post(client, signer, args).await
         }
         RequestBody::FollowSpace(args) => {
+            signer.increment_nonce();
             follow_space(client, signer, args).await
         }
         RequestBody::UnfollowSpace(args) => {
+            signer.increment_nonce();
             unfollow_space(client, signer, args).await
         }
         RequestBody::IsAccountFollower(args) => {
@@ -116,21 +127,27 @@ pub async fn handle(
             is_post_shared_by_account(client, signer, args).await
         }
         RequestBody::CreateProfile(args) => {
+            signer.increment_nonce();
             create_profile(client, signer, args).await
         }
         RequestBody::UpdateProfile(args) => {
+            signer.increment_nonce();
             update_profile(client, signer, args).await
         }
         RequestBody::CreateSpace(args) => {
+            signer.increment_nonce();
             create_space(client, signer, args).await
         }
         RequestBody::UpdateSpace(args) => {
+            signer.increment_nonce();
             update_space(client, signer, args).await
         }
         RequestBody::FollowAccount(args) => {
+            signer.increment_nonce();
             follow_account(client, signer, args).await
         }
         RequestBody::UnfollowAccount(args) => {
+            signer.increment_nonce();
             unfollow_account(client, signer, args).await
         }
     };
@@ -143,6 +160,22 @@ pub async fn handle(
     let mut buffer = Vec::new();
     response.encode(&mut buffer).expect("should never fails");
     buffer
+}
+
+async fn query_account_data(
+    client: &Client<SubsocialRuntime>,
+    account_id: String,
+) -> Result<ResponseBody, Error> {
+    let account_id = AccountId32::convert(account_id)?;
+    let account_info = client.account(&account_id, None).await?;
+    let account_data = account_info.data;
+    let body = ResponseBody::AccountData(AccountData {
+        free_balance: account_data.free.to_string(),
+        reserved_balance: account_data.reserved.to_string(),
+        fee_frozen_balance: account_data.fee_frozen.to_string(),
+        misc_frozen_balance: account_data.misc_frozen.to_string(),
+    });
+    Ok(body)
 }
 
 async fn space_by_id(
