@@ -9,7 +9,7 @@ void main() {
 
   setUp(() async {
     final sdk = await Subsocial.instance;
-    await sdk.clearSigner();
+    sdk.clearSigner();
   });
 
   test('Get Space with Id', () async {
