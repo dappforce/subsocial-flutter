@@ -13,3 +13,5 @@ pub mod utils;
 pub type SpaceId = u64;
 pub type PostId = u64;
 pub type ReactionId = u64;
+pub type RoleId = u64;
+pub type ScoringAction = u8;

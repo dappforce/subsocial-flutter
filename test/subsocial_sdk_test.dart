@@ -15,11 +15,11 @@ void main() {
 
   test('Get AccountData with AccountId', () async {
     final sdk = await Subsocial.instance;
-    final space = await sdk.spaceById(1);
-    final accountData = await sdk.queryAccountData(space.owner);
+    final accountData = await sdk.queryAccountData(
+      "5GHnQYfvZdxJHSWnZqiM5eKdj2UawJs4s9Tqn22ckvLEENvc",
+    );
     final freeBalance = BigInt.parse(accountData.freeBalance);
-    final balanceAboveZero = freeBalance > BigInt.zero;
-    expect(balanceAboveZero, true);
+    expect(freeBalance, BigInt.from(100042893226878));
   });
 
   test('Get Space with handle', () async {

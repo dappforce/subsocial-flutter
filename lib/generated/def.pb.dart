@@ -94,7 +94,10 @@ class Request extends $pb.GeneratedMessage {
     36: Request_Body.queryAccountData,
     0: Request_Body.notSet
   };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Request',
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'Request',
       package: const $pb.PackageName(
           const $core.bool.fromEnvironment('protobuf.omit_message_names')
               ? ''
@@ -139,48 +142,221 @@ class Request extends $pb.GeneratedMessage {
       36
     ])
     ..aOM<GetSpaceById>(
-        1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceById',
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'spaceById',
         subBuilder: GetSpaceById.create)
     ..aOM<GetSpaceByHandle>(
-        2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceByHandle',
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'spaceByHandle',
         subBuilder: GetSpaceByHandle.create)
-    ..aOM<GetPostById>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postById',
+    ..aOM<GetPostById>(
+        3,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'postById',
         subBuilder: GetPostById.create)
     ..aOM<GetPostIdsBySpaceId>(
-        4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postIdsBySpaceId',
+        4,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'postIdsBySpaceId',
         subBuilder: GetPostIdsBySpaceId.create)
-    ..aOM<GetReactionById>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reactionById', subBuilder: GetReactionById.create)
-    ..aOM<GetReactionIdsByPostId>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reactionIdsByPostId', subBuilder: GetReactionIdsByPostId.create)
-    ..aOM<GetReplyIdsByPostId>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'replyIdsByPostId', subBuilder: GetReplyIdsByPostId.create)
-    ..aOM<GetSocialAccountByAccountId>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'socialAccountByAccountId', subBuilder: GetSocialAccountByAccountId.create)
-    ..aOM<GetNextSpaceId>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'nextSpaceId', subBuilder: GetNextSpaceId.create)
-    ..aOM<GetNextPostId>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'nextPostId', subBuilder: GetNextPostId.create)
-    ..aOM<GetSpaceIdsByOwner>(11, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceIdsByOwner', subBuilder: GetSpaceIdsByOwner.create)
-    ..aOM<GetSpaceFollowers>(12, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceFollowers', subBuilder: GetSpaceFollowers.create)
-    ..aOM<GetSpacesFollowedByAccount>(13, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spacesFollowedByAccount', subBuilder: GetSpacesFollowedByAccount.create)
-    ..aOM<GetAccountFollowers>(14, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountFollowers', subBuilder: GetAccountFollowers.create)
-    ..aOM<GetAccountsFollowedByAccount>(15, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountsFollowedByAccount', subBuilder: GetAccountsFollowedByAccount.create)
-    ..aOM<GenerateAccount>(16, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'generateAccount', subBuilder: GenerateAccount.create)
-    ..aOM<ImportAccount>(17, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'importAccount', subBuilder: ImportAccount.create)
-    ..aOM<CreatePostReaction>(18, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createPostReaction', subBuilder: CreatePostReaction.create)
-    ..aOM<CreatePost>(19, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createPost', subBuilder: CreatePost.create)
-    ..aOM<UpdatePost>(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatePost', subBuilder: UpdatePost.create)
-    ..aOM<FollowSpace>(21, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'followSpace', subBuilder: FollowSpace.create)
-    ..aOM<IsAccountFollower>(22, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isAccountFollower', subBuilder: IsAccountFollower.create)
-    ..aOM<IsSpaceFollower>(23, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isSpaceFollower', subBuilder: IsSpaceFollower.create)
-    ..aOM<IsPostSharedByAccount>(24, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isPostSharedByAccount', subBuilder: IsPostSharedByAccount.create)
-    ..aOM<UnfollowSpace>(25, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'unfollowSpace', subBuilder: UnfollowSpace.create)
-    ..aOM<UpdatePostReaction>(26, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatePostReaction', subBuilder: UpdatePostReaction.create)
-    ..aOM<DeletePostReaction>(27, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'deletePostReaction', subBuilder: DeletePostReaction.create)
-    ..aOM<CreateProfile>(28, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createProfile', subBuilder: CreateProfile.create)
-    ..aOM<UpdateProfile>(29, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updateProfile', subBuilder: UpdateProfile.create)
-    ..aOM<GetCurrentAccountId>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'currentAccountId', subBuilder: GetCurrentAccountId.create)
-    ..aOM<CreateSpace>(31, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createSpace', subBuilder: CreateSpace.create)
-    ..aOM<UpdateSpace>(32, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updateSpace', subBuilder: UpdateSpace.create)
-    ..aOM<FollowAccount>(33, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'followAccount', subBuilder: FollowAccount.create)
-    ..aOM<UnfollowAccount>(34, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'unfollowAccount', subBuilder: UnfollowAccount.create)
-    ..aOM<GetPostReactionIdByAccount>(35, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postReactionIdByAccount', subBuilder: GetPostReactionIdByAccount.create)
-    ..aOM<QueryAccountData>(36, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'queryAccountData', subBuilder: QueryAccountData.create)
+    ..aOM<GetReactionById>(
+        5,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'reactionById',
+        subBuilder: GetReactionById.create)
+    ..aOM<GetReactionIdsByPostId>(
+        6,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'reactionIdsByPostId',
+        subBuilder: GetReactionIdsByPostId.create)
+    ..aOM<GetReplyIdsByPostId>(
+        7,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'replyIdsByPostId',
+        subBuilder: GetReplyIdsByPostId.create)
+    ..aOM<GetSocialAccountByAccountId>(
+        8,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'socialAccountByAccountId',
+        subBuilder: GetSocialAccountByAccountId.create)
+    ..aOM<GetNextSpaceId>(
+        9,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'nextSpaceId',
+        subBuilder: GetNextSpaceId.create)
+    ..aOM<GetNextPostId>(
+        10,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'nextPostId',
+        subBuilder: GetNextPostId.create)
+    ..aOM<GetSpaceIdsByOwner>(
+        11,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'spaceIdsByOwner',
+        subBuilder: GetSpaceIdsByOwner.create)
+    ..aOM<GetSpaceFollowers>(
+        12,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'spaceFollowers',
+        subBuilder: GetSpaceFollowers.create)
+    ..aOM<GetSpacesFollowedByAccount>(
+        13,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'spacesFollowedByAccount',
+        subBuilder: GetSpacesFollowedByAccount.create)
+    ..aOM<GetAccountFollowers>(
+        14,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'accountFollowers',
+        subBuilder: GetAccountFollowers.create)
+    ..aOM<GetAccountsFollowedByAccount>(
+        15,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'accountsFollowedByAccount',
+        subBuilder: GetAccountsFollowedByAccount.create)
+    ..aOM<GenerateAccount>(
+        16,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'generateAccount',
+        subBuilder: GenerateAccount.create)
+    ..aOM<ImportAccount>(
+        17,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'importAccount',
+        subBuilder: ImportAccount.create)
+    ..aOM<CreatePostReaction>(
+        18,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'createPostReaction',
+        subBuilder: CreatePostReaction.create)
+    ..aOM<CreatePost>(
+        19,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'createPost',
+        subBuilder: CreatePost.create)
+    ..aOM<UpdatePost>(
+        20,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'updatePost',
+        subBuilder: UpdatePost.create)
+    ..aOM<FollowSpace>(
+        21,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'followSpace',
+        subBuilder: FollowSpace.create)
+    ..aOM<IsAccountFollower>(
+        22,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'isAccountFollower',
+        subBuilder: IsAccountFollower.create)
+    ..aOM<IsSpaceFollower>(
+        23,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'isSpaceFollower',
+        subBuilder: IsSpaceFollower.create)
+    ..aOM<IsPostSharedByAccount>(
+        24,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'isPostSharedByAccount',
+        subBuilder: IsPostSharedByAccount.create)
+    ..aOM<UnfollowSpace>(
+        25,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'unfollowSpace',
+        subBuilder: UnfollowSpace.create)
+    ..aOM<UpdatePostReaction>(
+        26,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'updatePostReaction',
+        subBuilder: UpdatePostReaction.create)
+    ..aOM<DeletePostReaction>(
+        27,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'deletePostReaction',
+        subBuilder: DeletePostReaction.create)
+    ..aOM<CreateProfile>(
+        28,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'createProfile',
+        subBuilder: CreateProfile.create)
+    ..aOM<UpdateProfile>(
+        29,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'updateProfile',
+        subBuilder: UpdateProfile.create)
+    ..aOM<GetCurrentAccountId>(
+        30,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'currentAccountId',
+        subBuilder: GetCurrentAccountId.create)
+    ..aOM<CreateSpace>(
+        31,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'createSpace',
+        subBuilder: CreateSpace.create)
+    ..aOM<UpdateSpace>(
+        32,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'updateSpace',
+        subBuilder: UpdateSpace.create)
+    ..aOM<FollowAccount>(
+        33,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'followAccount',
+        subBuilder: FollowAccount.create)
+    ..aOM<UnfollowAccount>(
+        34,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'unfollowAccount',
+        subBuilder: UnfollowAccount.create)
+    ..aOM<GetPostReactionIdByAccount>(
+        35,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'postReactionIdByAccount',
+        subBuilder: GetPostReactionIdByAccount.create)
+    ..aOM<QueryAccountData>(
+        36,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'queryAccountData',
+        subBuilder: QueryAccountData.create)
     ..hasRequiredFields = false;
 
   Request._() : super();
@@ -950,7 +1126,10 @@ class Response extends $pb.GeneratedMessage {
     37: Response_Body.accountData,
     0: Response_Body.notSet
   };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Response',
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'Response',
       package: const $pb.PackageName(
           const $core.bool.fromEnvironment('protobuf.omit_message_names')
               ? ''
@@ -995,50 +1174,225 @@ class Response extends $pb.GeneratedMessage {
       36,
       37
     ])
-    ..aOM<Error>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'error',
+    ..aOM<Error>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'error',
         subBuilder: Error.create)
     ..aOM<SpaceById>(
-        2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceById',
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'spaceById',
         subBuilder: SpaceById.create)
     ..aOM<SpaceByHandle>(
-        3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceByHandle',
+        3,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'spaceByHandle',
         subBuilder: SpaceByHandle.create)
     ..aOM<PostById>(
-        4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postById',
+        4,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'postById',
         subBuilder: PostById.create)
-    ..aOM<PostIdsBySpaceId>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postIdsBySpaceId', subBuilder: PostIdsBySpaceId.create)
-    ..aOM<ReactionById>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reactionById', subBuilder: ReactionById.create)
-    ..aOM<ReactionIdsByPostId>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reactionIdsByPostId', subBuilder: ReactionIdsByPostId.create)
-    ..aOM<ReplyIdsByPostId>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'replyIdsByPostId', subBuilder: ReplyIdsByPostId.create)
-    ..aOM<SocialAccountByAccountId>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'socialAccountByAccountId', subBuilder: SocialAccountByAccountId.create)
-    ..aOM<NextSpaceId>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'nextSpaceId', subBuilder: NextSpaceId.create)
-    ..aOM<NextPostId>(11, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'nextPostId', subBuilder: NextPostId.create)
-    ..aOM<SpaceIdsByOwner>(12, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceIdsByOwner', subBuilder: SpaceIdsByOwner.create)
-    ..aOM<SpaceFollowers>(13, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceFollowers', subBuilder: SpaceFollowers.create)
-    ..aOM<SpacesFollowedByAccount>(14, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spacesFollowedByAccount', subBuilder: SpacesFollowedByAccount.create)
-    ..aOM<AccountFollowers>(15, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountFollowers', subBuilder: AccountFollowers.create)
-    ..aOM<AccountsFollowedByAccount>(16, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountsFollowedByAccount', subBuilder: AccountsFollowedByAccount.create)
-    ..aOM<GeneratedAccount>(17, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'generatedAccount', subBuilder: GeneratedAccount.create)
-    ..aOM<ImportedAccount>(18, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'importedAccount', subBuilder: ImportedAccount.create)
-    ..aOM<PostReactionCreated>(19, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postReactionCreated', subBuilder: PostReactionCreated.create)
-    ..aOM<PostCreated>(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postCreated', subBuilder: PostCreated.create)
-    ..aOM<PostUpdated>(21, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postUpdated', subBuilder: PostUpdated.create)
-    ..aOM<SpaceFollowed>(22, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceFollowed', subBuilder: SpaceFollowed.create)
-    ..aOB(23, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isAccountFollower')
-    ..aOB(24, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isSpaceFollower')
-    ..aOB(25, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isPostSharedByAccount')
-    ..aOM<SpaceUnfollowed>(26, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceUnfollowed', subBuilder: SpaceUnfollowed.create)
-    ..aOM<PostReactionUpdated>(27, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postReactionUpdated', subBuilder: PostReactionUpdated.create)
-    ..aOM<PostReactionDeleted>(28, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postReactionDeleted', subBuilder: PostReactionDeleted.create)
-    ..aOM<ProfileCreated>(29, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'profileCreated', subBuilder: ProfileCreated.create)
-    ..aOM<ProfileUpdated>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'profileUpdated', subBuilder: ProfileUpdated.create)
-    ..aOM<CurrentAccountId>(31, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'currentAccountId', subBuilder: CurrentAccountId.create)
-    ..aOM<SpaceCreated>(32, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceCreated', subBuilder: SpaceCreated.create)
-    ..aOM<SpaceUpdated>(33, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceUpdated', subBuilder: SpaceUpdated.create)
-    ..aOM<AccountFollowed>(34, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountFollowed', subBuilder: AccountFollowed.create)
-    ..aOM<AccountUnfollowed>(35, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountUnfollowed', subBuilder: AccountUnfollowed.create)
-    ..aOM<PostReactionIdByAccount>(36, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postReactionIdByAccount', subBuilder: PostReactionIdByAccount.create)
-    ..aOM<AccountData>(37, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountData', subBuilder: AccountData.create)
+    ..aOM<PostIdsBySpaceId>(
+        5,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'postIdsBySpaceId',
+        subBuilder: PostIdsBySpaceId.create)
+    ..aOM<ReactionById>(
+        6,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'reactionById',
+        subBuilder: ReactionById.create)
+    ..aOM<ReactionIdsByPostId>(
+        7,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'reactionIdsByPostId',
+        subBuilder: ReactionIdsByPostId.create)
+    ..aOM<ReplyIdsByPostId>(
+        8,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'replyIdsByPostId',
+        subBuilder: ReplyIdsByPostId.create)
+    ..aOM<SocialAccountByAccountId>(
+        9,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'socialAccountByAccountId',
+        subBuilder: SocialAccountByAccountId.create)
+    ..aOM<NextSpaceId>(
+        10,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'nextSpaceId',
+        subBuilder: NextSpaceId.create)
+    ..aOM<NextPostId>(
+        11,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'nextPostId',
+        subBuilder: NextPostId.create)
+    ..aOM<SpaceIdsByOwner>(
+        12,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'spaceIdsByOwner',
+        subBuilder: SpaceIdsByOwner.create)
+    ..aOM<SpaceFollowers>(
+        13,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'spaceFollowers',
+        subBuilder: SpaceFollowers.create)
+    ..aOM<SpacesFollowedByAccount>(
+        14,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'spacesFollowedByAccount',
+        subBuilder: SpacesFollowedByAccount.create)
+    ..aOM<AccountFollowers>(
+        15,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'accountFollowers',
+        subBuilder: AccountFollowers.create)
+    ..aOM<AccountsFollowedByAccount>(
+        16,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'accountsFollowedByAccount',
+        subBuilder: AccountsFollowedByAccount.create)
+    ..aOM<GeneratedAccount>(
+        17,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'generatedAccount',
+        subBuilder: GeneratedAccount.create)
+    ..aOM<ImportedAccount>(
+        18,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'importedAccount',
+        subBuilder: ImportedAccount.create)
+    ..aOM<PostReactionCreated>(
+        19,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'postReactionCreated',
+        subBuilder: PostReactionCreated.create)
+    ..aOM<PostCreated>(
+        20,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'postCreated',
+        subBuilder: PostCreated.create)
+    ..aOM<PostUpdated>(
+        21,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'postUpdated',
+        subBuilder: PostUpdated.create)
+    ..aOM<SpaceFollowed>(
+        22,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'spaceFollowed',
+        subBuilder: SpaceFollowed.create)
+    ..aOB(
+        23,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'isAccountFollower')
+    ..aOB(
+        24,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'isSpaceFollower')
+    ..aOB(
+        25,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'isPostSharedByAccount')
+    ..aOM<SpaceUnfollowed>(
+        26,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'spaceUnfollowed',
+        subBuilder: SpaceUnfollowed.create)
+    ..aOM<PostReactionUpdated>(
+        27,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'postReactionUpdated',
+        subBuilder: PostReactionUpdated.create)
+    ..aOM<PostReactionDeleted>(
+        28,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'postReactionDeleted',
+        subBuilder: PostReactionDeleted.create)
+    ..aOM<ProfileCreated>(
+        29,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'profileCreated',
+        subBuilder: ProfileCreated.create)
+    ..aOM<ProfileUpdated>(
+        30,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'profileUpdated',
+        subBuilder: ProfileUpdated.create)
+    ..aOM<CurrentAccountId>(
+        31,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'currentAccountId',
+        subBuilder: CurrentAccountId.create)
+    ..aOM<SpaceCreated>(
+        32,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'spaceCreated',
+        subBuilder: SpaceCreated.create)
+    ..aOM<SpaceUpdated>(
+        33,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'spaceUpdated',
+        subBuilder: SpaceUpdated.create)
+    ..aOM<AccountFollowed>(
+        34,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'accountFollowed',
+        subBuilder: AccountFollowed.create)
+    ..aOM<AccountUnfollowed>(
+        35,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'accountUnfollowed',
+        subBuilder: AccountUnfollowed.create)
+    ..aOM<PostReactionIdByAccount>(
+        36,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'postReactionIdByAccount',
+        subBuilder: PostReactionIdByAccount.create)
+    ..aOM<AccountData>(
+        37,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'accountData',
+        subBuilder: AccountData.create)
     ..hasRequiredFields = false;
 
   Response._() : super();
@@ -1756,8 +2110,11 @@ class Error extends $pb.GeneratedMessage {
         defaultOrMaker: Error_Kind.KIND_UNKNOWN,
         valueOf: Error_Kind.valueOf,
         enumValues: Error_Kind.values)
-    ..aOS(2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'msg')
+    ..aOS(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'msg')
     ..hasRequiredFields = false;
 
   Error._() : super();
@@ -3174,11 +3531,17 @@ class CreatePostReaction extends $pb.GeneratedMessage {
               : 'subsocial'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(
-        1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postId', $pb.PbFieldType.OU6,
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'postId',
+        $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..e<Reaction_Kind>(
         2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'kind',
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'kind',
         $pb.PbFieldType.OE,
         defaultOrMaker: Reaction_Kind.UNKNOWN,
         valueOf: Reaction_Kind.valueOf,
@@ -3261,12 +3624,24 @@ class CreatePost extends $pb.GeneratedMessage {
               ? ''
               : 'subsocial'),
       createEmptyInstance: create)
-    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceId', $pb.PbFieldType.OU6,
+    ..a<$fixnum.Int64>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'spaceId',
+        $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOM<PostExtension>(
-        2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'extensionValue',
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'extensionValue',
         subBuilder: PostExtension.create)
-    ..aOM<Content>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'content',
+    ..aOM<Content>(
+        3,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'content',
         subBuilder: Content.create)
     ..hasRequiredFields = false;
 
@@ -3372,7 +3747,11 @@ class UpdatePost extends $pb.GeneratedMessage {
             : 'postId',
         $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOM<PostUpdate>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postUpdate',
+    ..aOM<PostUpdate>(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'postUpdate',
         subBuilder: PostUpdate.create)
     ..hasRequiredFields = false;
 
@@ -3797,12 +4176,26 @@ class UpdatePostReaction extends $pb.GeneratedMessage {
               ? ''
               : 'subsocial'),
       createEmptyInstance: create)
-    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postId', $pb.PbFieldType.OU6,
+    ..a<$fixnum.Int64>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'postId',
+        $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reactionId', $pb.PbFieldType.OU6,
+    ..a<$fixnum.Int64>(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'reactionId',
+        $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..e<Reaction_Kind>(
-        3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'newKind', $pb.PbFieldType.OE,
+        3,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'newKind',
+        $pb.PbFieldType.OE,
         defaultOrMaker: Reaction_Kind.UNKNOWN,
         valueOf: Reaction_Kind.valueOf,
         enumValues: Reaction_Kind.values)
@@ -3901,11 +4294,17 @@ class DeletePostReaction extends $pb.GeneratedMessage {
               : 'subsocial'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(
-        1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postId', $pb.PbFieldType.OU6,
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'postId',
+        $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(
         2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reactionId',
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'reactionId',
         $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
@@ -4133,9 +4532,17 @@ class CreateSpace extends $pb.GeneratedMessage {
             : 'parentId',
         $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOS(2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'handle')
-    ..aOM<Content>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'content', subBuilder: Content.create)
+    ..aOS(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'handle')
+    ..aOM<Content>(
+        3,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'content',
+        subBuilder: Content.create)
     ..hasRequiredFields = false;
 
   CreateSpace._() : super();
@@ -4239,7 +4646,10 @@ class UpdateSpace extends $pb.GeneratedMessage {
         $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOM<SpaceUpdate>(
-        2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'update',
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'update',
         subBuilder: SpaceUpdate.create)
     ..hasRequiredFields = false;
 
@@ -4460,11 +4870,17 @@ class WhoAndWhen extends $pb.GeneratedMessage {
             ? ''
             : 'account')
     ..a<$fixnum.Int64>(
-        2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'blockNumber', $pb.PbFieldType.OU6,
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'blockNumber',
+        $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(
         3,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'time',
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'time',
         $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
@@ -4581,7 +4997,10 @@ class Content extends $pb.GeneratedMessage {
             ? ''
             : 'ipfs')
     ..aOS(
-        3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hyper')
+        3,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'hyper')
     ..hasRequiredFields = false;
 
   Content._() : super();
@@ -4730,12 +5149,22 @@ class PostExtension extends $pb.GeneratedMessage {
       createEmptyInstance: create)
     ..oo(0, [1, 2, 3])
     ..aOM<RegularPost>(
-        1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'regularPost',
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'regularPost',
         subBuilder: RegularPost.create)
-    ..aOM<Comment>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'comment',
+    ..aOM<Comment>(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'comment',
         subBuilder: Comment.create)
     ..aOM<SharedPost>(
-        3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sharedPost',
+        3,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'sharedPost',
         subBuilder: SharedPost.create)
     ..hasRequiredFields = false;
 
@@ -4842,21 +5271,76 @@ class Space extends $pb.GeneratedMessage {
               : 'subsocial'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(
-        1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6,
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'id',
+        $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOM<WhoAndWhen>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'created',
+    ..aOM<WhoAndWhen>(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'created',
         subBuilder: WhoAndWhen.create)
-    ..aOM<WhoAndWhen>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updated',
+    ..aOM<WhoAndWhen>(
+        3,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'updated',
         subBuilder: WhoAndWhen.create)
-    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'owner')
-    ..a<$fixnum.Int64>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'parentId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'handle')
-    ..aOM<Content>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'content', subBuilder: Content.create)
-    ..aOB(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hidden')
-    ..a<$core.int>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postsCount', $pb.PbFieldType.OU3)
-    ..a<$core.int>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hiddenPostsCount', $pb.PbFieldType.OU3)
-    ..a<$core.int>(11, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'followersCount', $pb.PbFieldType.OU3)
-    ..a<$core.int>(12, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'score', $pb.PbFieldType.O3)
+    ..aOS(
+        4,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'owner')
+    ..a<$fixnum.Int64>(
+        5,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'parentId',
+        $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(
+        6,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'handle')
+    ..aOM<Content>(
+        7,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'content',
+        subBuilder: Content.create)
+    ..aOB(
+        8,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'hidden')
+    ..a<$core.int>(
+        9,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'postsCount',
+        $pb.PbFieldType.OU3)
+    ..a<$core.int>(
+        10,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'hiddenPostsCount',
+        $pb.PbFieldType.OU3)
+    ..a<$core.int>(
+        11,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'followersCount',
+        $pb.PbFieldType.OU3)
+    ..a<$core.int>(
+        12,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'score',
+        $pb.PbFieldType.O3)
     ..hasRequiredFields = false;
 
   Space._() : super();
@@ -5101,23 +5585,89 @@ class Post extends $pb.GeneratedMessage {
               : 'subsocial'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(
-        1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6,
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'id',
+        $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOM<WhoAndWhen>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'created',
+    ..aOM<WhoAndWhen>(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'created',
         subBuilder: WhoAndWhen.create)
-    ..aOM<WhoAndWhen>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updated',
+    ..aOM<WhoAndWhen>(
+        3,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'updated',
         subBuilder: WhoAndWhen.create)
-    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'owner')
-    ..aOM<PostExtension>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'extensionValue', subBuilder: PostExtension.create)
-    ..a<$fixnum.Int64>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOM<Content>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'content', subBuilder: Content.create)
-    ..aOB(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hidden')
-    ..a<$core.int>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'repliesCount', $pb.PbFieldType.OU3)
-    ..a<$core.int>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hiddenRepliesCount', $pb.PbFieldType.OU3)
-    ..a<$core.int>(11, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sharesCount', $pb.PbFieldType.OU3)
-    ..a<$core.int>(12, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'upvotesCount', $pb.PbFieldType.OU3)
-    ..a<$core.int>(13, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'downvotesCount', $pb.PbFieldType.OU3)
-    ..a<$core.int>(14, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'score', $pb.PbFieldType.O3)
+    ..aOS(
+        4,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'owner')
+    ..aOM<PostExtension>(
+        5,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'extensionValue',
+        subBuilder: PostExtension.create)
+    ..a<$fixnum.Int64>(
+        6,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'spaceId',
+        $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOM<Content>(
+        7,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'content',
+        subBuilder: Content.create)
+    ..aOB(
+        8,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'hidden')
+    ..a<$core.int>(
+        9,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'repliesCount',
+        $pb.PbFieldType.OU3)
+    ..a<$core.int>(
+        10,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'hiddenRepliesCount',
+        $pb.PbFieldType.OU3)
+    ..a<$core.int>(
+        11,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'sharesCount',
+        $pb.PbFieldType.OU3)
+    ..a<$core.int>(
+        12,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'upvotesCount',
+        $pb.PbFieldType.OU3)
+    ..a<$core.int>(
+        13,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'downvotesCount',
+        $pb.PbFieldType.OU3)
+    ..a<$core.int>(
+        14,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'score',
+        $pb.PbFieldType.O3)
     ..hasRequiredFields = false;
 
   Post._() : super();
@@ -5386,26 +5936,30 @@ class Post extends $pb.GeneratedMessage {
 }
 
 class Comment extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i =
-      $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Comment',
-          package: const $pb.PackageName(
-              const $core.bool.fromEnvironment('protobuf.omit_message_names')
-                  ? ''
-                  : 'subsocial'),
-          createEmptyInstance: create)
-        ..a<$fixnum.Int64>(
-            1,
-            const $core.bool.fromEnvironment('protobuf.omit_field_names')
-                ? ''
-                : 'parentId',
-            $pb.PbFieldType.OU6,
-            defaultOrMaker: $fixnum.Int64.ZERO)
-        ..a<$fixnum.Int64>(
-            2,
-            const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'rootPostId',
-            $pb.PbFieldType.OU6,
-            defaultOrMaker: $fixnum.Int64.ZERO)
-        ..hasRequiredFields = false;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'Comment',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..a<$fixnum.Int64>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'parentId',
+        $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'rootPostId',
+        $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false;
 
   Comment._() : super();
   factory Comment({
@@ -5541,22 +6095,40 @@ class SharedPost extends $pb.GeneratedMessage {
 }
 
 class Reaction extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Reaction',
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'Reaction',
       package: const $pb.PackageName(
           const $core.bool.fromEnvironment('protobuf.omit_message_names')
               ? ''
               : 'subsocial'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(
-        1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6,
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'id',
+        $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOM<WhoAndWhen>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'created',
+    ..aOM<WhoAndWhen>(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'created',
         subBuilder: WhoAndWhen.create)
     ..aOM<WhoAndWhen>(
-        3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updated',
+        3,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'updated',
         subBuilder: WhoAndWhen.create)
     ..e<Reaction_Kind>(
-        4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'kind', $pb.PbFieldType.OE,
+        4,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'kind',
+        $pb.PbFieldType.OE,
         defaultOrMaker: Reaction_Kind.UNKNOWN,
         valueOf: Reaction_Kind.valueOf,
         enumValues: Reaction_Kind.values)
@@ -5687,10 +6259,22 @@ class SocialAccount extends $pb.GeneratedMessage {
         $pb.PbFieldType.OU3)
     ..a<$core.int>(
         3,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'followingSpacesCount',
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'followingSpacesCount',
         $pb.PbFieldType.OU3)
-    ..a<$core.int>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reputation', $pb.PbFieldType.OU3)
-    ..aOM<Profile>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'profile', subBuilder: Profile.create)
+    ..a<$core.int>(
+        4,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'reputation',
+        $pb.PbFieldType.OU3)
+    ..aOM<Profile>(
+        5,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'profile',
+        subBuilder: Profile.create)
     ..hasRequiredFields = false;
 
   SocialAccount._() : super();
@@ -5820,12 +6404,22 @@ class Profile extends $pb.GeneratedMessage {
               : 'subsocial'),
       createEmptyInstance: create)
     ..aOM<WhoAndWhen>(
-        1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'created',
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'created',
         subBuilder: WhoAndWhen.create)
     ..aOM<WhoAndWhen>(
-        2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updated',
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'updated',
         subBuilder: WhoAndWhen.create)
-    ..aOM<Content>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'content',
+    ..aOM<Content>(
+        3,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'content',
         subBuilder: Content.create)
     ..hasRequiredFields = false;
 
@@ -6023,10 +6617,22 @@ class SpaceUpdate extends $pb.GeneratedMessage {
             : 'parentId',
         $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOS(2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'handle')
-    ..aOM<Content>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'content', subBuilder: Content.create)
-    ..aOB(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hidden')
+    ..aOS(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'handle')
+    ..aOM<Content>(
+        3,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'content',
+        subBuilder: Content.create)
+    ..aOB(
+        4,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'hidden')
     ..hasRequiredFields = false;
 
   SpaceUpdate._() : super();
@@ -7320,11 +7926,17 @@ class PostReactionCreated extends $pb.GeneratedMessage {
               : 'subsocial'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(
-        1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postId', $pb.PbFieldType.OU6,
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'postId',
+        $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(
         2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reactionId',
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'reactionId',
         $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
@@ -7764,11 +8376,17 @@ class PostReactionUpdated extends $pb.GeneratedMessage {
               : 'subsocial'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(
-        1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postId', $pb.PbFieldType.OU6,
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'postId',
+        $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(
         2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reactionId',
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'reactionId',
         $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
@@ -7850,11 +8468,17 @@ class PostReactionDeleted extends $pb.GeneratedMessage {
               : 'subsocial'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(
-        1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postId', $pb.PbFieldType.OU6,
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'postId',
+        $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(
         2,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reactionId',
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'reactionId',
         $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
@@ -8511,8 +9135,11 @@ class AccountData extends $pb.GeneratedMessage {
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
             : 'miscFrozenBalance')
-    ..aOS(4,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'feeFrozenBalance')
+    ..aOS(
+        4,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'feeFrozenBalance')
     ..hasRequiredFields = false;
 
   AccountData._() : super();
