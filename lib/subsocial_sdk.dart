@@ -31,20 +31,8 @@ class Subsocial {
       final dl = _load();
       final raw = RawSubsoical(dl);
       AlloIsolate(lib: dl).hook();
-      final completer = Completer<dynamic>();
-      final port = singleCompletePort(completer);
-      final config = malloc.call<SubscoialConfig>()
-        ..ref.url = "wss://rpc.subsocial.network".toNativeUtf8().cast();
-      final result = raw.subsocial_init_sdk(
-        port.nativePort,
-        config,
-      );
-      _assertOk(result);
-      final res = await completer.future;
-      if (res is String) {
-        throw SubxtException(res);
-      }
-      _instance = Subsocial._(raw);
+      // init the client and set the value to the instance.
+      await _init(raw);
       return _instance!;
     } else {
       return _instance!;
@@ -138,6 +126,15 @@ class Subsocial {
     final res = await _dispatch(req);
     final val = res.ensureReplyIdsByPostId();
     return val.replyIds.map((e) => e.toInt()).toList();
+  }
+
+  Future<SystemProperties> systemProperties() async {
+    final req = Request(
+      systemProperties: GetSystemProperties(),
+    );
+    final res = await _dispatch(req);
+    final val = res.ensureSystemProperties();
+    return val;
   }
 
   Future<AccountData> queryAccountData(AccountId accountId) async {
@@ -485,6 +482,30 @@ class Subsocial {
     // so next time we call the SDK
     // it should create new instance.
     _instance = null;
+  }
+
+  /// Restart the underlying client.
+  Future<void> restart() async {
+    await _init(_raw);
+  }
+
+  static Future<void> _init(RawSubsoical raw) async {
+    // dispose the current client (if any).
+    raw.subsocial_dispose_client();
+    final completer = Completer<dynamic>();
+    final port = singleCompletePort(completer);
+    final config = malloc.call<SubscoialConfig>()
+      ..ref.url = "wss://rpc.subsocial.network".toNativeUtf8().cast();
+    final result = raw.subsocial_init_sdk(
+      port.nativePort,
+      config,
+    );
+    _assertOk(result);
+    final res = await completer.future;
+    if (res is String) {
+      throw SubxtException(res);
+    }
+    _instance = Subsocial._(raw);
   }
 
   Future<Response> _dispatch(Request req) async {

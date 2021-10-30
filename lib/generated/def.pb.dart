@@ -51,6 +51,7 @@ enum Request_Body {
   unfollowAccount,
   postReactionIdByAccount,
   queryAccountData,
+  systemProperties,
   notSet
 }
 
@@ -92,6 +93,7 @@ class Request extends $pb.GeneratedMessage {
     34: Request_Body.unfollowAccount,
     35: Request_Body.postReactionIdByAccount,
     36: Request_Body.queryAccountData,
+    37: Request_Body.systemProperties,
     0: Request_Body.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
@@ -139,7 +141,8 @@ class Request extends $pb.GeneratedMessage {
       33,
       34,
       35,
-      36
+      36,
+      37
     ])
     ..aOM<GetSpaceById>(
         1,
@@ -357,6 +360,12 @@ class Request extends $pb.GeneratedMessage {
             ? ''
             : 'queryAccountData',
         subBuilder: QueryAccountData.create)
+    ..aOM<GetSystemProperties>(
+        37,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'systemProperties',
+        subBuilder: GetSystemProperties.create)
     ..hasRequiredFields = false;
 
   Request._() : super();
@@ -397,6 +406,7 @@ class Request extends $pb.GeneratedMessage {
     UnfollowAccount? unfollowAccount,
     GetPostReactionIdByAccount? postReactionIdByAccount,
     QueryAccountData? queryAccountData,
+    GetSystemProperties? systemProperties,
   }) {
     final _result = create();
     if (spaceById != null) {
@@ -506,6 +516,9 @@ class Request extends $pb.GeneratedMessage {
     }
     if (queryAccountData != null) {
       _result.queryAccountData = queryAccountData;
+    }
+    if (systemProperties != null) {
+      _result.systemProperties = systemProperties;
     }
     return _result;
   }
@@ -1042,6 +1055,20 @@ class Request extends $pb.GeneratedMessage {
   void clearQueryAccountData() => clearField(36);
   @$pb.TagNumber(36)
   QueryAccountData ensureQueryAccountData() => $_ensure(35);
+
+  @$pb.TagNumber(37)
+  GetSystemProperties get systemProperties => $_getN(36);
+  @$pb.TagNumber(37)
+  set systemProperties(GetSystemProperties v) {
+    setField(37, v);
+  }
+
+  @$pb.TagNumber(37)
+  $core.bool hasSystemProperties() => $_has(36);
+  @$pb.TagNumber(37)
+  void clearSystemProperties() => clearField(37);
+  @$pb.TagNumber(37)
+  GetSystemProperties ensureSystemProperties() => $_ensure(36);
 }
 
 enum Response_Body {
@@ -1082,6 +1109,7 @@ enum Response_Body {
   accountUnfollowed,
   postReactionIdByAccount,
   accountData,
+  systemProperties,
   notSet
 }
 
@@ -1124,6 +1152,7 @@ class Response extends $pb.GeneratedMessage {
     35: Response_Body.accountUnfollowed,
     36: Response_Body.postReactionIdByAccount,
     37: Response_Body.accountData,
+    38: Response_Body.systemProperties,
     0: Response_Body.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
@@ -1172,7 +1201,8 @@ class Response extends $pb.GeneratedMessage {
       34,
       35,
       36,
-      37
+      37,
+      38
     ])
     ..aOM<Error>(
         1,
@@ -1393,6 +1423,12 @@ class Response extends $pb.GeneratedMessage {
             ? ''
             : 'accountData',
         subBuilder: AccountData.create)
+    ..aOM<SystemProperties>(
+        38,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'systemProperties',
+        subBuilder: SystemProperties.create)
     ..hasRequiredFields = false;
 
   Response._() : super();
@@ -1434,6 +1470,7 @@ class Response extends $pb.GeneratedMessage {
     AccountUnfollowed? accountUnfollowed,
     PostReactionIdByAccount? postReactionIdByAccount,
     AccountData? accountData,
+    SystemProperties? systemProperties,
   }) {
     final _result = create();
     if (error != null) {
@@ -1546,6 +1583,9 @@ class Response extends $pb.GeneratedMessage {
     }
     if (accountData != null) {
       _result.accountData = accountData;
+    }
+    if (systemProperties != null) {
+      _result.systemProperties = systemProperties;
     }
     return _result;
   }
@@ -2089,6 +2129,20 @@ class Response extends $pb.GeneratedMessage {
   void clearAccountData() => clearField(37);
   @$pb.TagNumber(37)
   AccountData ensureAccountData() => $_ensure(36);
+
+  @$pb.TagNumber(38)
+  SystemProperties get systemProperties => $_getN(37);
+  @$pb.TagNumber(38)
+  set systemProperties(SystemProperties v) {
+    setField(38, v);
+  }
+
+  @$pb.TagNumber(38)
+  $core.bool hasSystemProperties() => $_has(37);
+  @$pb.TagNumber(38)
+  void clearSystemProperties() => clearField(38);
+  @$pb.TagNumber(38)
+  SystemProperties ensureSystemProperties() => $_ensure(37);
 }
 
 class Error extends $pb.GeneratedMessage {
@@ -2859,6 +2913,48 @@ class GetCurrentAccountId extends $pb.GeneratedMessage {
   static GetCurrentAccountId getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<GetCurrentAccountId>(create);
   static GetCurrentAccountId? _defaultInstance;
+}
+
+class GetSystemProperties extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'GetSystemProperties',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..hasRequiredFields = false;
+
+  GetSystemProperties._() : super();
+  factory GetSystemProperties() => create();
+  factory GetSystemProperties.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory GetSystemProperties.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  GetSystemProperties clone() => GetSystemProperties()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  GetSystemProperties copyWith(void Function(GetSystemProperties) updates) =>
+      super.copyWith((message) => updates(message as GetSystemProperties))
+          as GetSystemProperties; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetSystemProperties create() => GetSystemProperties._();
+  GetSystemProperties createEmptyInstance() => create();
+  static $pb.PbList<GetSystemProperties> createRepeated() =>
+      $pb.PbList<GetSystemProperties>();
+  @$core.pragma('dart2js:noInline')
+  static GetSystemProperties getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetSystemProperties>(create);
+  static GetSystemProperties? _defaultInstance;
 }
 
 class GetSpaceIdsByOwner extends $pb.GeneratedMessage {
@@ -9237,4 +9333,115 @@ class AccountData extends $pb.GeneratedMessage {
   $core.bool hasFeeFrozenBalance() => $_has(3);
   @$pb.TagNumber(4)
   void clearFeeFrozenBalance() => clearField(4);
+}
+
+class SystemProperties extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'SystemProperties',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'subsocial'),
+      createEmptyInstance: create)
+    ..a<$core.int>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'ss58Format',
+        $pb.PbFieldType.OU3)
+    ..a<$core.int>(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'tokenDecimals',
+        $pb.PbFieldType.OU3)
+    ..aOS(
+        3,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'tokenSymbol')
+    ..hasRequiredFields = false;
+
+  SystemProperties._() : super();
+  factory SystemProperties({
+    $core.int? ss58Format,
+    $core.int? tokenDecimals,
+    $core.String? tokenSymbol,
+  }) {
+    final _result = create();
+    if (ss58Format != null) {
+      _result.ss58Format = ss58Format;
+    }
+    if (tokenDecimals != null) {
+      _result.tokenDecimals = tokenDecimals;
+    }
+    if (tokenSymbol != null) {
+      _result.tokenSymbol = tokenSymbol;
+    }
+    return _result;
+  }
+  factory SystemProperties.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory SystemProperties.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  SystemProperties clone() => SystemProperties()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  SystemProperties copyWith(void Function(SystemProperties) updates) =>
+      super.copyWith((message) => updates(message as SystemProperties))
+          as SystemProperties; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static SystemProperties create() => SystemProperties._();
+  SystemProperties createEmptyInstance() => create();
+  static $pb.PbList<SystemProperties> createRepeated() =>
+      $pb.PbList<SystemProperties>();
+  @$core.pragma('dart2js:noInline')
+  static SystemProperties getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SystemProperties>(create);
+  static SystemProperties? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get ss58Format => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set ss58Format($core.int v) {
+    $_setUnsignedInt32(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasSs58Format() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSs58Format() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get tokenDecimals => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set tokenDecimals($core.int v) {
+    $_setUnsignedInt32(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasTokenDecimals() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTokenDecimals() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get tokenSymbol => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set tokenSymbol($core.String v) {
+    $_setString(2, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasTokenSymbol() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTokenSymbol() => clearField(3);
 }

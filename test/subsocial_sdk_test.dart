@@ -6,6 +6,12 @@ import 'package:subsocial_sdk/subsocial_sdk.dart';
 
 void main() {
   final suri = Platform.environment['SURI'] ?? '//Alice';
+  test('Get SystemProperties', () async {
+    final sdk = await Subsocial.instance;
+    final props = await sdk.systemProperties();
+    expect(props.tokenDecimals, 11);
+    expect(props.tokenSymbol, 'SUB');
+  });
 
   test('Get Space with Id', () async {
     final sdk = await Subsocial.instance;
