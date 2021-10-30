@@ -1,9 +1,9 @@
 use codec::{Decode, Encode};
 use frame_support::traits::Get;
-use frame_system as system;
 use sp_std::collections::btree_set::BTreeSet;
 use sp_std::prelude::*;
 use subxt::sp_runtime::RuntimeDebug;
+use subxt::system::System;
 
 use super::SpaceId;
 
@@ -106,7 +106,7 @@ pub struct SpacePermissionsContext {
 }
 
 /// The pallet's configuration trait.
-pub trait Trait: system::Trait {
+pub trait Trait: System {
     type DefaultSpacePermissions: Get<SpacePermissions>;
 }
 

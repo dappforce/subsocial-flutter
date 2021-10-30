@@ -20,7 +20,7 @@ struct Uint8List {
 //
 // However, you can call this again, if you disposed the client and the signer.
 //
-// We added checks as a safety mechanism, to ensure no UB would happen,
+// We added checks as a safety mechanism, to ensure no undefined behavior would happen,
 // but take care that not all paths are tested here.
 int32_t subsocial_init_sdk(int64_t port, struct SubscoialConfig *config);
 

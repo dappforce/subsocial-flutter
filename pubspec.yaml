@@ -1,7 +1,6 @@
 name: subsocial_sdk
 description: Flutter SDK for Subsocial.
 version: 0.1.0
-author: Shady Khalifa <shekohex@gmail.com>
 homepage: https://subsocial.network
 
 environment:

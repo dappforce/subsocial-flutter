@@ -37,7 +37,7 @@ pub struct SubscoialConfig {
 ///
 /// However, you can call this again, if you disposed the client and the signer.
 ///
-/// We added checks as a safety mechanism, to ensure no UB would happen,
+/// We added checks as a safety mechanism, to ensure no undefined behavior would happen,
 /// but take care that not all paths are tested here.
 #[no_mangle]
 pub unsafe extern "C" fn subsocial_init_sdk(

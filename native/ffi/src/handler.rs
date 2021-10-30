@@ -46,6 +46,7 @@ pub async fn handle(
         RequestBody::QueryAccountData(args) => {
             query_account_data(client, args.account_id).await
         }
+        RequestBody::SystemProperties(_) => system_properties(client),
         RequestBody::SpaceById(args) => {
             space_by_id(client, args.space_id).await
         }
@@ -178,6 +179,16 @@ async fn query_account_data(
     Ok(body)
 }
 
+fn system_properties(
+    client: &Client<SubsocialRuntime>,
+) -> Result<ResponseBody, Error> {
+    let props = client.properties();
+    Ok(ResponseBody::SystemProperties(SystemProperties {
+        ss58_format: props.ss58_format as _,
+        token_decimals: props.token_decimals as _,
+        token_symbol: props.token_symbol.to_string(),
+    }))
+}
 async fn space_by_id(
     client: &Client<SubsocialRuntime>,
     space_id: u64,

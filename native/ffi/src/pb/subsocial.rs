@@ -2,7 +2,7 @@
 pub struct Request {
     #[prost(
         oneof = "request::Body",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37"
     )]
     pub body: ::core::option::Option<request::Body>,
 }
@@ -82,13 +82,15 @@ pub mod request {
         PostReactionIdByAccount(super::GetPostReactionIdByAccount),
         #[prost(message, tag = "36")]
         QueryAccountData(super::QueryAccountData),
+        #[prost(message, tag = "37")]
+        SystemProperties(super::GetSystemProperties),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Response {
     #[prost(
         oneof = "response::Body",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38"
     )]
     pub body: ::core::option::Option<response::Body>,
 }
@@ -170,6 +172,8 @@ pub mod response {
         PostReactionIdByAccount(super::PostReactionIdByAccount),
         #[prost(message, tag = "37")]
         AccountData(super::AccountData),
+        #[prost(message, tag = "38")]
+        SystemProperties(super::SystemProperties),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -250,6 +254,8 @@ pub struct GetNextSpaceId {}
 pub struct GetNextPostId {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCurrentAccountId {}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetSystemProperties {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSpaceIdsByOwner {
     #[prost(string, tag = "1")]
@@ -785,4 +791,13 @@ pub struct AccountData {
     pub misc_frozen_balance: ::prost::alloc::string::String,
     #[prost(string, tag = "4")]
     pub fee_frozen_balance: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SystemProperties {
+    #[prost(uint32, tag = "1")]
+    pub ss58_format: u32,
+    #[prost(uint32, tag = "2")]
+    pub token_decimals: u32,
+    #[prost(string, tag = "3")]
+    pub token_symbol: ::prost::alloc::string::String,
 }

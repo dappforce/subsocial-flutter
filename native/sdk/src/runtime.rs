@@ -20,7 +20,6 @@ pub type Signature = MultiSignature;
 pub type AccountId =
     <<Signature as Verify>::Signer as IdentifyAccount>::AccountId;
 
-pub type Address = crate::multiaddress::MultiAddress<AccountId, ()>;
 /// Balance of an account.
 pub type Balance = u128;
 
@@ -37,12 +36,33 @@ pub struct SubsocialRuntime;
 impl subxt::Runtime for SubsocialRuntime {
     type Extra = DefaultExtra<Self>;
     type Signature = Signature;
+
+    fn register_type_sizes(
+        event_type_registry: &mut subxt::EventTypeRegistry<Self>,
+    ) {
+        subxt::register_default_type_sizes(event_type_registry);
+        event_type_registry.with_system();
+        event_type_registry.with_balances();
+        event_type_registry.register_type_size::<Balance>("BalanceOf<T>");
+        event_type_registry.register_type_size::<pallet::SpaceId>("SpaceId");
+        event_type_registry.register_type_size::<pallet::PostId>("PostId");
+        event_type_registry
+            .register_type_size::<pallet::ReactionId>("ReactionId");
+        event_type_registry.register_type_size::<pallet::RoleId>("RoleId");
+        event_type_registry
+            .register_type_size::<pallet::ScoringAction>("ScoringAction");
+        event_type_registry.register_type_size::<()>("PostReactionScores");
+        event_type_registry
+            .register_type_size::<pallet::utils::User<AccountId>>(
+                "User<AccountId>",
+            );
+    }
 }
 
 impl System for SubsocialRuntime {
     type AccountData = AccountData<BalanceOf<Self>>;
     type AccountId = AccountId;
-    type Address = Address;
+    type Address = AccountId;
     type BlockNumber = u32;
     type Extrinsic = OpaqueExtrinsic;
     type Hash = Hash;
@@ -59,7 +79,7 @@ impl Balances for SubsocialRuntime {
 impl pallet::spaces::Spaces for SubsocialRuntime {
     type SpaceId = pallet::SpaceId;
     // FIXME: this should be from the scores pallet.
-    type ScoringAction = u8;
+    type ScoringAction = pallet::ScoringAction;
 }
 
 impl pallet::posts::Posts for SubsocialRuntime {
