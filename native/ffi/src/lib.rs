@@ -9,6 +9,7 @@ use sdk::subxt;
 
 mod dart_utils;
 mod handler;
+mod pallet;
 mod pb;
 mod transformer;
 
@@ -17,10 +18,12 @@ use pb::subsocial;
 use prost::Message;
 use sdk::subxt::sp_core::sr25519::Pair as Sr25519Pair;
 
-/// Global Shared [subxt::Client] between all tasks.
-static mut CLIENT: OnceCell<subxt::Client<SubsocialRuntime>> = OnceCell::new();
-
+type SubsocialClient = subxt::Client<SubsocialRuntime>;
 type Signer = subxt::PairSigner<SubsocialRuntime, Sr25519Pair>;
+
+/// Global Shared [subxt::Client] between all tasks.
+static mut CLIENT: OnceCell<SubsocialClient> = OnceCell::new();
+
 /// Global Shared [subxt::PairSigner] between all tasks.
 static mut SIGNER: OnceCell<Signer> = OnceCell::new();
 
@@ -74,15 +77,15 @@ pub extern "C" fn subsocial_dispatch(port: i64, buffer: Box<Uint8List>) -> i32 {
     let req = match prost::Message::decode(buffer.as_slice()) {
         Ok(v) => v,
         Err(e) => {
-            let mut bytes = Vec::new();
+            let mut msg = Vec::new();
             let kind = subsocial::error::Kind::InvalidProto.into();
             subsocial::Error {
                 kind,
                 msg: e.to_string(),
             }
-            .encode(&mut bytes)
+            .encode(&mut msg)
             .expect("should never fails");
-            isolate.post(bytes);
+            isolate.post(msg);
             return 0xbadc0de;
         }
     };

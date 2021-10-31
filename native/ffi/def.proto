@@ -1,90 +1,88 @@
 syntax = "proto3";
 package subsocial;
 
-
 message Request {
   oneof body {
-    GetSpaceById space_by_id = 1;
-    GetSpaceByHandle space_by_handle = 2;
-    GetPostById post_by_id = 3;
-    GetPostIdsBySpaceId post_ids_by_space_id = 4;
-    GetReactionById reaction_by_id = 5;
-    GetReactionIdsByPostId reaction_ids_by_post_id = 6;
-    GetReplyIdsByPostId reply_ids_by_post_id = 7;
-    GetSocialAccountByAccountId social_account_by_account_id = 8;
-    GetNextSpaceId next_space_id = 9;
-    GetNextPostId next_post_id = 10;
-    GetSpaceIdsByOwner space_ids_by_owner = 11;
-    GetSpaceFollowers space_followers = 12;
-    GetSpacesFollowedByAccount spaces_followed_by_account = 13;
-    GetAccountFollowers account_followers = 14;
-    GetAccountsFollowedByAccount accounts_followed_by_account = 15;
-    GenerateAccount generate_account = 16;
-    ImportAccount import_account = 17;
-    CreatePostReaction create_post_reaction = 18;
-    CreatePost create_post = 19;
-    UpdatePost update_post = 20;
-    FollowSpace follow_space = 21;
-    IsAccountFollower is_account_follower = 22;
-    IsSpaceFollower is_space_follower = 23;
-    IsPostSharedByAccount is_post_shared_by_account = 24;
-    UnfollowSpace unfollow_space = 25;
-    UpdatePostReaction update_post_reaction = 26;
-    DeletePostReaction delete_post_reaction = 27;
-    CreateProfile create_profile = 28;
-    UpdateProfile update_profile = 29;
-    GetCurrentAccountId current_account_id = 30;
-    CreateSpace create_space = 31;
-    UpdateSpace update_space = 32;
-    FollowAccount follow_account = 33;
-    UnfollowAccount unfollow_account = 34;
-    GetPostReactionIdByAccount post_reaction_id_by_account = 35;
-    QueryAccountData query_account_data = 36;
-    GetSystemProperties system_properties = 37;
+    GetSystemProperties system_properties = 1;
+    GenerateAccount generate_account = 2;
+    ImportAccount import_account = 3;
+    QueryAccountData query_account_data = 4;
+    GetCurrentAccountId current_account_id = 5;
+    GetNextSpaceId next_space_id = 6;
+    GetSpaceById space_by_id = 7;
+    GetSpaceByHandle space_by_handle = 8;
+    GetSpaceIdsByOwner space_ids_by_owner = 9;
+    CreateSpace create_space = 10;
+    UpdateSpace update_space = 11;
+    GetNextPostId next_post_id = 12;
+    GetPostById post_by_id = 13;
+    GetPostIdsBySpaceId post_ids_by_space_id = 14;
+    CreatePost create_post = 15;
+    UpdatePost update_post = 16;
+    GetReactionById reaction_by_id = 17;
+    GetReactionIdsByPostId reaction_ids_by_post_id = 18;
+    GetReplyIdsByPostId reply_ids_by_post_id = 19;
+    GetPostReactionIdByAccount post_reaction_id_by_account = 20;
+    CreatePostReaction create_post_reaction = 21;
+    UpdatePostReaction update_post_reaction = 22;
+    DeletePostReaction delete_post_reaction = 23;
+    GetSpaceFollowers space_followers = 24;
+    GetSpacesFollowedByAccount spaces_followed_by_account = 25;
+    IsSpaceFollower is_space_follower = 26;
+    FollowSpace follow_space = 27;
+    UnfollowSpace unfollow_space = 28;
+    GetSocialAccountByAccountId social_account_by_account_id = 29;
+    CreateProfile create_profile = 30;
+    UpdateProfile update_profile = 31;
+    GetAccountFollowers account_followers = 32;
+    GetAccountsFollowedByAccount accounts_followed_by_account = 33;
+    FollowAccount follow_account = 34;
+    UnfollowAccount unfollow_account = 35;
+    IsAccountFollower is_account_follower = 36;
+    IsPostSharedByAccount is_post_shared_by_account = 37;
   }
 }
-
 
 message Response {
   oneof body {
     Error error = 1;
-    SpaceById space_by_id = 2;
-    SpaceByHandle space_by_handle = 3;
-    PostById post_by_id = 4;
-    PostIdsBySpaceId post_ids_by_space_id = 5;
-    ReactionById reaction_by_id = 6;
-    ReactionIdsByPostId reaction_ids_by_post_id = 7;
-    ReplyIdsByPostId reply_ids_by_post_id = 8;
-    SocialAccountByAccountId social_account_by_account_id = 9;
-    NextSpaceId next_space_id = 10;
-    NextPostId next_post_id = 11;
-    SpaceIdsByOwner space_ids_by_owner = 12;
-    SpaceFollowers space_followers = 13;
-    SpacesFollowedByAccount spaces_followed_by_account = 14;
-    AccountFollowers account_followers = 15;
-    AccountsFollowedByAccount accounts_followed_by_account = 16;
-    GeneratedAccount generated_account = 17;
-    ImportedAccount imported_account = 18;
-    PostReactionCreated post_reaction_created = 19;
-    PostCreated post_created = 20;
-    PostUpdated post_updated = 21;
-    SpaceFollowed space_followed = 22;
-    bool is_account_follower = 23;
-    bool is_space_follower = 24;
-    bool is_post_shared_by_account = 25;
-    SpaceUnfollowed space_unfollowed = 26;
-    PostReactionUpdated post_reaction_updated = 27;
-    PostReactionDeleted post_reaction_deleted = 28;
-    ProfileCreated profile_created = 29;
-    ProfileUpdated profile_updated = 30;
-    CurrentAccountId current_account_id = 31;
-    SpaceCreated space_created = 32;
-    SpaceUpdated space_updated = 33;
-    AccountFollowed account_followed = 34;
-    AccountUnfollowed account_unfollowed = 35;
-    PostReactionIdByAccount post_reaction_id_by_account = 36;
-    AccountData account_data = 37;
-    SystemProperties system_properties = 38;
+    SystemProperties system_properties = 2;
+    AccountData account_data = 3;
+    GeneratedAccount generated_account = 4;
+    ImportedAccount imported_account = 5;
+    CurrentAccountId current_account_id = 6;
+    NextSpaceId next_space_id = 7;
+    SpaceById space_by_id = 8;
+    SpaceByHandle space_by_handle = 9;
+    SpaceIdsByOwner space_ids_by_owner = 10;
+    SpaceCreated space_created = 11;
+    SpaceUpdated space_updated = 12;
+    NextPostId next_post_id = 13;
+    PostById post_by_id = 14;
+    PostIdsBySpaceId post_ids_by_space_id = 15;
+    ReplyIdsByPostId reply_ids_by_post_id = 16;
+    PostCreated post_created = 17;
+    PostUpdated post_updated = 18;
+    ReactionById reaction_by_id = 19;
+    ReactionIdsByPostId reaction_ids_by_post_id = 20;
+    PostReactionIdByAccount post_reaction_id_by_account = 21;
+    PostReactionCreated post_reaction_created = 22;
+    PostReactionUpdated post_reaction_updated = 23;
+    PostReactionDeleted post_reaction_deleted = 24;
+    SpaceFollowers space_followers = 25;
+    SpacesFollowedByAccount spaces_followed_by_account = 26;
+    bool is_space_follower = 27;
+    SpaceFollowed space_followed = 28;
+    SpaceUnfollowed space_unfollowed = 29;
+    AccountFollowers account_followers = 30;
+    AccountsFollowedByAccount accounts_followed_by_account = 31;
+    bool is_account_follower = 32;
+    AccountFollowed account_followed = 33;
+    AccountUnfollowed account_unfollowed = 34;
+    SocialAccountByAccountId social_account_by_account_id = 35;
+    ProfileCreated profile_created = 36;
+    ProfileUpdated profile_updated = 37;
+    bool is_post_shared_by_account = 38;
   }
 }
 
@@ -103,37 +101,21 @@ message Error {
 
 // REQUESTS
 
-message GetSpaceById {
-  uint64 space_id = 1;
-}
+message GetSpaceById { uint64 space_id = 1; }
 
-message GetSpaceByHandle {
-  string handle = 1;
-}
+message GetSpaceByHandle { string handle = 1; }
 
-message GetPostById {
-  uint64 post_id = 1;
-}
+message GetPostById { uint64 post_id = 1; }
 
-message GetReactionById {
-  uint64 reaction_id = 1;
-}
+message GetReactionById { uint64 reaction_id = 1; }
 
-message GetPostIdsBySpaceId {
-  uint64 space_id = 1;
-}
+message GetPostIdsBySpaceId { uint64 space_id = 1; }
 
-message GetReactionIdsByPostId {
-  uint64 post_id = 1;
-}
+message GetReactionIdsByPostId { uint64 post_id = 1; }
 
-message GetReplyIdsByPostId {
-  uint64 post_id = 1;
-}
+message GetReplyIdsByPostId { uint64 post_id = 1; }
 
-message GetSocialAccountByAccountId {
-  string account_id = 1;
-}
+message GetSocialAccountByAccountId { string account_id = 1; }
 
 message GetNextSpaceId {}
 
@@ -143,38 +125,24 @@ message GetCurrentAccountId {}
 
 message GetSystemProperties {}
 
-message GetSpaceIdsByOwner {
-  string account_id = 1;
-}
+message GetSpaceIdsByOwner { string account_id = 1; }
 
-message GetSpaceFollowers {
-  uint64 space_id = 1;
-}
+message GetSpaceFollowers { uint64 space_id = 1; }
 
-message GetSpacesFollowedByAccount {
-  string account_id = 1;
-}
+message GetSpacesFollowedByAccount { string account_id = 1; }
 
-message GetAccountFollowers {
-  string account_id = 1;
-}
+message GetAccountFollowers { string account_id = 1; }
 
-message GetAccountsFollowedByAccount {
-  string account_id = 1;
-}
+message GetAccountsFollowedByAccount { string account_id = 1; }
 
 message GetPostReactionIdByAccount {
   string account_id = 1;
   uint64 post_id = 2;
 }
 
-message QueryAccountData {
-  string account_id = 1;
-}
+message QueryAccountData { string account_id = 1; }
 
-message GenerateAccount {
-  string password = 1;
-}
+message GenerateAccount { string password = 1; }
 
 message ImportAccount {
   string password = 1;
@@ -197,25 +165,15 @@ message UpdatePost {
   PostUpdate post_update = 2;
 }
 
-message FollowSpace {
-  uint64 space_id = 1;
-}
+message FollowSpace { uint64 space_id = 1; }
 
-message UnfollowSpace {
-  uint64 space_id = 1;
-}
+message UnfollowSpace { uint64 space_id = 1; }
 
-message IsAccountFollower {
-  string account_id = 1;
-}
+message IsAccountFollower { string account_id = 1; }
 
-message IsSpaceFollower {
-  uint64 space_id = 1;
-}
+message IsSpaceFollower { uint64 space_id = 1; }
 
-message IsPostSharedByAccount {
-  uint64 post_id = 1;
-}
+message IsPostSharedByAccount { uint64 post_id = 1; }
 
 message UpdatePostReaction {
   uint64 post_id = 1;
@@ -228,13 +186,9 @@ message DeletePostReaction {
   uint64 reaction_id = 2;
 }
 
-message CreateProfile {
-  Content content = 1;
-}
+message CreateProfile { Content content = 1; }
 
-message UpdateProfile {
-  Content maybe_content = 1;
-}
+message UpdateProfile { Content maybe_content = 1; }
 
 message CreateSpace {
   uint64 parent_id = 1;
@@ -248,13 +202,9 @@ message UpdateSpace {
   SpaceUpdate update = 2;
 }
 
-message FollowAccount {
-  string account_id = 1;
-}
+message FollowAccount { string account_id = 1; }
 
-message UnfollowAccount {
-  string account_id = 1;
-}
+message UnfollowAccount { string account_id = 1; }
 
 // DATA
 
@@ -319,9 +269,7 @@ message Comment {
   uint64 root_post_id = 2;
 }
 
-message SharedPost {
-  uint64 root_post_id = 1;
-}
+message SharedPost { uint64 root_post_id = 1; }
 
 message Reaction {
   enum Kind {
@@ -364,78 +312,48 @@ message SpaceUpdate {
 
 // RESPONSES
 
-message SpaceById {
-  Space space = 1;
-}
+message SpaceById { Space space = 1; }
 
-message SpaceByHandle {
-  Space space = 1;
-}
+message SpaceByHandle { Space space = 1; }
 
-message PostById {
-  Post post = 1;
-}
+message PostById { Post post = 1; }
 
-message ReactionById {
-  Reaction reaction = 1;
-}
+message ReactionById { Reaction reaction = 1; }
 
-message PostIdsBySpaceId {
-  repeated uint64 post_ids = 1 [packed = true];
-}
+message PostIdsBySpaceId { repeated uint64 post_ids = 1 [ packed = true ]; }
 
 message ReactionIdsByPostId {
-  repeated uint64 reaction_ids = 1 [packed = true];
+  repeated uint64 reaction_ids = 1 [ packed = true ];
 }
 
-message ReplyIdsByPostId {
-  repeated uint64 reply_ids = 1 [packed = true];
-}
+message ReplyIdsByPostId { repeated uint64 reply_ids = 1 [ packed = true ]; }
 
-message SocialAccountByAccountId {
-  SocialAccount social_account = 1;
-}
+message SocialAccountByAccountId { SocialAccount social_account = 1; }
 
-message NextSpaceId {
-  uint64 id = 1;
-}
+message NextSpaceId { uint64 id = 1; }
 
-message NextPostId {
-  uint64 id = 1;
-}
+message NextPostId { uint64 id = 1; }
 
-message CurrentAccountId {
-  string account_id = 1;
-}
+message CurrentAccountId { string account_id = 1; }
 
-message SpaceIdsByOwner {
-  repeated uint64 space_ids = 1 [packed = true];
-}
+message SpaceIdsByOwner { repeated uint64 space_ids = 1 [ packed = true ]; }
 
-message SpaceFollowers {
-  repeated string account_ids = 1;
-}
+message SpaceFollowers { repeated string account_ids = 1; }
 
 message SpacesFollowedByAccount {
-  repeated uint64 space_ids = 1 [packed = true];
+  repeated uint64 space_ids = 1 [ packed = true ];
 }
 
-message AccountFollowers {
-  repeated string account_ids = 1;
-}
+message AccountFollowers { repeated string account_ids = 1; }
 
-message AccountsFollowedByAccount {
-  repeated string account_ids = 1;
-}
+message AccountsFollowedByAccount { repeated string account_ids = 1; }
 
 message GeneratedAccount {
   string public_key = 1;
   string seed_phrase = 2;
 }
 
-message ImportedAccount {
-  string public_key = 1;
-}
+message ImportedAccount { string public_key = 1; }
 
 message PostReactionCreated {
   uint64 post_id = 1;
@@ -472,13 +390,9 @@ message PostReactionDeleted {
   uint64 reaction_id = 2;
 }
 
-message ProfileCreated {
-  string account_id = 1;
-}
+message ProfileCreated { string account_id = 1; }
 
-message ProfileUpdated {
-  string account_id = 1;
-}
+message ProfileUpdated { string account_id = 1; }
 
 message SpaceCreated {
   string account_id = 1;
@@ -500,9 +414,7 @@ message AccountUnfollowed {
   string unfollowing = 2;
 }
 
-message PostReactionIdByAccount {
-  uint64 reaction_id = 1;
-}
+message PostReactionIdByAccount { uint64 reaction_id = 1; }
 
 message AccountData {
   string free_balance = 1;
