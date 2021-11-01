@@ -6,7 +6,7 @@ edition = "2018"
 
 [dependencies]
 subxt = { version = "0.15.0", package = "substrate-subxt" }
-codec = { package = "parity-scale-codec", version = "2.3.1", features = ["derive", "full"] }
+codec = { package = "parity-scale-codec", version = "=2.0.1", features = ["derive", "full"] }
 
 # Pallets
 # Substrate dependencies

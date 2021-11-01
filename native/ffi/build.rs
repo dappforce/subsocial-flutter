@@ -26,4 +26,8 @@ fn main() {
         .generate()
         .expect("Unable to generate bindings")
         .write_to_file("binding.h");
+    // run cargo fmt to format the generated protobuf
+    let mut cmd = std::process::Command::new("cargo");
+    cmd.arg("fmt");
+    cmd.status().expect("Failed to run cargo fmt");
 }

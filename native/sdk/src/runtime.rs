@@ -19,6 +19,8 @@ pub type Signature = MultiSignature;
 /// equivalent to the public key of our transaction signing scheme.
 pub type AccountId =
     <<Signature as Verify>::Signer as IdentifyAccount>::AccountId;
+pub type AccountIndex = u32;
+pub type Address = sp_runtime::MultiAddress<AccountId, AccountIndex>;
 
 /// Balance of an account.
 pub type Balance = u128;
@@ -62,7 +64,7 @@ impl subxt::Runtime for SubsocialRuntime {
 impl System for SubsocialRuntime {
     type AccountData = AccountData<BalanceOf<Self>>;
     type AccountId = AccountId;
-    type Address = AccountId;
+    type Address = Address;
     type BlockNumber = u32;
     type Extrinsic = OpaqueExtrinsic;
     type Hash = Hash;
