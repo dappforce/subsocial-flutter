@@ -160,9 +160,12 @@ pub async fn handle(
 }
 
 fn current_account_id(signer: &Signer) -> Result<ResponseBody, Error> {
-    let account_id = signer
-        .signer()
-        .public()
+    let my_public_key = signer.signer().public();
+    let dummy_public_key = crate::dummy_signer().signer().public();
+    if my_public_key == dummy_public_key {
+        return Ok(ResponseBody::CurrentAccountId(Default::default()));
+    }
+    let account_id = my_public_key
         .to_ss58check_with_version(Ss58AddressFormat::SubsocialAccount);
     let body = ResponseBody::CurrentAccountId(CurrentAccountId { account_id });
     Ok(body)
