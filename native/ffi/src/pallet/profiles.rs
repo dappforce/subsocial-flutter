@@ -1,18 +1,20 @@
-use sdk::pallet::profiles;
 use sdk::subxt::sp_runtime::AccountId32;
 
 use crate::pb::subsocial::response::Body as ResponseBody;
 use crate::pb::subsocial::*;
 use crate::transformer::AccountIdFromString;
-use crate::SubsocialClient;
+use crate::SubsocialApi;
 
 pub async fn social_account_by_account_id(
-    client: &SubsocialClient,
+    api: &SubsocialApi,
     account_id: String,
 ) -> Result<ResponseBody, Error> {
     let account_id = AccountId32::convert(account_id)?;
-    let store = profiles::SocialAccountByIdStore::new(account_id);
-    let maybe_account = client.fetch(&store, None).await?;
+    let maybe_account = api
+        .storage()
+        .profiles()
+        .social_account_by_id(account_id, None)
+        .await?;
     match maybe_account {
         Some(account) => {
             let body = ResponseBody::SocialAccountByAccountId(

@@ -1,12 +1,12 @@
-use sdk::pallet::profiles::*;
-use sdk::subxt::sp_core::crypto::{Ss58AddressFormat, Ss58Codec};
+use sdk::subsocial::api::{profiles, runtime_types};
+use sdk::subxt::sp_core::crypto::{Ss58AddressFormatRegistry, Ss58Codec};
 
 use crate::pb::subsocial::response::Body as ResponseBody;
 use crate::pb::subsocial::*;
-use crate::{Signer, SubsocialClient};
+use crate::{Signer, SubsocialApi};
 
 pub async fn create_profile(
-    client: &SubsocialClient,
+    api: &SubsocialApi,
     signer: &mut Signer,
     CreateProfile { content }: CreateProfile,
 ) -> Result<ResponseBody, Error> {
@@ -22,15 +22,18 @@ pub async fn create_profile(
         }
     };
 
-    let maybe_event = client
-        .create_profile_and_watch(signer, content)
+    let maybe_event = api
+        .tx()
+        .profiles()
+        .create_profile(content)
+        .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<ProfileCreatedEvent<_>>()?;
+        .find_event::<profiles::events::ProfileCreated>()?;
     match maybe_event {
         Some(event) => {
             let body = ResponseBody::ProfileCreated(ProfileCreated {
-                account_id: event.account_id.to_ss58check_with_version(
-                    Ss58AddressFormat::SubsocialAccount,
+                account_id: event.0.to_ss58check_with_version(
+                    Ss58AddressFormatRegistry::SubsocialAccount.into(),
                 ),
             });
             Ok(body)
@@ -43,24 +46,27 @@ pub async fn create_profile(
 }
 
 pub async fn update_profile(
-    client: &SubsocialClient,
+    api: &SubsocialApi,
     signer: &mut Signer,
     UpdateProfile { maybe_content }: UpdateProfile,
 ) -> Result<ResponseBody, Error> {
     // incremnt signer nonce
     signer.increment_nonce();
-    let update = ProfileUpdate {
+    let update = runtime_types::pallet_profiles::ProfileUpdate {
         content: maybe_content.map(Into::into),
     };
-    let maybe_event = client
-        .update_profile_and_watch(signer, update)
+    let maybe_event = api
+        .tx()
+        .profiles()
+        .update_profile(update)
+        .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<ProfileUpdatedEvent<_>>()?;
+        .find_event::<profiles::events::ProfileUpdated>()?;
     match maybe_event {
         Some(event) => {
             let body = ResponseBody::ProfileUpdated(ProfileUpdated {
-                account_id: event.account_id.to_ss58check_with_version(
-                    Ss58AddressFormat::SubsocialAccount,
+                account_id: event.0.to_ss58check_with_version(
+                    Ss58AddressFormatRegistry::SubsocialAccount.into(),
                 ),
             });
             Ok(body)

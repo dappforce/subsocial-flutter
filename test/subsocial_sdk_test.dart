@@ -25,7 +25,7 @@ void main() {
       "5GHnQYfvZdxJHSWnZqiM5eKdj2UawJs4s9Tqn22ckvLEENvc",
     );
     final freeBalance = BigInt.parse(accountData.freeBalance);
-    expect(freeBalance, BigInt.from(100042893226878));
+    expect(freeBalance, BigInt.from(100039563226878));
   });
 
   test('Get Space with handle', () async {
@@ -171,6 +171,6 @@ void main() {
       postId: postId,
       accountId: accountId,
     );
-    expect(reactionId, 32967);
+    expect(reactionId, 0);
   });
 }

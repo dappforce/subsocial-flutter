@@ -1,53 +1,44 @@
-use sdk::pallet::space_follows;
-use sdk::subxt::sp_core::crypto::{Ss58AddressFormat, Ss58Codec};
+use sdk::subxt::sp_core::crypto::{Ss58AddressFormatRegistry, Ss58Codec};
 use sdk::subxt::sp_runtime::AccountId32;
 
 use crate::pb::subsocial::response::Body as ResponseBody;
 use crate::pb::subsocial::*;
 use crate::transformer::AccountIdFromString;
-use crate::SubsocialClient;
+use crate::SubsocialApi;
 
 pub async fn space_followers(
-    client: &SubsocialClient,
+    api: &SubsocialApi,
     space_id: u64,
 ) -> Result<ResponseBody, Error> {
-    let store = space_follows::SpaceFollowersStore::new(space_id);
-    let maybe_account_ids = client.fetch(&store, None).await?;
-    match maybe_account_ids {
-        Some(account_ids) => {
-            let body = ResponseBody::SpaceFollowers(SpaceFollowers {
-                account_ids: account_ids
-                    .into_iter()
-                    .map(|v| {
-                        v.to_ss58check_with_version(
-                            Ss58AddressFormat::SubsocialAccount,
-                        )
-                    })
-                    .collect(),
-            });
-            Ok(body)
-        }
-        None => Err(Error {
-            kind: error::Kind::NotFound.into(),
-            msg: String::from("Space Not Found"),
-        }),
-    }
+    let account_ids = api
+        .storage()
+        .space_follows()
+        .space_followers(space_id, None)
+        .await?;
+    let body = ResponseBody::SpaceFollowers(SpaceFollowers {
+        account_ids: account_ids
+            .into_iter()
+            .map(|v| {
+                v.to_ss58check_with_version(
+                    Ss58AddressFormatRegistry::SubsocialAccount.into(),
+                )
+            })
+            .collect(),
+    });
+    Ok(body)
 }
 
 pub async fn spaces_followed_by_account(
-    client: &SubsocialClient,
+    api: &SubsocialApi,
     account_id: String,
 ) -> Result<ResponseBody, Error> {
     let account_id = AccountId32::convert(account_id)?;
-    let store = space_follows::SpacesFollowedByAccountStore::new(account_id);
-    let maybe_space_ids = client.fetch(&store, None).await?;
-    match maybe_space_ids {
-        Some(space_ids) => Ok(ResponseBody::SpacesFollowedByAccount(
-            SpacesFollowedByAccount { space_ids },
-        )),
-        None => Err(Error {
-            kind: error::Kind::NotFound.into(),
-            msg: String::from("AccountId Not Found"),
-        }),
-    }
+    let space_ids = api
+        .storage()
+        .space_follows()
+        .spaces_followed_by_account(account_id, None)
+        .await?;
+    Ok(ResponseBody::SpacesFollowedByAccount(
+        SpacesFollowedByAccount { space_ids },
+    ))
 }

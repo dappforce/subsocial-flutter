@@ -1,12 +1,12 @@
-use sdk::pallet::spaces::*;
-use sdk::subxt::sp_core::crypto::{Ss58AddressFormat, Ss58Codec};
+use sdk::subsocial::api::spaces;
+use sdk::subxt::sp_core::crypto::{Ss58AddressFormatRegistry, Ss58Codec};
 
 use crate::pb::subsocial::response::Body as ResponseBody;
 use crate::pb::subsocial::*;
-use crate::{Signer, SubsocialClient};
+use crate::{Signer, SubsocialApi};
 
 pub async fn create_space(
-    client: &SubsocialClient,
+    api: &SubsocialApi,
     signer: &mut Signer,
     CreateSpace {
         parent_id,
@@ -36,22 +36,19 @@ pub async fn create_space(
         }
     };
 
-    let maybe_event = client
-        .create_space_and_watch(
-            signer,
-            maybe_parent_id,
-            maybe_handle,
-            content,
-            None,
-        )
+    let maybe_event = api
+        .tx()
+        .spaces()
+        .create_space(maybe_parent_id, maybe_handle, content, None)
+        .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<SpaceCreatedEvent<_>>()?;
+        .find_event::<spaces::events::SpaceCreated>()?;
     match maybe_event {
         Some(event) => {
             let body = ResponseBody::SpaceCreated(SpaceCreated {
-                space_id: event.space_id,
-                account_id: event.account_id.to_ss58check_with_version(
-                    Ss58AddressFormat::SubsocialAccount,
+                space_id: event.1,
+                account_id: event.0.to_ss58check_with_version(
+                    Ss58AddressFormatRegistry::SubsocialAccount.into(),
                 ),
             });
             Ok(body)
@@ -64,7 +61,7 @@ pub async fn create_space(
 }
 
 pub async fn update_space(
-    client: &SubsocialClient,
+    api: &SubsocialApi,
     signer: &mut Signer,
     UpdateSpace { space_id, update }: UpdateSpace,
 ) -> Result<ResponseBody, Error> {
@@ -80,16 +77,19 @@ pub async fn update_space(
         }
     };
 
-    let maybe_event = client
-        .update_space_and_watch(signer, space_id, update)
+    let maybe_event = api
+        .tx()
+        .spaces()
+        .update_space(space_id, update)
+        .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<SpaceUpdatedEvent<_>>()?;
+        .find_event::<spaces::events::SpaceUpdated>()?;
     match maybe_event {
         Some(event) => {
             let body = ResponseBody::SpaceUpdated(SpaceUpdated {
-                space_id: event.space_id,
-                account_id: event.account_id.to_ss58check_with_version(
-                    Ss58AddressFormat::SubsocialAccount,
+                space_id: event.1,
+                account_id: event.0.to_ss58check_with_version(
+                    Ss58AddressFormatRegistry::SubsocialAccount.into(),
                 ),
             });
             Ok(body)

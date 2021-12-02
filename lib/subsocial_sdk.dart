@@ -495,7 +495,8 @@ class Subsocial {
     final completer = Completer<dynamic>();
     final port = singleCompletePort(completer);
     final config = malloc.call<SubscoialConfig>()
-      ..ref.url = "wss://rpc.subsocial.network".toNativeUtf8().cast();
+      ..ref.url =
+          "wss://staging.subsocial.network:443/072-ws".toNativeUtf8().cast();
     final result = raw.subsocial_init_sdk(
       port.nativePort,
       config,

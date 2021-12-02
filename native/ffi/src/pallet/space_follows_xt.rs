@@ -1,27 +1,30 @@
-use sdk::pallet::space_follows::{self, *};
-use sdk::subxt::sp_core::crypto::{Ss58AddressFormat, Ss58Codec};
+use sdk::subsocial::api::space_follows;
+use sdk::subxt::sp_core::crypto::{Ss58AddressFormatRegistry, Ss58Codec};
 
 use crate::pb::subsocial::response::Body as ResponseBody;
 use crate::pb::subsocial::*;
-use crate::{Signer, SubsocialClient};
+use crate::{Signer, SubsocialApi};
 
 pub async fn follow_space(
-    client: &SubsocialClient,
+    api: &SubsocialApi,
     signer: &mut Signer,
     FollowSpace { space_id }: FollowSpace,
 ) -> Result<ResponseBody, Error> {
     // increment signer nonce
     signer.increment_nonce();
-    let maybe_event = client
-        .follow_space_and_watch(signer, space_id)
+    let maybe_event = api
+        .tx()
+        .space_follows()
+        .follow_space(space_id)
+        .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<SpaceFollowedEvent<_>>()?;
+        .find_event::<space_follows::events::SpaceFollowed>()?;
     match maybe_event {
         Some(event) => Ok(ResponseBody::SpaceFollowed(SpaceFollowed {
-            space_id: event.space_id,
-            follower: event
-                .follower
-                .to_ss58check_with_version(Ss58AddressFormat::SubsocialAccount),
+            space_id: event.1,
+            follower: event.0.to_ss58check_with_version(
+                Ss58AddressFormatRegistry::SubsocialAccount.into(),
+            ),
         })),
         None => Err(Error {
             kind: error::Kind::NotFound.into(),
@@ -31,22 +34,25 @@ pub async fn follow_space(
 }
 
 pub async fn unfollow_space(
-    client: &SubsocialClient,
+    api: &SubsocialApi,
     signer: &mut Signer,
     UnfollowSpace { space_id }: UnfollowSpace,
 ) -> Result<ResponseBody, Error> {
     // increment signer nonce
     signer.increment_nonce();
-    let maybe_event = client
-        .unfollow_space_and_watch(signer, space_id)
+    let maybe_event = api
+        .tx()
+        .space_follows()
+        .unfollow_space(space_id)
+        .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<SpaceUnfollowedEvent<_>>()?;
+        .find_event::<space_follows::events::SpaceUnfollowed>()?;
     match maybe_event {
         Some(event) => Ok(ResponseBody::SpaceUnfollowed(SpaceUnfollowed {
-            space_id: event.space_id,
-            follower: event
-                .follower
-                .to_ss58check_with_version(Ss58AddressFormat::SubsocialAccount),
+            space_id: event.1,
+            follower: event.0.to_ss58check_with_version(
+                Ss58AddressFormatRegistry::SubsocialAccount.into(),
+            ),
         })),
         None => Err(Error {
             kind: error::Kind::NotFound.into(),
@@ -55,17 +61,19 @@ pub async fn unfollow_space(
     }
 }
 
+// this function is here since it uses the signer, however, it does not make any transactions.
 pub async fn is_space_follower(
-    client: &SubsocialClient,
+    api: &SubsocialApi,
     signer: &Signer,
     IsSpaceFollower { space_id }: IsSpaceFollower,
 ) -> Result<ResponseBody, Error> {
     use sdk::subxt::Signer;
     let my_account_id = signer.account_id().clone();
-    let store = space_follows::SpaceFollowedByAccountStore::new(
-        my_account_id,
-        space_id,
-    );
-    let response = client.fetch_or_default(&store, None).await?;
-    Ok(ResponseBody::IsSpaceFollower(response))
+
+    let v = api
+        .storage()
+        .space_follows()
+        .space_followed_by_account(my_account_id, space_id, None)
+        .await?;
+    Ok(ResponseBody::IsSpaceFollower(v))
 }

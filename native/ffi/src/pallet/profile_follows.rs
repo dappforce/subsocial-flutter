@@ -1,67 +1,54 @@
-use sdk::pallet::profile_follows;
-use sdk::subxt::sp_core::crypto::{Ss58AddressFormat, Ss58Codec};
+use sdk::subxt::sp_core::crypto::{Ss58AddressFormatRegistry, Ss58Codec};
 use sdk::subxt::sp_runtime::AccountId32;
 
 use crate::pb::subsocial::response::Body as ResponseBody;
 use crate::pb::subsocial::*;
 use crate::transformer::AccountIdFromString;
-use crate::SubsocialClient;
+use crate::SubsocialApi;
 
 pub async fn account_followers(
-    client: &SubsocialClient,
+    api: &SubsocialApi,
     account_id: String,
 ) -> Result<ResponseBody, Error> {
     let account_id = AccountId32::convert(account_id)?;
-    let store = profile_follows::AccountFollowersStore::new(account_id);
-    let maybe_account_ids = client.fetch(&store, None).await?;
-    match maybe_account_ids {
-        Some(account_ids) => {
-            let body = ResponseBody::AccountFollowers(AccountFollowers {
-                account_ids: account_ids
-                    .into_iter()
-                    .map(|v| {
-                        v.to_ss58check_with_version(
-                            Ss58AddressFormat::SubsocialAccount,
-                        )
-                    })
-                    .collect(),
-            });
-            Ok(body)
-        }
-        None => Err(Error {
-            kind: error::Kind::NotFound.into(),
-            msg: String::from("AccountId Not Found"),
-        }),
-    }
+    let account_ids = api
+        .storage()
+        .profile_follows()
+        .account_followers(account_id, None)
+        .await?;
+    let body = ResponseBody::AccountFollowers(AccountFollowers {
+        account_ids: account_ids
+            .into_iter()
+            .map(|v| {
+                v.to_ss58check_with_version(
+                    Ss58AddressFormatRegistry::SubsocialAccount.into(),
+                )
+            })
+            .collect(),
+    });
+    Ok(body)
 }
 
 pub async fn accounts_followed_by_account(
-    client: &SubsocialClient,
+    api: &SubsocialApi,
     account_id: String,
 ) -> Result<ResponseBody, Error> {
     let account_id = AccountId32::convert(account_id)?;
-    let store =
-        profile_follows::AccountsFollowedByAccountStore::new(account_id);
-    let maybe_account_ids = client.fetch(&store, None).await?;
-    match maybe_account_ids {
-        Some(account_ids) => {
-            let body = ResponseBody::AccountsFollowedByAccount(
-                AccountsFollowedByAccount {
-                    account_ids: account_ids
-                        .into_iter()
-                        .map(|v| {
-                            v.to_ss58check_with_version(
-                                Ss58AddressFormat::SubsocialAccount,
-                            )
-                        })
-                        .collect(),
-                },
-            );
-            Ok(body)
-        }
-        None => Err(Error {
-            kind: error::Kind::NotFound.into(),
-            msg: String::from("AccountId Not Found"),
-        }),
-    }
+    let account_ids = api
+        .storage()
+        .profile_follows()
+        .accounts_followed_by_account(account_id, None)
+        .await?;
+    let body =
+        ResponseBody::AccountsFollowedByAccount(AccountsFollowedByAccount {
+            account_ids: account_ids
+                .into_iter()
+                .map(|v| {
+                    v.to_ss58check_with_version(
+                        Ss58AddressFormatRegistry::SubsocialAccount.into(),
+                    )
+                })
+                .collect(),
+        });
+    Ok(body)
 }

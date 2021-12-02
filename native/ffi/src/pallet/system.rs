@@ -1,17 +1,16 @@
 use sdk::subxt::sp_runtime::AccountId32;
-use sdk::subxt::system::*;
 
 use crate::pb::subsocial::response::Body as ResponseBody;
 use crate::pb::subsocial::*;
 use crate::transformer::AccountIdFromString;
-use crate::SubsocialClient;
+use crate::SubsocialApi;
 
 pub async fn account(
-    client: &SubsocialClient,
+    api: &SubsocialApi,
     account_id: String,
 ) -> Result<ResponseBody, Error> {
     let account_id = AccountId32::convert(account_id)?;
-    let account_info = client.account(&account_id, None).await?;
+    let account_info = api.storage().system().account(account_id, None).await?;
     let account_data = account_info.data;
     let body = ResponseBody::AccountData(AccountData {
         free_balance: account_data.free.to_string(),
@@ -22,8 +21,8 @@ pub async fn account(
     Ok(body)
 }
 
-pub fn properties(client: &SubsocialClient) -> Result<ResponseBody, Error> {
-    let props = client.properties();
+pub fn properties(api: &SubsocialApi) -> Result<ResponseBody, Error> {
+    let props = api.client.properties();
     let body = ResponseBody::SystemProperties(SystemProperties {
         ss58_format: props.ss58_format as _,
         token_decimals: props.token_decimals as _,

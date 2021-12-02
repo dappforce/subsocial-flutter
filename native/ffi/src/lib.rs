@@ -2,9 +2,8 @@ use std::ffi::CStr;
 use std::os::raw::c_char;
 
 use allo_isolate::Isolate;
-use async_std::task;
 use once_cell::sync::OnceCell;
-use sdk::runtime::SubsocialRuntime;
+use sdk::subsocial::api::{DefaultConfig, RuntimeApi};
 use sdk::subxt;
 
 mod dart_utils;
@@ -18,11 +17,14 @@ use pb::subsocial;
 use prost::Message;
 use sdk::subxt::sp_core::sr25519::Pair as Sr25519Pair;
 
-type SubsocialClient = subxt::Client<SubsocialRuntime>;
-type Signer = subxt::PairSigner<SubsocialRuntime, Sr25519Pair>;
+type SubsocialApi = RuntimeApi<DefaultConfig>;
+type Signer = subxt::PairSigner<DefaultConfig, Sr25519Pair>;
+
+/// Global Tokio Runtime.
+static mut RUNTIME: OnceCell<tokio::runtime::Runtime> = OnceCell::new();
 
 /// Global Shared [subxt::Client] between all tasks.
-static mut CLIENT: OnceCell<SubsocialClient> = OnceCell::new();
+static mut CLIENT: OnceCell<SubsocialApi> = OnceCell::new();
 
 /// Global Shared [subxt::PairSigner] between all tasks.
 static mut SIGNER: OnceCell<Signer> = OnceCell::new();
@@ -60,14 +62,20 @@ pub unsafe extern "C" fn subsocial_init_sdk(
     if SIGNER.get().is_none() {
         let _ = SIGNER.set(dummy_signer());
     }
+    // init the runtime if not already done
+    let runtime = RUNTIME.get_or_init(create_runtime);
     let task = isolate.catch_unwind(async move {
-        let client = subxt::ClientBuilder::new().set_url(url).build().await?;
+        let client = subxt::ClientBuilder::new()
+            .set_url(url)
+            .build()
+            .await?
+            .to_runtime_api();
         CLIENT.set(client).map_err(|_| {
             subxt::Error::Other(String::from("Client already initialized"))
         })?;
         Result::<_, subxt::Error>::Ok(())
     });
-    task::spawn(task);
+    runtime.spawn(task);
     1
 }
 
@@ -97,8 +105,13 @@ pub extern "C" fn subsocial_dispatch(port: i64, buffer: Box<Uint8List>) -> i32 {
         Some(v) => v,
         None => return 0xdead,
     };
+    // finaly the runtime
+    let runtime = match unsafe { RUNTIME.get() } {
+        Some(v) => v,
+        None => return 0xdead,
+    };
     let task = isolate.catch_unwind(handler::handle(client, signer, req));
-    task::spawn(task);
+    runtime.spawn(task);
     1
 }
 
@@ -142,4 +155,11 @@ pub unsafe extern "C" fn subsocial_link_me_plz() {}
 fn dummy_signer() -> Signer {
     let (pair, _) = Sr25519Pair::from_entropy(&[0u8; 32], None);
     Signer::new(pair)
+}
+
+fn create_runtime() -> tokio::runtime::Runtime {
+    tokio::runtime::Builder::new_multi_thread()
+        .enable_all()
+        .build()
+        .unwrap()
 }

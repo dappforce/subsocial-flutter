@@ -1,26 +1,29 @@
-use sdk::pallet::reactions::*;
+use sdk::subsocial::api::reactions;
 
 use crate::pb::subsocial::response::Body as ResponseBody;
 use crate::pb::subsocial::*;
-use crate::{Signer, SubsocialClient};
+use crate::{Signer, SubsocialApi};
 
 pub async fn create_post_reaction(
-    client: &SubsocialClient,
+    api: &SubsocialApi,
     signer: &mut Signer,
     CreatePostReaction { post_id, kind }: CreatePostReaction,
 ) -> Result<ResponseBody, Error> {
     // increment signer nonce
     signer.increment_nonce();
     let kind = reaction::Kind::from_i32(kind).unwrap_or_default();
-    let maybe_event = client
-        .create_post_reaction_and_watch(signer, post_id, kind.into())
+    let maybe_event = api
+        .tx()
+        .reactions()
+        .create_post_reaction(post_id, kind.into())
+        .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<PostReactionCreatedEvent<_>>()?;
+        .find_event::<reactions::events::PostReactionCreated>()?;
     match maybe_event {
         Some(event) => {
             let body = ResponseBody::PostReactionCreated(PostReactionCreated {
                 post_id,
-                reaction_id: event.reaction_id,
+                reaction_id: event.2,
             });
             Ok(body)
         }
@@ -32,7 +35,7 @@ pub async fn create_post_reaction(
 }
 
 pub async fn update_post_reaction(
-    client: &SubsocialClient,
+    api: &SubsocialApi,
     signer: &mut Signer,
     UpdatePostReaction {
         post_id,
@@ -43,20 +46,18 @@ pub async fn update_post_reaction(
     // increment signer nonce
     signer.increment_nonce();
     let kind = reaction::Kind::from_i32(new_kind).unwrap_or_default();
-    let maybe_event = client
-        .update_post_reaction_and_watch(
-            signer,
-            post_id,
-            reaction_id,
-            kind.into(),
-        )
+    let maybe_event = api
+        .tx()
+        .reactions()
+        .update_post_reaction(post_id, reaction_id, kind.into())
+        .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<PostReactionUpdatedEvent<_>>()?;
+        .find_event::<reactions::events::PostReactionUpdated>()?;
     match maybe_event {
         Some(event) => {
             let body = ResponseBody::PostReactionUpdated(PostReactionUpdated {
                 post_id,
-                reaction_id: event.reaction_id,
+                reaction_id: event.2,
             });
             Ok(body)
         }
@@ -68,7 +69,7 @@ pub async fn update_post_reaction(
 }
 
 pub async fn delete_post_reaction(
-    client: &SubsocialClient,
+    api: &SubsocialApi,
     signer: &mut Signer,
     DeletePostReaction {
         post_id,
@@ -77,15 +78,18 @@ pub async fn delete_post_reaction(
 ) -> Result<ResponseBody, Error> {
     // increment signer nonce
     signer.increment_nonce();
-    let maybe_event = client
-        .delete_post_reaction_and_watch(signer, post_id, reaction_id)
+    let maybe_event = api
+        .tx()
+        .reactions()
+        .delete_post_reaction(post_id, reaction_id)
+        .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<PostReactionDeletedEvent<_>>()?;
+        .find_event::<reactions::events::PostReactionDeleted>()?;
     match maybe_event {
         Some(event) => {
             let body = ResponseBody::PostReactionDeleted(PostReactionDeleted {
                 post_id,
-                reaction_id: event.reaction_id,
+                reaction_id: event.2,
             });
             Ok(body)
         }

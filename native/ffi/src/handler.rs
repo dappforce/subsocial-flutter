@@ -1,6 +1,6 @@
 use allo_isolate::ZeroCopyBuffer;
 use prost::Message;
-use sdk::subxt::sp_core::crypto::Ss58AddressFormat;
+use sdk::subxt::sp_core::crypto::Ss58AddressFormatRegistry;
 use sdk::subxt::sp_core::crypto::Ss58Codec;
 use sdk::subxt::sp_core::Pair;
 
@@ -12,10 +12,10 @@ use crate::pallet::{
 use crate::pb::subsocial::request::Body as RequestBody;
 use crate::pb::subsocial::response::Body as ResponseBody;
 use crate::pb::subsocial::*;
-use crate::{Signer, SubsocialClient};
+use crate::{Signer, SubsocialApi};
 
 pub async fn handle(
-    client: &SubsocialClient,
+    client: &SubsocialApi,
     signer: &mut Signer,
     req: Request,
 ) -> ZeroCopyBuffer<Vec<u8>> {
@@ -165,8 +165,9 @@ fn current_account_id(signer: &Signer) -> Result<ResponseBody, Error> {
     if my_public_key == dummy_public_key {
         return Ok(ResponseBody::CurrentAccountId(Default::default()));
     }
-    let account_id = my_public_key
-        .to_ss58check_with_version(Ss58AddressFormat::SubsocialAccount);
+    let account_id = my_public_key.to_ss58check_with_version(
+        Ss58AddressFormatRegistry::SubsocialAccount.into(),
+    );
     let body = ResponseBody::CurrentAccountId(CurrentAccountId { account_id });
     Ok(body)
 }
@@ -181,10 +182,9 @@ fn generate_account(
             Some(password.as_str())
         });
     let pair = crate::subxt::PairSigner::new(pair);
-    let public_key = pair
-        .signer()
-        .public()
-        .to_ss58check_with_version(Ss58AddressFormat::SubsocialAccount);
+    let public_key = pair.signer().public().to_ss58check_with_version(
+        Ss58AddressFormatRegistry::SubsocialAccount.into(),
+    );
     unsafe {
         let _old = crate::SIGNER.take();
         crate::SIGNER
@@ -215,10 +215,9 @@ fn import_account(
         crate::subxt::Error::Other(String::from("Invalid Phrase Format"))
     })?;
     let pair = crate::subxt::PairSigner::new(pair);
-    let public_key = pair
-        .signer()
-        .public()
-        .to_ss58check_with_version(Ss58AddressFormat::SubsocialAccount);
+    let public_key = pair.signer().public().to_ss58check_with_version(
+        Ss58AddressFormatRegistry::SubsocialAccount.into(),
+    );
     unsafe {
         let _old = crate::SIGNER.take();
         crate::SIGNER
@@ -231,7 +230,7 @@ fn import_account(
 }
 
 async fn is_post_shared_by_account(
-    _client: &SubsocialClient,
+    _client: &SubsocialApi,
     _signer: &Signer,
     IsPostSharedByAccount { post_id: _ }: IsPostSharedByAccount,
 ) -> Result<ResponseBody, Error> {

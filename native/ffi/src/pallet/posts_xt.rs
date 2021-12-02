@@ -1,12 +1,12 @@
-use sdk::pallet::posts::*;
-use sdk::subxt::sp_core::crypto::{Ss58AddressFormat, Ss58Codec};
+use sdk::subsocial::api::posts;
+use sdk::subxt::sp_core::crypto::{Ss58AddressFormatRegistry, Ss58Codec};
 
 use crate::pb::subsocial::response::Body as ResponseBody;
 use crate::pb::subsocial::*;
-use crate::{Signer, SubsocialClient};
+use crate::{Signer, SubsocialApi};
 
 pub async fn create_post(
-    client: &SubsocialClient,
+    api: &SubsocialApi,
     signer: &mut Signer,
     CreatePost {
         space_id,
@@ -36,16 +36,19 @@ pub async fn create_post(
         }
     };
 
-    let maybe_event = client
-        .create_post_and_watch(signer, maybe_space_id, extension, content)
+    let maybe_event = api
+        .tx()
+        .posts()
+        .create_post(maybe_space_id, extension, content)
+        .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<PostCreatedEvent<_>>()?;
+        .find_event::<posts::events::PostCreated>()?;
     match maybe_event {
         Some(event) => {
             let body = ResponseBody::PostCreated(PostCreated {
-                post_id: event.post_id,
-                account_id: event.account_id.to_ss58check_with_version(
-                    Ss58AddressFormat::SubsocialAccount,
+                post_id: event.1,
+                account_id: event.0.to_ss58check_with_version(
+                    Ss58AddressFormatRegistry::SubsocialAccount.into(),
                 ),
             });
             Ok(body)
@@ -58,7 +61,7 @@ pub async fn create_post(
 }
 
 pub async fn update_post(
-    client: &SubsocialClient,
+    api: &SubsocialApi,
     signer: &mut Signer,
     UpdatePost {
         post_id,
@@ -77,16 +80,19 @@ pub async fn update_post(
         }
     };
 
-    let maybe_event = client
-        .update_post_and_watch(signer, post_id, update)
+    let maybe_event = api
+        .tx()
+        .posts()
+        .update_post(post_id, update)
+        .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<PostUpdatedEvent<_>>()?;
+        .find_event::<posts::events::PostUpdated>()?;
     match maybe_event {
         Some(event) => {
             let body = ResponseBody::PostUpdated(PostUpdated {
-                post_id: event.post_id,
-                account_id: event.account_id.to_ss58check_with_version(
-                    Ss58AddressFormat::SubsocialAccount,
+                post_id: event.1,
+                account_id: event.0.to_ss58check_with_version(
+                    Ss58AddressFormatRegistry::SubsocialAccount.into(),
                 ),
             });
             Ok(body)
