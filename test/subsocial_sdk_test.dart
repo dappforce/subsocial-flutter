@@ -13,6 +13,11 @@ void main() {
     expect(props.tokenSymbol, 'SUB');
   });
 
+  setUp(() async {
+    final sdk = await Subsocial.instance;
+    sdk.clearSigner();
+  });
+
   test('Get Space with Id', () async {
     final sdk = await Subsocial.instance;
     final space = await sdk.spaceById(1);
@@ -173,4 +178,13 @@ void main() {
     );
     expect(reactionId, 32967);
   });
+
+  test('signer', () async {
+    final sdk = await Subsocial.instance;
+    final dummy = (await sdk.currentAccountId()).accountId;
+    expect(dummy, '3qMxrqpKLCvSBz943N5vEERRiyXBZFYySFwnBKXj7vA9W7ng');
+    final account = await sdk.importAccount(suri: suri);
+    final signer = (await sdk.currentAccountId()).accountId;
+    expect(signer, account.publicKey);
+  }, skip: true);
 }
