@@ -22,11 +22,31 @@ pub async fn account(
 }
 
 pub fn properties(api: &SubsocialApi) -> Result<ResponseBody, Error> {
-    let props = api.client.properties();
+    #[derive(Debug, serde::Serialize, serde::Deserialize)]
+    #[serde(rename_all = "camelCase")]
+    struct SubsocialSystemProperties {
+        token_decimals: [u8; 1],
+        token_symbol: [String; 1],
+        ss58_format: u32,
+    }
+
+    impl Default for SubsocialSystemProperties {
+        fn default() -> Self {
+            Self {
+                token_decimals: [11],
+                token_symbol: ["SUB".into()],
+                ss58_format: 28,
+            }
+        }
+    }
+    let props: SubsocialSystemProperties = serde_json::from_value(
+        serde_json::Value::Object(api.client.properties().clone()),
+    )
+    .unwrap_or_default();
     let body = ResponseBody::SystemProperties(SystemProperties {
-        ss58_format: props.ss58_format as _,
-        token_decimals: props.token_decimals as _,
-        token_symbol: props.token_symbol.to_string(),
+        ss58_format: props.ss58_format,
+        token_decimals: props.token_decimals[0] as _,
+        token_symbol: props.token_symbol[0].clone(),
     });
     Ok(body)
 }

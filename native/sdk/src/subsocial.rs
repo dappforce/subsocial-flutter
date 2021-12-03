@@ -5133,7 +5133,9 @@ pub mod api {
                     #[derive(
                         :: subxt :: codec :: Encode, :: subxt :: codec :: Decode,
                     )]
-                    pub struct CheckNonce(pub ::core::primitive::u32);
+                    pub struct CheckNonce(
+                        #[codec(compact)] pub ::core::primitive::u32,
+                    );
                 }
                 pub mod check_spec_version {
                     use super::runtime_types;
@@ -6667,7 +6669,9 @@ pub mod api {
             #[derive(
                 :: subxt :: codec :: Encode, :: subxt :: codec :: Decode,
             )]
-            pub struct ChargeTransactionPayment(pub ::core::primitive::u128);
+            pub struct ChargeTransactionPayment(
+                #[codec(compact)] pub ::core::primitive::u128,
+            );
             #[derive(
                 :: subxt :: codec :: Encode, :: subxt :: codec :: Decode,
             )]
@@ -7483,7 +7487,7 @@ pub mod api {
                     #[codec(index = 0)]
                     Id(_0),
                     #[codec(index = 1)]
-                    Index(_1),
+                    Index(#[codec(compact)] _1),
                     #[codec(index = 2)]
                     Raw(::std::vec::Vec<::core::primitive::u8>),
                     #[codec(index = 3)]
