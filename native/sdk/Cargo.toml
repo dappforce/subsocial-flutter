@@ -12,7 +12,7 @@ hex = { version = "0.4", default-features = false }
 [dependencies.subxt]
 git = "https://github.com/paritytech/subxt.git"
 version = "0.15.0"
-rev = "e05d24b" # https://github.com/paritytech/subxt/commit/e05d24b
+rev = "55aafa2" # https://github.com/paritytech/subxt/commit/55aafa2
 
 [build-dependencies]
 syn = { version = "1.0.80", optional = true }
@@ -22,7 +22,7 @@ frame-metadata = { version = "14.0.0", features = ["v14", "std"], optional = tru
 [build-dependencies.subxt-codegen]
 git = "https://github.com/paritytech/subxt.git"
 version = "0.2.0"
-rev = "e05d24b" # https://github.com/paritytech/subxt/commit/e05d24b
+rev = "55aafa2" # https://github.com/paritytech/subxt/commit/55aafa2
 optional = true
 
 [features]

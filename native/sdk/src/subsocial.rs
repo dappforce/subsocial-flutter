@@ -5730,7 +5730,12 @@ pub mod api {
                 UpdateSpaceSettings,
             }
             #[derive(
-                :: subxt :: codec :: Encode, :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                :: subxt :: codec :: Decode,
+                PartialEq,
+                Eq,
+                PartialOrd,
+                Ord,
             )]
             pub struct SpacePermissions {
                 pub none: ::core::option::Option<

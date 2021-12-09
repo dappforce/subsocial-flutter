@@ -19,7 +19,12 @@ fn parse_and_generate_runtime(
     let item_mod = syn::parse_quote!(
         pub mod api {}
     );
-    let runtime_api = generator.generate_runtime(item_mod, Default::default());
+    let derives = vec![];
+    let mut generated_type_derives =
+        subxt_codegen::GeneratedTypeDerives::default();
+    generated_type_derives.append(derives.iter().cloned());
+    let runtime_api =
+        generator.generate_runtime(item_mod, generated_type_derives);
     std::fs::write(out, runtime_api.to_string())?;
     Ok(())
 }

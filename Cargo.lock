@@ -2561,7 +2561,7 @@ checksum = "6bdef32e8150c2a081110b42772ffe7d7c9032b606bc226c8260fd97e0976601"
 [[package]]
 name = "subxt"
 version = "0.15.0"
-source = "git+https://github.com/paritytech/subxt.git?rev=e05d24b#e05d24bd8a4751c24ed14e0b93f78e705ece779d"
+source = "git+https://github.com/paritytech/subxt.git?rev=55aafa2#55aafa25d8354cdebd99eeffddbbbd80c5cc1e50"
 dependencies = [
  "async-trait",
  "bitvec",
@@ -2576,7 +2576,6 @@ dependencies = [
  "scale-info",
  "serde",
  "serde_json",
- "sp-arithmetic",
  "sp-core",
  "sp-runtime",
  "sp-version",
@@ -2588,7 +2587,7 @@ dependencies = [
 [[package]]
 name = "subxt-codegen"
 version = "0.2.0"
-source = "git+https://github.com/paritytech/subxt.git?rev=e05d24b#e05d24bd8a4751c24ed14e0b93f78e705ece779d"
+source = "git+https://github.com/paritytech/subxt.git?rev=55aafa2#55aafa25d8354cdebd99eeffddbbbd80c5cc1e50"
 dependencies = [
  "async-trait",
  "darling",
@@ -2606,7 +2605,7 @@ dependencies = [
 [[package]]
 name = "subxt-macro"
 version = "0.1.0"
-source = "git+https://github.com/paritytech/subxt.git?rev=e05d24b#e05d24bd8a4751c24ed14e0b93f78e705ece779d"
+source = "git+https://github.com/paritytech/subxt.git?rev=55aafa2#55aafa25d8354cdebd99eeffddbbbd80c5cc1e50"
 dependencies = [
  "async-trait",
  "darling",

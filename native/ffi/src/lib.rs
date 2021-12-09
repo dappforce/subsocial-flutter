@@ -57,7 +57,7 @@ pub unsafe extern "C" fn subsocial_init_sdk(
     }
     let url = CStr::from_ptr(config.url)
         .to_str()
-        .unwrap_or("wss://rpc.subsocial.network");
+        .unwrap_or("wss://rpc.subsocial.network:443");
     // only init it with default value once.
     if SIGNER.get().is_none() {
         let _ = SIGNER.set(dummy_signer());
