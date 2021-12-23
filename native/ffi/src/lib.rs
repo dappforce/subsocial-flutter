@@ -3,7 +3,7 @@ use std::os::raw::c_char;
 
 use allo_isolate::Isolate;
 use once_cell::sync::OnceCell;
-use sdk::subsocial::api::{DefaultConfig, RuntimeApi};
+use sdk::subsocial::{DefaultConfig, RuntimeApi};
 use sdk::subxt;
 
 mod dart_utils;

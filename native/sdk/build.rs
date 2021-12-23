@@ -31,7 +31,10 @@ fn parse_and_generate_runtime(
 
 #[cfg(feature = "generate-runtime")]
 pub fn generate_subsocial_runtime() -> Result<(), Box<dyn Error>> {
-    parse_and_generate_runtime("metadata/subsocial.scale", "src/subsocial.rs")
+    parse_and_generate_runtime(
+        "metadata/subsocial.scale",
+        "src/subsocial_api.rs",
+    )
 }
 
 fn main() -> Result<(), Box<dyn Error>> {

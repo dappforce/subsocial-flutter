@@ -1,4 +1,4 @@
-use sdk::subsocial::api::{profiles, runtime_types};
+use sdk::subsocial::{profiles, runtime_types};
 use sdk::subxt::sp_core::crypto::{Ss58AddressFormatRegistry, Ss58Codec};
 
 use crate::pb::subsocial::response::Body as ResponseBody;
@@ -28,7 +28,9 @@ pub async fn create_profile(
         .create_profile(content)
         .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<profiles::events::ProfileCreated>()?;
+        .wait_for_finalized_success()
+        .await?
+        .find_first_event::<profiles::events::ProfileCreated>()?;
     match maybe_event {
         Some(event) => {
             let body = ResponseBody::ProfileCreated(ProfileCreated {
@@ -61,7 +63,9 @@ pub async fn update_profile(
         .update_profile(update)
         .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<profiles::events::ProfileUpdated>()?;
+        .wait_for_finalized_success()
+        .await?
+        .find_first_event::<profiles::events::ProfileUpdated>()?;
     match maybe_event {
         Some(event) => {
             let body = ResponseBody::ProfileUpdated(ProfileUpdated {

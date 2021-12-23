@@ -1,11 +1,18 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:subsocial_sdk/subsocial_sdk.dart';
 
 void main() {
   final suri = Platform.environment['SURI'] ?? '//Alice';
+
+  test('Get Next Space Id', () async {
+    final sdk = await Subsocial.instance;
+    final spaceId = await sdk.nextSpaceId();
+    debugPrint('spaceId: $spaceId');
+  });
   test('Get SystemProperties', () async {
     final sdk = await Subsocial.instance;
     final props = await sdk.systemProperties();

@@ -1,4 +1,4 @@
-use sdk::subsocial::api::posts;
+use sdk::subsocial::posts;
 use sdk::subxt::sp_core::crypto::{Ss58AddressFormatRegistry, Ss58Codec};
 
 use crate::pb::subsocial::response::Body as ResponseBody;
@@ -42,7 +42,9 @@ pub async fn create_post(
         .create_post(maybe_space_id, extension, content)
         .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<posts::events::PostCreated>()?;
+        .wait_for_finalized_success()
+        .await?
+        .find_first_event::<posts::events::PostCreated>()?;
     match maybe_event {
         Some(event) => {
             let body = ResponseBody::PostCreated(PostCreated {
@@ -86,7 +88,9 @@ pub async fn update_post(
         .update_post(post_id, update)
         .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<posts::events::PostUpdated>()?;
+        .wait_for_finalized_success()
+        .await?
+        .find_first_event::<posts::events::PostUpdated>()?;
     match maybe_event {
         Some(event) => {
             let body = ResponseBody::PostUpdated(PostUpdated {

@@ -1,4 +1,4 @@
-use sdk::subsocial::api::reactions;
+use sdk::subsocial::reactions;
 
 use crate::pb::subsocial::response::Body as ResponseBody;
 use crate::pb::subsocial::*;
@@ -18,7 +18,9 @@ pub async fn create_post_reaction(
         .create_post_reaction(post_id, kind.into())
         .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<reactions::events::PostReactionCreated>()?;
+        .wait_for_finalized_success()
+        .await?
+        .find_first_event::<reactions::events::PostReactionCreated>()?;
     match maybe_event {
         Some(event) => {
             let body = ResponseBody::PostReactionCreated(PostReactionCreated {
@@ -52,7 +54,9 @@ pub async fn update_post_reaction(
         .update_post_reaction(post_id, reaction_id, kind.into())
         .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<reactions::events::PostReactionUpdated>()?;
+        .wait_for_finalized_success()
+        .await?
+        .find_first_event::<reactions::events::PostReactionUpdated>()?;
     match maybe_event {
         Some(event) => {
             let body = ResponseBody::PostReactionUpdated(PostReactionUpdated {
@@ -84,7 +88,9 @@ pub async fn delete_post_reaction(
         .delete_post_reaction(post_id, reaction_id)
         .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<reactions::events::PostReactionDeleted>()?;
+        .wait_for_finalized_success()
+        .await?
+        .find_first_event::<reactions::events::PostReactionDeleted>()?;
     match maybe_event {
         Some(event) => {
             let body = ResponseBody::PostReactionDeleted(PostReactionDeleted {

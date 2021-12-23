@@ -1,4 +1,4 @@
-use sdk::subsocial::api::spaces;
+use sdk::subsocial::spaces;
 use sdk::subxt::sp_core::crypto::{Ss58AddressFormatRegistry, Ss58Codec};
 
 use crate::pb::subsocial::response::Body as ResponseBody;
@@ -42,7 +42,9 @@ pub async fn create_space(
         .create_space(maybe_parent_id, maybe_handle, content, None)
         .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<spaces::events::SpaceCreated>()?;
+        .wait_for_finalized_success()
+        .await?
+        .find_first_event::<spaces::events::SpaceCreated>()?;
     match maybe_event {
         Some(event) => {
             let body = ResponseBody::SpaceCreated(SpaceCreated {
@@ -83,7 +85,9 @@ pub async fn update_space(
         .update_space(space_id, update)
         .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<spaces::events::SpaceUpdated>()?;
+        .wait_for_finalized_success()
+        .await?
+        .find_first_event::<spaces::events::SpaceUpdated>()?;
     match maybe_event {
         Some(event) => {
             let body = ResponseBody::SpaceUpdated(SpaceUpdated {

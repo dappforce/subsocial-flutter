@@ -1,4 +1,4 @@
-use sdk::subsocial::api::space_follows;
+use sdk::subsocial::space_follows;
 use sdk::subxt::sp_core::crypto::{Ss58AddressFormatRegistry, Ss58Codec};
 
 use crate::pb::subsocial::response::Body as ResponseBody;
@@ -18,7 +18,9 @@ pub async fn follow_space(
         .follow_space(space_id)
         .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<space_follows::events::SpaceFollowed>()?;
+        .wait_for_finalized_success()
+        .await?
+        .find_first_event::<space_follows::events::SpaceFollowed>()?;
     match maybe_event {
         Some(event) => Ok(ResponseBody::SpaceFollowed(SpaceFollowed {
             space_id: event.1,
@@ -46,7 +48,9 @@ pub async fn unfollow_space(
         .unfollow_space(space_id)
         .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<space_follows::events::SpaceUnfollowed>()?;
+        .wait_for_finalized_success()
+        .await?
+        .find_first_event::<space_follows::events::SpaceUnfollowed>()?;
     match maybe_event {
         Some(event) => Ok(ResponseBody::SpaceUnfollowed(SpaceUnfollowed {
             space_id: event.1,

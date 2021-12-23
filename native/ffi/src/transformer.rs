@@ -1,4 +1,4 @@
-use sdk::subsocial::api::runtime_types;
+use sdk::subsocial::runtime_types;
 use sdk::subxt::sp_core::crypto::{Ss58AddressFormatRegistry, Ss58Codec};
 use sdk::subxt::sp_runtime::AccountId32;
 

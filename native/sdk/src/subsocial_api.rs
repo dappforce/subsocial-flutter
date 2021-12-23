@@ -160,7 +160,7 @@ pub mod api {
                 pub fn fill_block(
                     &self,
                     ratio: runtime_types::sp_arithmetic::per_things::Perbill,
-                ) -> ::subxt::SubmittableExtrinsic<T, FillBlock>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, FillBlock>
                 {
                     let call = FillBlock { ratio };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -168,14 +168,15 @@ pub mod api {
                 pub fn remark(
                     &self,
                     remark: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, Remark> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Remark>
+                {
                     let call = Remark { remark };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
                 pub fn set_heap_pages(
                     &self,
                     pages: ::core::primitive::u64,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetHeapPages>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetHeapPages>
                 {
                     let call = SetHeapPages { pages };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -183,14 +184,15 @@ pub mod api {
                 pub fn set_code(
                     &self,
                     code: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetCode> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetCode>
+                {
                     let call = SetCode { code };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
                 pub fn set_code_without_checks(
                     &self,
                     code: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetCodeWithoutChecks>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetCodeWithoutChecks>
                 {
                     let call = SetCodeWithoutChecks { code };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -198,7 +200,7 @@ pub mod api {
                 pub fn set_changes_trie_config(
                     &self,
                     changes_trie_config : :: core :: option :: Option < runtime_types :: sp_core :: changes_trie :: ChangesTrieConfiguration >,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetChangesTrieConfig>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetChangesTrieConfig>
                 {
                     let call = SetChangesTrieConfig {
                         changes_trie_config,
@@ -211,7 +213,7 @@ pub mod api {
                         ::std::vec::Vec<::core::primitive::u8>,
                         ::std::vec::Vec<::core::primitive::u8>,
                     )>,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetStorage>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetStorage>
                 {
                     let call = SetStorage { items };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -221,7 +223,7 @@ pub mod api {
                     keys: ::std::vec::Vec<
                         ::std::vec::Vec<::core::primitive::u8>,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, KillStorage>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, KillStorage>
                 {
                     let call = KillStorage { keys };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -230,7 +232,7 @@ pub mod api {
                     &self,
                     prefix: ::std::vec::Vec<::core::primitive::u8>,
                     subkeys: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, KillPrefix>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, KillPrefix>
                 {
                     let call = KillPrefix { prefix, subkeys };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -238,7 +240,7 @@ pub mod api {
                 pub fn remark_with_event(
                     &self,
                     remark: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, RemarkWithEvent>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, RemarkWithEvent>
                 {
                     let call = RemarkWithEvent { remark };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -783,7 +785,7 @@ pub mod api {
                 pub fn set(
                     &self,
                     now: ::core::primitive::u64,
-                ) -> ::subxt::SubmittableExtrinsic<T, Set> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Set> {
                     let call = Set { now };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -904,7 +906,7 @@ pub mod api {
                     &self,
                     equivocation_proof : runtime_types :: sp_finality_grandpa :: EquivocationProof < :: subxt :: sp_core :: H256 , :: core :: primitive :: u32 >,
                     key_owner_proof: runtime_types::sp_core::Void,
-                ) -> ::subxt::SubmittableExtrinsic<T, ReportEquivocation>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ReportEquivocation>
                 {
                     let call = ReportEquivocation {
                         equivocation_proof,
@@ -916,8 +918,11 @@ pub mod api {
                     &self,
                     equivocation_proof : runtime_types :: sp_finality_grandpa :: EquivocationProof < :: subxt :: sp_core :: H256 , :: core :: primitive :: u32 >,
                     key_owner_proof: runtime_types::sp_core::Void,
-                ) -> ::subxt::SubmittableExtrinsic<T, ReportEquivocationUnsigned>
-                {
+                ) -> ::subxt::SubmittableExtrinsic<
+                    'a,
+                    T,
+                    ReportEquivocationUnsigned,
+                > {
                     let call = ReportEquivocationUnsigned {
                         equivocation_proof,
                         key_owner_proof,
@@ -928,7 +933,7 @@ pub mod api {
                     &self,
                     delay: ::core::primitive::u32,
                     best_finalized_block_number: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, NoteStalled>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, NoteStalled>
                 {
                     let call = NoteStalled {
                         delay,
@@ -1243,7 +1248,7 @@ pub mod api {
                         (),
                     >,
                     value: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, Transfer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Transfer>
                 {
                     let call = Transfer { dest, value };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -1256,7 +1261,7 @@ pub mod api {
                     >,
                     new_free: ::core::primitive::u128,
                     new_reserved: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetBalance>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetBalance>
                 {
                     let call = SetBalance {
                         who,
@@ -1276,7 +1281,7 @@ pub mod api {
                         (),
                     >,
                     value: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceTransfer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceTransfer>
                 {
                     let call = ForceTransfer {
                         source,
@@ -1292,7 +1297,7 @@ pub mod api {
                         (),
                     >,
                     value: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, TransferKeepAlive>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, TransferKeepAlive>
                 {
                     let call = TransferKeepAlive { dest, value };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -1304,7 +1309,7 @@ pub mod api {
                         (),
                     >,
                     keep_alive: ::core::primitive::bool,
-                ) -> ::subxt::SubmittableExtrinsic<T, TransferAll>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, TransferAll>
                 {
                     let call = TransferAll { dest, keep_alive };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -1316,7 +1321,7 @@ pub mod api {
                         (),
                     >,
                     amount: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceUnreserve>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceUnreserve>
                 {
                     let call = ForceUnreserve { who, amount };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -1698,7 +1703,8 @@ pub mod api {
                 pub fn sudo(
                     &self,
                     call: runtime_types::subsocial_runtime::Call,
-                ) -> ::subxt::SubmittableExtrinsic<T, Sudo> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Sudo>
+                {
                     let call = Sudo { call };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -1706,7 +1712,7 @@ pub mod api {
                     &self,
                     call: runtime_types::subsocial_runtime::Call,
                     weight: ::core::primitive::u64,
-                ) -> ::subxt::SubmittableExtrinsic<T, SudoUncheckedWeight>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SudoUncheckedWeight>
                 {
                     let call = SudoUncheckedWeight { call, weight };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -1717,7 +1723,8 @@ pub mod api {
                         ::subxt::sp_core::crypto::AccountId32,
                         (),
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetKey> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetKey>
+                {
                     let call = SetKey { new };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -1728,7 +1735,8 @@ pub mod api {
                         (),
                     >,
                     call: runtime_types::subsocial_runtime::Call,
-                ) -> ::subxt::SubmittableExtrinsic<T, SudoAs> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SudoAs>
+                {
                     let call = SudoAs { who, call };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -1916,7 +1924,7 @@ pub mod api {
                     )>,
                     priority: ::core::primitive::u8,
                     call: runtime_types::subsocial_runtime::Call,
-                ) -> ::subxt::SubmittableExtrinsic<T, Schedule>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Schedule>
                 {
                     let call = Schedule {
                         when,
@@ -1930,7 +1938,8 @@ pub mod api {
                     &self,
                     when: ::core::primitive::u32,
                     index: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, Cancel> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Cancel>
+                {
                     let call = Cancel { when, index };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -1944,7 +1953,7 @@ pub mod api {
                     )>,
                     priority: ::core::primitive::u8,
                     call: runtime_types::subsocial_runtime::Call,
-                ) -> ::subxt::SubmittableExtrinsic<T, ScheduleNamed>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ScheduleNamed>
                 {
                     let call = ScheduleNamed {
                         id,
@@ -1958,7 +1967,7 @@ pub mod api {
                 pub fn cancel_named(
                     &self,
                     id: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, CancelNamed>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, CancelNamed>
                 {
                     let call = CancelNamed { id };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -1972,7 +1981,7 @@ pub mod api {
                     )>,
                     priority: ::core::primitive::u8,
                     call: runtime_types::subsocial_runtime::Call,
-                ) -> ::subxt::SubmittableExtrinsic<T, ScheduleAfter>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ScheduleAfter>
                 {
                     let call = ScheduleAfter {
                         after,
@@ -1992,7 +2001,7 @@ pub mod api {
                     )>,
                     priority: ::core::primitive::u8,
                     call: runtime_types::subsocial_runtime::Call,
-                ) -> ::subxt::SubmittableExtrinsic<T, ScheduleNamedAfter>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ScheduleNamedAfter>
                 {
                     let call = ScheduleNamedAfter {
                         id,
@@ -2223,7 +2232,8 @@ pub mod api {
                     calls: ::std::vec::Vec<
                         runtime_types::subsocial_runtime::Call,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, Batch> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Batch>
+                {
                     let call = Batch { calls };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -2231,7 +2241,7 @@ pub mod api {
                     &self,
                     index: ::core::primitive::u16,
                     call: runtime_types::subsocial_runtime::Call,
-                ) -> ::subxt::SubmittableExtrinsic<T, AsDerivative>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, AsDerivative>
                 {
                     let call = AsDerivative { index, call };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -2241,7 +2251,7 @@ pub mod api {
                     calls: ::std::vec::Vec<
                         runtime_types::subsocial_runtime::Call,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, BatchAll>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, BatchAll>
                 {
                     let call = BatchAll { calls };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -2314,7 +2324,7 @@ pub mod api {
                 pub content: runtime_types::pallet_utils::Content,
             }
             impl ::subxt::Call for CreatePost {
-                const PALLET: &'static str = "Posts";
+                const PALLET: &'static str = "PostsModule";
                 const FUNCTION: &'static str = "create_post";
             }
             #[derive(
@@ -2325,7 +2335,7 @@ pub mod api {
                 pub update: runtime_types::pallet_posts::PostUpdate,
             }
             impl ::subxt::Call for UpdatePost {
-                const PALLET: &'static str = "Posts";
+                const PALLET: &'static str = "PostsModule";
                 const FUNCTION: &'static str = "update_post";
             }
             #[derive(
@@ -2337,7 +2347,7 @@ pub mod api {
                     ::core::option::Option<::core::primitive::u64>,
             }
             impl ::subxt::Call for MovePost {
-                const PALLET: &'static str = "Posts";
+                const PALLET: &'static str = "PostsModule";
                 const FUNCTION: &'static str = "move_post";
             }
             pub struct TransactionApi<
@@ -2360,7 +2370,7 @@ pub mod api {
                     >,
                     extension: runtime_types::pallet_posts::PostExtension,
                     content: runtime_types::pallet_utils::Content,
-                ) -> ::subxt::SubmittableExtrinsic<T, CreatePost>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, CreatePost>
                 {
                     let call = CreatePost {
                         space_id_opt,
@@ -2373,7 +2383,7 @@ pub mod api {
                     &self,
                     post_id: ::core::primitive::u64,
                     update: runtime_types::pallet_posts::PostUpdate,
-                ) -> ::subxt::SubmittableExtrinsic<T, UpdatePost>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, UpdatePost>
                 {
                     let call = UpdatePost { post_id, update };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -2384,7 +2394,7 @@ pub mod api {
                     new_space_id: ::core::option::Option<
                         ::core::primitive::u64,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, MovePost>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, MovePost>
                 {
                     let call = MovePost {
                         post_id,
@@ -2407,7 +2417,7 @@ pub mod api {
                 pub ::core::primitive::u64,
             );
             impl ::subxt::Event for PostCreated {
-                const PALLET: &'static str = "Posts";
+                const PALLET: &'static str = "PostsModule";
                 const EVENT: &'static str = "PostCreated";
             }
             #[derive(
@@ -2418,7 +2428,7 @@ pub mod api {
                 pub ::core::primitive::u64,
             );
             impl ::subxt::Event for PostUpdated {
-                const PALLET: &'static str = "Posts";
+                const PALLET: &'static str = "PostsModule";
                 const EVENT: &'static str = "PostUpdated";
             }
             #[derive(
@@ -2429,7 +2439,7 @@ pub mod api {
                 pub ::core::primitive::u64,
             );
             impl ::subxt::Event for PostDeleted {
-                const PALLET: &'static str = "Posts";
+                const PALLET: &'static str = "PostsModule";
                 const EVENT: &'static str = "PostDeleted";
             }
             #[derive(
@@ -2440,7 +2450,7 @@ pub mod api {
                 pub ::core::primitive::u64,
             );
             impl ::subxt::Event for PostShared {
-                const PALLET: &'static str = "Posts";
+                const PALLET: &'static str = "PostsModule";
                 const EVENT: &'static str = "PostShared";
             }
             #[derive(
@@ -2451,7 +2461,7 @@ pub mod api {
                 pub ::core::primitive::u64,
             );
             impl ::subxt::Event for PostMoved {
-                const PALLET: &'static str = "Posts";
+                const PALLET: &'static str = "PostsModule";
                 const EVENT: &'static str = "PostMoved";
             }
         }
@@ -2459,7 +2469,7 @@ pub mod api {
             use super::runtime_types;
             pub struct NextPostId;
             impl ::subxt::StorageEntry for NextPostId {
-                const PALLET: &'static str = "Posts";
+                const PALLET: &'static str = "PostsModule";
                 const STORAGE: &'static str = "NextPostId";
                 type Value = ::core::primitive::u64;
                 fn key(&self) -> ::subxt::StorageEntryKey {
@@ -2468,7 +2478,7 @@ pub mod api {
             }
             pub struct PostById(pub ::core::primitive::u64);
             impl ::subxt::StorageEntry for PostById {
-                const PALLET: &'static str = "Posts";
+                const PALLET: &'static str = "PostsModule";
                 const STORAGE: &'static str = "PostById";
                 type Value = runtime_types::pallet_posts::Post;
                 fn key(&self) -> ::subxt::StorageEntryKey {
@@ -2482,7 +2492,7 @@ pub mod api {
             }
             pub struct ReplyIdsByPostId(pub ::core::primitive::u64);
             impl ::subxt::StorageEntry for ReplyIdsByPostId {
-                const PALLET: &'static str = "Posts";
+                const PALLET: &'static str = "PostsModule";
                 const STORAGE: &'static str = "ReplyIdsByPostId";
                 type Value = ::std::vec::Vec<::core::primitive::u64>;
                 fn key(&self) -> ::subxt::StorageEntryKey {
@@ -2496,7 +2506,7 @@ pub mod api {
             }
             pub struct PostIdsBySpaceId(pub ::core::primitive::u64);
             impl ::subxt::StorageEntry for PostIdsBySpaceId {
-                const PALLET: &'static str = "Posts";
+                const PALLET: &'static str = "PostsModule";
                 const STORAGE: &'static str = "PostIdsBySpaceId";
                 type Value = ::std::vec::Vec<::core::primitive::u64>;
                 fn key(&self) -> ::subxt::StorageEntryKey {
@@ -2512,7 +2522,7 @@ pub mod api {
                 pub ::core::primitive::u64,
             );
             impl ::subxt::StorageEntry for SharedPostIdsByOriginalPostId {
-                const PALLET: &'static str = "Posts";
+                const PALLET: &'static str = "PostsModule";
                 const STORAGE: &'static str = "SharedPostIdsByOriginalPostId";
                 type Value = ::std::vec::Vec<::core::primitive::u64>;
                 fn key(&self) -> ::subxt::StorageEntryKey {
@@ -2716,7 +2726,7 @@ pub mod api {
                 pub fn follow_account(
                     &self,
                     account: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, FollowAccount>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, FollowAccount>
                 {
                     let call = FollowAccount { account };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -2724,7 +2734,7 @@ pub mod api {
                 pub fn unfollow_account(
                     &self,
                     account: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, UnfollowAccount>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, UnfollowAccount>
                 {
                     let call = UnfollowAccount { account };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -2894,7 +2904,7 @@ pub mod api {
                 pub content: runtime_types::pallet_utils::Content,
             }
             impl ::subxt::Call for CreateProfile {
-                const PALLET: &'static str = "Profiles";
+                const PALLET: &'static str = "ProfilesModule";
                 const FUNCTION: &'static str = "create_profile";
             }
             #[derive(
@@ -2904,7 +2914,7 @@ pub mod api {
                 pub update: runtime_types::pallet_profiles::ProfileUpdate,
             }
             impl ::subxt::Call for UpdateProfile {
-                const PALLET: &'static str = "Profiles";
+                const PALLET: &'static str = "ProfilesModule";
                 const FUNCTION: &'static str = "update_profile";
             }
             pub struct TransactionApi<
@@ -2923,7 +2933,7 @@ pub mod api {
                 pub fn create_profile(
                     &self,
                     content: runtime_types::pallet_utils::Content,
-                ) -> ::subxt::SubmittableExtrinsic<T, CreateProfile>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, CreateProfile>
                 {
                     let call = CreateProfile { content };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -2931,7 +2941,7 @@ pub mod api {
                 pub fn update_profile(
                     &self,
                     update: runtime_types::pallet_profiles::ProfileUpdate,
-                ) -> ::subxt::SubmittableExtrinsic<T, UpdateProfile>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, UpdateProfile>
                 {
                     let call = UpdateProfile { update };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -2950,7 +2960,7 @@ pub mod api {
                 pub ::subxt::sp_core::crypto::AccountId32,
             );
             impl ::subxt::Event for ProfileCreated {
-                const PALLET: &'static str = "Profiles";
+                const PALLET: &'static str = "ProfilesModule";
                 const EVENT: &'static str = "ProfileCreated";
             }
             #[derive(
@@ -2960,7 +2970,7 @@ pub mod api {
                 pub ::subxt::sp_core::crypto::AccountId32,
             );
             impl ::subxt::Event for ProfileUpdated {
-                const PALLET: &'static str = "Profiles";
+                const PALLET: &'static str = "ProfilesModule";
                 const EVENT: &'static str = "ProfileUpdated";
             }
         }
@@ -2970,7 +2980,7 @@ pub mod api {
                 pub ::subxt::sp_core::crypto::AccountId32,
             );
             impl ::subxt::StorageEntry for SocialAccountById {
-                const PALLET: &'static str = "Profiles";
+                const PALLET: &'static str = "ProfilesModule";
                 const STORAGE: &'static str = "SocialAccountById";
                 type Value = runtime_types::pallet_profiles::SocialAccount;
                 fn key(&self) -> ::subxt::StorageEntryKey {
@@ -3111,7 +3121,7 @@ pub mod api {
                     &self,
                     post_id: ::core::primitive::u64,
                     kind: runtime_types::pallet_reactions::ReactionKind,
-                ) -> ::subxt::SubmittableExtrinsic<T, CreatePostReaction>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, CreatePostReaction>
                 {
                     let call = CreatePostReaction { post_id, kind };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -3121,7 +3131,7 @@ pub mod api {
                     post_id: ::core::primitive::u64,
                     reaction_id: ::core::primitive::u64,
                     new_kind: runtime_types::pallet_reactions::ReactionKind,
-                ) -> ::subxt::SubmittableExtrinsic<T, UpdatePostReaction>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, UpdatePostReaction>
                 {
                     let call = UpdatePostReaction {
                         post_id,
@@ -3134,7 +3144,7 @@ pub mod api {
                     &self,
                     post_id: ::core::primitive::u64,
                     reaction_id: ::core::primitive::u64,
-                ) -> ::subxt::SubmittableExtrinsic<T, DeletePostReaction>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, DeletePostReaction>
                 {
                     let call = DeletePostReaction {
                         post_id,
@@ -3422,7 +3432,7 @@ pub mod api {
                     permissions: ::std::vec::Vec<
                         runtime_types::pallet_permissions::SpacePermission,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, CreateRole>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, CreateRole>
                 {
                     let call = CreateRole {
                         space_id,
@@ -3436,7 +3446,7 @@ pub mod api {
                     &self,
                     role_id: ::core::primitive::u64,
                     update: runtime_types::pallet_roles::RoleUpdate,
-                ) -> ::subxt::SubmittableExtrinsic<T, UpdateRole>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, UpdateRole>
                 {
                     let call = UpdateRole { role_id, update };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -3444,7 +3454,7 @@ pub mod api {
                 pub fn delete_role(
                     &self,
                     role_id: ::core::primitive::u64,
-                ) -> ::subxt::SubmittableExtrinsic<T, DeleteRole>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, DeleteRole>
                 {
                     let call = DeleteRole { role_id };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -3457,7 +3467,7 @@ pub mod api {
                             ::subxt::sp_core::crypto::AccountId32,
                         >,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, GrantRole>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, GrantRole>
                 {
                     let call = GrantRole { role_id, users };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -3470,7 +3480,7 @@ pub mod api {
                             ::subxt::sp_core::crypto::AccountId32,
                         >,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, RevokeRole>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, RevokeRole>
                 {
                     let call = RevokeRole { role_id, users };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -3747,7 +3757,7 @@ pub mod api {
                 pub space_id: ::core::primitive::u64,
             }
             impl ::subxt::Call for FollowSpace {
-                const PALLET: &'static str = "SpaceFollows";
+                const PALLET: &'static str = "SpaceFollowsModule";
                 const FUNCTION: &'static str = "follow_space";
             }
             #[derive(
@@ -3757,7 +3767,7 @@ pub mod api {
                 pub space_id: ::core::primitive::u64,
             }
             impl ::subxt::Call for UnfollowSpace {
-                const PALLET: &'static str = "SpaceFollows";
+                const PALLET: &'static str = "SpaceFollowsModule";
                 const FUNCTION: &'static str = "unfollow_space";
             }
             pub struct TransactionApi<
@@ -3776,7 +3786,7 @@ pub mod api {
                 pub fn follow_space(
                     &self,
                     space_id: ::core::primitive::u64,
-                ) -> ::subxt::SubmittableExtrinsic<T, FollowSpace>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, FollowSpace>
                 {
                     let call = FollowSpace { space_id };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -3784,7 +3794,7 @@ pub mod api {
                 pub fn unfollow_space(
                     &self,
                     space_id: ::core::primitive::u64,
-                ) -> ::subxt::SubmittableExtrinsic<T, UnfollowSpace>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, UnfollowSpace>
                 {
                     let call = UnfollowSpace { space_id };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -3804,7 +3814,7 @@ pub mod api {
                 pub ::core::primitive::u64,
             );
             impl ::subxt::Event for SpaceFollowed {
-                const PALLET: &'static str = "SpaceFollows";
+                const PALLET: &'static str = "SpaceFollowsModule";
                 const EVENT: &'static str = "SpaceFollowed";
             }
             #[derive(
@@ -3815,7 +3825,7 @@ pub mod api {
                 pub ::core::primitive::u64,
             );
             impl ::subxt::Event for SpaceUnfollowed {
-                const PALLET: &'static str = "SpaceFollows";
+                const PALLET: &'static str = "SpaceFollowsModule";
                 const EVENT: &'static str = "SpaceUnfollowed";
             }
         }
@@ -3823,7 +3833,7 @@ pub mod api {
             use super::runtime_types;
             pub struct SpaceFollowers(pub ::core::primitive::u64);
             impl ::subxt::StorageEntry for SpaceFollowers {
-                const PALLET: &'static str = "SpaceFollows";
+                const PALLET: &'static str = "SpaceFollowsModule";
                 const STORAGE: &'static str = "SpaceFollowers";
                 type Value =
                     ::std::vec::Vec<::subxt::sp_core::crypto::AccountId32>;
@@ -3841,7 +3851,7 @@ pub mod api {
                 ::core::primitive::u64,
             );
             impl ::subxt::StorageEntry for SpaceFollowedByAccount {
-                const PALLET: &'static str = "SpaceFollows";
+                const PALLET: &'static str = "SpaceFollowsModule";
                 const STORAGE: &'static str = "SpaceFollowedByAccount";
                 type Value = ::core::primitive::bool;
                 fn key(&self) -> ::subxt::StorageEntryKey {
@@ -3857,7 +3867,7 @@ pub mod api {
                 pub ::subxt::sp_core::crypto::AccountId32,
             );
             impl ::subxt::StorageEntry for SpacesFollowedByAccount {
-                const PALLET: &'static str = "SpaceFollows";
+                const PALLET: &'static str = "SpaceFollowsModule";
                 const STORAGE: &'static str = "SpacesFollowedByAccount";
                 type Value = ::std::vec::Vec<::core::primitive::u64>;
                 fn key(&self) -> ::subxt::StorageEntryKey {
@@ -4044,7 +4054,7 @@ pub mod api {
                     &self,
                     space_id: ::core::primitive::u64,
                     transfer_to: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, TransferSpaceOwnership>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, TransferSpaceOwnership>
                 {
                     let call = TransferSpaceOwnership {
                         space_id,
@@ -4055,7 +4065,7 @@ pub mod api {
                 pub fn accept_pending_ownership(
                     &self,
                     space_id: ::core::primitive::u64,
-                ) -> ::subxt::SubmittableExtrinsic<T, AcceptPendingOwnership>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, AcceptPendingOwnership>
                 {
                     let call = AcceptPendingOwnership { space_id };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -4063,7 +4073,7 @@ pub mod api {
                 pub fn reject_pending_ownership(
                     &self,
                     space_id: ::core::primitive::u64,
-                ) -> ::subxt::SubmittableExtrinsic<T, RejectPendingOwnership>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, RejectPendingOwnership>
                 {
                     let call = RejectPendingOwnership { space_id };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -4177,7 +4187,7 @@ pub mod api {
                 >,
             }
             impl ::subxt::Call for CreateSpace {
-                const PALLET: &'static str = "Spaces";
+                const PALLET: &'static str = "SpacesModule";
                 const FUNCTION: &'static str = "create_space";
             }
             #[derive(
@@ -4188,7 +4198,7 @@ pub mod api {
                 pub update: runtime_types::pallet_spaces::SpaceUpdate,
             }
             impl ::subxt::Call for UpdateSpace {
-                const PALLET: &'static str = "Spaces";
+                const PALLET: &'static str = "SpacesModule";
                 const FUNCTION: &'static str = "update_space";
             }
             #[derive(
@@ -4198,7 +4208,7 @@ pub mod api {
                 pub new_settings: runtime_types::pallet_spaces::SpacesSettings,
             }
             impl ::subxt::Call for UpdateSettings {
-                const PALLET: &'static str = "Spaces";
+                const PALLET: &'static str = "SpacesModule";
                 const FUNCTION: &'static str = "update_settings";
             }
             #[derive(
@@ -4208,7 +4218,7 @@ pub mod api {
                 pub handle: ::std::vec::Vec<::core::primitive::u8>,
             }
             impl ::subxt::Call for ForceUnreserveHandle {
-                const PALLET: &'static str = "Spaces";
+                const PALLET: &'static str = "SpacesModule";
                 const FUNCTION: &'static str = "force_unreserve_handle";
             }
             pub struct TransactionApi<
@@ -4236,7 +4246,7 @@ pub mod api {
                     permissions_opt: ::core::option::Option<
                         runtime_types::pallet_permissions::SpacePermissions,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, CreateSpace>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, CreateSpace>
                 {
                     let call = CreateSpace {
                         parent_id_opt,
@@ -4250,7 +4260,7 @@ pub mod api {
                     &self,
                     space_id: ::core::primitive::u64,
                     update: runtime_types::pallet_spaces::SpaceUpdate,
-                ) -> ::subxt::SubmittableExtrinsic<T, UpdateSpace>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, UpdateSpace>
                 {
                     let call = UpdateSpace { space_id, update };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -4258,7 +4268,7 @@ pub mod api {
                 pub fn update_settings(
                     &self,
                     new_settings: runtime_types::pallet_spaces::SpacesSettings,
-                ) -> ::subxt::SubmittableExtrinsic<T, UpdateSettings>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, UpdateSettings>
                 {
                     let call = UpdateSettings { new_settings };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -4266,7 +4276,7 @@ pub mod api {
                 pub fn force_unreserve_handle(
                     &self,
                     handle: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceUnreserveHandle>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceUnreserveHandle>
                 {
                     let call = ForceUnreserveHandle { handle };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -4286,7 +4296,7 @@ pub mod api {
                 pub ::core::primitive::u64,
             );
             impl ::subxt::Event for SpaceCreated {
-                const PALLET: &'static str = "Spaces";
+                const PALLET: &'static str = "SpacesModule";
                 const EVENT: &'static str = "SpaceCreated";
             }
             #[derive(
@@ -4297,7 +4307,7 @@ pub mod api {
                 pub ::core::primitive::u64,
             );
             impl ::subxt::Event for SpaceUpdated {
-                const PALLET: &'static str = "Spaces";
+                const PALLET: &'static str = "SpacesModule";
                 const EVENT: &'static str = "SpaceUpdated";
             }
             #[derive(
@@ -4308,7 +4318,7 @@ pub mod api {
                 pub ::core::primitive::u64,
             );
             impl ::subxt::Event for SpaceDeleted {
-                const PALLET: &'static str = "Spaces";
+                const PALLET: &'static str = "SpacesModule";
                 const EVENT: &'static str = "SpaceDeleted";
             }
         }
@@ -4316,7 +4326,7 @@ pub mod api {
             use super::runtime_types;
             pub struct NextSpaceId;
             impl ::subxt::StorageEntry for NextSpaceId {
-                const PALLET: &'static str = "Spaces";
+                const PALLET: &'static str = "SpacesModule";
                 const STORAGE: &'static str = "NextSpaceId";
                 type Value = ::core::primitive::u64;
                 fn key(&self) -> ::subxt::StorageEntryKey {
@@ -4325,7 +4335,7 @@ pub mod api {
             }
             pub struct SpaceById(pub ::core::primitive::u64);
             impl ::subxt::StorageEntry for SpaceById {
-                const PALLET: &'static str = "Spaces";
+                const PALLET: &'static str = "SpacesModule";
                 const STORAGE: &'static str = "SpaceById";
                 type Value = runtime_types::pallet_spaces::Space;
                 fn key(&self) -> ::subxt::StorageEntryKey {
@@ -4341,7 +4351,7 @@ pub mod api {
                 pub ::std::vec::Vec<::core::primitive::u8>,
             );
             impl ::subxt::StorageEntry for SpaceIdByHandle {
-                const PALLET: &'static str = "Spaces";
+                const PALLET: &'static str = "SpacesModule";
                 const STORAGE: &'static str = "SpaceIdByHandle";
                 type Value = ::core::primitive::u64;
                 fn key(&self) -> ::subxt::StorageEntryKey {
@@ -4357,7 +4367,7 @@ pub mod api {
                 pub ::subxt::sp_core::crypto::AccountId32,
             );
             impl ::subxt::StorageEntry for SpaceIdsByOwner {
-                const PALLET: &'static str = "Spaces";
+                const PALLET: &'static str = "SpacesModule";
                 const STORAGE: &'static str = "SpaceIdsByOwner";
                 type Value = ::std::vec::Vec<::core::primitive::u64>;
                 fn key(&self) -> ::subxt::StorageEntryKey {
@@ -4371,7 +4381,7 @@ pub mod api {
             }
             pub struct PalletSettings;
             impl ::subxt::StorageEntry for PalletSettings {
-                const PALLET: &'static str = "Spaces";
+                const PALLET: &'static str = "SpacesModule";
                 const STORAGE: &'static str = "PalletSettings";
                 type Value = runtime_types::pallet_spaces::SpacesSettings;
                 fn key(&self) -> ::subxt::StorageEntryKey {
@@ -4380,7 +4390,7 @@ pub mod api {
             }
             pub struct SpaceIdByHandleStorageFixed;
             impl ::subxt::StorageEntry for SpaceIdByHandleStorageFixed {
-                const PALLET: &'static str = "Spaces";
+                const PALLET: &'static str = "SpacesModule";
                 const STORAGE: &'static str = "SpaceIdByHandleStorageFixed";
                 type Value = ::core::primitive::bool;
                 fn key(&self) -> ::subxt::StorageEntryKey {
@@ -4605,7 +4615,7 @@ pub mod api {
                     period: ::core::primitive::u32,
                     period_limit: ::core::primitive::u128,
                     drip_limit: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, AddFaucet>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, AddFaucet>
                 {
                     let call = AddFaucet {
                         faucet,
@@ -4622,7 +4632,7 @@ pub mod api {
                         ::core::primitive::u32,
                         ::core::primitive::u128,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, UpdateFaucet>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, UpdateFaucet>
                 {
                     let call = UpdateFaucet { faucet, update };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -4632,7 +4642,7 @@ pub mod api {
                     faucets: ::std::vec::Vec<
                         ::subxt::sp_core::crypto::AccountId32,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, RemoveFaucets>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, RemoveFaucets>
                 {
                     let call = RemoveFaucets { faucets };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -4641,7 +4651,8 @@ pub mod api {
                     &self,
                     recipient: ::subxt::sp_core::crypto::AccountId32,
                     amount: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, Drip> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Drip>
+                {
                     let call = Drip { recipient, amount };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -4792,7 +4803,7 @@ pub mod api {
                 }
                 pub fn claim_tokens(
                     &self,
-                ) -> ::subxt::SubmittableExtrinsic<T, ClaimTokens>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ClaimTokens>
                 {
                     let call = ClaimTokens {};
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -4802,7 +4813,7 @@ pub mod api {
                     rewards_sender_opt: ::core::option::Option<
                         ::subxt::sp_core::crypto::AccountId32,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetRewardsSender>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetRewardsSender>
                 {
                     let call = SetRewardsSender { rewards_sender_opt };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -4812,7 +4823,7 @@ pub mod api {
                     eligible_accounts: ::std::vec::Vec<
                         ::subxt::sp_core::crypto::AccountId32,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, AddEligibleAccounts>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, AddEligibleAccounts>
                 {
                     let call = AddEligibleAccounts { eligible_accounts };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -5730,12 +5741,7 @@ pub mod api {
                 UpdateSpaceSettings,
             }
             #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                PartialEq,
-                Eq,
-                PartialOrd,
-                Ord,
+                :: subxt :: codec :: Encode, :: subxt :: codec :: Decode,
             )]
             pub struct SpacePermissions {
                 pub none: ::core::option::Option<

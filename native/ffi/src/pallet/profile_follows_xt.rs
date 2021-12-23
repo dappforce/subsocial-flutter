@@ -1,4 +1,4 @@
-use sdk::subsocial::api::profile_follows;
+use sdk::subsocial::profile_follows;
 use sdk::subxt::sp_core::crypto::{Ss58AddressFormatRegistry, Ss58Codec};
 use sdk::subxt::sp_runtime::AccountId32;
 
@@ -21,7 +21,9 @@ pub async fn follow_account(
         .follow_account(account_id)
         .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<profile_follows::events::AccountFollowed>()?;
+        .wait_for_finalized_success()
+        .await?
+        .find_first_event::<profile_follows::events::AccountFollowed>()?;
     match maybe_event {
         Some(event) => {
             let body = ResponseBody::AccountFollowed(AccountFollowed {
@@ -55,7 +57,9 @@ pub async fn unfollow_account(
         .unfollow_account(account_id)
         .sign_and_submit_then_watch(signer)
         .await?
-        .find_event::<profile_follows::events::AccountUnfollowed>()?;
+        .wait_for_finalized_success()
+        .await?
+        .find_first_event::<profile_follows::events::AccountUnfollowed>()?;
     match maybe_event {
         Some(event) => {
             let body = ResponseBody::AccountUnfollowed(AccountUnfollowed {
