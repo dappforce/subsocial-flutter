@@ -16,7 +16,7 @@ mod tests {
     use super::*;
 
     type SubsocialApi = RuntimeApi<DefaultConfig>;
-    const URL: &str = "ws://localhost:9944";
+    const URL: &str = "wss://staging.subsocial.network:443/072-ws";
     #[tokio::test]
     async fn next_space_id() {
         let api: SubsocialApi = subxt::ClientBuilder::new()
