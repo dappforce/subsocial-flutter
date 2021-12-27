@@ -13,6 +13,7 @@ crate-type = ["rlib"]
 
 [dependencies]
 sdk = { path = "../sdk", package = "subsocial-sdk" }
+jsonrpsee = { version = "0.5.1", features = ["macros", "ws-client", "http-client"] }
 bytes = "1.0"
 prost = "0.9.0"
 prost-types = "0.9.0"

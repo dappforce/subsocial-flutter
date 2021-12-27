@@ -2,6 +2,8 @@ use std::ffi::CStr;
 use std::os::raw::c_char;
 
 use allo_isolate::Isolate;
+use jsonrpsee::types::CertificateStore;
+use jsonrpsee::ws_client::WsClientBuilder;
 use once_cell::sync::OnceCell;
 use sdk::subsocial::{DefaultConfig, RuntimeApi};
 use sdk::subxt;
@@ -65,7 +67,13 @@ pub unsafe extern "C" fn subsocial_init_sdk(
     // init the runtime if not already done
     let runtime = RUNTIME.get_or_init(create_runtime);
     let task = isolate.catch_unwind(async move {
+        let ws_client = WsClientBuilder::default()
+            .certificate_store(CertificateStore::WebPki)
+            .max_notifs_per_subscription(4096)
+            .build(url)
+            .await?;
         let client = subxt::ClientBuilder::new()
+            .set_client(ws_client)
             .set_url(url)
             .build()
             .await?
