@@ -1,6 +1,5 @@
-use sdk::pallet::{posts, profiles, reactions, spaces, utils};
-use sdk::runtime::SubsocialRuntime;
-use sdk::subxt::sp_core::crypto::{Ss58AddressFormat, Ss58Codec};
+use sdk::subsocial::runtime_types;
+use sdk::subxt::sp_core::crypto::{Ss58AddressFormatRegistry, Ss58Codec};
 use sdk::subxt::sp_runtime::AccountId32;
 
 use crate::pb::subsocial::*;
@@ -28,8 +27,8 @@ impl From<sdk::subxt::Error> for Error {
     }
 }
 
-impl From<sdk::codec::Error> for Error {
-    fn from(e: sdk::codec::Error) -> Self {
+impl From<sdk::scale::Error> for Error {
+    fn from(e: sdk::scale::Error) -> Self {
         Self {
             kind: error::Kind::Subxt.into(),
             msg: e.to_string(),
@@ -37,37 +36,39 @@ impl From<sdk::codec::Error> for Error {
     }
 }
 
-impl From<utils::WhoAndWhen<SubsocialRuntime>> for WhoAndWhen {
-    fn from(v: utils::WhoAndWhen<SubsocialRuntime>) -> Self {
+impl From<runtime_types::pallet_utils::WhoAndWhen> for WhoAndWhen {
+    fn from(v: runtime_types::pallet_utils::WhoAndWhen) -> Self {
         Self {
-            account: v
-                .account
-                .to_ss58check_with_version(Ss58AddressFormat::SubsocialAccount),
+            account: v.account.to_ss58check_with_version(
+                Ss58AddressFormatRegistry::SubsocialAccount.into(),
+            ),
             block_number: v.block.into(),
             time: v.time,
         }
     }
 }
 
-impl From<utils::Content> for Content {
-    fn from(content: utils::Content) -> Self {
+impl From<runtime_types::pallet_utils::Content> for Content {
+    fn from(content: runtime_types::pallet_utils::Content) -> Self {
         use content::Value;
         match content {
-            utils::Content::None => unimplemented!("Should not be called"),
-            utils::Content::Raw(value) => Content {
+            runtime_types::pallet_utils::Content::None => {
+                unimplemented!("Should not be called")
+            }
+            runtime_types::pallet_utils::Content::Raw(value) => Content {
                 value: Some(Value::Raw(value)),
             },
-            utils::Content::IPFS(cid) => Content {
+            runtime_types::pallet_utils::Content::IPFS(cid) => Content {
                 value: Some(Value::Ipfs(String::from_utf8(cid).unwrap())),
             },
-            utils::Content::Hyper(link) => Content {
+            runtime_types::pallet_utils::Content::Hyper(link) => Content {
                 value: Some(Value::Hyper(String::from_utf8(link).unwrap())),
             },
         }
     }
 }
 
-impl From<Content> for utils::Content {
+impl From<Content> for runtime_types::pallet_utils::Content {
     fn from(content: Content) -> Self {
         use content::Value;
         let val = match content.value {
@@ -82,27 +83,35 @@ impl From<Content> for utils::Content {
     }
 }
 
-impl From<posts::PostExtension<SubsocialRuntime>> for PostExtension {
-    fn from(extension: posts::PostExtension<SubsocialRuntime>) -> Self {
+impl From<runtime_types::pallet_posts::PostExtension> for PostExtension {
+    fn from(extension: runtime_types::pallet_posts::PostExtension) -> Self {
         use post_extension::Value;
         match extension {
-            posts::PostExtension::Comment(comment) => PostExtension {
-                value: Some(Value::Comment(Comment {
-                    parent_id: comment.parent_id.unwrap_or_default(),
-                    root_post_id: comment.root_post_id,
-                })),
-            },
-            posts::PostExtension::SharedPost(id) => PostExtension {
-                value: Some(Value::SharedPost(SharedPost { root_post_id: id })),
-            },
-            posts::PostExtension::RegularPost => PostExtension {
-                value: Some(Value::RegularPost(RegularPost {})),
-            },
+            runtime_types::pallet_posts::PostExtension::Comment(comment) => {
+                PostExtension {
+                    value: Some(Value::Comment(Comment {
+                        parent_id: comment.parent_id.unwrap_or_default(),
+                        root_post_id: comment.root_post_id,
+                    })),
+                }
+            }
+            runtime_types::pallet_posts::PostExtension::SharedPost(id) => {
+                PostExtension {
+                    value: Some(Value::SharedPost(SharedPost {
+                        root_post_id: id,
+                    })),
+                }
+            }
+            runtime_types::pallet_posts::PostExtension::RegularPost => {
+                PostExtension {
+                    value: Some(Value::RegularPost(RegularPost {})),
+                }
+            }
         }
     }
 }
 
-impl From<PostExtension> for posts::PostExtension<SubsocialRuntime> {
+impl From<PostExtension> for runtime_types::pallet_posts::PostExtension {
     fn from(ext: PostExtension) -> Self {
         use post_extension::Value;
         let val = match ext.value {
@@ -111,29 +120,31 @@ impl From<PostExtension> for posts::PostExtension<SubsocialRuntime> {
         };
         match val {
             Value::RegularPost(_) => Self::RegularPost,
-            Value::Comment(comment) => Self::Comment(posts::Comment {
-                parent_id: if comment.parent_id != 0 {
-                    Some(comment.parent_id)
-                } else {
-                    None
-                },
-                root_post_id: comment.root_post_id,
-            }),
+            Value::Comment(comment) => {
+                Self::Comment(runtime_types::pallet_posts::Comment {
+                    parent_id: if comment.parent_id != 0 {
+                        Some(comment.parent_id)
+                    } else {
+                        None
+                    },
+                    root_post_id: comment.root_post_id,
+                })
+            }
             Value::SharedPost(val) => Self::SharedPost(val.root_post_id),
         }
     }
 }
 
-impl From<spaces::Space<SubsocialRuntime>> for Space {
-    fn from(space: spaces::Space<SubsocialRuntime>) -> Self {
-        use utils::Content;
+impl From<runtime_types::pallet_spaces::Space> for Space {
+    fn from(space: runtime_types::pallet_spaces::Space) -> Self {
+        use runtime_types::pallet_utils::Content;
         Self {
             id: space.id,
             created: Some(space.created.into()),
             updated: space.updated.map(Into::into),
-            owner: space
-                .owner
-                .to_ss58check_with_version(Ss58AddressFormat::SubsocialAccount),
+            owner: space.owner.to_ss58check_with_version(
+                Ss58AddressFormatRegistry::SubsocialAccount.into(),
+            ),
             parent_id: space.parent_id.unwrap_or_default(),
             handle: space
                 .handle
@@ -155,17 +166,17 @@ impl From<spaces::Space<SubsocialRuntime>> for Space {
     }
 }
 
-impl From<posts::Post<SubsocialRuntime>> for Post {
-    fn from(post: posts::Post<SubsocialRuntime>) -> Self {
-        use posts::PostExtension;
-        use utils::Content;
+impl From<runtime_types::pallet_posts::Post> for Post {
+    fn from(post: runtime_types::pallet_posts::Post) -> Self {
+        use runtime_types::pallet_posts::PostExtension;
+        use runtime_types::pallet_utils::Content;
         Self {
             id: post.id,
             created: Some(post.created.into()),
             updated: post.updated.map(Into::into),
-            owner: post
-                .owner
-                .to_ss58check_with_version(Ss58AddressFormat::SubsocialAccount),
+            owner: post.owner.to_ss58check_with_version(
+                Ss58AddressFormatRegistry::SubsocialAccount.into(),
+            ),
             space_id: post.space_id.unwrap_or_default(),
             content: if post.content == Content::None {
                 None
@@ -188,33 +199,47 @@ impl From<posts::Post<SubsocialRuntime>> for Post {
     }
 }
 
-impl From<PostUpdate> for posts::PostUpdate<SubsocialRuntime> {
+impl From<PostUpdate> for runtime_types::pallet_posts::PostUpdate {
     fn from(update: PostUpdate) -> Self {
-        Self::new(update.content.map(Into::into), Some(update.hidden))
-    }
-}
-
-impl From<reactions::ReactionKind> for reaction::Kind {
-    fn from(k: reactions::ReactionKind) -> Self {
-        match k {
-            reactions::ReactionKind::Upvote => reaction::Kind::UpVote,
-            reactions::ReactionKind::Downvote => reaction::Kind::DownVote,
+        Self {
+            space_id: None,
+            content: update.content.map(Into::into),
+            hidden: Some(update.hidden),
         }
     }
 }
 
-impl From<reaction::Kind> for reactions::ReactionKind {
+impl From<runtime_types::pallet_reactions::ReactionKind> for reaction::Kind {
+    fn from(k: runtime_types::pallet_reactions::ReactionKind) -> Self {
+        match k {
+            runtime_types::pallet_reactions::ReactionKind::Upvote => {
+                reaction::Kind::UpVote
+            }
+            runtime_types::pallet_reactions::ReactionKind::Downvote => {
+                reaction::Kind::DownVote
+            }
+        }
+    }
+}
+
+impl From<reaction::Kind> for runtime_types::pallet_reactions::ReactionKind {
     fn from(k: reaction::Kind) -> Self {
         match k {
-            reaction::Kind::Unknown => reactions::ReactionKind::Upvote,
-            reaction::Kind::UpVote => reactions::ReactionKind::Upvote,
-            reaction::Kind::DownVote => reactions::ReactionKind::Downvote,
+            reaction::Kind::Unknown => {
+                runtime_types::pallet_reactions::ReactionKind::Upvote
+            }
+            reaction::Kind::UpVote => {
+                runtime_types::pallet_reactions::ReactionKind::Upvote
+            }
+            reaction::Kind::DownVote => {
+                runtime_types::pallet_reactions::ReactionKind::Downvote
+            }
         }
     }
 }
 
-impl From<reactions::Reaction<SubsocialRuntime>> for Reaction {
-    fn from(reaction: reactions::Reaction<SubsocialRuntime>) -> Self {
+impl From<runtime_types::pallet_reactions::Reaction> for Reaction {
+    fn from(reaction: runtime_types::pallet_reactions::Reaction) -> Self {
         Self {
             id: reaction.id,
             created: Some(reaction.created.into()),
@@ -224,8 +249,8 @@ impl From<reactions::Reaction<SubsocialRuntime>> for Reaction {
     }
 }
 
-impl From<profiles::Profile<SubsocialRuntime>> for Profile {
-    fn from(profile: profiles::Profile<SubsocialRuntime>) -> Self {
+impl From<runtime_types::pallet_profiles::Profile> for Profile {
+    fn from(profile: runtime_types::pallet_profiles::Profile) -> Self {
         Self {
             created: Some(profile.created.into()),
             updated: profile.updated.map(Into::into),
@@ -234,8 +259,8 @@ impl From<profiles::Profile<SubsocialRuntime>> for Profile {
     }
 }
 
-impl From<profiles::SocialAccount<SubsocialRuntime>> for SocialAccount {
-    fn from(account: profiles::SocialAccount<SubsocialRuntime>) -> Self {
+impl From<runtime_types::pallet_profiles::SocialAccount> for SocialAccount {
+    fn from(account: runtime_types::pallet_profiles::SocialAccount) -> Self {
         Self {
             profile: account.profile.map(Into::into),
             followers_count: account.followers_count,
@@ -246,7 +271,7 @@ impl From<profiles::SocialAccount<SubsocialRuntime>> for SocialAccount {
     }
 }
 
-impl From<SpaceUpdate> for spaces::SpaceUpdate<SubsocialRuntime> {
+impl From<SpaceUpdate> for runtime_types::pallet_spaces::SpaceUpdate {
     fn from(v: SpaceUpdate) -> Self {
         Self {
             content: v.content.map(Into::into),

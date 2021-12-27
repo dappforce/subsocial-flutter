@@ -1,11 +1,18 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:subsocial_sdk/subsocial_sdk.dart';
 
 void main() {
   final suri = Platform.environment['SURI'] ?? '//Alice';
+
+  test('Get Next Space Id', () async {
+    final sdk = await Subsocial.instance;
+    final spaceId = await sdk.nextSpaceId();
+    debugPrint('spaceId: $spaceId');
+  });
   test('Get SystemProperties', () async {
     final sdk = await Subsocial.instance;
     final props = await sdk.systemProperties();
@@ -25,7 +32,7 @@ void main() {
       "5GHnQYfvZdxJHSWnZqiM5eKdj2UawJs4s9Tqn22ckvLEENvc",
     );
     final freeBalance = BigInt.parse(accountData.freeBalance);
-    expect(freeBalance, BigInt.from(100042893226878));
+    expect(freeBalance, BigInt.from(100039563226878));
   });
 
   test('Get Space with handle', () async {
@@ -171,6 +178,6 @@ void main() {
       postId: postId,
       accountId: accountId,
     );
-    expect(reactionId, 32967);
+    expect(reactionId, 0);
   });
 }
